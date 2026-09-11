@@ -4,138 +4,168 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MUHAMMAD IBRAHIM | Graphic & Web Designer</title>
+<title>MUHAMMAD IBRAHIM | Graphic & Web Designer Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 /* =====================================================
-    RESET & BASE STYLES
+    RESET & CORE VARIABLES
 ===================================================== */
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;scroll-padding-top:100px;}
+html{scroll-behavior:smooth;scroll-padding-top:90px;}
 :root{
-    --white:#ffffff; --text:#f8fafc; --muted:#cbd5e1;
+    --white:#ffffff; --text:#f8fafc; --muted:#94a3b8;
     --orange:#ff7a00; --cyan:#00d9ff; --green:#00e676; --lime:#b7ff00;
-    --border:rgba(255,255,255,.18);
-    --glass:rgba(3,12,20,.68); --glass2:rgba(4,18,27,.78); --nav:rgba(2,8,14,.78);
-    --gradient:linear-gradient(135deg, #ff7a00 0%, #00d9ff 48%, #00e676 100%);
+    --border:rgba(255,255,255,.12);
+    --glass:rgba(3,12,20,.75); --glass2:rgba(6,22,33,.85); --nav:rgba(2,8,14,.88);
+    --gradient:linear-gradient(135deg, #ff7a00 0%, #00d9ff 50%, #00e676 100%);
 }
 [data-theme="light"]{
-    --text:#07111a; --muted:#475569; --border:rgba(0,0,0,.14);
-    --glass:rgba(255,255,255,.72); --glass2:rgba(255,255,255,.82); --nav:rgba(255,255,255,.78);
+    --text:#0f172a; --muted:#475569; --border:rgba(0,0,0,.12);
+    --glass:rgba(255,255,255,.85); --glass2:rgba(241,245,249,.9); --nav:rgba(255,255,255,.92);
 }
 body{
     font-family:'Poppins',sans-serif; color:var(--text); overflow-x:hidden; min-height:100vh;
-    background-image:linear-gradient(135deg, rgba(5,10,18,.55), rgba(0,35,48,.45), rgba(2,35,24,.42)), url("image_b22f25.png");
+    background-image:linear-gradient(135deg, rgba(5,10,18,.65), rgba(0,35,48,.55), rgba(2,35,24,.52)), url("image_b22f25.png");
     background-size:cover; background-position:center; background-attachment:fixed; transition:.4s ease;
-}
-[data-theme="light"] body{
-    background-image:linear-gradient(135deg, rgba(255,255,255,.35), rgba(230,255,250,.28), rgba(255,245,225,.28)), url("image_b22f25.png");
 }
 a{text-decoration:none; color:inherit;}
 button{font-family:inherit;}
-.container{width:min(1180px,92%); margin:auto;}
+.container{width:min(1200px,92%); margin:auto;}
 
 /* =====================================================
     NAVBAR
 ===================================================== */
-.nav{position:fixed; top:0; left:0; right:0; height:82px; z-index:999; background:var(--nav); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); box-shadow:0 8px 35px rgba(0,0,0,.18);}
+.nav{position:fixed; top:0; left:0; right:0; height:82px; z-index:999; background:var(--nav); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); box-shadow:0 8px 32px rgba(0,0,0,.3);}
 .nav-inner{height:100%; display:flex; align-items:center; justify-content:space-between;}
 .brand{display:flex; align-items:center; gap:12px; cursor:pointer;}
-.brand-logo{font-size:36px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
-.brand-name strong{font-size:19px; font-weight:700;}
+.brand-logo{font-size:34px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.brand-name strong{font-size:18px; font-weight:700;}
 .brand-name strong span{color:var(--green);}
-.brand-name small{display:block; color:var(--muted); font-size:8px; letter-spacing:2px; margin-top:3px;}
+.brand-name small{display:block; color:var(--muted); font-size:8px; letter-spacing:2px;}
 
-.nav-links{display:flex; align-items:center; gap:24px;}
-.nav-links a{position:relative; color:var(--text); font-size:14px; font-weight:500; padding:30px 0; opacity:.8; cursor:pointer; transition:.3s;}
+.nav-links{display:flex; align-items:center; gap:22px;}
+.nav-links a{color:var(--text); font-size:14px; font-weight:500; opacity:.8; cursor:pointer; transition:.3s;}
 .nav-links a:hover, .nav-links a.active{opacity:1; color:var(--cyan);}
 
 .nav-right-actions{display:flex; align-items:center; gap:10px;}
 .theme-toggle-btn, .login-nav-btn{width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:var(--glass); color:var(--green); display:grid; place-items:center; cursor:pointer; transition:.3s;}
 .login-nav-btn{color:var(--cyan);}
-.theme-toggle-btn:hover, .login-nav-btn:hover{transform:scale(1.08); border-color:var(--cyan); box-shadow:0 0 15px rgba(0,217,255,.2);}
+.theme-toggle-btn:hover, .login-nav-btn:hover{transform:scale(1.08); border-color:var(--cyan);}
 
-.phone{padding:10px 15px; border-radius:10px; border:1px solid var(--cyan); color:var(--cyan); font-size:12px; font-weight:600; transition:.3s;}
+.phone{padding:10px 16px; border-radius:10px; border:1px solid var(--cyan); color:var(--cyan); font-size:12px; font-weight:600; transition:.3s;}
 .phone:hover{background:rgba(0,217,255,.1); transform:translateY(-2px);}
 .menu{display:none; background:none; border:0; color:var(--text); font-size:26px; cursor:pointer;}
 
 /* =====================================================
-    PAGE SYSTEM & COMMON STYLES
+    COMMON COMPONENTS & LAYOUT
 ===================================================== */
 .page-view{display:none;}
 .page-view.active-page{display:block; animation:pageFade .45s ease;}
-@keyframes pageFade{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+@keyframes pageFade{from{opacity:0; transform:translateY(15px);} to{opacity:1; transform:translateY(0);}}
 
-section{padding:95px 0;}
+section{padding:90px 0;}
 .section-label{color:var(--green); font-size:12px; font-weight:700; letter-spacing:3px;}
-.section-title{margin-top:8px; font-size:40px; font-weight:800; letter-spacing:-1px;}
+.section-title{margin-top:8px; font-size:38px; font-weight:800; letter-spacing:-1px;}
 .section-title span{color:var(--cyan);}
 .section-desc{margin-top:10px; max-width:650px; color:var(--muted); font-size:14px; line-height:1.8;}
 
-.card, .about-box, .contact-card{
-    background:linear-gradient(135deg, rgba(2,15,23,.72), rgba(4,25,31,.55));
-    border:1px solid var(--border); backdrop-filter:blur(16px); box-shadow:0 20px 50px rgba(0,0,0,.16);
+.card{
+    background:var(--glass2); border:1px solid var(--border); border-radius:18px;
+    backdrop-filter:blur(16px); padding:30px; transition:.3s ease;
 }
-[data-theme="light"] .card, [data-theme="light"] .about-box, [data-theme="light"] .contact-card{background:rgba(255,255,255,.72);}
+.card:hover{border-color:var(--cyan); transform:translateY(-5px); box-shadow:0 15px 35px rgba(0,217,255,.12);}
+
+.btn{display:inline-flex; justify-content:center; align-items:center; gap:8px; padding:14px 26px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; transition:.3s; border:none;}
+.btn:hover{transform:translateY(-3px);}
+.btn.green{color:#020b06; background:linear-gradient(135deg, #00ff80, #b7ff00); box-shadow:0 10px 25px rgba(0,255,128,0.25);}
+.btn.outline{color:var(--cyan); border:2px solid var(--cyan); background:rgba(2, 12, 20, 0.8);}
 
 /* HERO SECTION */
-.hero{min-height:100vh; padding-top:120px; padding-bottom:70px; display:flex; align-items:center;}
+.hero{min-height:92vh; padding-top:120px; display:flex; align-items:center;}
 .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:50px;}
-.hello{color:var(--green); font-size:13px; font-weight:700; letter-spacing:4px; margin-bottom:18px;}
-h1{font-size:clamp(42px,6vw,76px); line-height:1.02; letter-spacing:-2px; font-weight:800;}
+.hello{color:var(--green); font-size:13px; font-weight:700; letter-spacing:4px; margin-bottom:15px;}
+h1{font-size:clamp(40px,5.5vw,72px); line-height:1.05; letter-spacing:-1.5px; font-weight:800;}
 h1 span{background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
-.title{margin-top:20px; font-size:18px; font-weight:600;}
+.title{margin-top:18px; font-size:18px; font-weight:600;}
 .title span{color:var(--cyan);}
-.hero-text{max-width:600px; margin-top:20px; color:var(--muted); font-size:15px; line-height:1.9;}
-.actions{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
-.btn{display:inline-flex; justify-content:center; align-items:center; gap:8px; padding:14px 25px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; transition:.3s;}
-.btn:hover{transform:translateY(-4px);}
-.btn.green{color:#020b06; background:linear-gradient(135deg, #00ff80, #b7ff00); box-shadow:0 10px 25px rgba(0,255,128,0.3); border:none;}
-.btn.outline{color:var(--cyan); border:2px solid var(--cyan); background:rgba(2, 12, 20, 0.85); backdrop-filter:blur(10px);}
-.btn.outline:hover{background:rgba(0,217,255,0.2); color:#ffffff;}
+.hero-text{max-width:580px; margin-top:18px; color:var(--muted); font-size:14px; line-height:1.8;}
+.actions{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
 
-/* PROFILE */
-.profile-wrap{position:relative; display:flex; justify-content:center; align-items:center; min-height:470px;}
-.profile-ring{position:relative; width:min(380px,82vw); height:min(380px,82vw); padding:12px; border-radius:50%; border:2px solid var(--green); background:linear-gradient(135deg, rgba(255,122,0,.20), rgba(0,217,255,.15), rgba(0,230,118,.20)); box-shadow:0 0 35px rgba(0,230,118,.15);}
-.profile{width:100%; height:100%; object-fit:cover; object-position:center top; border-radius:50%; display:block;}
-.freelance{position:absolute; bottom:25px; left:50%; transform:translateX(-50%); padding:11px 19px; display:flex; align-items:center; gap:9px; background:var(--glass2); border:1px solid var(--border); border-radius:50px; backdrop-filter:blur(15px);}
+/* PROFILE RING */
+.profile-wrap{position:relative; display:flex; justify-content:center; align-items:center;}
+.profile-ring{position:relative; width:min(360px,80vw); height:min(360px,80vw); padding:10px; border-radius:50%; border:2px solid var(--green); background:linear-gradient(135deg, rgba(255,122,0,.2), rgba(0,217,255,.2), rgba(0,230,118,.2));}
+.profile{width:100%; height:100%; object-fit:cover; object-position:center top; border-radius:50%;}
+.freelance{position:absolute; bottom:20px; left:50%; transform:translateX(-50%); padding:10px 20px; display:flex; align-items:center; gap:8px; background:var(--glass2); border:1px solid var(--border); border-radius:50px; backdrop-filter:blur(15px);}
 .freelance span, .freelance b{font-size:12px;}
 .freelance b{color:var(--green);}
-.dot{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 12px var(--green);}
+.dot{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green);}
+
+/* SERVICES GRID */
+.services-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; margin-top:40px;}
+.service-icon{width:55px; height:55px; border-radius:14px; background:rgba(0,217,255,.1); color:var(--cyan); border:1px solid rgba(0,217,255,.2); display:grid; place-items:center; font-size:24px; margin-bottom:20px;}
+.card h3{font-size:20px; margin-bottom:10px;}
+.card p{color:var(--muted); font-size:13px; line-height:1.7;}
+
+/* PROJECTS GRID */
+.projects-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:25px; margin-top:40px;}
+.project-card{overflow:hidden; padding:0; border-radius:18px; border:1px solid var(--border); background:var(--glass2);}
+.project-img-box{position:relative; width:100%; height:220px; overflow:hidden;}
+.project-img-box img{width:100%; height:100%; object-fit:cover; transition:.5s ease;}
+.project-card:hover .project-img-box img{transform:scale(1.08);}
+.project-info{padding:22px;}
+.project-tag{display:inline-block; padding:4px 12px; border-radius:20px; font-size:11px; background:rgba(0,230,118,.12); color:var(--green); border:1px solid rgba(0,230,118,.2); margin-bottom:10px;}
+.project-info h4{font-size:18px; margin-bottom:8px;}
+.project-info p{color:var(--muted); font-size:13px; line-height:1.6;}
+
+/* ABOUT & SKILLS */
+.about-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:40px; align-items:center;}
+.stats-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:25px;}
+.stat-item{padding:20px; background:rgba(0,0,0,.2); border-radius:14px; border:1px solid var(--border); text-align:center;}
+.stat-item h3{font-size:32px; color:var(--green); font-weight:800;}
+.stat-item p{font-size:12px; color:var(--muted); margin-top:4px;}
+
+.skill-item{margin-bottom:20px;}
+.skill-info{display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:8px;}
+.progress-bar{height:8px; border-radius:10px; background:rgba(255,255,255,.1); overflow:hidden;}
+.progress{height:100%; border-radius:10px; background:var(--gradient);}
+
+/* EXPERIENCE TIMELINE */
+.timeline{margin-top:40px; border-left:2px solid var(--cyan); padding-left:25px; display:grid; gap:30px;}
+.timeline-item{position:relative;}
+.timeline-item::before{content:''; position:absolute; left:-32px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan);}
+.timeline-date{font-size:12px; color:var(--green); font-weight:700;}
+.timeline-title{font-size:18px; margin:4px 0;}
+.timeline-company{color:var(--cyan); font-size:13px; margin-bottom:8px;}
 
 /* CONTACT & FORMS */
-.contact-grid{display:grid; grid-template-columns:.8fr 1.2fr; gap:22px; margin-top:40px;}
-.contact-card{padding:30px; border-radius:18px;}
+.contact-grid{display:grid; grid-template-columns:.8fr 1.2fr; gap:25px; margin-top:40px;}
 .contact-row{display:flex; gap:15px; margin:22px 0;}
 .contact-row > div:first-child{width:42px; height:42px; display:grid; place-items:center; border-radius:11px; color:var(--green); background:rgba(0,230,118,.08); border:1px solid rgba(0,230,118,.18);}
-.contact-row strong{display:block; margin-bottom:4px; font-size:14px;}
-.contact-row span{color:var(--muted); font-size:13px;}
 form{display:grid; gap:14px;}
-.field{width:100%; padding:15px; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,.20); color:var(--text); font:inherit; font-size:13px; outline:none; transition:.3s;}
-[data-theme="light"] .field{background:rgba(255,255,255,.75); color:#07111a;}
-.field:focus{border-color:var(--green); box-shadow:0 0 0 3px rgba(0,230,118,.08);}
-textarea{min-height:145px; resize:vertical;}
+.field{width:100%; padding:15px; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,.25); color:var(--text); font:inherit; font-size:13px; outline:none; transition:.3s;}
+.field:focus{border-color:var(--green); box-shadow:0 0 0 3px rgba(0,230,118,.1);}
+textarea{min-height:140px; resize:vertical;}
 
-/* LOGIN MODAL STYLES */
-.modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); z-index:9999; display:none; place-items:center;}
+/* LOGIN MODAL */
+.modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); z-index:9999; display:none; place-items:center;}
 .modal-overlay.active{display:grid;}
-.login-box{width:min(400px, 90%); padding:35px; border-radius:20px; background:var(--glass2); border:1px solid var(--border); position:relative; box-shadow:0 25px 50px rgba(0,0,0,0.5);}
-.login-box h2{margin-bottom:20px; font-size:24px;}
+.login-box{width:min(400px, 90%); padding:35px; border-radius:20px; background:var(--glass2); border:1px solid var(--border); position:relative;}
 .close-modal{position:absolute; top:20px; right:20px; background:none; border:0; color:var(--muted); font-size:20px; cursor:pointer;}
 
 /* FOOTER */
-footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,14,.72); backdrop-filter:blur(15px); color:var(--muted); font-size:12px;}
+footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,14,.85); color:var(--muted); font-size:12px;}
 .footer{display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap;}
 
 @media(max-width:950px){
     .nav-links, .phone{display:none;}
     .menu{display:block;}
-    .nav-links.open{position:absolute; top:82px; left:0; right:0; display:flex; flex-direction:column; padding:15px 5%; background:var(--nav); border-bottom:1px solid var(--border);}
-    .hero-grid, .contact-grid{grid-template-columns:1fr; text-align:center;}
-    .profile-wrap{order:-1; min-height:400px;}
+    .nav-links.open{position:absolute; top:82px; left:0; right:0; display:flex; flex-direction:column; padding:20px 5%; background:var(--nav); border-bottom:1px solid var(--border);}
+    .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr; text-align:center;}
+    .profile-wrap{order:-1;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -174,13 +204,13 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
 <section class="hero">
 <div class="container hero-grid">
 <div>
-    <div class="hello">HELLO, I'M</div>
+    <div class="hello">WELCOME TO MY PORTFOLIO</div>
     <h1>MUHAMMAD<br><span>IBRAHIM</span></h1>
-    <div class="title">I <span>DESIGN SOLUTIONS</span> THAT INSPIRE</div>
-    <p class="hero-text">I am a passionate Graphic Designer & Web Designer. I create modern, unique and professional designs that help brands grow.</p>
+    <div class="title">I <span>DESIGN CREATIVE SOLUTIONS</span> THAT INSPIRE</div>
+    <p class="hero-text">I am a professional Graphic Designer & Web Developer dedicated to transforming ideas into high-impact visual designs and responsive web applications.</p>
     <div class="actions">
-        <a class="btn green" onclick="switchPage('projects')"><i class="fa-solid fa-layer-group"></i> ENTER PORTFOLIO</a>
-        <a class="btn outline" onclick="switchPage('contact')"><i class="fa-solid fa-paper-plane"></i> CONTACT ME</a>
+        <a class="btn green" onclick="switchPage('projects')"><i class="fa-solid fa-layer-group"></i> VIEW PROJECTS</a>
+        <a class="btn outline" onclick="switchPage('contact')"><i class="fa-solid fa-paper-plane"></i> GET IN TOUCH</a>
     </div>
 </div>
 <div class="profile-wrap">
@@ -188,8 +218,8 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
         <img class="profile" src="profile.png" alt="Muhammad Ibrahim">
     </div>
     <div class="freelance">
-        <span>Available For</span>
-        <b>Freelance Work</b>
+        <span>Status</span>
+        <b>Available For Hire</b>
         <i class="dot"></i>
     </div>
 </div>
@@ -197,64 +227,195 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
 </section>
 </div>
 
-<!-- ================= CONTACT PAGE ================= -->
-<div id="page-contact" class="page-view">
-    <section>
-        <div class="container">
-            <div class="section-label">GET IN TOUCH</div>
-            <h2 class="section-title">Contact <span>Me</span></h2>
-            <p class="section-desc">Let's discuss your project. Messages will be sent directly to your email.</p>
-            
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <h3>Contact Information</h3>
-                    <div class="contact-row">
-                        <div><i class="fa-solid fa-phone"></i></div>
-                        <div><strong>Phone</strong><span><a href="tel:+923209306672">0320-9306672</a></span></div>
-                    </div>
-                    <div class="contact-row">
-                        <div><i class="fa-brands fa-whatsapp"></i></div>
-                        <div><strong>WhatsApp</strong><span><a href="https://wa.me/923209306672" target="_blank">Chat on WhatsApp</a></span></div>
-                    </div>
-                    <div class="contact-row">
-                        <div><i class="fa-solid fa-location-dot"></i></div>
-                        <div><strong>Location</strong><span>Mandi Bahauddin, Pakistan</span></div>
-                    </div>
-                </div>
-                
-                <div class="contact-card">
-                    <!-- WEB3FORMS INTEGRATION WITH LOGIN CHECK -->
-                    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
-                        <input type="hidden" name="access_key" value="732db9ef-b98e-4349-8f2b-67db7786891e">
-
-                        <input type="text" name="name" class="field" placeholder="Your Name" required>
-                        <input type="email" name="email" class="field" placeholder="Your Email" required>
-                        <input type="text" name="subject" class="field" placeholder="Subject">
-                        <textarea name="message" class="field" placeholder="Your Message" required></textarea>
-                        
-                        <button type="submit" id="submit-btn" class="btn green" style="border:0; width:100%;">SEND MESSAGE <i class="fa-solid fa-paper-plane"></i></button>
-                    </form>
-                </div>
+<!-- ================= ABOUT PAGE ================= -->
+<div id="page-about" class="page-view">
+<section>
+<div class="container">
+    <div class="section-label">GET TO KNOW ME</div>
+    <h2 class="section-title">About <span>Muhammad Ibrahim</span></h2>
+    <div class="about-grid">
+        <div>
+            <p class="section-desc" style="max-width:100%;">
+                I am a passionate Graphic & Web Designer based in Mandi Bahauddin, Pakistan. With strong expertise in modern web design, brand development, and UI/UX solutions, I help businesses establish a powerful visual presence online.
+            </p>
+            <div class="stats-grid">
+                <div class="stat-item"><h3>50+</h3><p>Projects Completed</p></div>
+                <div class="stat-item"><h3>100%</h3><p>Client Satisfaction</p></div>
             </div>
         </div>
-    </section>
+        <div>
+            <h3 style="margin-bottom:20px; font-size:22px;">Technical Skills</h3>
+            <div class="skill-item">
+                <div class="skill-info"><span>Graphic Design (Photoshop / Illustrator)</span><span>95%</span></div>
+                <div class="progress-bar"><div class="progress" style="width:95%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info"><span>Web Design & HTML/CSS/JS</span><span>90%</span></div>
+                <div class="progress-bar"><div class="progress" style="width:90%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info"><span>UI/UX Design</span><span>85%</span></div>
+                <div class="progress-bar"><div class="progress" style="width:85%;"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
 </div>
 
-<!-- Placeholders for other pages -->
-<div id="page-about" class="page-view"><section><div class="container"><h2 class="section-title">About Page</h2></div></section></div>
-<div id="page-services" class="page-view"><section><div class="container"><h2 class="section-title">Services Page</h2></div></section></div>
-<div id="page-projects" class="page-view"><section><div class="container"><h2 class="section-title">Projects Page</h2></div></section></div>
-<div id="page-experience" class="page-view"><section><div class="container"><h2 class="section-title">Experience Page</h2></div></section></div>
+<!-- ================= SERVICES PAGE ================= -->
+<div id="page-services" class="page-view">
+<section>
+<div class="container">
+    <div class="section-label">WHAT I OFFER</div>
+    <h2 class="section-title">Professional <span>Services</span></h2>
+    <div class="services-grid">
+        <div class="card">
+            <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+            <h3>Graphic Design</h3>
+            <p>High-end logos, social media banners, marketing materials, and brand identity suites customized for your business.</p>
+        </div>
+        <div class="card">
+            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Web Development</h3>
+            <p>Fast, clean, and responsive websites built with modern HTML, CSS, and JS that work seamlessly on all devices.</p>
+        </div>
+        <div class="card">
+            <div class="service-icon"><i class="fa-solid fa-vector-square"></i></div>
+            <h3>UI/UX Design</h3>
+            <p>User-centric digital interfaces designed to deliver intuitive navigation and highly engaging user experiences.</p>
+        </div>
+        <div class="card">
+            <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
+            <h3>Brand Strategy</h3>
+            <p>Complete branding packages including color typography, style guides, and promotional graphics.</p>
+        </div>
+    </div>
+</div>
+</section>
+</div>
+
+<!-- ================= PROJECTS PAGE ================= -->
+<div id="page-projects" class="page-view">
+<section>
+<div class="container">
+    <div class="section-label">PORTFOLIO</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="projects-grid">
+        
+        <div class="project-card card">
+            <div class="project-img-box">
+                <img src="project1.png" onerror="this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600'" alt="Project 1">
+            </div>
+            <div class="project-info">
+                <span class="project-tag">Web Design</span>
+                <h4>Hy Business Portfolio</h4>
+                <p>Modern responsive dark-themed portfolio featuring smooth navigation and interactive elements.</p>
+            </div>
+        </div>
+
+        <div class="project-card card">
+            <div class="project-img-box">
+                <img src="project2.png" onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600'" alt="Project 2">
+            </div>
+            <div class="project-info">
+                <span class="project-tag">Graphic Design</span>
+                <h4>Brand Identity Pack</h4>
+                <p>Complete visual identity including corporate logo, social media banners, and typography guidelines.</p>
+            </div>
+        </div>
+
+        <div class="project-card card">
+            <div class="project-img-box">
+                <img src="project3.png" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600'" alt="Project 3">
+            </div>
+            <div class="project-info">
+                <span class="project-tag">UI/UX Design</span>
+                <h4>Dashboard Interface</h4>
+                <p>Interactive web application design focused on clean data visualization and seamless navigation.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+</div>
+
+<!-- ================= EXPERIENCE PAGE ================= -->
+<div id="page-experience" class="page-view">
+<section>
+<div class="container">
+    <div class="section-label">MY JOURNEY</div>
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="timeline">
+        <div class="timeline-item card">
+            <div class="timeline-date">2024 - PRESENT</div>
+            <h3 class="timeline-title">Lead Web & Graphic Designer</h3>
+            <div class="timeline-company">Hy Business | Freelance</div>
+            <p class="section-desc">Delivering custom branding, website builds, and visual media designs for diverse clients globally.</p>
+        </div>
+        <div class="timeline-item card">
+            <div class="timeline-date">2022 - 2024</div>
+            <h3 class="timeline-title">Senior Visual Designer</h3>
+            <div class="timeline-company">Creative Agency</div>
+            <p class="section-desc">Designed high-converting marketing materials, promotional banners, and user interface mockups.</p>
+        </div>
+    </div>
+</div>
+</section>
+</div>
+
+<!-- ================= CONTACT PAGE ================= -->
+<div id="page-contact" class="page-view">
+<section>
+<div class="container">
+    <div class="section-label">GET IN TOUCH</div>
+    <h2 class="section-title">Contact <span>Me</span></h2>
+    <p class="section-desc">Have a project in mind? Send me a message and let's create something great together.</p>
+    
+    <div class="contact-grid">
+        <div class="card">
+            <h3>Contact Information</h3>
+            <div class="contact-row">
+                <div><i class="fa-solid fa-phone"></i></div>
+                <div><strong>Phone</strong><span><a href="tel:+923209306672">0320-9306672</a></span></div>
+            </div>
+            <div class="contact-row">
+                <div><i class="fa-brands fa-whatsapp"></i></div>
+                <div><strong>WhatsApp</strong><span><a href="https://wa.me/923209306672" target="_blank">Chat on WhatsApp</a></span></div>
+            </div>
+            <div class="contact-row">
+                <div><i class="fa-solid fa-location-dot"></i></div>
+                <div><strong>Location</strong><span>Mandi Bahauddin, Pakistan</span></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+                <input type="hidden" name="access_key" value="732db9ef-b98e-4349-8f2b-67db7786891e">
+
+                <input type="text" name="name" class="field" placeholder="Your Name" required>
+                <input type="email" name="email" class="field" placeholder="Your Email" required>
+                <input type="text" name="subject" class="field" placeholder="Subject">
+                <textarea name="message" class="field" placeholder="Your Message" required></textarea>
+                
+                <button type="submit" id="submit-btn" class="btn green" style="width:100%;">SEND MESSAGE <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+</div>
 
 <!-- ================= LOGIN MODAL ================= -->
 <div class="modal-overlay" id="loginModal">
     <div class="login-box">
         <button class="close-modal" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i></button>
-        <h2>User / Admin Login</h2>
+        <h2 style="margin-bottom:20px;">User Login</h2>
         <form onsubmit="handleLogin(event)">
-            <input type="email" id="loginEmail" class="field" placeholder="Email Address" required style="margin-bottom:14px;">
+            <input type="email" class="field" placeholder="Email Address" required style="margin-bottom:14px;">
             <input type="password" class="field" placeholder="Password" required style="margin-bottom:14px;">
-            <button type="submit" class="btn green" style="width:100%; border:0;">LOGIN</button>
+            <button type="submit" class="btn green" style="width:100%;">LOGIN</button>
         </form>
     </div>
 </div>
@@ -317,7 +478,6 @@ function handleLogin(e) {
     closeLoginModal();
 }
 
-// LOGIN CHECK BEFORE SENDING MESSAGE
 document.getElementById('contact-form').addEventListener('submit', function(e) {
     if(!isLoggedIn) {
         e.preventDefault();
