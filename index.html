@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- EmailJS SDK v3 -->
+<!-- EmailJS Official Browser SDK v3 -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
    (function(){
@@ -231,7 +231,7 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
                 </div>
                 
                 <div class="contact-card">
-                    <form id="contact-form" onsubmit="sendEmail(event)">
+                    <form id="contact-form">
                         <input type="text" name="user_name" class="field" placeholder="Your Name" required>
                         <input type="email" name="user_email" class="field" placeholder="Your Email" required>
                         <input type="text" name="subject" class="field" placeholder="Subject">
@@ -315,22 +315,14 @@ function handleLogin(e) {
     closeLoginModal();
 }
 
-/* Updated Email Send Function with Correct Service ID & Template ID */
-function sendEmail(e) {
-    e.preventDefault();
+/* Guaranteed EmailJS Event Listener using sendForm */
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
     const btn = document.getElementById('submit-btn');
     btn.innerText = "Sending...";
 
-    const templateParams = {
-        user_name: document.querySelector('input[name="user_name"]').value,
-        user_email: document.querySelector('input[name="user_email"]').value,
-        subject: document.querySelector('input[name="subject"]').value,
-        message: document.querySelector('textarea[name="message"]').value
-    };
-
-    // Service: service_zvx7win | Template: template_4p3xhad | Public Key: aFl4xlVKsxbf0d-7T
-    emailjs.send('service_zvx7win', 'template_4p3xhad', templateParams, 'aFl4xlVKsxbf0d-7T')
-        .then(function(response) {
+    emailjs.sendForm('service_zvx7win', 'template_4p3xhad', this, 'aFl4xlVKsxbf0d-7T')
+        .then(function() {
             alert('SUCCESS! Message sent successfully.');
             document.getElementById('contact-form').reset();
             btn.innerHTML = 'SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';
@@ -339,7 +331,7 @@ function sendEmail(e) {
             console.error('EmailJS Error:', error);
             btn.innerHTML = 'SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';
         });
-}
+});
 </script>
 
 </body>
