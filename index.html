@@ -161,7 +161,7 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
         <a onclick="switchPage('contact')">Contact</a>
     </div>
     <div class="nav-right-actions">
-        <button class="login-nav-btn" onclick="openLoginModal()" title="Login"><i class="fa-solid fa-user"></i></button>
+        <button class="login-nav-btn" onclick="openLoginModal()" id="loginNavIcon" title="Login"><i class="fa-solid fa-user"></i></button>
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
         <a class="phone" href="tel:+923209306672"><i class="fa-solid fa-phone"></i> 0320-9306672</a>
     </div>
@@ -223,7 +223,7 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
                 </div>
                 
                 <div class="contact-card">
-                    <!-- WEB3FORMS INTEGRATION WITH YOUR EXACT KEY -->
+                    <!-- WEB3FORMS INTEGRATION WITH LOGIN CHECK -->
                     <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
                         <input type="hidden" name="access_key" value="732db9ef-b98e-4349-8f2b-67db7786891e">
 
@@ -250,9 +250,9 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
 <div class="modal-overlay" id="loginModal">
     <div class="login-box">
         <button class="close-modal" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i></button>
-        <h2>Admin / User Login</h2>
+        <h2>User / Admin Login</h2>
         <form onsubmit="handleLogin(event)">
-            <input type="email" class="field" placeholder="Email Address" required style="margin-bottom:14px;">
+            <input type="email" id="loginEmail" class="field" placeholder="Email Address" required style="margin-bottom:14px;">
             <input type="password" class="field" placeholder="Password" required style="margin-bottom:14px;">
             <button type="submit" class="btn green" style="width:100%; border:0;">LOGIN</button>
         </form>
@@ -268,6 +268,8 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
 
 <!-- ================= JAVASCRIPT ================= -->
 <script>
+let isLoggedIn = false;
+
 function switchPage(pageId) {
     document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
     const target = document.getElementById('page-' + pageId);
@@ -302,14 +304,27 @@ function toggleMenu() {
 function openLoginModal() {
     document.getElementById('loginModal').classList.add('active');
 }
+
 function closeLoginModal() {
     document.getElementById('loginModal').classList.remove('active');
 }
+
 function handleLogin(e) {
     e.preventDefault();
-    alert('Login successful!');
+    isLoggedIn = true;
+    alert('Login Successful! Ab aap message bhej sakte hain.');
+    document.getElementById('loginNavIcon').style.color = 'var(--green)';
     closeLoginModal();
 }
+
+// LOGIN CHECK BEFORE SENDING MESSAGE
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    if(!isLoggedIn) {
+        e.preventDefault();
+        alert('Message bhejne ke liye pehle Login karna zaroori hai!');
+        openLoginModal();
+    }
+});
 </script>
 
 </body>
