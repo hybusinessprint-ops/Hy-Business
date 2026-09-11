@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MUHAMMAD IBRAHIM | Graphic & Web Designer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- EmailJS CDN -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("YOUR_PUBLIC_KEY"); // Yahan apni EmailJS Public Key lagayein
+   })();
+</script>
+
+<style>
+/* =====================================================
+    RESET & BASE STYLES
+===================================================== */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:100px;}
+:root{
+    --white:#ffffff; --text:#f8fafc; --muted:#cbd5e1;
+    --orange:#ff7a00; --cyan:#00d9ff; --green:#00e676; --lime:#b7ff00;
+    --border:rgba(255,255,255,.18);
+    --glass:rgba(3,12,20,.68); --glass2:rgba(4,18,27,.78); --nav:rgba(2,8,14,.78);
+    --gradient:linear-gradient(135deg, #ff7a00 0%, #00d9ff 48%, #00e676 100%);
+}
+[data-theme="light"]{
+    --text:#07111a; --muted:#475569; --border:rgba(0,0,0,.14);
+    --glass:rgba(255,255,255,.72); --glass2:rgba(255,255,255,.82); --nav:rgba(255,255,255,.78);
+}
+body{
+    font-family:'Poppins',sans-serif; color:var(--text); overflow-x:hidden; min-height:100vh;
+    background-image:linear-gradient(135deg, rgba(5,10,18,.55), rgba(0,35,48,.45), rgba(2,35,24,.42)), url("image_b22f25.png");
+    background-size:cover; background-position:center; background-attachment:fixed; transition:.4s ease;
+}
+[data-theme="light"] body{
+    background-image:linear-gradient(135deg, rgba(255,255,255,.35), rgba(230,255,250,.28), rgba(255,245,225,.28)), url("image_b22f25.png");
+}
+a{text-decoration:none; color:inherit;}
+button{font-family:inherit;}
+.container{width:min(1180px,92%); margin:auto;}
+
+/* =====================================================
+    NAVBAR
+===================================================== */
+.nav{position:fixed; top:0; left:0; right:0; height:82px; z-index:999; background:var(--nav); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); box-shadow:0 8px 35px rgba(0,0,0,.18);}
+.nav-inner{height:100%; display:flex; align-items:center; justify-content:space-between;}
+.brand{display:flex; align-items:center; gap:12px; cursor:pointer;}
+.brand-logo{font-size:36px; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.brand-name strong{font-size:19px; font-weight:700;}
+.brand-name strong span{color:var(--green);}
+.brand-name small{display:block; color:var(--muted); font-size:8px; letter-spacing:2px; margin-top:3px;}
+
+.nav-links{display:flex; align-items:center; gap:24px;}
+.nav-links a{position:relative; color:var(--text); font-size:14px; font-weight:500; padding:30px 0; opacity:.8; cursor:pointer; transition:.3s;}
+.nav-links a:hover, .nav-links a.active{opacity:1; color:var(--cyan);}
+
+.nav-right-actions{display:flex; align-items:center; gap:10px;}
+.theme-toggle-btn, .login-nav-btn{width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:var(--glass); color:var(--green); display:grid; place-items:center; cursor:pointer; transition:.3s;}
+.login-nav-btn{color:var(--cyan);}
+.theme-toggle-btn:hover, .login-nav-btn:hover{transform:scale(1.08); border-color:var(--cyan); box-shadow:0 0 15px rgba(0,217,255,.2);}
+
+.phone{padding:10px 15px; border-radius:10px; border:1px solid var(--cyan); color:var(--cyan); font-size:12px; font-weight:600; transition:.3s;}
+.phone:hover{background:rgba(0,217,255,.1); transform:translateY(-2px);}
+.menu{display:none; background:none; border:0; color:var(--text); font-size:26px; cursor:pointer;}
+
+/* =====================================================
+    PAGE SYSTEM & COMMON STYLES
+===================================================== */
+.page-view{display:none;}
+.page-view.active-page{display:block; animation:pageFade .45s ease;}
+@keyframes pageFade{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+section{padding:95px 0;}
+.section-label{color:var(--green); font-size:12px; font-weight:700; letter-spacing:3px;}
+.section-title{margin-top:8px; font-size:40px; font-weight:800; letter-spacing:-1px;}
+.section-title span{color:var(--cyan);}
+.section-desc{margin-top:10px; max-width:650px; color:var(--muted); font-size:14px; line-height:1.8;}
+
+.card, .about-box, .contact-card{
+    background:linear-gradient(135deg, rgba(2,15,23,.72), rgba(4,25,31,.55));
+    border:1px solid var(--border); backdrop-filter:blur(16px); box-shadow:0 20px 50px rgba(0,0,0,.16);
+}
+[data-theme="light"] .card, [data-theme="light"] .about-box, [data-theme="light"] .contact-card{background:rgba(255,255,255,.72);}
+
+/* HERO SECTION */
+.hero{min-height:100vh; padding-top:120px; padding-bottom:70px; display:flex; align-items:center;}
+.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:50px;}
+.hello{color:var(--green); font-size:13px; font-weight:700; letter-spacing:4px; margin-bottom:18px;}
+h1{font-size:clamp(42px,6vw,76px); line-height:1.02; letter-spacing:-2px; font-weight:800;}
+h1 span{background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.title{margin-top:20px; font-size:18px; font-weight:600;}
+.title span{color:var(--cyan);}
+.hero-text{max-width:600px; margin-top:20px; color:var(--muted); font-size:15px; line-height:1.9;}
+.actions{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+.btn{display:inline-flex; justify-content:center; align-items:center; gap:8px; padding:14px 25px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; transition:.3s;}
+.btn:hover{transform:translateY(-4px);}
+.btn.green{color:#020b06; background:linear-gradient(135deg, #00ff80, #b7ff00); box-shadow:0 10px 25px rgba(0,255,128,0.3); border:none;}
+.btn.outline{color:var(--cyan); border:2px solid var(--cyan); background:rgba(2, 12, 20, 0.85); backdrop-filter:blur(10px);}
+.btn.outline:hover{background:rgba(0,217,255,0.2); color:#ffffff;}
+
+/* PROFILE */
+.profile-wrap{position:relative; display:flex; justify-content:center; align-items:center; min-height:470px;}
+.profile-ring{position:relative; width:min(380px,82vw); height:min(380px,82vw); padding:12px; border-radius:50%; border:2px solid var(--green); background:linear-gradient(135deg, rgba(255,122,0,.20), rgba(0,217,255,.15), rgba(0,230,118,.20)); box-shadow:0 0 35px rgba(0,230,118,.15);}
+.profile{width:100%; height:100%; object-fit:cover; object-position:center top; border-radius:50%; display:block;}
+.freelance{position:absolute; bottom:25px; left:50%; transform:translateX(-50%); padding:11px 19px; display:flex; align-items:center; gap:9px; background:var(--glass2); border:1px solid var(--border); border-radius:50px; backdrop-filter:blur(15px);}
+.freelance span, .freelance b{font-size:12px;}
+.freelance b{color:var(--green);}
+.dot{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 12px var(--green);}
+
+/* CONTACT & FORMS */
+.contact-grid{display:grid; grid-template-columns:.8fr 1.2fr; gap:22px; margin-top:40px;}
+.contact-card{padding:30px; border-radius:18px;}
+.contact-row{display:flex; gap:15px; margin:22px 0;}
+.contact-row > div:first-child{width:42px; height:42px; display:grid; place-items:center; border-radius:11px; color:var(--green); background:rgba(0,230,118,.08); border:1px solid rgba(0,230,118,.18);}
+.contact-row strong{display:block; margin-bottom:4px; font-size:14px;}
+.contact-row span{color:var(--muted); font-size:13px;}
+form{display:grid; gap:14px;}
+.field{width:100%; padding:15px; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,.20); color:var(--text); font:inherit; font-size:13px; outline:none; transition:.3s;}
+[data-theme="light"] .field{background:rgba(255,255,255,.75); color:#07111a;}
+.field:focus{border-color:var(--green); box-shadow:0 0 0 3px rgba(0,230,118,.08);}
+textarea{min-height:145px; resize:vertical;}
+
+/* LOGIN MODAL STYLES */
+.modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); z-index:9999; display:none; place-items:center;}
+.modal-overlay.active{display:grid;}
+.login-box{width:min(400px, 90%); padding:35px; border-radius:20px; background:var(--glass2); border:1px solid var(--border); position:relative; box-shadow:0 25px 50px rgba(0,0,0,0.5);}
+.login-box h2{margin-bottom:20px; font-size:24px;}
+.close-modal{position:absolute; top:20px; right:20px; background:none; border:0; color:var(--muted); font-size:20px; cursor:pointer;}
+
+/* FOOTER */
+footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,14,.72); backdrop-filter:blur(15px); color:var(--muted); font-size:12px;}
+.footer{display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap;}
+
+@media(max-width:950px){
+    .nav-links, .phone{display:none;}
+    .menu{display:block;}
+    .nav-links.open{position:absolute; top:82px; left:0; right:0; display:flex; flex-direction:column; padding:15px 5%; background:var(--nav); border-bottom:1px solid var(--border);}
+    .hero-grid, .contact-grid{grid-template-columns:1fr; text-align:center;}
+    .profile-wrap{order:-1; min-height:400px;}
+}
+</style>
+</head>
+
+<body data-theme="dark">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="nav">
+<div class="container nav-inner">
+    <div class="brand" onclick="switchPage('home')">
+        <div class="brand-logo">Hy</div>
+        <div class="brand-name">
+            <strong>Hy<span> Business</span></strong>
+            <small>GRAPHIC & WEB DESIGNER</small>
+        </div>
+    </div>
+    <div class="nav-links">
+        <a class="active" onclick="switchPage('home')">Home</a>
+        <a onclick="switchPage('about')">About</a>
+        <a onclick="switchPage('services')">Services</a>
+        <a onclick="switchPage('projects')">Projects</a>
+        <a onclick="switchPage('experience')">Experience</a>
+        <a onclick="switchPage('contact')">Contact</a>
+    </div>
+    <div class="nav-right-actions">
+        <button class="login-nav-btn" onclick="openLoginModal()" title="Login"><i class="fa-solid fa-user"></i></button>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <a class="phone" href="tel:+923209306672"><i class="fa-solid fa-phone"></i> 0320-9306672</a>
+    </div>
+    <button class="menu" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+</div>
+</nav>
+
+<!-- ================= HOME PAGE ================= -->
+<div id="page-home" class="page-view active-page">
+<section class="hero">
+<div class="container hero-grid">
+<div>
+    <div class="hello">HELLO, I'M</div>
+    <h1>MUHAMMAD<br><span>IBRAHIM</span></h1>
+    <div class="title">I <span>DESIGN SOLUTIONS</span> THAT INSPIRE</div>
+    <p class="hero-text">I am a passionate Graphic Designer & Web Designer. I create modern, unique and professional designs that help brands grow.</p>
+    <div class="actions">
+        <a class="btn green" onclick="switchPage('projects')"><i class="fa-solid fa-layer-group"></i> ENTER PORTFOLIO</a>
+        <a class="btn outline" onclick="switchPage('contact')"><i class="fa-solid fa-paper-plane"></i> CONTACT ME</a>
+    </div>
+</div>
+<div class="profile-wrap">
+    <div class="profile-ring">
+        <img class="profile" src="profile.png" alt="Muhammad Ibrahim">
+    </div>
+    <div class="freelance">
+        <span>Available For</span>
+        <b>Freelance Work</b>
+        <i class="dot"></i>
+    </div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ================= CONTACT PAGE ================= -->
+<div id="page-contact" class="page-view">
+    <section>
+        <div class="container">
+            <div class="section-label">GET IN TOUCH</div>
+            <h2 class="section-title">Contact <span>Me</span></h2>
+            <p class="section-desc">Let's discuss your project. Messages will be sent directly to your email.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Contact Information</h3>
+                    <div class="contact-row">
+                        <div><i class="fa-solid fa-phone"></i></div>
+                        <div><strong>Phone</strong><span><a href="tel:+923209306672">0320-9306672</a></span></div>
+                    </div>
+                    <div class="contact-row">
+                        <div><i class="fa-brands fa-whatsapp"></i></div>
+                        <div><strong>WhatsApp</strong><span><a href="https://wa.me/923209306672" target="_blank">Chat on WhatsApp</a></span></div>
+                    </div>
+                    <div class="contact-row">
+                        <div><i class="fa-solid fa-location-dot"></i></div>
+                        <div><strong>Location</strong><span>Mandi Bahauddin, Pakistan</span></div>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <!-- Contact Form connected with EmailJS -->
+                    <form id="contact-form" onsubmit="sendEmail(event)">
+                        <input type="text" name="user_name" class="field" placeholder="Your Name" required>
+                        <input type="email" name="user_email" class="field" placeholder="Your Email" required>
+                        <input type="text" name="subject" class="field" placeholder="Subject">
+                        <textarea name="message" class="field" placeholder="Your Message" required></textarea>
+                        <button type="submit" id="submit-btn" class="btn green" style="border:0; width:100%;">SEND MESSAGE <i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Other pages placeholders if needed (About, Services, Projects, Experience) can stay or be included -->
+<div id="page-about" class="page-view"><section><div class="container"><h2 class="section-title">About Page</h2></div></section></div>
+<div id="page-services" class="page-view"><section><div class="container"><h2 class="section-title">Services Page</h2></div></section></div>
+<div id="page-projects" class="page-view"><section><div class="container"><h2 class="section-title">Projects Page</h2></div></section></div>
+<div id="page-experience" class="page-view"><section><div class="container"><h2 class="section-title">Experience Page</h2></div></section></div>
+
+<!-- ================= LOGIN MODAL ================= -->
+<div class="modal-overlay" id="loginModal">
+    <div class="login-box">
+        <button class="close-modal" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Admin / User Login</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="email" class="field" placeholder="Email Address" required style="margin-bottom:14px;">
+            <input type="password" class="field" placeholder="Password" required style="margin-bottom:14px;">
+            <button type="submit" class="btn green" style="width:100%; border:0;">LOGIN</button>
+        </form>
+    </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<div class="container footer">
+    <div>&copy; 2026 <strong>Muhammad Ibrahim</strong>. All Rights Reserved.</div>
+</div>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+function switchPage(pageId) {
+    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-page'));
+    const target = document.getElementById('page-' + pageId);
+    if(target) target.classList.add('active-page');
+    
+    document.querySelectorAll('.nav-links a').forEach(l => {
+        l.classList.remove('active');
+        if(l.getAttribute('onclick') && l.getAttribute('onclick').includes(pageId)) l.classList.add('active');
+    });
+    
+    const navLinksContainer = document.querySelector('.nav-links');
+    if(navLinksContainer.classList.contains('open')) navLinksContainer.classList.remove('open');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function toggleTheme() {
+    const body = document.body;
+    const themeIcon = document.getElementById('themeIcon');
+    if(body.getAttribute('data-theme') === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        themeIcon.className = 'fa-solid fa-sun';
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.className = 'fa-solid fa-moon';
+    }
+}
+
+function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('open');
+}
+
+/* Login Modal Handlers */
+function openLoginModal() {
+    document.getElementById('loginModal').classList.add('active');
+}
+function closeLoginModal() {
+    document.getElementById('loginModal').classList.remove('active');
+}
+function handleLogin(e) {
+    e.preventDefault();
+    alert('Login successful!');
+    closeLoginModal();
+}
+
+/* Direct Email Send Function using EmailJS */
+function sendEmail(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.innerText = "Sending...";
+    
+    // EmailJS parameters: service_id, template_id, form_element
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', '#contact-form')
+        .then(function() {
+            alert('Message sent successfully to your email!');
+            document.getElementById('contact-form').reset();
+            btn.innerHTML = 'SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';
+        }, function(error) {
+            alert('Failed to send message. Please configure EmailJS properly.');
+            console.error('FAILED...', error);
+            btn.innerHTML = 'SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';
+        });
+}
+</script>
+
+</body>
+</html>
