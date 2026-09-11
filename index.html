@@ -9,14 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- EmailJS Official Browser SDK v3 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init("aFl4xlVKsxbf0d-7T");
-   })();
-</script>
-
 <style>
 /* =====================================================
     RESET & BASE STYLES
@@ -231,11 +223,15 @@ footer{padding:28px 0; border-top:1px solid var(--border); background:rgba(2,8,1
                 </div>
                 
                 <div class="contact-card">
-                    <form id="contact-form">
-                        <input type="text" name="user_name" class="field" placeholder="Your Name" required>
-                        <input type="email" name="user_email" class="field" placeholder="Your Email" required>
+                    <!-- WEB3FORMS INTEGRATION WITH YOUR EXACT KEY -->
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+                        <input type="hidden" name="access_key" value="732db9ef-b98e-4349-8f2b-67db7786891e">
+
+                        <input type="text" name="name" class="field" placeholder="Your Name" required>
+                        <input type="email" name="email" class="field" placeholder="Your Email" required>
                         <input type="text" name="subject" class="field" placeholder="Subject">
                         <textarea name="message" class="field" placeholder="Your Message" required></textarea>
+                        
                         <button type="submit" id="submit-btn" class="btn green" style="border:0; width:100%;">SEND MESSAGE <i class="fa-solid fa-paper-plane"></i></button>
                     </form>
                 </div>
@@ -314,24 +310,6 @@ function handleLogin(e) {
     alert('Login successful!');
     closeLoginModal();
 }
-
-/* Guaranteed EmailJS Event Listener using sendForm */
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.innerText = "Sending...";
-
-    emailjs.sendForm('service_zvx7win', 'template_4p3xhad', this, 'aFl4xlVKsxbf0d-7T')
-        .then(function() {
-            alert('SUCCESS! Message sent successfully.');
-            document.getElementById('contact-form').reset();
-            btn.innerHTML = 'SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';
-        }, function(error) {
-            alert('FAILED! Error: ' + JSON.stringify(error));
-            console.error('EmailJS Error:', error);
-            btn.innerHTML = 'SEND MESSAGE <i class="fa-solid fa-paper-plane"></i>';
-        });
-});
 </script>
 
 </body>
