@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- EmailJS SDK -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- EmailJS SDK v3 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
    (function(){
       emailjs.init("aFl4xlVKsxbf0d-7T");
@@ -315,7 +315,7 @@ function handleLogin(e) {
     closeLoginModal();
 }
 
-/* Updated & Direct Email Send Function */
+/* Updated Email Send Function with Correct Service ID & Template ID */
 function sendEmail(e) {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
@@ -325,12 +325,11 @@ function sendEmail(e) {
         user_name: document.querySelector('input[name="user_name"]').value,
         user_email: document.querySelector('input[name="user_email"]').value,
         subject: document.querySelector('input[name="subject"]').value,
-        message: document.querySelector('textarea[name="message"]').value,
-        name: document.querySelector('input[name="user_name"]').value,
-        email: document.querySelector('input[name="user_email"]').value
+        message: document.querySelector('textarea[name="message"]').value
     };
 
-    emailjs.send('service_zvx7win', 'tekegir', templateParams)
+    // Service: service_zvx7win | Template: template_4p3xhad | Public Key: aFl4xlVKsxbf0d-7T
+    emailjs.send('service_zvx7win', 'template_4p3xhad', templateParams, 'aFl4xlVKsxbf0d-7T')
         .then(function(response) {
             alert('SUCCESS! Message sent successfully.');
             document.getElementById('contact-form').reset();
