@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HY STORE | Official Store</title>
+<title>HY STORE | Premium E-Commerce Hub</title>
 
+<!-- Fonts & Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -12,146 +13,316 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 :root{
-    --bg:#080c14; --card-bg:#0f172a; --text:#f8fafc; --muted:#94a3b8;
-    --accent:#00e676; --cyan:#00d9ff; --orange:#ff7a00; --border:rgba(255,255,255,0.1);
+    --bg:#070a10; --card-bg:#0f172a; --text:#f8fafc; --muted:#94a3b8;
+    --accent:#00e676; --cyan:#00d9ff; --orange:#ff7a00; --border:rgba(255,255,255,0.08);
 }
 body{font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden;}
 a{text-decoration:none; color:inherit;}
-.container{width:min(1200px, 92%); margin:auto;}
+.container{width:min(1280px, 95%); margin:auto;}
 
-/* NAVBAR */
-header{position:fixed; top:0; left:0; right:0; height:80px; background:rgba(8,12,20,0.9); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); z-index:999; display:flex; align-items:center;}
-.nav-inner{display:flex; justify-content:space-between; align-items:center; width:100%;}
-.logo{font-size:26px; font-weight:800; background:linear-gradient(135deg, var(--orange), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+/* 1. TOP UTILITY BAR */
+.top-bar{background:#03060c; font-size:12px; border-bottom:1px solid var(--border); color:var(--muted); padding:6px 0;}
+.top-bar .inner{display:flex; justify-content:space-between; align-items:center;}
+.top-links{display:flex; gap:20px;}
+.top-links a:hover{color:var(--cyan);}
+
+/* 2. MAIN HEADER & SEARCH */
+header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); sticky; top:0; z-index:999; padding:15px 0;}
+.header-inner{display:flex; align-items:center; justify-content:space-between; gap:20px;}
+.logo{font-size:28px; font-weight:800; background:linear-gradient(135deg, var(--orange), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space:nowrap;}
 .logo span{color:var(--accent);}
-.nav-links{display:flex; gap:25px;}
-.nav-links a{font-weight:500; font-size:14px; opacity:0.8; transition:.3s;}
-.nav-links a:hover{opacity:1; color:var(--cyan);}
 
-/* HERO SECTION */
-.hero{padding:140px 0 60px; text-align:center;}
-.hero span.badge{background:rgba(0,230,118,0.15); color:var(--accent); border:1px solid rgba(0,230,118,0.3); padding:6px 16px; border-radius:20px; font-size:12px; font-weight:600;}
-.hero h1{font-size:clamp(32px, 5vw, 56px); font-weight:800; margin:18px 0 10px; line-height:1.2;}
-.hero h1 span{color:var(--cyan);}
-.hero p{color:var(--muted); max-width:600px; margin:auto; font-size:15px;}
+/* DARAZ STYLE SEARCH BAR */
+.search-box{flex:1; max-width:650px; display:flex; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:30px; overflow:hidden;}
+.search-box select{background:transparent; border:none; color:var(--muted); padding:0 15px; font-size:13px; outline:none; border-right:1px solid var(--border);}
+.search-box select option{background:var(--card-bg); color:#fff;}
+.search-box input{flex:1; background:transparent; border:none; padding:12px 18px; color:#fff; outline:none; font-size:14px;}
+.search-box button{background:linear-gradient(135deg, var(--orange), var(--accent)); border:none; padding:0 25px; color:#000; font-weight:700; cursor:pointer;}
 
-/* STORE PRODUCTS */
-section{padding:40px 0 80px;}
-.section-title{font-size:28px; font-weight:700; margin-bottom:30px; display:flex; align-items:center; gap:10px;}
-.section-title::before{content:''; width:5px; height:25px; background:var(--accent); border-radius:3px;}
+.header-cart{display:flex; align-items:center; gap:20px; font-size:20px; cursor:pointer;}
+.cart-icon{position:relative;}
+.cart-badge{position:absolute; top:-8px; right:-10px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;}
 
-.grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px;}
-.product-card{background:var(--card-bg); border:1px solid var(--border); border-radius:18px; padding:20px; transition:.3s; position:relative;}
-.product-card:hover{transform:translateY(-6px); border-color:var(--cyan);}
-.product-img{width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom:15px;}
-.product-tag{position:absolute; top:30px; left:30px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; padding:4px 10px; border-radius:10px;}
-.product-card h3{font-size:18px; margin-bottom:8px;}
-.product-card .price{font-size:20px; font-weight:700; color:var(--accent); margin-bottom:15px;}
-.product-card .price del{font-size:14px; color:var(--muted); margin-left:8px;}
-.btn-buy{width:100%; padding:12px; border:none; border-radius:10px; background:var(--cyan); color:#000; font-weight:700; cursor:pointer; transition:.3s;}
-.btn-buy:hover{background:var(--accent);}
+/* 3. HERO SECTION (DARAZ LAYOUT: CATEGORIES + SLIDER + PROMO) */
+.hero-layout{display:grid; grid-template-columns:230px 1fr 240px; gap:15px; margin-top:20px;}
 
-/* MODAL / ORDER POPUP */
-.modal{position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:9999; display:none; place-items:center;}
+/* Left Categories Drawer */
+.cat-sidebar{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:10px 0;}
+.cat-item{display:flex; align-items:center; gap:12px; padding:10px 18px; font-size:13px; color:var(--muted); transition:.2s; cursor:pointer;}
+.cat-item:hover{background:rgba(0,217,255,0.1); color:var(--cyan); border-left:3px solid var(--cyan);}
+
+/* Center Main Banner Slider */
+.hero-banner-slider{position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); height:340px;}
+.slide{position:absolute; inset:0; opacity:0; transition:opacity .5s ease-in-out;}
+.slide.active{opacity:1;}
+.slide img{width:100%; height:100%; object-fit:cover;}
+.slide-content{position:absolute; bottom:30px; left:30px; background:rgba(7,10,16,0.85); backdrop-filter:blur(8px); padding:20px 25px; border-radius:12px; border:1px solid var(--border); max-width:380px;}
+.slide-content h2{font-size:22px; color:#fff; margin-bottom:5px;}
+.slide-content p{font-size:12px; color:var(--muted); margin-bottom:12px;}
+.btn-slider{display:inline-block; padding:8px 18px; background:var(--accent); color:#000; font-weight:700; font-size:12px; border-radius:20px;}
+
+/* Slider Dots */
+.dots{position:absolute; bottom:15px; right:20px; display:flex; gap:6px; z-index:10;}
+.dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer;}
+.dot.active{background:var(--cyan); width:24px; border-radius:10px;}
+
+/* Right Side App Promo Card */
+.side-promo{background:linear-gradient(180deg, var(--card-bg), rgba(15,23,42,0.5)); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;}
+.side-promo i{font-size:40px; color:var(--orange); margin-bottom:10px;}
+.side-promo h3{font-size:16px; margin-bottom:6px;}
+.side-promo p{font-size:11px; color:var(--muted); margin-bottom:15px;}
+.promo-badge{background:rgba(0,230,118,0.15); color:var(--accent); border:1px solid var(--accent); padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600;}
+
+/* 4. PROMOTIONAL SALE BANNER */
+.promo-strip{margin:25px 0; background:linear-gradient(90deg, #ff7a00, #ff0055); border-radius:12px; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
+.promo-strip h3{font-size:20px; font-weight:800; color:#fff;}
+.promo-strip span{font-size:13px; background:rgba(0,0,0,0.3); padding:5px 12px; border-radius:20px; color:#fff;}
+
+/* 5. FLASH SALE SECTION */
+.flash-sale-head{display:flex; justify-content:space-between; align-items:center; padding:15px 20px; background:var(--card-bg); border:1px solid var(--border); border-radius:12px 12px 0 0; margin-top:20px;}
+.timer{display:flex; align-items:center; gap:8px; font-weight:700; color:var(--orange); font-size:14px;}
+.time-box{background:#000; color:#fff; padding:3px 8px; border-radius:5px; font-size:13px;}
+
+.product-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:15px; background:var(--card-bg); border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; padding:20px;}
+.product-card{background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px; padding:12px; transition:.3s; position:relative;}
+.product-card:hover{transform:translateY(-5px); border-color:var(--cyan);}
+.product-img{width:100%; height:170px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
+.discount-tag{position:absolute; top:18px; left:18px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px;}
+.product-card h4{font-size:14px; margin-bottom:6px; font-weight:500; height:38px; overflow:hidden;}
+.product-card .price{font-size:18px; font-weight:700; color:var(--accent);}
+.product-card .price del{font-size:12px; color:var(--muted); margin-left:6px;}
+
+.progress-bar{height:6px; background:rgba(255,255,255,0.1); border-radius:3px; margin:10px 0 12px; overflow:hidden;}
+.progress-fill{height:100%; width:75%; background:linear-gradient(90deg, var(--orange), var(--accent));}
+
+.btn-add{width:100%; padding:10px; border:none; border-radius:8px; background:var(--cyan); color:#000; font-weight:700; font-size:13px; cursor:pointer; transition:.2s;}
+.btn-add:hover{background:var(--accent);}
+
+/* MODAL / CHECKOUT */
+.modal{position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:9999; display:none; place-items:center;}
 .modal.active{display:grid;}
-.modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:20px; width:min(450px, 90%); padding:30px; position:relative;}
-.close-modal{position:absolute; top:20px; right:20px; background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer;}
-.field{width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,0.3); color:#fff; font-size:14px; outline:none;}
+.modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:min(450px, 92%); padding:25px; position:relative;}
+.close-modal{position:absolute; top:18px; right:18px; background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer;}
+.field{width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:rgba(0,0,0,0.4); color:#fff; font-size:13px; outline:none;}
 .field:focus{border-color:var(--accent);}
-.submit-btn{padding:14px; background:var(--accent); color:#000; font-weight:700; border:none; border-radius:10px; cursor:pointer; font-size:15px;}
+.submit-btn{width:100%; padding:12px; background:var(--accent); color:#000; font-weight:700; border:none; border-radius:8px; cursor:pointer; font-size:14px; margin-top:5px;}
 
-footer{text-align:center; padding:30px; border-top:1px solid var(--border); color:var(--muted); font-size:13px;}
+footer{text-align:center; padding:25px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; margin-top:50px;}
+
+@media(max-width:992px){
+    .hero-layout{grid-template-columns:1fr;}
+    .cat-sidebar, .side-promo{display:none;}
+}
 </style>
 </head>
 <body>
 
+<!-- 1. TOP UTILITY BAR -->
+<div class="top-bar">
+    <div class="container inner">
+        <div class="top-links">
+            <a href="#">Save More on App</a>
+            <a href="#">Help & Support</a>
+            <a href="#">Track My Order</a>
+        </div>
+        <div>
+            <span><i class="fa-solid fa-truck-fast"></i> Free Shipping Available Across Pakistan</span>
+        </div>
+    </div>
+</div>
+
+<!-- 2. MAIN HEADER -->
 <header>
-    <div class="container nav-inner">
+    <div class="container header-inner">
         <a href="#" class="logo">HY <span>STORE</span></a>
-        <div class="nav-links">
-            <a href="#products">Products</a>
-            <a href="#about">About Us</a>
+        
+        <div class="search-box">
+            <select>
+                <option>All Categories</option>
+                <option>Gadgets</option>
+                <option>Smartwatches</option>
+                <option>Audio</option>
+            </select>
+            <input type="text" placeholder="Search in HY Store...">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div class="header-cart">
+            <div class="cart-icon" onclick="alert('Cart empty. Click Buy Now on any item!')">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge">0</span>
+            </div>
         </div>
     </div>
 </header>
 
-<div class="hero">
-    <div class="container">
-        <span class="badge"><i class="fa-solid fa-bolt"></i> FAST ONLINE DELIVERY IN PAKISTAN</span>
-        <h1>Premium Quality <span>Gadgets</span></h1>
-        <p>Order online with Cash on Delivery & Instant Confirmation.</p>
-    </div>
-</div>
+<div class="container">
 
-<section id="products">
-    <div class="container">
-        <h2 class="section-title">Our Products</h2>
-        <div class="grid">
+    <!-- 3. DARAZ-STYLE HERO LAYOUT -->
+    <div class="hero-layout">
+        
+        <!-- Left Sidebar Categories -->
+        <div class="cat-sidebar">
+            <div class="cat-item"><i class="fa-solid fa-headphones"></i> Audio & Headphones</div>
+            <div class="cat-item"><i class="fa-solid fa-stopwatch"></i> Smartwatches & Bands</div>
+            <div class="cat-item"><i class="fa-solid fa-mobile-screen"></i> Mobile Accessories</div>
+            <div class="cat-item"><i class="fa-solid fa-bolt"></i> Power Banks & Cables</div>
+            <div class="cat-item"><i class="fa-solid fa-gamepad"></i> Gaming Accessories</div>
+            <div class="cat-item"><i class="fa-solid fa-camera"></i> Camera & Vlogging Tech</div>
+        </div>
+
+        <!-- Center Auto Slider Banners -->
+        <div class="hero-banner-slider">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80" alt="Banner 1">
+                <div class="slide-content">
+                    <h2>Noise Cancelling Master</h2>
+                    <p>Up to 40% Off on Premium Wireless Headphones.</p>
+                    <a href="#flash" class="btn-slider">Shop Now</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80" alt="Banner 2">
+                <div class="slide-content">
+                    <h2>Smart Watch Ultra Series</h2>
+                    <p>Track fitness, calls & health metrics in real-time.</p>
+                    <a href="#flash" class="btn-slider">Explore Deals</a>
+                </div>
+            </div>
+            
+            <div class="dots">
+                <div class="dot active" onclick="setSlide(0)"></div>
+                <div class="dot" onclick="setSlide(1)"></div>
+            </div>
+        </div>
+
+        <!-- Right Side Promo Card -->
+        <div class="side-promo">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>100% Verified</h3>
+            <p>Cash on Delivery & Instant WhatsApp Confirmation.</p>
+            <span class="promo-badge"><i class="fa-solid fa-check"></i> Fast Shipping</span>
+        </div>
+
+    </div>
+
+    <!-- 4. PROMO BANNER STRIP -->
+    <div class="promo-strip">
+        <h3>⚡ MEGA ANNIVERSARY SALE IS LIVE!</h3>
+        <span>Deals Worth Celebrating - Up to 50% Off</span>
+    </div>
+
+    <!-- 5. FLASH SALE SECTION -->
+    <div id="flash">
+        <div class="flash-sale-head">
+            <h3 style="font-size:18px;"><i class="fa-solid fa-bolt" style="color:var(--orange);"></i> Flash Sale</h3>
+            <div class="timer">
+                Ending in: 
+                <span class="time-box" id="hours">04</span> : 
+                <span class="time-box" id="mins">22</span> : 
+                <span class="time-box" id="secs">15</span>
+            </div>
+        </div>
+
+        <div class="product-grid">
             
             <!-- Product 1 -->
             <div class="product-card">
-                <span class="product-tag">20% OFF</span>
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Headphones">
-                <h3>Wireless Noise Cancelling Headphones</h3>
+                <span class="discount-tag">-25%</span>
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" class="product-img">
+                <h4>Wireless Noise Cancelling Headphones</h4>
                 <div class="price">Rs. 4,999 <del>Rs. 6,200</del></div>
-                <button class="btn-buy" onclick="openOrderModal('Wireless Headphones', '4999')">Buy Now</button>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <button class="btn-add" onclick="openOrderModal('Wireless Headphones', '4999')">Buy Now</button>
             </div>
 
             <!-- Product 2 -->
             <div class="product-card">
-                <span class="product-tag">HOT</span>
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Smartwatch">
-                <h3>Smart Fitness Watch Ultra</h3>
+                <span class="discount-tag">-30%</span>
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" class="product-img">
+                <h4>Smart Fitness Watch Ultra Series</h4>
                 <div class="price">Rs. 3,499 <del>Rs. 4,500</del></div>
-                <button class="btn-buy" onclick="openOrderModal('Smart Fitness Watch Ultra', '3499')">Buy Now</button>
+                <div class="progress-bar"><div class="progress-fill" style="width:85%;"></div></div>
+                <button class="btn-add" onclick="openOrderModal('Smart Fitness Watch Ultra', '3499')">Buy Now</button>
             </div>
 
             <!-- Product 3 -->
             <div class="product-card">
-                <span class="product-tag">NEW</span>
-                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80" class="product-img" alt="Earbuds">
-                <h3>Pro TWS Wireless Earbuds</h3>
+                <span class="discount-tag">-20%</span>
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80" class="product-img">
+                <h4>Pro TWS Wireless Earbuds Pro</h4>
                 <div class="price">Rs. 2,800 <del>Rs. 3,500</del></div>
-                <button class="btn-buy" onclick="openOrderModal('Pro TWS Wireless Earbuds', '2800')">Buy Now</button>
+                <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
+                <button class="btn-add" onclick="openOrderModal('Pro TWS Wireless Earbuds', '2800')">Buy Now</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <span class="discount-tag">-15%</span>
+                <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80" class="product-img">
+                <h4>Gaming RGB Over-Ear Headset</h4>
+                <div class="price">Rs. 3,999 <del>Rs. 4,800</del></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:90%;"></div></div>
+                <button class="btn-add" onclick="openOrderModal('Gaming RGB Headset', '3999')">Buy Now</button>
             </div>
 
         </div>
     </div>
-</section>
 
-<!-- ORDER MODAL -->
+</div>
+
+<!-- ORDER MODAL (CHECKOUT) -->
 <div class="modal" id="orderModal">
     <div class="modal-box">
         <button class="close-modal" onclick="closeOrderModal()"><i class="fa-solid fa-xmark"></i></button>
-        <h3 style="font-size:20px; margin-bottom:5px;">Place Your Order</h3>
-        <p style="color:var(--accent); font-weight:600; font-size:14px; margin-bottom:15px;" id="mProductName"></p>
+        <h3 style="font-size:18px; margin-bottom:4px;">Checkout Order</h3>
+        <p style="color:var(--accent); font-weight:600; font-size:13px; margin-bottom:15px;" id="mProductName"></p>
 
-        <form id="orderForm" onsubmit="handleOrderSubmit(event)" style="display:grid; gap:12px;">
+        <form id="orderForm" onsubmit="handleOrderSubmit(event)" style="display:grid; gap:10px;">
             <input type="hidden" id="oProduct">
             <input type="hidden" id="oPrice">
             
-            <input type="text" id="oName" class="field" placeholder="Your Full Name" required>
+            <input type="text" id="oName" class="field" placeholder="Full Name" required>
             <input type="tel" id="oPhone" class="field" placeholder="WhatsApp / Phone Number" required>
-            <textarea id="oAddress" class="field" placeholder="Complete Delivery Address" style="min-height:70px;" required></textarea>
+            <textarea id="oAddress" class="field" placeholder="Complete Delivery Address" style="min-height:60px;" required></textarea>
             
             <select id="oPayment" class="field" required>
                 <option value="Cash on Delivery">Cash on Delivery (COD)</option>
                 <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
             </select>
 
-            <button type="submit" id="subBtn" class="submit-btn"><i class="fa-solid fa-check"></i> CONFIRM ORDER</button>
+            <button type="submit" id="subBtn" class="submit-btn"><i class="fa-solid fa-check"></i> PLACE ORDER</button>
         </form>
     </div>
 </div>
 
 <footer>
-    &copy; 2026 <strong>HY STORE</strong>. All Rights Reserved.
+    &copy; 2026 <strong>HY STORE</strong>. All Rights Reserved. Built for Professional E-Commerce.
 </footer>
 
 <script>
-// GOOGLE SCRIPT WEB APP URL (UPDATED)
+// GOOGLE SCRIPT WEB APP URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxW8MdmgSf-g6KkFnJ91TQqCFvUBFYnRw-6G8tcztQO-n91iho3uNiWUglL2pVSyfsh/exec";
 
+// SLIDER LOGIC
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function setSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+setInterval(() => {
+    let next = (currentSlide + 1) % slides.length;
+    setSlide(next);
+}, 4000);
+
+// MODAL LOGIC
 function openOrderModal(pName, price) {
     document.getElementById('mProductName').innerText = pName + " - Rs. " + price;
     document.getElementById('oProduct').value = pName;
@@ -179,7 +350,7 @@ function handleOrderSubmit(e) {
         payment: document.getElementById('oPayment').value
     };
 
-    // Save to Google Sheet
+    // Auto Save to Google Sheet
     fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -193,7 +364,7 @@ function handleOrderSubmit(e) {
     const msg = `Hi HY Store, I placed an order:\n\n*Product:* ${orderData.product}\n*Price:* Rs.${orderData.price}\n*Name:* ${orderData.name}\n*Phone:* ${orderData.phone}\n*Address:* ${orderData.address}`;
     window.open(`https://wa.me/923209306672?text=${encodeURIComponent(msg)}`, '_blank');
 
-    submitBtn.innerText = "CONFIRM ORDER";
+    submitBtn.innerText = "PLACE ORDER";
     submitBtn.disabled = false;
     closeOrderModal();
     document.getElementById('orderForm').reset();
