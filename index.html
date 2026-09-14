@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HY STORE | Official Mega Store</title>
+<title>HY STORE | Official Store</title>
 
 <!-- Fonts & Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,25 +13,36 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 :root{
-    --bg:#070a10; --card-bg:#0f172a; --text:#f8fafc; --muted:#94a3b8;
-    --accent:#00e676; --cyan:#00d9ff; --orange:#ff5722; --border:rgba(255,255,255,0.08);
+    --bg:#070a10; 
+    --card-bg:#0f172a; 
+    --text:#f8fafc; 
+    --muted:#94a3b8;
+    --accent:#00e676; 
+    --cyan:#00d9ff; 
+    --navy-blue:#0c172c; /* Updated Blue Shade */
+    --border:rgba(255,255,255,0.08);
 }
 body{font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden;}
 a{text-decoration:none; color:inherit;}
 .container{width:min(1280px, 95%); margin:auto;}
 
-/* 1. TOP ORANGE UTILITY BAR */
-.top-orange-bar{background:var(--orange); color:#fff; font-size:12px; font-weight:600; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.1);}
-.top-orange-bar .inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
-.top-nav-links{display:flex; gap:20px; align-items:center;}
-.top-nav-links a{color:#fff; transition:.2s; font-size:11px; letter-spacing:0.5px;}
-.top-nav-links a:hover{opacity:0.8; text-decoration:underline;}
-.lang-btn{background:rgba(0,0,0,0.2); border:none; color:#fff; padding:3px 10px; border-radius:4px; font-family:'Poppins', sans-serif; cursor:pointer; font-size:12px;}
+/* 1. TOP NAVY BLUE UTILITY BAR */
+.top-navy-bar{background:var(--navy-blue); color:#fff; font-size:12px; font-weight:500; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.08);}
+.top-navy-bar .inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+.top-nav-links{display:flex; gap:15px; align-items:center;}
+.top-nav-links a{color:#e2e8f0; transition:.2s; font-size:12px;}
+.top-nav-links a:hover{color:var(--cyan);}
 
-/* 2. MAIN HEADER & SEARCH */
+/* Highlighted Action Buttons in Top Bar */
+.nav-highlight-btn{background:linear-gradient(135deg, #00d9ff, #00e676); color:#000 !important; padding:4px 14px; border-radius:20px; font-weight:700 !important; font-size:11px !important; display:inline-flex; align-items:center; gap:5px; transition:.3s;}
+.nav-highlight-btn:hover{transform:scale(1.05); box-shadow:0 0 10px rgba(0,217,255,0.4);}
+
+.lang-btn{background:rgba(255,255,255,0.1); border:1px solid var(--border); color:#fff; padding:3px 10px; border-radius:4px; font-family:'Poppins', sans-serif; cursor:pointer; font-size:11px;}
+
+/* 2. MAIN HEADER */
 header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); sticky; top:0; z-index:999; padding:15px 0;}
 .header-inner{display:flex; align-items:center; justify-content:space-between; gap:20px;}
-.logo{font-size:28px; font-weight:800; background:linear-gradient(135deg, var(--orange), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space:nowrap;}
+.logo{font-size:28px; font-weight:800; background:linear-gradient(135deg, #00d9ff, var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space:nowrap;}
 .logo span{color:var(--accent);}
 
 /* SEARCH BAR */
@@ -39,21 +50,19 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .search-box select{background:transparent; border:none; color:var(--muted); padding:0 15px; font-size:13px; outline:none; border-right:1px solid var(--border);}
 .search-box select option{background:var(--card-bg); color:#fff;}
 .search-box input{flex:1; background:transparent; border:none; padding:12px 18px; color:#fff; outline:none; font-size:14px;}
-.search-box button{background:linear-gradient(135deg, var(--orange), var(--accent)); border:none; padding:0 25px; color:#000; font-weight:700; cursor:pointer;}
+.search-box button{background:linear-gradient(135deg, var(--cyan), var(--accent)); border:none; padding:0 25px; color:#000; font-weight:700; cursor:pointer;}
 
 .header-cart{display:flex; align-items:center; gap:20px; font-size:20px; cursor:pointer;}
 .cart-icon{position:relative;}
-.cart-badge{position:absolute; top:-8px; right:-10px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;}
+.cart-badge{position:absolute; top:-8px; right:-10px; background:var(--accent); color:#000; font-size:10px; font-weight:800; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;}
 
 /* HERO LAYOUT */
 .hero-layout{display:grid; grid-template-columns:230px 1fr 240px; gap:15px; margin-top:20px;}
 
-/* Categories Sidebar */
 .cat-sidebar{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:10px 0;}
 .cat-item{display:flex; align-items:center; gap:12px; padding:10px 18px; font-size:13px; color:var(--muted); transition:.2s; cursor:pointer;}
 .cat-item:hover, .cat-item.active{background:rgba(0,217,255,0.1); color:var(--cyan); border-left:3px solid var(--cyan);}
 
-/* Banner Slider */
 .hero-banner-slider{position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); height:340px;}
 .slide{position:absolute; inset:0; opacity:0; transition:opacity .5s ease-in-out;}
 .slide.active{opacity:1;}
@@ -67,19 +76,18 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer;}
 .dot.active{background:var(--cyan); width:24px; border-radius:10px;}
 
-/* Side Promo */
 .side-promo{background:linear-gradient(180deg, var(--card-bg), rgba(15,23,42,0.5)); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;}
-.side-promo i{font-size:40px; color:var(--orange); margin-bottom:10px;}
+.side-promo i{font-size:40px; color:var(--cyan); margin-bottom:10px;}
 .side-promo h3{font-size:16px; margin-bottom:6px;}
 .side-promo p{font-size:11px; color:var(--muted); margin-bottom:15px;}
 .promo-badge{background:rgba(0,230,118,0.15); color:var(--accent); border:1px solid var(--accent); padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600;}
 
 /* PROMO STRIP */
-.promo-strip{margin:25px 0; background:linear-gradient(90deg, #ff5722, #ff0055); border-radius:12px; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
+.promo-strip{margin:25px 0; background:linear-gradient(90deg, #0c172c, #00d9ff); border:1px solid var(--border); border-radius:12px; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
 .promo-strip h3{font-size:20px; font-weight:800; color:#fff;}
-.promo-strip span{font-size:13px; background:rgba(0,0,0,0.3); padding:5px 12px; border-radius:20px; color:#fff;}
+.promo-strip span{font-size:13px; background:rgba(0,0,0,0.4); padding:5px 12px; border-radius:20px; color:var(--accent);}
 
-/* PRODUCTS GRID SECTION */
+/* PRODUCTS GRID */
 .section-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
 .section-head h2{font-size:22px; font-weight:700;}
 
@@ -87,9 +95,9 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .product-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:12px; transition:.3s; position:relative; display:flex; flex-direction:column; justify-content:space-between;}
 .product-card:hover{transform:translateY(-5px); border-color:var(--cyan);}
 .product-img{width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
-.discount-tag{position:absolute; top:18px; left:18px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px;}
+.discount-tag{position:absolute; top:18px; left:18px; background:var(--accent); color:#000; font-size:10px; font-weight:800; padding:3px 8px; border-radius:5px;}
 .product-card h4{font-size:14px; margin-bottom:6px; font-weight:500; height:38px; overflow:hidden;}
-.product-card .price{font-size:17px; font-weight:700; color:var(--accent);}
+.product-card .price{font-size:17px; font-weight:700; color:var(--cyan);}
 .product-card .price del{font-size:12px; color:var(--muted); margin-left:6px;}
 
 .btn-add{width:100%; padding:10px; border:none; border-radius:8px; background:var(--cyan); color:#000; font-weight:700; font-size:13px; cursor:pointer; transition:.2s; margin-top:10px;}
@@ -98,7 +106,17 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .load-more-btn{display:block; width:220px; margin:30px auto; padding:12px; background:transparent; border:2px solid var(--cyan); color:var(--cyan); font-weight:700; border-radius:30px; text-align:center; cursor:pointer; transition:.3s;}
 .load-more-btn:hover{background:var(--cyan); color:#000;}
 
-/* MODALS (Login / Order) */
+/* CUSTOM OFFICIAL SUCCESS NOTIFICATION POPUP (ARIAL FONT) */
+.custom-notify-modal{position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:99999; display:none; place-items:center;}
+.custom-notify-modal.active{display:grid;}
+.notify-card{background:var(--card-bg); border:1px solid var(--cyan); border-radius:16px; width:min(400px, 90%); padding:30px 20px; text-align:center; box-shadow:0 10px 30px rgba(0,217,255,0.2); font-family:Arial, sans-serif;}
+.notify-icon{width:60px; height:60px; background:rgba(0,230,118,0.15); border:2px solid var(--accent); color:var(--accent); border-radius:50%; display:grid; place-items:center; margin:0 auto 15px; font-size:28px;}
+.notify-card h3{font-size:20px; color:#fff; margin-bottom:8px; font-family:Arial, sans-serif;}
+.notify-card p{font-size:14px; color:var(--muted); margin-bottom:20px; line-height:1.4; font-family:Arial, sans-serif;}
+.notify-btn{background:var(--accent); color:#000; border:none; padding:10px 30px; font-weight:bold; font-size:14px; border-radius:25px; cursor:pointer; font-family:Arial, sans-serif; transition:.2s;}
+.notify-btn:hover{background:var(--cyan);}
+
+/* MODALS */
 .modal{position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:9999; display:none; place-items:center;}
 .modal.active{display:grid;}
 .modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:min(420px, 92%); padding:25px; position:relative;}
@@ -117,18 +135,23 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 </head>
 <body>
 
-<!-- 1. TOP ORANGE UTILITY BAR -->
-<div class="top-orange-bar">
+<!-- 1. TOP NAVY BLUE UTILITY BAR -->
+<div class="top-navy-bar">
     <div class="container inner">
         <div class="top-nav-links">
-            <a href="javascript:void(0)" onclick="alert('Download HY Store App coming soon on Play Store!')">SAVE MORE ON APP</a>
-            <a href="javascript:void(0)" onclick="alert('Sell on HY Store vendor program is opening soon.')">SELL ON HY STORE</a>
-            <a href="javascript:void(0)" onclick="alert('Customer Support Hotline: +92 320 9306672')">HELP & SUPPORT</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('HY Store Mobile App', 'Our official Android & iOS app will be launching soon on Play Store!')">SAVE MORE ON APP</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('Partner Program', 'Vendor Registration is currently opening for verified sellers.')">SELL ON HY STORE</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('Customer Support', '24/7 Official Support Line: +92 320 9306672')">HELP & SUPPORT</a>
         </div>
+        
         <div class="top-nav-links">
+            <!-- Highlighted Buttons Side By Side -->
+            <a href="#productsSection" class="nav-highlight-btn"><i class="fa-solid fa-bag-shopping"></i> PRODUCTS</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('Contact Us', 'WhatsApp Hotline: +92 320 9306672\nEmail: support@hystore.com')" class="nav-highlight-btn" style="background:linear-gradient(135deg, #00e676, #00d9ff);"><i class="fa-solid fa-headset"></i> CONTACT US</a>
+            
             <a href="javascript:void(0)" onclick="openAuthModal('Login')">LOGIN</a>
             <a href="javascript:void(0)" onclick="openAuthModal('Sign Up')">SIGN UP</a>
-            <button class="lang-btn" onclick="toggleLanguage()">زبان تبدیل کریں</button>
+            <button class="lang-btn" onclick="toggleLanguage()">Language: EN</button>
         </div>
     </div>
 </div>
@@ -150,7 +173,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
         </div>
 
         <div class="header-cart">
-            <div class="cart-icon" onclick="alert('Your Cart: ' + cartCount + ' item(s)')">
+            <div class="cart-icon" onclick="showOfficialNotify('Your Shopping Cart', 'You currently have ' + cartCount + ' item(s) in your cart.')">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span class="cart-badge" id="cartCount">0</span>
             </div>
@@ -172,7 +195,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
             <div class="cat-item" onclick="filterCategory('Gaming', this)"><i class="fa-solid fa-gamepad"></i> Gaming Gear</div>
         </div>
 
-        <!-- Center Slider Banners -->
+        <!-- Center Banner Slider -->
         <div class="hero-banner-slider">
             <div class="slide active">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80">
@@ -221,7 +244,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
         </div>
 
         <div class="product-grid" id="productGridContainer">
-            <!-- Dynamic Products Will Render Here -->
+            <!-- Dynamic Products Array Rendered Here -->
         </div>
 
         <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">Load More Products</button>
@@ -229,12 +252,22 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 
 </div>
 
+<!-- CUSTOM OFFICIAL SUCCESS NOTIFICATION MODAL -->
+<div class="custom-notify-modal" id="customNotifyModal">
+    <div class="notify-card">
+        <div class="notify-icon"><i class="fa-solid fa-check"></i></div>
+        <h3 id="notifyTitle">Action Successful</h3>
+        <p id="notifyMessage">Welcome to HY Official Store.</p>
+        <button class="notify-btn" onclick="closeNotifyModal()">OK</button>
+    </div>
+</div>
+
 <!-- ORDER CHECKOUT MODAL -->
 <div class="modal" id="orderModal">
     <div class="modal-box">
         <button class="close-modal" onclick="closeModal('orderModal')"><i class="fa-solid fa-xmark"></i></button>
         <h3 style="font-size:18px; margin-bottom:4px;">Checkout Order</h3>
-        <p style="color:var(--accent); font-weight:600; font-size:13px; margin-bottom:15px;" id="mProductName"></p>
+        <p style="color:var(--cyan); font-weight:600; font-size:13px; margin-bottom:15px;" id="mProductName"></p>
 
         <form id="orderForm" onsubmit="handleOrderSubmit(event)">
             <input type="hidden" id="oProduct">
@@ -275,9 +308,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 <script>
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxW8MdmgSf-g6KkFnJ91TQqCFvUBFYnRw-6G8tcztQO-n91iho3uNiWUglL2pVSyfsh/exec";
 
-/* ==========================================================================
-   EASY PRODUCT MANAGEMENT ARRAY (ADD / EDIT ALL YOUR PRODUCTS HERE)
-   ========================================================================== */
+/* ARRAY PRODUCT MANAGEMENT */
 const productsData = [
     { id: 1, name: "Wireless Noise Cancelling Headphones", category: "Audio", price: 4999, oldPrice: 6200, discount: "20% OFF", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" },
     { id: 2, name: "Smart Fitness Watch Ultra Series", category: "Watches", price: 3499, oldPrice: 4500, discount: "30% OFF", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" },
@@ -294,18 +325,23 @@ const productsData = [
     { id: 13, name: "Studio Microphone Kit USB", category: "Audio", price: 5200, oldPrice: 6500, discount: "20% OFF", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=600&q=80" },
     { id: 14, name: "PD 65W Fast Wall Charger C-Type", category: "Accessories", price: 1750, oldPrice: 2200, discount: "20% OFF", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" },
     { id: 15, name: "Noise Isolating In-Ear Earphones", category: "Audio", price: 1200, oldPrice: 1600, discount: "25% OFF", img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80" },
-    { id: 16, name: "Luxury Steel Strap Smartwatch", category: "Watches", price: 4800, oldPrice: 6000, discount: "20% OFF", img: "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=600&q=80" },
-    
-    // Additional Products (Rendered on Load More)
-    { id: 17, name: "Universal Game Controller Bluetooth", category: "Gaming", price: 3200, oldPrice: 4000, discount: "20% OFF", img: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" },
-    { id: 18, name: "HD Web Camera with Microphone", category: "Accessories", price: 2600, oldPrice: 3300, discount: "21% OFF", img: "https://images.unsplash.com/photo-1587826080692-f439cd0b70da?auto=format&fit=crop&w=600&q=80" },
-    { id: 19, name: "Waterproof Bluetooth Shower Speaker", category: "Audio", price: 1650, oldPrice: 2100, discount: "21% OFF", img: "https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=600&q=80" },
-    { id: 20, name: "Wireless Charging Pad 15W", category: "Accessories", price: 1400, oldPrice: 1800, discount: "22% OFF", img: "https://images.unsplash.com/photo-1622445268465-84288417c805?auto=format&fit=crop&w=600&q=80" }
+    { id: 16, name: "Luxury Steel Strap Smartwatch", category: "Watches", price: 4800, oldPrice: 6000, discount: "20% OFF", img: "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=600&q=80" }
 ];
 
 let displayedCount = 16;
 let currentProductsList = [...productsData];
 let cartCount = 0;
+
+/* OFFICIAL CENTER NOTIFICATION FUNCTION */
+function showOfficialNotify(title, message) {
+    document.getElementById('notifyTitle').innerText = title;
+    document.getElementById('notifyMessage').innerText = message;
+    document.getElementById('customNotifyModal').classList.add('active');
+}
+
+function closeNotifyModal() {
+    document.getElementById('customNotifyModal').classList.remove('active');
+}
 
 // RENDER PRODUCTS
 function renderProducts() {
@@ -408,7 +444,7 @@ function closeModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
 }
 
-// ORDER SUBMIT (SAVE TO GOOGLE SHEET + WHATSAPP)
+// ORDER SUBMIT WITH CUSTOM POPUP & WHATSAPP
 function handleOrderSubmit(e) {
     e.preventDefault();
     
@@ -435,7 +471,7 @@ function handleOrderSubmit(e) {
     cartCount++;
     document.getElementById('cartCount').innerText = cartCount;
 
-    alert("Shukriya " + orderData.name + "! Aapka order place ho gaya hai.");
+    showOfficialNotify("Order Confirmed!", "Thank you " + orderData.name + ". Your order has been placed successfully.");
     
     const msg = `Hi HY Store, I placed an order:\n\n*Product:* ${orderData.product}\n*Price:* Rs.${orderData.price}\n*Name:* ${orderData.name}\n*Phone:* ${orderData.phone}\n*Address:* ${orderData.address}`;
     window.open(`https://wa.me/923209306672?text=${encodeURIComponent(msg)}`, '_blank');
@@ -448,21 +484,12 @@ function handleOrderSubmit(e) {
 
 function handleAuthSubmit(e) {
     e.preventDefault();
-    alert("Success! Welcome to HY Store.");
     closeModal('authModal');
+    showOfficialNotify("Account Authentication", "Success! Welcome to HY Official Store.");
 }
 
-// URDU LANGUAGE TOGGLE
-let isUrdu = false;
 function toggleLanguage() {
-    isUrdu = !isUrdu;
-    if(isUrdu) {
-        document.getElementById('promoText').innerText = "⚡ سالگرہ کی بمپر سیل جاری ہے!";
-        document.getElementById('sectionTitle').innerText = "تمام مصنوعات";
-    } else {
-        document.getElementById('promoText').innerText = "⚡ MEGA ANNIVERSARY SALE IS LIVE!";
-        document.getElementById('sectionTitle').innerText = "All Products";
-    }
+    showOfficialNotify("Language Preferences", "English is set as the primary store language.");
 }
 
 // INITIAL RENDER
