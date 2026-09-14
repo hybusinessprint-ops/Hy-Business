@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HY STORE | Official Store</title>
+<title>HY STORE | Official Mobile App & Web</title>
 
 <!-- Fonts & Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,117 +19,139 @@ html{scroll-behavior:smooth;}
     --muted:#94a3b8;
     --accent:#00e676; 
     --cyan:#00d9ff; 
-    --navy-blue:#0c172c; /* Updated Blue Shade */
+    --navy-blue:#0c172c; 
     --border:rgba(255,255,255,0.08);
 }
-body{font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden;}
+body{font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; padding-bottom:60px;}
 a{text-decoration:none; color:inherit;}
 .container{width:min(1280px, 95%); margin:auto;}
 
 /* 1. TOP NAVY BLUE UTILITY BAR */
 .top-navy-bar{background:var(--navy-blue); color:#fff; font-size:12px; font-weight:500; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.08);}
 .top-navy-bar .inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
-.top-nav-links{display:flex; gap:15px; align-items:center;}
+.top-nav-links{display:flex; gap:12px; align-items:center;}
 .top-nav-links a{color:#e2e8f0; transition:.2s; font-size:12px;}
 .top-nav-links a:hover{color:var(--cyan);}
 
-/* Highlighted Action Buttons in Top Bar */
-.nav-highlight-btn{background:linear-gradient(135deg, #00d9ff, #00e676); color:#000 !important; padding:4px 14px; border-radius:20px; font-weight:700 !important; font-size:11px !important; display:inline-flex; align-items:center; gap:5px; transition:.3s;}
-.nav-highlight-btn:hover{transform:scale(1.05); box-shadow:0 0 10px rgba(0,217,255,0.4);}
-
+.nav-highlight-btn{background:linear-gradient(135deg, #00d9ff, #00e676); color:#000 !important; padding:4px 12px; border-radius:20px; font-weight:700 !important; font-size:11px !important; display:inline-flex; align-items:center; gap:5px; transition:.3s;}
 .lang-btn{background:rgba(255,255,255,0.1); border:1px solid var(--border); color:#fff; padding:3px 10px; border-radius:4px; font-family:'Poppins', sans-serif; cursor:pointer; font-size:11px;}
 
 /* 2. MAIN HEADER */
-header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); sticky; top:0; z-index:999; padding:15px 0;}
-.header-inner{display:flex; align-items:center; justify-content:space-between; gap:20px;}
-.logo{font-size:28px; font-weight:800; background:linear-gradient(135deg, #00d9ff, var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space:nowrap;}
+header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:999; padding:12px 0;}
+.header-inner{display:flex; align-items:center; justify-content:space-between; gap:15px;}
+.logo{font-size:24px; font-weight:800; background:linear-gradient(135deg, #00d9ff, var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space:nowrap;}
 .logo span{color:var(--accent);}
 
 /* SEARCH BAR */
 .search-box{flex:1; max-width:650px; display:flex; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:30px; overflow:hidden;}
-.search-box select{background:transparent; border:none; color:var(--muted); padding:0 15px; font-size:13px; outline:none; border-right:1px solid var(--border);}
+.search-box select{background:transparent; border:none; color:var(--muted); padding:0 12px; font-size:12px; outline:none; border-right:1px solid var(--border);}
 .search-box select option{background:var(--card-bg); color:#fff;}
-.search-box input{flex:1; background:transparent; border:none; padding:12px 18px; color:#fff; outline:none; font-size:14px;}
-.search-box button{background:linear-gradient(135deg, var(--cyan), var(--accent)); border:none; padding:0 25px; color:#000; font-weight:700; cursor:pointer;}
+.search-box input{flex:1; background:transparent; border:none; padding:10px 15px; color:#fff; outline:none; font-size:13px; width:100%;}
+.search-box button{background:linear-gradient(135deg, var(--cyan), var(--accent)); border:none; padding:0 20px; color:#000; font-weight:700; cursor:pointer;}
 
-.header-cart{display:flex; align-items:center; gap:20px; font-size:20px; cursor:pointer;}
+.header-cart{display:flex; align-items:center; gap:15px; font-size:20px; cursor:pointer;}
 .cart-icon{position:relative;}
 .cart-badge{position:absolute; top:-8px; right:-10px; background:var(--accent); color:#000; font-size:10px; font-weight:800; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;}
 
-/* HERO LAYOUT */
-.hero-layout{display:grid; grid-template-columns:230px 1fr 240px; gap:15px; margin-top:20px;}
+/* MOBILE APP HORIZONTAL ICON SCROLL BAR */
+.app-quick-cats{display:flex; gap:15px; overflow-x:auto; padding:12px 0; margin-top:10px; scrollbar-width:none;}
+.app-quick-cats::-webkit-scrollbar{display:none;}
+.app-cat-item{flex:0 0 auto; width:72px; text-align:center; cursor:pointer;}
+.app-cat-icon{width:50px; height:50px; background:var(--card-bg); border:1px solid var(--border); border-radius:14px; display:grid; place-items:center; margin:0 auto 6px; color:var(--cyan); font-size:20px; transition:.2s;}
+.app-cat-item:hover .app-cat-icon, .app-cat-item.active .app-cat-icon{background:var(--cyan); color:#000; border-color:var(--cyan);}
+.app-cat-item span{font-size:11px; color:var(--muted); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 
+/* HERO LAYOUT */
+.hero-layout{display:grid; grid-template-columns:230px 1fr 240px; gap:15px; margin-top:10px;}
 .cat-sidebar{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:10px 0;}
 .cat-item{display:flex; align-items:center; gap:12px; padding:10px 18px; font-size:13px; color:var(--muted); transition:.2s; cursor:pointer;}
 .cat-item:hover, .cat-item.active{background:rgba(0,217,255,0.1); color:var(--cyan); border-left:3px solid var(--cyan);}
 
-.hero-banner-slider{position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); height:340px;}
+.hero-banner-slider{position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); height:280px;}
 .slide{position:absolute; inset:0; opacity:0; transition:opacity .5s ease-in-out;}
 .slide.active{opacity:1;}
 .slide img{width:100%; height:100%; object-fit:cover;}
-.slide-content{position:absolute; bottom:30px; left:30px; background:rgba(7,10,16,0.85); backdrop-filter:blur(8px); padding:20px 25px; border-radius:12px; border:1px solid var(--border); max-width:380px;}
-.slide-content h2{font-size:22px; color:#fff; margin-bottom:5px;}
-.slide-content p{font-size:12px; color:var(--muted); margin-bottom:12px;}
-.btn-slider{display:inline-block; padding:8px 18px; background:var(--accent); color:#000; font-weight:700; font-size:12px; border-radius:20px;}
+.slide-content{position:absolute; bottom:20px; left:20px; background:rgba(7,10,16,0.85); backdrop-filter:blur(8px); padding:15px 20px; border-radius:12px; border:1px solid var(--border); max-width:320px;}
+.slide-content h2{font-size:18px; color:#fff; margin-bottom:4px;}
+.slide-content p{font-size:11px; color:var(--muted); margin-bottom:10px;}
+.btn-slider{display:inline-block; padding:6px 15px; background:var(--accent); color:#000; font-weight:700; font-size:11px; border-radius:20px;}
 
-.dots{position:absolute; bottom:15px; right:20px; display:flex; gap:6px; z-index:10;}
-.dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer;}
-.dot.active{background:var(--cyan); width:24px; border-radius:10px;}
+.dots{position:absolute; bottom:12px; right:15px; display:flex; gap:6px; z-index:10;}
+.dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer;}
+.dot.active{background:var(--cyan); width:20px; border-radius:10px;}
 
 .side-promo{background:linear-gradient(180deg, var(--card-bg), rgba(15,23,42,0.5)); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;}
-.side-promo i{font-size:40px; color:var(--cyan); margin-bottom:10px;}
-.side-promo h3{font-size:16px; margin-bottom:6px;}
-.side-promo p{font-size:11px; color:var(--muted); margin-bottom:15px;}
-.promo-badge{background:rgba(0,230,118,0.15); color:var(--accent); border:1px solid var(--accent); padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600;}
+.side-promo i{font-size:36px; color:var(--cyan); margin-bottom:8px;}
+.side-promo h3{font-size:15px; margin-bottom:4px;}
+.side-promo p{font-size:11px; color:var(--muted); margin-bottom:12px;}
+.promo-badge{background:rgba(0,230,118,0.15); color:var(--accent); border:1px solid var(--accent); padding:5px 10px; border-radius:20px; font-size:10px; font-weight:600;}
 
 /* PROMO STRIP */
-.promo-strip{margin:25px 0; background:linear-gradient(90deg, #0c172c, #00d9ff); border:1px solid var(--border); border-radius:12px; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
-.promo-strip h3{font-size:20px; font-weight:800; color:#fff;}
-.promo-strip span{font-size:13px; background:rgba(0,0,0,0.4); padding:5px 12px; border-radius:20px; color:var(--accent);}
+.promo-strip{margin:20px 0; background:linear-gradient(90deg, #0c172c, #00d9ff); border:1px solid var(--border); border-radius:12px; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+.promo-strip h3{font-size:16px; font-weight:800; color:#fff;}
+.promo-strip span{font-size:11px; background:rgba(0,0,0,0.4); padding:4px 10px; border-radius:20px; color:var(--accent);}
 
-/* PRODUCTS GRID */
-.section-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
-.section-head h2{font-size:22px; font-weight:700;}
+/* PRODUCTS GRID - APP OPTIMIZED */
+.section-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;}
+.section-head h2{font-size:18px; font-weight:700;}
 
-.product-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:18px;}
-.product-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:12px; transition:.3s; position:relative; display:flex; flex-direction:column; justify-content:space-between;}
-.product-card:hover{transform:translateY(-5px); border-color:var(--cyan);}
-.product-img{width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
-.discount-tag{position:absolute; top:18px; left:18px; background:var(--accent); color:#000; font-size:10px; font-weight:800; padding:3px 8px; border-radius:5px;}
-.product-card h4{font-size:14px; margin-bottom:6px; font-weight:500; height:38px; overflow:hidden;}
-.product-card .price{font-size:17px; font-weight:700; color:var(--cyan);}
-.product-card .price del{font-size:12px; color:var(--muted); margin-left:6px;}
+.product-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:15px;}
+.product-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:10px; transition:.3s; position:relative; display:flex; flex-direction:column; justify-content:space-between;}
+.product-card:hover{transform:translateY(-3px); border-color:var(--cyan);}
+.product-img{width:100%; height:150px; object-fit:cover; border-radius:8px; margin-bottom:8px;}
+.discount-tag{position:absolute; top:15px; left:15px; background:var(--accent); color:#000; font-size:9px; font-weight:800; padding:2px 6px; border-radius:4px;}
+.product-card h4{font-size:13px; margin-bottom:5px; font-weight:500; height:36px; overflow:hidden; line-height:1.3;}
+.product-card .price{font-size:15px; font-weight:700; color:var(--cyan);}
+.product-card .price del{font-size:11px; color:var(--muted); margin-left:4px;}
 
-.btn-add{width:100%; padding:10px; border:none; border-radius:8px; background:var(--cyan); color:#000; font-weight:700; font-size:13px; cursor:pointer; transition:.2s; margin-top:10px;}
+.btn-add{width:100%; padding:8px; border:none; border-radius:8px; background:var(--cyan); color:#000; font-weight:700; font-size:12px; cursor:pointer; transition:.2s; margin-top:8px;}
 .btn-add:hover{background:var(--accent);}
 
-.load-more-btn{display:block; width:220px; margin:30px auto; padding:12px; background:transparent; border:2px solid var(--cyan); color:var(--cyan); font-weight:700; border-radius:30px; text-align:center; cursor:pointer; transition:.3s;}
-.load-more-btn:hover{background:var(--cyan); color:#000;}
+.load-more-btn{display:block; width:180px; margin:25px auto; padding:10px; background:transparent; border:2px solid var(--cyan); color:var(--cyan); font-weight:700; font-size:13px; border-radius:30px; text-align:center; cursor:pointer;}
 
 /* CUSTOM OFFICIAL SUCCESS NOTIFICATION POPUP (ARIAL FONT) */
 .custom-notify-modal{position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:99999; display:none; place-items:center;}
 .custom-notify-modal.active{display:grid;}
-.notify-card{background:var(--card-bg); border:1px solid var(--cyan); border-radius:16px; width:min(400px, 90%); padding:30px 20px; text-align:center; box-shadow:0 10px 30px rgba(0,217,255,0.2); font-family:Arial, sans-serif;}
-.notify-icon{width:60px; height:60px; background:rgba(0,230,118,0.15); border:2px solid var(--accent); color:var(--accent); border-radius:50%; display:grid; place-items:center; margin:0 auto 15px; font-size:28px;}
-.notify-card h3{font-size:20px; color:#fff; margin-bottom:8px; font-family:Arial, sans-serif;}
-.notify-card p{font-size:14px; color:var(--muted); margin-bottom:20px; line-height:1.4; font-family:Arial, sans-serif;}
-.notify-btn{background:var(--accent); color:#000; border:none; padding:10px 30px; font-weight:bold; font-size:14px; border-radius:25px; cursor:pointer; font-family:Arial, sans-serif; transition:.2s;}
-.notify-btn:hover{background:var(--cyan);}
+.notify-card{background:var(--card-bg); border:1px solid var(--cyan); border-radius:16px; width:min(380px, 90%); padding:25px 20px; text-align:center; box-shadow:0 10px 30px rgba(0,217,255,0.2); font-family:Arial, sans-serif;}
+.notify-icon{width:50px; height:50px; background:rgba(0,230,118,0.15); border:2px solid var(--accent); color:var(--accent); border-radius:50%; display:grid; place-items:center; margin:0 auto 12px; font-size:24px;}
+.notify-card h3{font-size:18px; color:#fff; margin-bottom:6px; font-family:Arial, sans-serif;}
+.notify-card p{font-size:13px; color:var(--muted); margin-bottom:18px; line-height:1.4; font-family:Arial, sans-serif;}
+.notify-btn{background:var(--accent); color:#000; border:none; padding:8px 25px; font-weight:bold; font-size:13px; border-radius:20px; cursor:pointer; font-family:Arial, sans-serif;}
 
 /* MODALS */
 .modal{position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:9999; display:none; place-items:center;}
 .modal.active{display:grid;}
-.modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:min(420px, 92%); padding:25px; position:relative;}
-.close-modal{position:absolute; top:18px; right:18px; background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer;}
-.field{width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:rgba(0,0,0,0.4); color:#fff; font-size:13px; outline:none; margin-bottom:10px;}
-.field:focus{border-color:var(--accent);}
-.submit-btn{width:100%; padding:12px; background:var(--accent); color:#000; font-weight:700; border:none; border-radius:8px; cursor:pointer; font-size:14px;}
+.modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:min(400px, 92%); padding:20px; position:relative;}
+.close-modal{position:absolute; top:15px; right:15px; background:none; border:none; color:var(--muted); font-size:18px; cursor:pointer;}
+.field{width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); background:rgba(0,0,0,0.4); color:#fff; font-size:13px; outline:none; margin-bottom:10px;}
+.submit-btn{width:100%; padding:10px; background:var(--accent); color:#000; font-weight:700; border:none; border-radius:8px; cursor:pointer; font-size:13px;}
 
-footer{text-align:center; padding:25px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; margin-top:50px;}
+/* BOTTOM MOBILE APP NAVBAR */
+.mobile-bottom-nav{display:none; position:fixed; bottom:0; left:0; right:0; background:#080c14; border-top:1px solid var(--border); padding:8px 10px; z-index:9999; justify-content:space-around; text-align:center;}
+.nav-item{color:var(--muted); font-size:10px; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:3px;}
+.nav-item i{font-size:18px;}
+.nav-item.active{color:var(--cyan);}
 
+footer{text-align:center; padding:20px; border-top:1px solid var(--border); color:var(--muted); font-size:11px; margin-top:30px;}
+
+/* MOBILE SPECIFIC RESPONSIVE CSS */
 @media(max-width:992px){
     .hero-layout{grid-template-columns:1fr;}
     .cat-sidebar, .side-promo{display:none;}
+    .search-box select{display:none;}
+}
+
+@media(max-width:576px){
+    .top-navy-bar{display:none;} /* Hidden on small mobile to look like native app */
+    .mobile-bottom-nav{display:flex;} /* Show Mobile App Navigation */
+    .product-grid{grid-template-columns:repeat(2, 1fr); gap:10px;} /* 2 Columns like Daraz */
+    .product-img{height:120px;}
+    .hero-banner-slider{height:180px;}
+    .slide-content{padding:10px; bottom:10px; left:10px;}
+    .slide-content h2{font-size:14px;}
+    .slide-content p{display:none;}
+    .btn-slider{padding:4px 10px; font-size:10px;}
+    .header-cart{display:none;} /* Cart in bottom nav */
 }
 </style>
 </head>
@@ -139,24 +161,21 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 <div class="top-navy-bar">
     <div class="container inner">
         <div class="top-nav-links">
-            <a href="javascript:void(0)" onclick="showOfficialNotify('HY Store Mobile App', 'Our official Android & iOS app will be launching soon on Play Store!')">SAVE MORE ON APP</a>
-            <a href="javascript:void(0)" onclick="showOfficialNotify('Partner Program', 'Vendor Registration is currently opening for verified sellers.')">SELL ON HY STORE</a>
-            <a href="javascript:void(0)" onclick="showOfficialNotify('Customer Support', '24/7 Official Support Line: +92 320 9306672')">HELP & SUPPORT</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('HY Store App', 'Download our official Mobile App for extra discounts.')">SAVE MORE ON APP</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('Partner Program', 'Vendor Registration is currently open.')">SELL ON HY STORE</a>
+            <a href="javascript:void(0)" onclick="showOfficialNotify('Customer Support', '24/7 Official Helpline: +92 320 9306672')">HELP & SUPPORT</a>
         </div>
         
         <div class="top-nav-links">
-            <!-- Highlighted Buttons Side By Side -->
             <a href="#productsSection" class="nav-highlight-btn"><i class="fa-solid fa-bag-shopping"></i> PRODUCTS</a>
             <a href="javascript:void(0)" onclick="showOfficialNotify('Contact Us', 'WhatsApp Hotline: +92 320 9306672\nEmail: support@hystore.com')" class="nav-highlight-btn" style="background:linear-gradient(135deg, #00e676, #00d9ff);"><i class="fa-solid fa-headset"></i> CONTACT US</a>
-            
             <a href="javascript:void(0)" onclick="openAuthModal('Login')">LOGIN</a>
             <a href="javascript:void(0)" onclick="openAuthModal('Sign Up')">SIGN UP</a>
-            <button class="lang-btn" onclick="toggleLanguage()">Language: EN</button>
         </div>
     </div>
 </div>
 
-<!-- 2. MAIN HEADER -->
+<!-- 2. MAIN STICKY HEADER -->
 <header>
     <div class="container header-inner">
         <a href="#" class="logo">HY <span>STORE</span></a>
@@ -168,7 +187,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
                 <option value="Watches">Watches</option>
                 <option value="Accessories">Accessories</option>
             </select>
-            <input type="text" id="searchInput" placeholder="Search product name..." onkeyup="filterProducts()">
+            <input type="text" id="searchInput" placeholder="Search mobile, glue, audio..." onkeyup="filterProducts()">
             <button onclick="filterProducts()"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
 
@@ -183,10 +202,32 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 
 <div class="container">
 
+    <!-- MOBILE APP CATEGORIES HORIZONTAL BAR (Daraz Style) -->
+    <div class="app-quick-cats">
+        <div class="app-cat-item active" onclick="filterCategory('All', this)">
+            <div class="app-cat-icon"><i class="fa-solid fa-fire"></i></div>
+            <span>9.9 Sale</span>
+        </div>
+        <div class="app-cat-item" onclick="filterCategory('Audio', this)">
+            <div class="app-cat-icon"><i class="fa-solid fa-headphones"></i></div>
+            <span>Audio</span>
+        </div>
+        <div class="app-cat-item" onclick="filterCategory('Watches', this)">
+            <div class="app-cat-icon"><i class="fa-solid fa-stopwatch"></i></div>
+            <span>Watches</span>
+        </div>
+        <div class="app-cat-item" onclick="filterCategory('Accessories', this)">
+            <div class="app-cat-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <span>Accessories</span>
+        </div>
+        <div class="app-cat-item" onclick="filterCategory('Gaming', this)">
+            <div class="app-cat-icon"><i class="fa-solid fa-gamepad"></i></div>
+            <span>Gaming Hub</span>
+        </div>
+    </div>
+
     <!-- HERO LAYOUT -->
     <div class="hero-layout">
-        
-        <!-- Left Sidebar Categories -->
         <div class="cat-sidebar">
             <div class="cat-item active" onclick="filterCategory('All', this)"><i class="fa-solid fa-border-all"></i> All Products</div>
             <div class="cat-item" onclick="filterCategory('Audio', this)"><i class="fa-solid fa-headphones"></i> Audio & Headphones</div>
@@ -195,7 +236,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
             <div class="cat-item" onclick="filterCategory('Gaming', this)"><i class="fa-solid fa-gamepad"></i> Gaming Gear</div>
         </div>
 
-        <!-- Center Banner Slider -->
+        <!-- Slider Banner -->
         <div class="hero-banner-slider">
             <div class="slide active">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80">
@@ -213,43 +254,64 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
                     <a href="#productsSection" class="btn-slider">Explore Deals</a>
                 </div>
             </div>
-            
             <div class="dots">
                 <div class="dot active" onclick="setSlide(0)"></div>
                 <div class="dot" onclick="setSlide(1)"></div>
             </div>
         </div>
 
-        <!-- Right Side Promo -->
         <div class="side-promo">
             <i class="fa-solid fa-shield-halved"></i>
             <h3>100% Verified</h3>
-            <p>Cash on Delivery & Instant WhatsApp Confirmation.</p>
-            <span class="promo-badge"><i class="fa-solid fa-check"></i> Fast Shipping</span>
+            <p>Cash on Delivery & Fast WhatsApp Confirmation.</p>
+            <span class="promo-badge"><i class="fa-solid fa-truck-fast"></i> Free Delivery</span>
         </div>
-
     </div>
 
     <!-- PROMO STRIP -->
     <div class="promo-strip">
-        <h3 id="promoText">⚡ MEGA ANNIVERSARY SALE IS LIVE!</h3>
-        <span>Deals Worth Celebrating - Up to 50% Off</span>
+        <h3 id="promoText">⚡ 9.9 ANNIVERSARY SALE IS LIVE!</h3>
+        <span>FLAT 15% OFF - SHOP NOW</span>
     </div>
 
     <!-- PRODUCTS SECTION -->
-    <div id="productsSection" style="padding-top:20px;">
+    <div id="productsSection" style="padding-top:10px;">
         <div class="section-head">
-            <h2 id="sectionTitle">All Products</h2>
-            <span style="color:var(--muted); font-size:13px;" id="productCountText">Showing products</span>
+            <h2 id="sectionTitle">Flash Deals</h2>
+            <span style="color:var(--muted); font-size:11px;" id="productCountText">Showing products</span>
         </div>
 
         <div class="product-grid" id="productGridContainer">
             <!-- Dynamic Products Array Rendered Here -->
         </div>
 
-        <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">Load More Products</button>
+        <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">Load More</button>
     </div>
 
+</div>
+
+<!-- BOTTOM MOBILE APP NAVIGATION BAR -->
+<div class="mobile-bottom-nav">
+    <a href="#" class="nav-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+    <a href="#productsSection" class="nav-item">
+        <i class="fa-solid fa-grid-2"></i>
+        <span>Categories</span>
+    </a>
+    <a href="javascript:void(0)" onclick="showOfficialNotify('Live Chat', 'WhatsApp Support Helpline: +92 320 9306672')" class="nav-item">
+        <i class="fa-solid fa-comments"></i>
+        <span>Messages</span>
+    </a>
+    <a href="javascript:void(0)" onclick="showOfficialNotify('Cart', 'You have ' + cartCount + ' item(s) in cart')" class="nav-item">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Cart (<span id="mobileCartCount">0</span>)</span>
+    </a>
+    <a href="javascript:void(0)" onclick="openAuthModal('Login')" class="nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Account</span>
+    </a>
 </div>
 
 <!-- CUSTOM OFFICIAL SUCCESS NOTIFICATION MODAL -->
@@ -266,8 +328,8 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 <div class="modal" id="orderModal">
     <div class="modal-box">
         <button class="close-modal" onclick="closeModal('orderModal')"><i class="fa-solid fa-xmark"></i></button>
-        <h3 style="font-size:18px; margin-bottom:4px;">Checkout Order</h3>
-        <p style="color:var(--cyan); font-weight:600; font-size:13px; margin-bottom:15px;" id="mProductName"></p>
+        <h3 style="font-size:16px; margin-bottom:4px;">Checkout Order</h3>
+        <p style="color:var(--cyan); font-weight:600; font-size:12px; margin-bottom:12px;" id="mProductName"></p>
 
         <form id="orderForm" onsubmit="handleOrderSubmit(event)">
             <input type="hidden" id="oProduct">
@@ -275,7 +337,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
             
             <input type="text" id="oName" class="field" placeholder="Full Name" required>
             <input type="tel" id="oPhone" class="field" placeholder="WhatsApp / Phone Number" required>
-            <textarea id="oAddress" class="field" placeholder="Complete Delivery Address" style="min-height:60px;" required></textarea>
+            <textarea id="oAddress" class="field" placeholder="Complete Delivery Address" style="min-height:50px;" required></textarea>
             
             <select id="oPayment" class="field" required>
                 <option value="Cash on Delivery">Cash on Delivery (COD)</option>
@@ -291,7 +353,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 <div class="modal" id="authModal">
     <div class="modal-box">
         <button class="close-modal" onclick="closeModal('authModal')"><i class="fa-solid fa-xmark"></i></button>
-        <h3 style="font-size:18px; margin-bottom:15px;" id="authTitle">Login to HY Store</h3>
+        <h3 style="font-size:16px; margin-bottom:12px;" id="authTitle">Login to HY Store</h3>
 
         <form onsubmit="handleAuthSubmit(event)">
             <input type="email" class="field" placeholder="Email Address" required>
@@ -302,7 +364,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 </div>
 
 <footer>
-    &copy; 2026 <strong>HY STORE</strong>. All Rights Reserved. Built for Professional E-Commerce.
+    &copy; 2026 <strong>HY STORE</strong>. All Rights Reserved. Built for Web & Mobile.
 </footer>
 
 <script>
@@ -319,16 +381,10 @@ const productsData = [
     { id: 7, name: "AMOLED Display Smart Band", category: "Watches", price: 2200, oldPrice: 2900, discount: "24% OFF", img: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80" },
     { id: 8, name: "Mechanical RGB Gaming Keyboard", category: "Gaming", price: 4500, oldPrice: 5800, discount: "22% OFF", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80" },
     { id: 9, name: "Wireless Ergonomic Gaming Mouse", category: "Gaming", price: 1850, oldPrice: 2400, discount: "23% OFF", img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80" },
-    { id: 10, name: "Magnetic Wireless Car Phone Charger", category: "Accessories", price: 1599, oldPrice: 2100, discount: "24% OFF", img: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=600&q=80" },
-    { id: 11, name: "Ultra HD Vlogging Ring Light Tripod", category: "Accessories", price: 2999, oldPrice: 3800, discount: "21% OFF", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" },
-    { id: 12, name: "Smart Fitness Watch Sport Edition", category: "Watches", price: 3100, oldPrice: 3900, discount: "20% OFF", img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80" },
-    { id: 13, name: "Studio Microphone Kit USB", category: "Audio", price: 5200, oldPrice: 6500, discount: "20% OFF", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=600&q=80" },
-    { id: 14, name: "PD 65W Fast Wall Charger C-Type", category: "Accessories", price: 1750, oldPrice: 2200, discount: "20% OFF", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" },
-    { id: 15, name: "Noise Isolating In-Ear Earphones", category: "Audio", price: 1200, oldPrice: 1600, discount: "25% OFF", img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80" },
-    { id: 16, name: "Luxury Steel Strap Smartwatch", category: "Watches", price: 4800, oldPrice: 6000, discount: "20% OFF", img: "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=600&q=80" }
+    { id: 10, name: "Magnetic Wireless Car Phone Charger", category: "Accessories", price: 1599, oldPrice: 2100, discount: "24% OFF", img: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=600&q=80" }
 ];
 
-let displayedCount = 16;
+let displayedCount = 10;
 let currentProductsList = [...productsData];
 let cartCount = 0;
 
@@ -373,23 +429,23 @@ function renderProducts() {
 }
 
 function loadMoreProducts() {
-    displayedCount += 8;
+    displayedCount += 6;
     renderProducts();
 }
 
 // FILTER BY CATEGORY
 function filterCategory(cat, element) {
-    document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.cat-item, .app-cat-item').forEach(el => el.classList.remove('active'));
     if(element) element.classList.add('active');
 
     if(cat === 'All') {
         currentProductsList = [...productsData];
-        document.getElementById('sectionTitle').innerText = "All Products";
+        document.getElementById('sectionTitle').innerText = "Flash Deals";
     } else {
         currentProductsList = productsData.filter(p => p.category === cat);
         document.getElementById('sectionTitle').innerText = cat + " Products";
     }
-    displayedCount = 16;
+    displayedCount = 10;
     renderProducts();
 }
 
@@ -404,7 +460,7 @@ function filterProducts() {
         return matchesName && matchesCat;
     });
 
-    displayedCount = 16;
+    displayedCount = 10;
     renderProducts();
 }
 
@@ -470,6 +526,7 @@ function handleOrderSubmit(e) {
 
     cartCount++;
     document.getElementById('cartCount').innerText = cartCount;
+    document.getElementById('mobileCartCount').innerText = cartCount;
 
     showOfficialNotify("Order Confirmed!", "Thank you " + orderData.name + ". Your order has been placed successfully.");
     
@@ -486,10 +543,6 @@ function handleAuthSubmit(e) {
     e.preventDefault();
     closeModal('authModal');
     showOfficialNotify("Account Authentication", "Success! Welcome to HY Official Store.");
-}
-
-function toggleLanguage() {
-    showOfficialNotify("Language Preferences", "English is set as the primary store language.");
 }
 
 // INITIAL RENDER
