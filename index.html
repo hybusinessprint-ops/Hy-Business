@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HY STORE | Premium E-Commerce Hub</title>
+<title>HY STORE | Official Mega Store</title>
 
 <!-- Fonts & Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,17 +14,19 @@
 html{scroll-behavior:smooth;}
 :root{
     --bg:#070a10; --card-bg:#0f172a; --text:#f8fafc; --muted:#94a3b8;
-    --accent:#00e676; --cyan:#00d9ff; --orange:#ff7a00; --border:rgba(255,255,255,0.08);
+    --accent:#00e676; --cyan:#00d9ff; --orange:#ff5722; --border:rgba(255,255,255,0.08);
 }
 body{font-family:'Poppins',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden;}
 a{text-decoration:none; color:inherit;}
 .container{width:min(1280px, 95%); margin:auto;}
 
-/* 1. TOP UTILITY BAR */
-.top-bar{background:#03060c; font-size:12px; border-bottom:1px solid var(--border); color:var(--muted); padding:6px 0;}
-.top-bar .inner{display:flex; justify-content:space-between; align-items:center;}
-.top-links{display:flex; gap:20px;}
-.top-links a:hover{color:var(--cyan);}
+/* 1. TOP ORANGE UTILITY BAR */
+.top-orange-bar{background:var(--orange); color:#fff; font-size:12px; font-weight:600; padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.1);}
+.top-orange-bar .inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+.top-nav-links{display:flex; gap:20px; align-items:center;}
+.top-nav-links a{color:#fff; transition:.2s; font-size:11px; letter-spacing:0.5px;}
+.top-nav-links a:hover{opacity:0.8; text-decoration:underline;}
+.lang-btn{background:rgba(0,0,0,0.2); border:none; color:#fff; padding:3px 10px; border-radius:4px; font-family:'Poppins', sans-serif; cursor:pointer; font-size:12px;}
 
 /* 2. MAIN HEADER & SEARCH */
 header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:1px solid var(--border); sticky; top:0; z-index:999; padding:15px 0;}
@@ -32,7 +34,7 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .logo{font-size:28px; font-weight:800; background:linear-gradient(135deg, var(--orange), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; white-space:nowrap;}
 .logo span{color:var(--accent);}
 
-/* DARAZ STYLE SEARCH BAR */
+/* SEARCH BAR */
 .search-box{flex:1; max-width:650px; display:flex; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:30px; overflow:hidden;}
 .search-box select{background:transparent; border:none; color:var(--muted); padding:0 15px; font-size:13px; outline:none; border-right:1px solid var(--border);}
 .search-box select option{background:var(--card-bg); color:#fff;}
@@ -43,15 +45,15 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .cart-icon{position:relative;}
 .cart-badge{position:absolute; top:-8px; right:-10px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:grid; place-items:center;}
 
-/* 3. HERO SECTION (DARAZ LAYOUT: CATEGORIES + SLIDER + PROMO) */
+/* HERO LAYOUT */
 .hero-layout{display:grid; grid-template-columns:230px 1fr 240px; gap:15px; margin-top:20px;}
 
-/* Left Categories Drawer */
+/* Categories Sidebar */
 .cat-sidebar{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:10px 0;}
 .cat-item{display:flex; align-items:center; gap:12px; padding:10px 18px; font-size:13px; color:var(--muted); transition:.2s; cursor:pointer;}
-.cat-item:hover{background:rgba(0,217,255,0.1); color:var(--cyan); border-left:3px solid var(--cyan);}
+.cat-item:hover, .cat-item.active{background:rgba(0,217,255,0.1); color:var(--cyan); border-left:3px solid var(--cyan);}
 
-/* Center Main Banner Slider */
+/* Banner Slider */
 .hero-banner-slider{position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); height:340px;}
 .slide{position:absolute; inset:0; opacity:0; transition:opacity .5s ease-in-out;}
 .slide.active{opacity:1;}
@@ -61,51 +63,49 @@ header{background:rgba(8,12,20,0.95); backdrop-filter:blur(15px); border-bottom:
 .slide-content p{font-size:12px; color:var(--muted); margin-bottom:12px;}
 .btn-slider{display:inline-block; padding:8px 18px; background:var(--accent); color:#000; font-weight:700; font-size:12px; border-radius:20px;}
 
-/* Slider Dots */
 .dots{position:absolute; bottom:15px; right:20px; display:flex; gap:6px; z-index:10;}
 .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer;}
 .dot.active{background:var(--cyan); width:24px; border-radius:10px;}
 
-/* Right Side App Promo Card */
+/* Side Promo */
 .side-promo{background:linear-gradient(180deg, var(--card-bg), rgba(15,23,42,0.5)); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center;}
 .side-promo i{font-size:40px; color:var(--orange); margin-bottom:10px;}
 .side-promo h3{font-size:16px; margin-bottom:6px;}
 .side-promo p{font-size:11px; color:var(--muted); margin-bottom:15px;}
 .promo-badge{background:rgba(0,230,118,0.15); color:var(--accent); border:1px solid var(--accent); padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600;}
 
-/* 4. PROMOTIONAL SALE BANNER */
-.promo-strip{margin:25px 0; background:linear-gradient(90deg, #ff7a00, #ff0055); border-radius:12px; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
+/* PROMO STRIP */
+.promo-strip{margin:25px 0; background:linear-gradient(90deg, #ff5722, #ff0055); border-radius:12px; padding:15px 25px; display:flex; justify-content:space-between; align-items:center;}
 .promo-strip h3{font-size:20px; font-weight:800; color:#fff;}
 .promo-strip span{font-size:13px; background:rgba(0,0,0,0.3); padding:5px 12px; border-radius:20px; color:#fff;}
 
-/* 5. FLASH SALE SECTION */
-.flash-sale-head{display:flex; justify-content:space-between; align-items:center; padding:15px 20px; background:var(--card-bg); border:1px solid var(--border); border-radius:12px 12px 0 0; margin-top:20px;}
-.timer{display:flex; align-items:center; gap:8px; font-weight:700; color:var(--orange); font-size:14px;}
-.time-box{background:#000; color:#fff; padding:3px 8px; border-radius:5px; font-size:13px;}
+/* PRODUCTS GRID SECTION */
+.section-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
+.section-head h2{font-size:22px; font-weight:700;}
 
-.product-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:15px; background:var(--card-bg); border:1px solid var(--border); border-top:none; border-radius:0 0 12px 12px; padding:20px;}
-.product-card{background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px; padding:12px; transition:.3s; position:relative;}
+.product-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:18px;}
+.product-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:12px; transition:.3s; position:relative; display:flex; flex-direction:column; justify-content:space-between;}
 .product-card:hover{transform:translateY(-5px); border-color:var(--cyan);}
-.product-img{width:100%; height:170px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
+.product-img{width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:10px;}
 .discount-tag{position:absolute; top:18px; left:18px; background:var(--orange); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px;}
 .product-card h4{font-size:14px; margin-bottom:6px; font-weight:500; height:38px; overflow:hidden;}
-.product-card .price{font-size:18px; font-weight:700; color:var(--accent);}
+.product-card .price{font-size:17px; font-weight:700; color:var(--accent);}
 .product-card .price del{font-size:12px; color:var(--muted); margin-left:6px;}
 
-.progress-bar{height:6px; background:rgba(255,255,255,0.1); border-radius:3px; margin:10px 0 12px; overflow:hidden;}
-.progress-fill{height:100%; width:75%; background:linear-gradient(90deg, var(--orange), var(--accent));}
-
-.btn-add{width:100%; padding:10px; border:none; border-radius:8px; background:var(--cyan); color:#000; font-weight:700; font-size:13px; cursor:pointer; transition:.2s;}
+.btn-add{width:100%; padding:10px; border:none; border-radius:8px; background:var(--cyan); color:#000; font-weight:700; font-size:13px; cursor:pointer; transition:.2s; margin-top:10px;}
 .btn-add:hover{background:var(--accent);}
 
-/* MODAL / CHECKOUT */
+.load-more-btn{display:block; width:220px; margin:30px auto; padding:12px; background:transparent; border:2px solid var(--cyan); color:var(--cyan); font-weight:700; border-radius:30px; text-align:center; cursor:pointer; transition:.3s;}
+.load-more-btn:hover{background:var(--cyan); color:#000;}
+
+/* MODALS (Login / Order) */
 .modal{position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:9999; display:none; place-items:center;}
 .modal.active{display:grid;}
-.modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:min(450px, 92%); padding:25px; position:relative;}
+.modal-box{background:var(--card-bg); border:1px solid var(--border); border-radius:16px; width:min(420px, 92%); padding:25px; position:relative;}
 .close-modal{position:absolute; top:18px; right:18px; background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer;}
-.field{width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:rgba(0,0,0,0.4); color:#fff; font-size:13px; outline:none;}
+.field{width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:rgba(0,0,0,0.4); color:#fff; font-size:13px; outline:none; margin-bottom:10px;}
 .field:focus{border-color:var(--accent);}
-.submit-btn{width:100%; padding:12px; background:var(--accent); color:#000; font-weight:700; border:none; border-radius:8px; cursor:pointer; font-size:14px; margin-top:5px;}
+.submit-btn{width:100%; padding:12px; background:var(--accent); color:#000; font-weight:700; border:none; border-radius:8px; cursor:pointer; font-size:14px;}
 
 footer{text-align:center; padding:25px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; margin-top:50px;}
 
@@ -117,16 +117,18 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 </head>
 <body>
 
-<!-- 1. TOP UTILITY BAR -->
-<div class="top-bar">
+<!-- 1. TOP ORANGE UTILITY BAR -->
+<div class="top-orange-bar">
     <div class="container inner">
-        <div class="top-links">
-            <a href="#">Save More on App</a>
-            <a href="#">Help & Support</a>
-            <a href="#">Track My Order</a>
+        <div class="top-nav-links">
+            <a href="javascript:void(0)" onclick="alert('Download HY Store App coming soon on Play Store!')">SAVE MORE ON APP</a>
+            <a href="javascript:void(0)" onclick="alert('Sell on HY Store vendor program is opening soon.')">SELL ON HY STORE</a>
+            <a href="javascript:void(0)" onclick="alert('Customer Support Hotline: +92 320 9306672')">HELP & SUPPORT</a>
         </div>
-        <div>
-            <span><i class="fa-solid fa-truck-fast"></i> Free Shipping Available Across Pakistan</span>
+        <div class="top-nav-links">
+            <a href="javascript:void(0)" onclick="openAuthModal('Login')">LOGIN</a>
+            <a href="javascript:void(0)" onclick="openAuthModal('Sign Up')">SIGN UP</a>
+            <button class="lang-btn" onclick="toggleLanguage()">زبان تبدیل کریں</button>
         </div>
     </div>
 </div>
@@ -137,20 +139,20 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
         <a href="#" class="logo">HY <span>STORE</span></a>
         
         <div class="search-box">
-            <select>
-                <option>All Categories</option>
-                <option>Gadgets</option>
-                <option>Smartwatches</option>
-                <option>Audio</option>
+            <select id="searchCategory">
+                <option value="All">All Categories</option>
+                <option value="Audio">Audio</option>
+                <option value="Watches">Watches</option>
+                <option value="Accessories">Accessories</option>
             </select>
-            <input type="text" placeholder="Search in HY Store...">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="text" id="searchInput" placeholder="Search product name..." onkeyup="filterProducts()">
+            <button onclick="filterProducts()"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
 
         <div class="header-cart">
-            <div class="cart-icon" onclick="alert('Cart empty. Click Buy Now on any item!')">
+            <div class="cart-icon" onclick="alert('Your Cart: ' + cartCount + ' item(s)')">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span class="cart-badge">0</span>
+                <span class="cart-badge" id="cartCount">0</span>
             </div>
         </div>
     </div>
@@ -158,35 +160,34 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 
 <div class="container">
 
-    <!-- 3. DARAZ-STYLE HERO LAYOUT -->
+    <!-- HERO LAYOUT -->
     <div class="hero-layout">
         
         <!-- Left Sidebar Categories -->
         <div class="cat-sidebar">
-            <div class="cat-item"><i class="fa-solid fa-headphones"></i> Audio & Headphones</div>
-            <div class="cat-item"><i class="fa-solid fa-stopwatch"></i> Smartwatches & Bands</div>
-            <div class="cat-item"><i class="fa-solid fa-mobile-screen"></i> Mobile Accessories</div>
-            <div class="cat-item"><i class="fa-solid fa-bolt"></i> Power Banks & Cables</div>
-            <div class="cat-item"><i class="fa-solid fa-gamepad"></i> Gaming Accessories</div>
-            <div class="cat-item"><i class="fa-solid fa-camera"></i> Camera & Vlogging Tech</div>
+            <div class="cat-item active" onclick="filterCategory('All', this)"><i class="fa-solid fa-border-all"></i> All Products</div>
+            <div class="cat-item" onclick="filterCategory('Audio', this)"><i class="fa-solid fa-headphones"></i> Audio & Headphones</div>
+            <div class="cat-item" onclick="filterCategory('Watches', this)"><i class="fa-solid fa-stopwatch"></i> Smartwatches</div>
+            <div class="cat-item" onclick="filterCategory('Accessories', this)"><i class="fa-solid fa-mobile-screen"></i> Mobile Accessories</div>
+            <div class="cat-item" onclick="filterCategory('Gaming', this)"><i class="fa-solid fa-gamepad"></i> Gaming Gear</div>
         </div>
 
-        <!-- Center Auto Slider Banners -->
+        <!-- Center Slider Banners -->
         <div class="hero-banner-slider">
             <div class="slide active">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80" alt="Banner 1">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80">
                 <div class="slide-content">
                     <h2>Noise Cancelling Master</h2>
                     <p>Up to 40% Off on Premium Wireless Headphones.</p>
-                    <a href="#flash" class="btn-slider">Shop Now</a>
+                    <a href="#productsSection" class="btn-slider">Shop Now</a>
                 </div>
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80" alt="Banner 2">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80">
                 <div class="slide-content">
                     <h2>Smart Watch Ultra Series</h2>
                     <p>Track fitness, calls & health metrics in real-time.</p>
-                    <a href="#flash" class="btn-slider">Explore Deals</a>
+                    <a href="#productsSection" class="btn-slider">Explore Deals</a>
                 </div>
             </div>
             
@@ -196,7 +197,7 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
             </div>
         </div>
 
-        <!-- Right Side Promo Card -->
+        <!-- Right Side Promo -->
         <div class="side-promo">
             <i class="fa-solid fa-shield-halved"></i>
             <h3>100% Verified</h3>
@@ -206,79 +207,36 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 
     </div>
 
-    <!-- 4. PROMO BANNER STRIP -->
+    <!-- PROMO STRIP -->
     <div class="promo-strip">
-        <h3>⚡ MEGA ANNIVERSARY SALE IS LIVE!</h3>
+        <h3 id="promoText">⚡ MEGA ANNIVERSARY SALE IS LIVE!</h3>
         <span>Deals Worth Celebrating - Up to 50% Off</span>
     </div>
 
-    <!-- 5. FLASH SALE SECTION -->
-    <div id="flash">
-        <div class="flash-sale-head">
-            <h3 style="font-size:18px;"><i class="fa-solid fa-bolt" style="color:var(--orange);"></i> Flash Sale</h3>
-            <div class="timer">
-                Ending in: 
-                <span class="time-box" id="hours">04</span> : 
-                <span class="time-box" id="mins">22</span> : 
-                <span class="time-box" id="secs">15</span>
-            </div>
+    <!-- PRODUCTS SECTION -->
+    <div id="productsSection" style="padding-top:20px;">
+        <div class="section-head">
+            <h2 id="sectionTitle">All Products</h2>
+            <span style="color:var(--muted); font-size:13px;" id="productCountText">Showing products</span>
         </div>
 
-        <div class="product-grid">
-            
-            <!-- Product 1 -->
-            <div class="product-card">
-                <span class="discount-tag">-25%</span>
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" class="product-img">
-                <h4>Wireless Noise Cancelling Headphones</h4>
-                <div class="price">Rs. 4,999 <del>Rs. 6,200</del></div>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-                <button class="btn-add" onclick="openOrderModal('Wireless Headphones', '4999')">Buy Now</button>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card">
-                <span class="discount-tag">-30%</span>
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" class="product-img">
-                <h4>Smart Fitness Watch Ultra Series</h4>
-                <div class="price">Rs. 3,499 <del>Rs. 4,500</del></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:85%;"></div></div>
-                <button class="btn-add" onclick="openOrderModal('Smart Fitness Watch Ultra', '3499')">Buy Now</button>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card">
-                <span class="discount-tag">-20%</span>
-                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80" class="product-img">
-                <h4>Pro TWS Wireless Earbuds Pro</h4>
-                <div class="price">Rs. 2,800 <del>Rs. 3,500</del></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
-                <button class="btn-add" onclick="openOrderModal('Pro TWS Wireless Earbuds', '2800')">Buy Now</button>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card">
-                <span class="discount-tag">-15%</span>
-                <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80" class="product-img">
-                <h4>Gaming RGB Over-Ear Headset</h4>
-                <div class="price">Rs. 3,999 <del>Rs. 4,800</del></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:90%;"></div></div>
-                <button class="btn-add" onclick="openOrderModal('Gaming RGB Headset', '3999')">Buy Now</button>
-            </div>
-
+        <div class="product-grid" id="productGridContainer">
+            <!-- Dynamic Products Will Render Here -->
         </div>
+
+        <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">Load More Products</button>
     </div>
 
 </div>
 
-<!-- ORDER MODAL (CHECKOUT) -->
+<!-- ORDER CHECKOUT MODAL -->
 <div class="modal" id="orderModal">
     <div class="modal-box">
-        <button class="close-modal" onclick="closeOrderModal()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="close-modal" onclick="closeModal('orderModal')"><i class="fa-solid fa-xmark"></i></button>
         <h3 style="font-size:18px; margin-bottom:4px;">Checkout Order</h3>
         <p style="color:var(--accent); font-weight:600; font-size:13px; margin-bottom:15px;" id="mProductName"></p>
 
-        <form id="orderForm" onsubmit="handleOrderSubmit(event)" style="display:grid; gap:10px;">
+        <form id="orderForm" onsubmit="handleOrderSubmit(event)">
             <input type="hidden" id="oProduct">
             <input type="hidden" id="oPrice">
             
@@ -291,7 +249,21 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
                 <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
             </select>
 
-            <button type="submit" id="subBtn" class="submit-btn"><i class="fa-solid fa-check"></i> PLACE ORDER</button>
+            <button type="submit" id="subBtn" class="submit-btn"><i class="fa-solid fa-check"></i> CONFIRM ORDER</button>
+        </form>
+    </div>
+</div>
+
+<!-- AUTH LOGIN / SIGNUP MODAL -->
+<div class="modal" id="authModal">
+    <div class="modal-box">
+        <button class="close-modal" onclick="closeModal('authModal')"><i class="fa-solid fa-xmark"></i></button>
+        <h3 style="font-size:18px; margin-bottom:15px;" id="authTitle">Login to HY Store</h3>
+
+        <form onsubmit="handleAuthSubmit(event)">
+            <input type="email" class="field" placeholder="Email Address" required>
+            <input type="password" class="field" placeholder="Password" required>
+            <button type="submit" class="submit-btn" id="authBtn">LOGIN</button>
         </form>
     </div>
 </div>
@@ -301,8 +273,104 @@ footer{text-align:center; padding:25px; border-top:1px solid var(--border); colo
 </footer>
 
 <script>
-// GOOGLE SCRIPT WEB APP URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxW8MdmgSf-g6KkFnJ91TQqCFvUBFYnRw-6G8tcztQO-n91iho3uNiWUglL2pVSyfsh/exec";
+
+/* ==========================================================================
+   EASY PRODUCT MANAGEMENT ARRAY (ADD / EDIT ALL YOUR PRODUCTS HERE)
+   ========================================================================== */
+const productsData = [
+    { id: 1, name: "Wireless Noise Cancelling Headphones", category: "Audio", price: 4999, oldPrice: 6200, discount: "20% OFF", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" },
+    { id: 2, name: "Smart Fitness Watch Ultra Series", category: "Watches", price: 3499, oldPrice: 4500, discount: "30% OFF", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" },
+    { id: 3, name: "Pro TWS Wireless Earbuds", category: "Audio", price: 2800, oldPrice: 3500, discount: "20% OFF", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80" },
+    { id: 4, name: "Gaming RGB Over-Ear Headset", category: "Gaming", price: 3999, oldPrice: 4800, discount: "15% OFF", img: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80" },
+    { id: 5, name: "Fast Charging Power Bank 20000mAh", category: "Accessories", price: 2499, oldPrice: 3200, discount: "22% OFF", img: "https://images.unsplash.com/photo-1609592424074-b52b36b412bf?auto=format&fit=crop&w=600&q=80" },
+    { id: 6, name: "Portable Bluetooth Speaker Mini", category: "Audio", price: 1999, oldPrice: 2500, discount: "20% OFF", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=600&q=80" },
+    { id: 7, name: "AMOLED Display Smart Band", category: "Watches", price: 2200, oldPrice: 2900, discount: "24% OFF", img: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80" },
+    { id: 8, name: "Mechanical RGB Gaming Keyboard", category: "Gaming", price: 4500, oldPrice: 5800, discount: "22% OFF", img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80" },
+    { id: 9, name: "Wireless Ergonomic Gaming Mouse", category: "Gaming", price: 1850, oldPrice: 2400, discount: "23% OFF", img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80" },
+    { id: 10, name: "Magnetic Wireless Car Phone Charger", category: "Accessories", price: 1599, oldPrice: 2100, discount: "24% OFF", img: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=600&q=80" },
+    { id: 11, name: "Ultra HD Vlogging Ring Light Tripod", category: "Accessories", price: 2999, oldPrice: 3800, discount: "21% OFF", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" },
+    { id: 12, name: "Smart Fitness Watch Sport Edition", category: "Watches", price: 3100, oldPrice: 3900, discount: "20% OFF", img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80" },
+    { id: 13, name: "Studio Microphone Kit USB", category: "Audio", price: 5200, oldPrice: 6500, discount: "20% OFF", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=600&q=80" },
+    { id: 14, name: "PD 65W Fast Wall Charger C-Type", category: "Accessories", price: 1750, oldPrice: 2200, discount: "20% OFF", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" },
+    { id: 15, name: "Noise Isolating In-Ear Earphones", category: "Audio", price: 1200, oldPrice: 1600, discount: "25% OFF", img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80" },
+    { id: 16, name: "Luxury Steel Strap Smartwatch", category: "Watches", price: 4800, oldPrice: 6000, discount: "20% OFF", img: "https://images.unsplash.com/photo-1544117519-31a4b719223d?auto=format&fit=crop&w=600&q=80" },
+    
+    // Additional Products (Rendered on Load More)
+    { id: 17, name: "Universal Game Controller Bluetooth", category: "Gaming", price: 3200, oldPrice: 4000, discount: "20% OFF", img: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" },
+    { id: 18, name: "HD Web Camera with Microphone", category: "Accessories", price: 2600, oldPrice: 3300, discount: "21% OFF", img: "https://images.unsplash.com/photo-1587826080692-f439cd0b70da?auto=format&fit=crop&w=600&q=80" },
+    { id: 19, name: "Waterproof Bluetooth Shower Speaker", category: "Audio", price: 1650, oldPrice: 2100, discount: "21% OFF", img: "https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=600&q=80" },
+    { id: 20, name: "Wireless Charging Pad 15W", category: "Accessories", price: 1400, oldPrice: 1800, discount: "22% OFF", img: "https://images.unsplash.com/photo-1622445268465-84288417c805?auto=format&fit=crop&w=600&q=80" }
+];
+
+let displayedCount = 16;
+let currentProductsList = [...productsData];
+let cartCount = 0;
+
+// RENDER PRODUCTS
+function renderProducts() {
+    const container = document.getElementById('productGridContainer');
+    container.innerHTML = '';
+    
+    const visibleItems = currentProductsList.slice(0, displayedCount);
+
+    visibleItems.forEach(item => {
+        const cardHTML = `
+            <div class="product-card">
+                <span class="discount-tag">${item.discount}</span>
+                <img src="${item.img}" class="product-img" alt="${item.name}">
+                <h4>${item.name}</h4>
+                <div class="price">Rs. ${item.price.toLocaleString()} <del>Rs. ${item.oldPrice.toLocaleString()}</del></div>
+                <button class="btn-add" onclick="openOrderModal('${item.name}', ${item.price})">Buy Now</button>
+            </div>
+        `;
+        container.innerHTML += cardHTML;
+    });
+
+    document.getElementById('productCountText').innerText = `Showing ${visibleItems.length} of ${currentProductsList.length} products`;
+    
+    if(displayedCount >= currentProductsList.length) {
+        document.getElementById('loadMoreBtn').style.display = 'none';
+    } else {
+        document.getElementById('loadMoreBtn').style.display = 'block';
+    }
+}
+
+function loadMoreProducts() {
+    displayedCount += 8;
+    renderProducts();
+}
+
+// FILTER BY CATEGORY
+function filterCategory(cat, element) {
+    document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+    if(element) element.classList.add('active');
+
+    if(cat === 'All') {
+        currentProductsList = [...productsData];
+        document.getElementById('sectionTitle').innerText = "All Products";
+    } else {
+        currentProductsList = productsData.filter(p => p.category === cat);
+        document.getElementById('sectionTitle').innerText = cat + " Products";
+    }
+    displayedCount = 16;
+    renderProducts();
+}
+
+// SEARCH FILTER
+function filterProducts() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const selectedCat = document.getElementById('searchCategory').value;
+
+    currentProductsList = productsData.filter(p => {
+        const matchesName = p.name.toLowerCase().includes(query);
+        const matchesCat = selectedCat === 'All' || p.category === selectedCat;
+        return matchesName && matchesCat;
+    });
+
+    displayedCount = 16;
+    renderProducts();
+}
 
 // SLIDER LOGIC
 let currentSlide = 0;
@@ -322,18 +390,25 @@ setInterval(() => {
     setSlide(next);
 }, 4000);
 
-// MODAL LOGIC
+// MODALS CONTROL
 function openOrderModal(pName, price) {
-    document.getElementById('mProductName').innerText = pName + " - Rs. " + price;
+    document.getElementById('mProductName').innerText = pName + " - Rs. " + price.toLocaleString();
     document.getElementById('oProduct').value = pName;
     document.getElementById('oPrice').value = price;
     document.getElementById('orderModal').classList.add('active');
 }
 
-function closeOrderModal() {
-    document.getElementById('orderModal').classList.remove('active');
+function openAuthModal(type) {
+    document.getElementById('authTitle').innerText = type + " to HY Store";
+    document.getElementById('authBtn').innerText = type.toUpperCase();
+    document.getElementById('authModal').classList.add('active');
 }
 
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+}
+
+// ORDER SUBMIT (SAVE TO GOOGLE SHEET + WHATSAPP)
 function handleOrderSubmit(e) {
     e.preventDefault();
     
@@ -350,7 +425,6 @@ function handleOrderSubmit(e) {
         payment: document.getElementById('oPayment').value
     };
 
-    // Auto Save to Google Sheet
     fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -358,17 +432,41 @@ function handleOrderSubmit(e) {
         body: JSON.stringify(orderData)
     });
 
+    cartCount++;
+    document.getElementById('cartCount').innerText = cartCount;
+
     alert("Shukriya " + orderData.name + "! Aapka order place ho gaya hai.");
     
-    // Direct WhatsApp Redirect
     const msg = `Hi HY Store, I placed an order:\n\n*Product:* ${orderData.product}\n*Price:* Rs.${orderData.price}\n*Name:* ${orderData.name}\n*Phone:* ${orderData.phone}\n*Address:* ${orderData.address}`;
     window.open(`https://wa.me/923209306672?text=${encodeURIComponent(msg)}`, '_blank');
 
-    submitBtn.innerText = "PLACE ORDER";
+    submitBtn.innerText = "CONFIRM ORDER";
     submitBtn.disabled = false;
-    closeOrderModal();
+    closeModal('orderModal');
     document.getElementById('orderForm').reset();
 }
+
+function handleAuthSubmit(e) {
+    e.preventDefault();
+    alert("Success! Welcome to HY Store.");
+    closeModal('authModal');
+}
+
+// URDU LANGUAGE TOGGLE
+let isUrdu = false;
+function toggleLanguage() {
+    isUrdu = !isUrdu;
+    if(isUrdu) {
+        document.getElementById('promoText').innerText = "⚡ سالگرہ کی بمپر سیل جاری ہے!";
+        document.getElementById('sectionTitle').innerText = "تمام مصنوعات";
+    } else {
+        document.getElementById('promoText').innerText = "⚡ MEGA ANNIVERSARY SALE IS LIVE!";
+        document.getElementById('sectionTitle').innerText = "All Products";
+    }
+}
+
+// INITIAL RENDER
+renderProducts();
 </script>
 
 </body>
