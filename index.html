@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HY STORE</title>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -12,22 +11,22 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #0b1120;
+            background-color: #0b0f19;
             color: #ffffff;
-            padding-bottom: 70px;
+            padding-bottom: 75px;
         }
 
-        /* Top Header */
+        /* Top Bar */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 15px;
-            background-color: #0b1120;
+            background-color: #0b0f19;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -35,141 +34,157 @@
 
         .logo {
             font-size: 22px;
-            font-weight: 800;
+            font-weight: 900;
             color: #00ffaa;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        .search-bar {
+        .search-container {
             display: flex;
             align-items: center;
-            background-color: #162032;
-            border-radius: 20px;
-            padding: 6px 12px;
-            width: 60%;
+            background-color: #121826;
+            border-radius: 25px;
+            padding: 4px 6px 4px 15px;
+            width: 65%;
+            border: 1px solid #1e293b;
         }
 
-        .search-bar input {
+        .search-container input {
             background: transparent;
             border: none;
             outline: none;
             color: #fff;
             width: 100%;
-            padding-right: 5px;
             font-size: 13px;
         }
 
-        .search-bar button {
-            background: #00ffaa;
+        .search-container button {
+            background: linear-gradient(135deg, #00d2ff, #00ffaa);
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            color: #0b0f19;
         }
 
-        .search-bar button i {
-            color: #0b1120;
-            font-size: 12px;
-        }
-
-        /* Categories Section */
+        /* Category Items */
         .categories {
             display: flex;
-            justify-content: space-around;
-            padding: 15px 10px;
+            justify-content: space-between;
+            padding: 10px 15px 20px;
         }
 
-        .category-item {
+        .cat-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            font-size: 12px;
+            font-size: 11px;
             color: #94a3b8;
+            cursor: pointer;
         }
 
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            background-color: #162032;
-            border-radius: 14px;
+        .cat-icon {
+            width: 55px;
+            height: 55px;
+            background-color: #121826;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             color: #00d2ff;
+            border: 1px solid #1e293b;
         }
 
-        .category-item.active .icon-box {
+        .cat-card.active .cat-icon {
             background-color: #00d2ff;
-            color: #0b1120;
+            color: #0b0f19;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
         }
 
         /* Banner Carousel Slider */
-        .banner-container {
+        .slider-wrapper {
             padding: 0 15px;
             position: relative;
         }
 
-        .banner-card {
-            background-color: #0f172a;
-            border-radius: 16px;
-            overflow: hidden;
+        .banner-slider {
             position: relative;
-            height: 180px;
+            border-radius: 18px;
+            overflow: hidden;
+            height: 190px;
             border: 1px solid #1e293b;
         }
 
-        .banner-card img {
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .banner-overlay {
+        .slide-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(11, 17, 32, 0.95));
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(11, 15, 25, 0.95) 100%);
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 15px;
         }
 
         .banner-title {
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 6px;
-            background: rgba(15, 23, 42, 0.8);
-            padding: 4px 10px;
+            background: rgba(18, 24, 38, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 6px 12px;
             border-radius: 12px;
-            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            width: max-content;
+            margin-bottom: 8px;
+            border: 1px solid #334155;
         }
 
-        .price-tag {
+        .banner-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-badge {
             background-color: #00ffaa;
-            color: #0b1120;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-weight: 700;
+            color: #0b0f19;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 800;
             font-size: 12px;
         }
 
-        .buy-btn {
-            background: #00ffaa;
-            color: #0b1120;
+        .buy-now-btn {
+            background-color: #00ffaa;
+            color: #0b0f19;
             border: none;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 12px;
             cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
         }
 
         /* Section Title */
@@ -177,25 +192,25 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 15px 10px;
+            padding: 20px 15px 12px;
         }
 
         .section-title {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800;
             color: #00d2ff;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .sub-text {
+        .count-text {
             font-size: 11px;
             color: #64748b;
         }
 
-        /* Product Grid */
-        .product-grid {
+        /* Products Grid Layout */
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
@@ -203,23 +218,26 @@
         }
 
         .product-card {
-            background-color: #162032;
-            border-radius: 14px;
+            background-color: #121826;
+            border-radius: 16px;
             padding: 10px;
             position: relative;
             border: 1px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .badge {
+        .discount-tag {
             position: absolute;
             top: 15px;
             left: 15px;
             background-color: #00ffaa;
-            color: #0b1120;
+            color: #0b0f19;
             font-size: 10px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
+            font-weight: 800;
+            padding: 3px 6px;
+            border-radius: 5px;
             z-index: 2;
         }
 
@@ -227,20 +245,49 @@
             width: 100%;
             height: 120px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 8px;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
-        .product-name {
-            font-size: 13px;
+        .product-title {
+            font-size: 12px;
             font-weight: 600;
             line-height: 1.3;
-            margin-bottom: 8px;
-            color: #e2e8f0;
+            color: #f1f5f9;
+            margin-bottom: 10px;
         }
 
-        /* Bottom Navigation Bar */
-        .bottom-nav {
+        .card-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            background: #1e293b;
+            color: #00ffaa;
+            border: 1px solid #00ffaa;
+            padding: 6px 0;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-buy-small {
+            flex: 1;
+            background: #00ffaa;
+            color: #0b0f19;
+            border: none;
+            padding: 6px 0;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Bottom Nav */
+        .bottom-bar {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -248,12 +295,12 @@
             background-color: #0f172a;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
+            padding: 10px 0;
             border-top: 1px solid #1e293b;
             z-index: 99;
         }
 
-        .nav-item {
+        .nav-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -261,33 +308,77 @@
             font-size: 10px;
             color: #64748b;
             cursor: pointer;
-            text-decoration: none;
+            border: none;
+            background: none;
         }
 
-        .nav-item.active {
+        .nav-btn.active {
             color: #00d2ff;
         }
 
-        .nav-item i {
+        .nav-btn i {
             font-size: 18px;
         }
 
-        /* Chat Interface Modal */
-        .chat-modal {
+        /* Popups & Chat Modal */
+        .modal {
             display: none;
             position: fixed;
-            bottom: 65px;
-            right: 15px;
-            left: 15px;
-            max-width: 400px;
-            margin: 0 auto;
-            height: 420px;
-            background-color: #0f172a;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #121826;
             border: 1px solid #1e293b;
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            padding: 20px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            color: #00ffaa;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .close-modal-btn {
+            background: #00d2ff;
+            color: #0b0f19;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Chat Widget */
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            right: 15px;
+            left: 15px;
+            max-width: 380px;
+            margin: 0 auto;
+            height: 400px;
+            background-color: #121826;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             flex-direction: column;
-            z-index: 1000;
+            z-index: 101;
             overflow: hidden;
         }
 
@@ -297,31 +388,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #334155;
-        }
-
-        .chat-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .online-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #00ffaa;
-            border-radius: 50%;
-        }
-
-        .close-chat {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 18px;
-            cursor: pointer;
         }
 
         .chat-body {
@@ -333,58 +399,43 @@
             gap: 10px;
         }
 
-        .message {
+        .msg {
             max-width: 80%;
             padding: 8px 12px;
-            border-radius: 12px;
-            font-size: 13px;
+            border-radius: 10px;
+            font-size: 12px;
             line-height: 1.4;
         }
 
-        .message.received {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
+        .msg.in { background: #1e293b; color: #fff; align-self: flex-start; }
+        .msg.out { background: #00ffaa; color: #0b0f19; align-self: flex-end; font-weight: 600; }
 
-        .message.sent {
-            background-color: #00ffaa;
-            color: #0b1120;
-            font-weight: 500;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-        }
-
-        .chat-footer {
+        .chat-input {
             padding: 10px;
-            background-color: #1e293b;
+            background: #1e293b;
             display: flex;
             gap: 8px;
         }
 
-        .chat-footer input {
+        .chat-input input {
             flex: 1;
-            background-color: #0b1120;
+            background: #0b0f19;
             border: 1px solid #334155;
             padding: 8px 12px;
             border-radius: 20px;
             color: #fff;
             outline: none;
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        .chat-footer button {
-            background-color: #00ffaa;
+        .chat-input button {
+            background: #00ffaa;
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            color: #0b1120;
+            color: #0b0f19;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
     </style>
 </head>
@@ -393,155 +444,245 @@
     <!-- Header -->
     <div class="header">
         <div class="logo">HY STORE</div>
-        <div class="search-bar">
+        <div class="search-container">
             <input type="text" placeholder="Search product name...">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
     </div>
 
-    <!-- Categories -->
+    <!-- Category Nav -->
     <div class="categories">
-        <div class="category-item active">
-            <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
+        <div class="cat-card active">
+            <div class="cat-icon"><i class="fa-solid fa-fire"></i></div>
             <span>9.9 Sale</span>
         </div>
-        <div class="category-item">
-            <div class="icon-box"><i class="fa-solid fa-headphones"></i></div>
+        <div class="cat-card">
+            <div class="cat-icon"><i class="fa-solid fa-headphones"></i></div>
             <span>Audio</span>
         </div>
-        <div class="category-item">
-            <div class="icon-box"><i class="fa-regular fa-clock"></i></div>
+        <div class="cat-card">
+            <div class="cat-icon"><i class="fa-regular fa-clock"></i></div>
             <span>Watches</span>
         </div>
-        <div class="category-item">
-            <div class="icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <div class="cat-card">
+            <div class="cat-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
             <span>Accessories</span>
         </div>
     </div>
 
-    <!-- Main Banner Slider -->
-    <div class="banner-container">
-        <div class="banner-card">
-            <!-- Fixed working image link -->
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Fast Charging Power Bank">
-            <div class="banner-overlay">
-                <div>
+    <!-- Banner Slider (Auto Running & Manual Working) -->
+    <div class="slider-wrapper">
+        <div class="banner-slider">
+            
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1609592424109-dd9892f1b177?w=600" alt="Power Bank">
+                <div class="slide-overlay">
                     <div class="banner-title">Fast Charging Power Bank 20000mAh</div>
-                    <div class="price-tag">Rs. 2,499 (22% OFF)</div>
+                    <div class="banner-actions">
+                        <span class="price-badge">Rs. 2,499 (22% OFF)</span>
+                        <button class="buy-now-btn" onclick="triggerBuy('Fast Charging Power Bank')">Buy Now</button>
+                    </div>
                 </div>
-                <button class="buy-btn">Buy Now</button>
             </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600" alt="Headphones">
+                <div class="slide-overlay">
+                    <div class="banner-title">Wireless Noise Cancelling Headphones</div>
+                    <div class="banner-actions">
+                        <span class="price-badge">Rs. 4,999 (30% OFF)</span>
+                        <button class="buy-now-btn" onclick="triggerBuy('Wireless Headphones')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt="Smartwatch">
+                <div class="slide-overlay">
+                    <div class="banner-title">Series 8 Smart Watch Waterproof</div>
+                    <div class="banner-actions">
+                        <span class="price-badge">Rs. 3,199 (15% OFF)</span>
+                        <button class="buy-now-btn" onclick="triggerBuy('Series 8 Smart Watch')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- Products Header -->
+    <!-- Products List Section -->
     <div class="section-header">
         <div class="section-title">
             <i class="fa-solid fa-bolt"></i> Store Products Catalog
         </div>
-        <div class="sub-text">Showing 24 of 2000 products</div>
+        <div class="count-text">Showing 24 of 2000 products</div>
     </div>
 
-    <!-- Product Cards Grid -->
-    <div class="product-grid">
+    <!-- Dynamic Product Cards with unique images -->
+    <div class="products-grid">
+        
         <div class="product-card">
-            <span class="badge">22% OFF</span>
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Power Bank">
-            <div class="product-name">Charging Power Bank 20000mAh (Series #1)</div>
+            <span class="discount-tag">22% OFF</span>
+            <img src="https://images.unsplash.com/photo-1609592424109-dd9892f1b177?w=400" alt="Power Bank">
+            <div class="product-title">Fast Charging Power Bank 20000mAh</div>
+            <div class="card-actions">
+                <button class="btn-add-cart" onclick="addToCart('Power Bank 20000mAh')">Cart</button>
+                <button class="btn-buy-small" onclick="triggerBuy('Power Bank 20000mAh')">Buy</button>
+            </div>
         </div>
+
         <div class="product-card">
-            <span class="badge">20% OFF</span>
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Headphones">
-            <div class="product-name">Wireless Noise Cancelling Headphone</div>
+            <span class="discount-tag">20% OFF</span>
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" alt="Headphones">
+            <div class="product-title">Wireless Noise Cancelling Headphone</div>
+            <div class="card-actions">
+                <button class="btn-add-cart" onclick="addToCart('Wireless Headphone')">Cart</button>
+                <button class="btn-buy-small" onclick="triggerBuy('Wireless Headphone')">Buy</button>
+            </div>
         </div>
+
+        <div class="product-card">
+            <span class="discount-tag">15% OFF</span>
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="Watch">
+            <div class="product-title">Smart Fitness Watch AMOLED Display</div>
+            <div class="card-actions">
+                <button class="btn-add-cart" onclick="addToCart('Smart Fitness Watch')">Cart</button>
+                <button class="btn-buy-small" onclick="triggerBuy('Smart Fitness Watch')">Buy</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <span class="discount-tag">10% OFF</span>
+            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400" alt="Earbuds">
+            <div class="product-title">True Wireless TWS Earbuds Bass+</div>
+            <div class="card-actions">
+                <button class="btn-add-cart" onclick="addToCart('TWS Earbuds')">Cart</button>
+                <button class="btn-buy-small" onclick="triggerBuy('TWS Earbuds')">Buy</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <div class="nav-item active">
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-bar">
+        <button class="nav-btn active" onclick="openNav('Home')">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
-        </div>
-        <div class="nav-item">
+        </button>
+        <button class="nav-btn" onclick="openNav('2000+ Items Catalog')">
             <i class="fa-solid fa-border-all"></i>
             <span>2000+ Items</span>
-        </div>
-        <div class="nav-item" onclick="toggleChat()">
+        </button>
+        <button class="nav-btn" onclick="toggleChat()">
             <i class="fa-regular fa-comments"></i>
             <span>Support</span>
-        </div>
-        <div class="nav-item">
+        </button>
+        <button class="nav-btn" onclick="openCartModal()">
             <i class="fa-solid fa-cart-shopping"></i>
-            <span>Cart (2)</span>
-        </div>
-        <div class="nav-item">
+            <span>Cart (<span id="cart-count">2</span>)</span>
+        </button>
+        <button class="nav-btn" onclick="openAccountModal()">
             <i class="fa-regular fa-user"></i>
             <span>Account</span>
-        </div>
+        </button>
     </div>
 
-    <!-- Live Chat Modal Interface -->
-    <div class="chat-modal" id="chatModal">
+    <!-- Floating Chat Modal -->
+    <div class="chat-box" id="chatBox">
         <div class="chat-header">
-            <div class="chat-title">
-                <span class="online-dot"></span> HY Store Support
-            </div>
-            <button class="close-chat" onclick="toggleChat()">&times;</button>
+            <span style="font-weight: bold; color:#00ffaa;"><i class="fa-solid fa-circle" style="font-size:8px; color:#00ffaa;"></i> HY Support</span>
+            <span style="cursor:pointer;" onclick="toggleChat()">&times;</span>
         </div>
         <div class="chat-body" id="chatBody">
-            <div class="message received">
-                Assalam-o-Alaikum! Welcome to HY STORE. Hum aap ki kya help kar sakte hain?
-            </div>
+            <div class="msg in">Hello! Welcome to HY Store support. Hum aap ki kya help kar sakte hain?</div>
         </div>
-        <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Write a message..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+        <div class="chat-input">
+            <input type="text" id="chatMsgInput" placeholder="Message write karein...">
+            <button onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <!-- JavaScript logic -->
+    <!-- Generic Working Popups for Account & Navigation -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Header</h3>
+            <p id="modalDesc">Description text goes here...</p>
+            <button class="close-modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
     <script>
-        // Open/Close Chat Window
-        function toggleChat() {
-            const chatModal = document.getElementById('chatModal');
-            if (chatModal.style.display === 'flex') {
-                chatModal.style.display = 'none';
-            } else {
-                chatModal.style.display = 'flex';
-            }
+        // 1. Auto Slide Banner Mechanism
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 3500);
+
+        // 2. Add to Cart Counter & Handlers
+        let cartTotal = 2;
+        function addToCart(itemName) {
+            cartTotal++;
+            document.getElementById('cart-count').innerText = cartTotal;
+            showPopup('Cart Update', itemName + ' Cart mein add ho gaya hai!');
         }
 
-        // Send Message in Chat
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const chatBody = document.getElementById('chatBody');
-            const text = input.value.trim();
+        function triggerBuy(itemName) {
+            showPopup('Checkout Order', itemName + ' khareedne ke liye order page tyar hai!');
+        }
 
-            if (text !== '') {
-                // Add User Message
-                const userMsg = document.createElement('div');
-                userMsg.className = 'message sent';
-                userMsg.textContent = text;
-                chatBody.appendChild(userMsg);
+        // 3. Navigation Modal Trigger
+        function openNav(name) {
+            showPopup('Navigation', name + ' Section Clicked!');
+        }
+
+        function openAccountModal() {
+            showPopup('User Account', 'Aapka account profile active hai. (Logged in as HY Store User)');
+        }
+
+        function openCartModal() {
+            showPopup('Your Cart', 'Aapke cart mein total ' + cartTotal + ' items mojood hain.');
+        }
+
+        function showPopup(title, msg) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = msg;
+            document.getElementById('modalInfoModal') ? null : document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        // 4. Support Chat Interface
+        function toggleChat() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = (chatBox.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function sendMsg() {
+            const input = document.getElementById('chatMsgInput');
+            const chatBody = document.getElementById('chatBody');
+            if(input.value.trim() !== '') {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'msg out';
+                userDiv.innerText = input.value;
+                chatBody.appendChild(userDiv);
 
                 input.value = '';
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // Auto Bot Reply (Temporary Demo)
                 setTimeout(() => {
-                    const botMsg = document.createElement('div');
-                    botMsg.className = 'message received';
-                    botMsg.textContent = "Shukriya! Aapka message humein mil gaya hai. Representative jaldi reply karega.";
-                    chatBody.appendChild(botMsg);
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'msg in';
+                    botDiv.innerText = "Aap ka message receive ho gaya hai, hum jald hi aap se contact karenge.";
+                    chatBody.appendChild(botDiv);
                     chatBody.scrollTop = chatBody.scrollHeight;
                 }, 1000);
-            }
-        }
-
-        // Press Enter to send
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
             }
         }
     </script>
