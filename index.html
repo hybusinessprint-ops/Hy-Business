@@ -46,7 +46,6 @@ body{
 button, input, textarea, select{ font-family:inherit; }
 button{ cursor:pointer; border:0; }
 
-/* ERROR BANNER / SYSTEM NOTICE STYLES */
 .error-banner {
   background: linear-gradient(90deg, #ff4d67, #e60026);
   color: #fff;
@@ -240,20 +239,31 @@ header{
 .track-form button{ padding:0 18px; border-radius:10px; background:var(--cyan); font-weight:700; color:#00140a; }
 .track-result{ margin-top:18px; }
 
-.order-card{ background:#080f1b; border:1px solid var(--border); border-radius:15px; padding:18px; }
-.status{ display:inline-flex; align-items:center; gap:7px; padding:7px 12px; border-radius:30px; font-size:12px; font-weight:700; }
-.pending{ background:rgba(255,213,74,.12); color:var(--yellow); }
-.paid{ background:rgba(0,217,255,.12); color:var(--cyan); }
-.approved{ background:rgba(0,230,118,.12); color:var(--green); }
-.shipped{ background:rgba(77,163,255,.12); color:var(--blue); }
-.delivered{ background:rgba(0,230,118,.15); color:var(--green); }
-.rejected{ background:rgba(255,77,103,.12); color:var(--red); }
+.order-card{ background:#080f1b; border:1px solid var(--border); border-radius:18px; padding:22px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.order-header{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:15px; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
+.order-header b{ font-size:18px; color:var(--green); }
 
-.timeline{ display:flex; gap:6px; margin-top:20px; }
-.step{ flex:1; text-align:center; color:#52627a; font-size:10px; }
-.step .dot{ width:27px; height:27px; border-radius:50%; margin:0 auto 6px; background:#172238; display:grid; place-items:center; }
-.step.done{ color:#cbd5e1; }
-.step.done .dot{ background:var(--green); color:#00140a; }
+.status{ display:inline-flex; align-items:center; gap:7px; padding:7px 14px; border-radius:30px; font-size:12px; font-weight:700; letter-spacing:0.5px; }
+.pending{ background:rgba(255,213,74,.15); color:var(--yellow); border:1px solid rgba(255,213,74,.3); }
+.paid{ background:rgba(0,217,255,.15); color:var(--cyan); border:1px solid rgba(0,217,255,.3); }
+.approved{ background:rgba(0,230,118,.15); color:var(--green); border:1px solid rgba(0,230,118,.3); }
+.shipped{ background:rgba(77,163,255,.15); color:var(--blue); border:1px solid rgba(77,163,255,.3); }
+.delivered{ background:rgba(0,230,118,.2); color:var(--green); border:1px solid rgba(0,230,118,.5); }
+.rejected, .cancelled{ background:rgba(255,77,103,.15); color:var(--red); border:1px solid rgba(255,77,103,.3); }
+
+.order-grid-info{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; background:#0d1626; padding:15px; border-radius:12px; margin-bottom:20px; font-size:13px; }
+.order-grid-info div span{ color:var(--muted); display:block; font-size:11px; }
+
+.timeline-container{ margin-top:22px; padding-top:15px; border-top:1px solid var(--border); }
+.timeline-title{ font-size:13px; font-weight:600; color:var(--muted); margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; }
+.timeline{ display:flex; justify-content:space-between; position:relative; }
+.timeline::before{ content:''; position:absolute; top:18px; left:10%; right:10%; height:3px; background:#172238; z-index:1; }
+.timeline-progress{ position:absolute; top:18px; left:10%; height:3px; background:var(--green); z-index:2; transition:width 0.4s ease; }
+
+.step{ position:relative; z-index:3; text-align:center; flex:1; font-size:11px; color:var(--muted); }
+.step .dot{ width:36px; height:36px; border-radius:50%; margin:0 auto 8px; background:#101a2d; border:2px solid #223352; display:grid; place-items:center; font-size:13px; color:var(--muted); transition:.3s; }
+.step.active .dot{ background:var(--green); border-color:var(--green); color:#00140a; box-shadow:0 0 15px rgba(0,230,118,0.4); }
+.step.active{ color:white; font-weight:600; }
 
 footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); background:#05080d; color:var(--muted); }
 .footer-grid{ width:min(1200px,92%); margin:auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:30px; }
@@ -268,7 +278,7 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 
 .modal{ position:fixed; inset:0; background:rgba(0,0,0,.7); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; z-index:100; padding:15px; }
 .modal.show{ display:flex; }
-.modalbox{ width:min(520px,100%); max-height:90vh; overflow:auto; background:#0b1321; border:1px solid var(--border); border-radius:20px; box-shadow:var(--shadow); }
+.modalbox{ width:min(550px,100%); max-height:90vh; overflow:auto; background:#0b1321; border:1px solid var(--border); border-radius:20px; box-shadow:var(--shadow); }
 .modalhead{ padding:17px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
 .close{ background:#172238; color:white; width:35px; height:35px; border-radius:9px; }
 .modalbody{ padding:20px; }
@@ -286,7 +296,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 
 .account{ display:flex; align-items:center; gap:14px; }
 .avatar{ width:65px; height:65px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--green),var(--cyan)); color:#00140a; font-weight:800; font-size:25px; overflow:hidden; }
-.avatar img{ width:100%; height:100%; object-fit:cover; }
 
 .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:18px 0; }
 .stat{ background:#111c31; border-radius:10px; padding:12px; text-align:center; }
@@ -322,6 +331,7 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   .track-form{ flex-direction:column; }
   .track-form button{ padding:11px; }
   .slide-content h1{ font-size:28px; }
+  .order-grid-info{ grid-template-columns:1fr; }
 }
 
 @media(max-width:520px){
@@ -338,13 +348,14 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   .trust{ grid-template-columns:1fr; }
   .slide{ padding:20px; }
   .slide-content h1{ font-size:24px; }
+  .step .dot{ width:28px; height:28px; font-size:11px; }
+  .step{ font-size:9px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- DYNAMIC ERROR / NOTICE BANNER -->
 <div id="errorBanner" class="error-banner hidden">
   <div class="error-banner-content">
     <i class="fa-solid fa-triangle-exclamation"></i>
@@ -353,7 +364,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   <button class="error-banner-close" onclick="closeErrorBanner()">✕</button>
 </div>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div>
     <span><i class="fa-solid fa-mobile-screen"></i> SAVE MORE ON APP</span>
@@ -365,7 +375,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 </div>
 
-<!-- HEADER -->
 <header>
   <div class="logo">
     HY <b>STORE</b>
@@ -378,7 +387,7 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 
   <div class="head-actions">
-    <button class="iconbtn" onclick="openTrack()" title="Track Order"><i class="fa-solid fa-box"></i></button>
+    <button class="iconbtn" onclick="openTrackModal()" title="Track Order"><i class="fa-solid fa-box"></i></button>
     <button class="iconbtn" onclick="openAccount()" title="Account"><i class="fa-solid fa-user"></i></button>
     <button class="iconbtn" onclick="openCart()" title="Cart">
       <i class="fa-solid fa-cart-shopping"></i>
@@ -389,7 +398,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 
 <main class="container">
 
-<!-- HERO SLIDER SECTION -->
 <section class="hero">
   <div class="hero-slider">
     <div class="slides" id="heroSlides">
@@ -461,7 +469,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 </section>
 
-<!-- CATEGORIES -->
 <div class="categories">
   <button class="cat active" onclick="filterCategory('All',this)">All</button>
   <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
@@ -471,7 +478,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   <button class="cat" onclick="filterCategory('Mobiles',this)">Mobiles</button>
 </div>
 
-<!-- PRODUCTS -->
 <section id="products">
   <div class="section-head">
     <h2>Store Products Catalog</h2>
@@ -481,24 +487,22 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   <button class="load" id="loadBtn" onclick="loadMore()">Load More Products</button>
 </section>
 
-<!-- ORDER TRACKING -->
 <section class="track" id="trackSection">
   <div class="section-head">
     <div>
-      <h2><i class="fa-solid fa-box-open"></i> Track Your Order</h2>
-      <div class="muted">Enter your HY STORE Order ID to check the latest status.</div>
+      <h2><i class="fa-solid fa-box-open"></i> Live Order Tracking</h2>
+      <div class="muted">Enter your Order ID (e.g., HY1001) to view real-time status.</div>
     </div>
   </div>
   <div class="track-form">
-    <input id="trackInput" placeholder="Example: HY1726390000000">
-    <button onclick="trackOrder()"><i class="fa-solid fa-magnifying-glass"></i> Check Order</button>
+    <input id="trackInput" placeholder="Example: HY1001">
+    <button onclick="trackOrder('page')"><i class="fa-solid fa-magnifying-glass"></i> Track Order</button>
   </div>
   <div class="track-result" id="trackResult"></div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -518,16 +522,14 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 
 <button class="fab" onclick="openChat()" title="Support"><i class="fa-solid fa-headset"></i></button>
 
-<!-- APP BOTTOM NAVIGATION BAR (ADDED ORDERS BUTTON) -->
 <nav class="bottomnav">
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-house"></i><span>HOME</span></button>
   <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-bag-shopping"></i><span>PRODUCTS</span></button>
-  <button onclick="openTrack()"><i class="fa-solid fa-box-open"></i><span>ORDERS</span></button>
+  <button onclick="openTrackModal()"><i class="fa-solid fa-box-open"></i><span>ORDERS</span></button>
   <button onclick="openChat()"><i class="fa-solid fa-comments"></i><span>CHATS</span></button>
   <button onclick="openAccount()"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
 </nav>
 
-<!-- CART MODAL -->
 <div class="modal" id="cartModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -538,7 +540,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 </div>
 
-<!-- ACCOUNT MODAL -->
 <div class="modal" id="accountModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -549,7 +550,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 </div>
 
-<!-- EDIT PROFILE MODAL -->
 <div class="modal" id="editProfileModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -568,7 +568,6 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 </div>
 
-<!-- CHECKOUT MODAL -->
 <div class="modal" id="checkoutModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -584,7 +583,7 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
           <label>Payment Method</label>
           <select id="cPayment">
             <option>Cash on Delivery</option>
-            <option>Paid</option>
+            <option>JazzCash / EasyPaisa</option>
           </select>
         </div>
         <div class="field"><label>Order Total</label><input id="cTotal" readonly></div>
@@ -594,24 +593,22 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   </div>
 </div>
 
-<!-- TRACK MODAL -->
 <div class="modal" id="trackModal">
   <div class="modalbox">
     <div class="modalhead">
-      <b><i class="fa-solid fa-box"></i> Track Order</b>
+      <b><i class="fa-solid fa-box"></i> Track Order Status</b>
       <button class="close" onclick="closeModal('trackModal')">×</button>
     </div>
     <div class="modalbody">
       <div class="track-form">
-        <input id="trackInputModal" placeholder="Enter Order ID">
-        <button onclick="trackOrder('modal')">Check</button>
+        <input id="trackInputModal" placeholder="Enter Order ID (e.g. HY1001)">
+        <button onclick="trackOrder('modal')">Track Now</button>
       </div>
       <div class="track-result" id="trackResultModal"></div>
     </div>
   </div>
 </div>
 
-<!-- SUPPORT CHAT -->
 <div class="modal" id="chatModal">
   <div class="modalbox chatbox">
     <div class="modalhead">
@@ -643,10 +640,8 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 </div>
 
 <script>
-/* =====================================================
-   CONFIGURATIONS & SYSTEM ERROR HANDLING
-   ===================================================== */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzhHswdmvs8DajMGQZBE4i0Sj_gqBh9bkxRdvcdFsC0c2OsQl1tq1s6iVXPSJHqj4tz/exec";
+// Updated Google Script URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-1PjDgW6Lc3usyHhmE6XHDu4cctBbPF60xHuCEVcCkjmCeMZXuG_nsuHBq8pf3Q-Q/exec";
 const WHATSAPP = "923209306672";
 
 function showErrorBanner(message) {
@@ -660,15 +655,6 @@ function closeErrorBanner() {
   document.getElementById('errorBanner').classList.add('hidden');
 }
 
-/* Global Error Catching for Web Stability */
-window.onerror = function(msg, url, lineNo, columnNo, error) {
-  showErrorBanner("System Notice: Web application running with partial limits. (" + msg + ")");
-  return false;
-};
-
-/* =====================================================
-   HERO BANNER SLIDER LOGIC
-   ===================================================== */
 let currentSlide = 0;
 const slidesContainer = document.getElementById("heroSlides");
 const dots = document.querySelectorAll(".dot-item");
@@ -698,37 +684,28 @@ function setSlide(index) {
 
 let slideInterval = setInterval(nextSlide, 5000);
 
-/* =====================================================
-   DATA & INITIALIZATION
-   ===================================================== */
 const baseProducts = [
   { name:"Fast Charging Power Bank 20000mAh", cat:"Accessories", price:2499, old:3200, img:"https://images.unsplash.com/photo-1609592424690-5e2c7b1f4c4e?auto=format&fit=crop&w=800&q=85" },
   { name:"Wireless Noise Cancelling Headphones", cat:"Audio", price:4999, old:6200, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85" },
   { name:"Smart Fitness Watch Ultra Series", cat:"Watches", price:3499, old:4500, img:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=85" },
   { name:"Pro TWS Wireless Earbuds", cat:"Audio", price:2800, old:3500, img:"https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=800&q=85" },
   { name:"Gaming RGB Over-Ear Headset", cat:"Gaming", price:3999, old:4800, img:"https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=800&q=85" },
-  { name:"Portable Bluetooth Speaker Mini", cat:"Audio", price:1999, old:2500, img:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=85" },
-  { name:"AMOLED Display Smart Band", cat:"Watches", price:2200, old:2900, img:"https://images.unsplash.com/photo-1576243345690-4e4b79b63288?auto=format&fit=crop&w=800&q=85" },
-  { name:"Mechanical RGB Gaming Keyboard", cat:"Gaming", price:4500, old:5800, img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=85" },
-  { name:"Premium Smartphone Stand", cat:"Accessories", price:999, old:1400, img:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=800&q=85" },
-  { name:"USB-C Fast Charging Cable", cat:"Accessories", price:699, old:999, img:"https://images.unsplash.com/photo-1587033411391-5d9e51cce126?auto=format&fit=crop&w=800&q=85" },
-  { name:"Wireless Gaming Mouse", cat:"Gaming", price:2499, old:3200, img:"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=85" },
-  { name:"Mobile Phone Holder", cat:"Accessories", price:799, old:1100, img:"https://images.unsplash.com/photo-1609592424747-2a8e5d9b8b8b?auto=format&fit=crop&w=800&q=85" }
+  { name:"Portable Bluetooth Speaker Mini", cat:"Audio", price:1999, old:2500, img:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=85" }
 ];
 
 const products = [];
 for(let i=0; i<2000; i++){
   const b = baseProducts[i % baseProducts.length];
-  products.push({ ...b, id: i+1, name: i < 12 ? b.name : b.name + " — Series #" + (i+1) });
+  products.push({ ...b, id: i+1, name: i < 6 ? b.name : b.name + " — Series #" + (i+1) });
 }
 
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || JSON.stringify({
-  name: "HY Business",
-  phone: "033333333333333",
+  name: "Hy Business",
+  phone: "03478306672",
   email: "hybusiness@store.com",
-  address: "Main Market, Store Location"
+  address: "KING ROAD MANDI BAHAUDDIN"
 }));
 
 function fallbackImage(name){
@@ -789,13 +766,8 @@ function saveCart(){
 
 function cartTotal(){ return cart.reduce((s,p)=>s+p.price,0); }
 
-function showModal(id){
-  document.getElementById(id).classList.add("show");
-}
-
-function closeModal(id){
-  document.getElementById(id).classList.remove("show");
-}
+function showModal(id){ document.getElementById(id).classList.add("show"); }
+function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
 function openCart(){
   const body = document.getElementById("cartBody");
@@ -829,7 +801,6 @@ function openCheckout(){
   showModal("checkoutModal");
 }
 
-/* MODAL & ACCOUNT UPGRADE FUNCTIONS */
 function openAccount(){
   const body = document.getElementById("accountBody");
   const userInit = currentUser && currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U";
@@ -896,7 +867,11 @@ function openTrack(){
   document.getElementById("trackSection").scrollIntoView({behavior:"smooth"});
 }
 
-function generateOrderId(){ return "HY" + Date.now(); }
+function openTrackModal(){
+  showModal("trackModal");
+}
+
+function generateOrderId(){ return "HY" + Math.floor(1000 + Math.random() * 9000); }
 
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
   e.preventDefault();
@@ -932,46 +907,97 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
 async function trackOrder(which){
   const input = which==="modal" ? document.getElementById("trackInputModal") : document.getElementById("trackInput");
   const box = which==="modal" ? document.getElementById("trackResultModal") : document.getElementById("trackResult");
-  const id = input.value.trim();
+  const id = input.value.trim().toUpperCase();
 
-  if(!id){ box.innerHTML=`<div class="order-card">Please enter your Order ID.</div>`; return; }
-  box.innerHTML=`<div class="order-card"><i class="fa-solid fa-spinner fa-spin"></i> Checking Google Sheet...</div>`;
+  if(!id){ box.innerHTML=`<div class="order-card" style="text-align:center;color:var(--yellow)">Please enter your Order ID.</div>`; return; }
+  box.innerHTML=`<div class="order-card" style="text-align:center;padding:30px"><i class="fa-solid fa-spinner fa-spin" style="font-size:24px;color:var(--green)"></i><br><br>Searching Google Sheet for #${id}...</div>`;
 
   try{
     const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
     const data = await response.json();
-    if(data.result!=="success"){
-      box.innerHTML=`<div class="order-card">❌ Order not found.<br><br>Please check your Order ID and try again.</div>`;
+    
+    if(data.result === "not_found"){
+      box.innerHTML=`<div class="order-card" style="text-align:center;color:var(--red)"><i class="fa-solid fa-circle-xmark" style="font-size:30px;margin-bottom:10px"></i><br>Order <b>#${id}</b> Not Found.<br><small style="color:var(--muted)">Please double-check your Order ID and try again.</small></div>`;
       return;
     }
-    box.innerHTML = orderHtml(data);
+    
+    if(data.result === "success"){
+      box.innerHTML = buildProfessionalTracker(data);
+    }
   } catch(error){
-    showErrorBanner("Unable to fetch order status. Server connection issue.");
-    box.innerHTML=`<div class="order-card">Unable to check order right now.<br><br>Please try again or contact HY STORE Support.</div>`;
+    box.innerHTML=`<div class="order-card" style="text-align:center;color:var(--red)"><i class="fa-solid fa-triangle-exclamation" style="font-size:25px;margin-bottom:8px"></i><br>Connection Error.<br><small style="color:var(--muted)">Unable to connect to Google Sheet.</small></div>`;
   }
 }
 
-function orderHtml(d){
-  const s = String(d.status || "PENDING").toUpperCase();
-  let cls="pending";
-  if(s==="PAID") cls="paid";
-  if(s==="APPROVED") cls="approved";
-  if(s==="SHIPPED") cls="shipped";
-  if(s==="DELIVERED") cls="delivered";
-  if(s==="REJECTED") cls="rejected";
+function buildProfessionalTracker(d){
+  const rawStatus = String(d.status || "PENDING").toUpperCase().trim();
+  
+  let cls = "pending";
+  let activeStep = 1;
+  
+  if(rawStatus === "PENDING") { cls = "pending"; activeStep = 1; }
+  else if(rawStatus === "PAID" || rawStatus === "APPROVED") { cls = "approved"; activeStep = 2; }
+  else if(rawStatus === "SHIPPED" || rawStatus === "DISPATCHED") { cls = "shipped"; activeStep = 3; }
+  else if(rawStatus === "DELIVERED") { cls = "delivered"; activeStep = 4; }
+  else if(rawStatus === "REJECTED" || rawStatus === "CANCELLED") { cls = "cancelled"; activeStep = 0; }
+
+  let progressWidth = "0%";
+  if(activeStep === 1) progressWidth = "0%";
+  if(activeStep === 2) progressWidth = "33%";
+  if(activeStep === 3) progressWidth = "66%";
+  if(activeStep === 4) progressWidth = "100%";
 
   return `
     <div class="order-card">
-      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
-        <div><b>Order #${d.orderId}</b><div class="muted">${d.product || "Product"}</div></div>
-        <span class="status ${cls}"><i class="fa-solid fa-circle"></i> ${s}</span>
+      <div class="order-header">
+        <div>
+          <b>Order #${d.orderId}</b>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px"><i class="fa-regular fa-clock"></i> ${d.date ? new Date(d.date).toLocaleString() : 'Recent Order'}</div>
+        </div>
+        <span class="status ${cls}"><i class="fa-solid fa-circle"></i> ${rawStatus}</span>
       </div>
-      <div style="margin-top:15px">
-        <b>Customer:</b> ${d.name || "-"}<br>
-        <b>Phone:</b> ${d.phone || "-"}<br>
-        <b>Total:</b> Rs. ${Number(d.price || 0).toLocaleString()}<br>
-        <b>Payment:</b> ${d.payment || "COD"}
+
+      <div class="order-grid-info">
+        <div><span>Customer Name:</span> <b>${d.name || "N/A"}</b></div>
+        <div><span>Phone:</span> <b>${d.phone || "N/A"}</b></div>
+        <div><span>Product:</span> <b>${d.product || "N/A"}</b></div>
+        <div><span>Total Price:</span> <b style="color:var(--green)">Rs. ${Number(d.price || 0).toLocaleString()}</b></div>
+        <div style="grid-column:1/-1"><span>Delivery Address:</span> <b>${d.address || "N/A"}</b></div>
+        <div><span>Payment Method:</span> <b>${d.payment || "COD"}</b></div>
       </div>
+
+      ${activeStep > 0 ? `
+      <div class="timeline-container">
+        <div class="timeline-title"><i class="fa-solid fa-route"></i> Shipment Progress</div>
+        <div class="timeline">
+          <div class="timeline-progress" style="width:${progressWidth}"></div>
+          
+          <div class="step ${activeStep >= 1 ? 'active' : ''}">
+            <div class="dot"><i class="fa-solid fa-file-invoice"></i></div>
+            <span>Placed</span>
+          </div>
+
+          <div class="step ${activeStep >= 2 ? 'active' : ''}">
+            <div class="dot"><i class="fa-solid fa-check"></i></div>
+            <span>Approved / Paid</span>
+          </div>
+
+          <div class="step ${activeStep >= 3 ? 'active' : ''}">
+            <div class="dot"><i class="fa-solid fa-truck-fast"></i></div>
+            <span>Shipped</span>
+          </div>
+
+          <div class="step ${activeStep >= 4 ? 'active' : ''}">
+            <div class="dot"><i class="fa-solid fa-box-open"></i></div>
+            <span>Delivered</span>
+          </div>
+        </div>
+      </div>
+      ` : `
+      <div style="background:rgba(255,77,103,0.1);padding:12px;border-radius:10px;color:var(--red);text-align:center;font-size:13px;margin-top:15px">
+        <i class="fa-solid fa-circle-exclamation"></i> This order has been <b>${rawStatus}</b>. Please contact support for more details.
+      </div>
+      `}
     </div>
   `;
 }
@@ -1008,7 +1034,6 @@ function botQuick(type){
   if(type==='whatsapp') window.open("https://wa.me/" + WHATSAPP, "_blank");
 }
 
-/* Page Startup */
 renderProducts();
 document.getElementById("cartCount").textContent = cart.length;
 </script>
