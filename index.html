@@ -120,29 +120,85 @@ header{
 .container{ width:min(1200px,92%); margin:auto; }
 
 .hero{ margin:22px 0; display:grid; grid-template-columns:1fr 300px; gap:18px; }
-.hero-main{
-  min-height:290px;
+.hero-slider{
+  position:relative;
   border:1px solid var(--border);
   border-radius:20px;
-  padding:35px;
-  background: linear-gradient(135deg,#09242d,#0d1426 55%,#102d2d);
   overflow:hidden;
+  min-height:290px;
+}
+.slides{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform 0.5s ease-in-out;
+}
+.slide{
+  min-width:100%;
   position:relative;
+  display:flex;
+  align-items:center;
+  background-size:cover;
+  background-position:center;
+  padding:35px;
 }
-.hero-main:after{
-  content:"";
+.slide-overlay{
   position:absolute;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background:rgba(0,230,118,.13);
-  right:-70px;
-  top:-80px;
+  inset:0;
+  background:linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.4) 100%);
 }
-.hero h1{ font-size:42px; line-height:1.05; margin:0 0 12px; max-width:650px; }
-.hero h1 span{ color:var(--green); }
-.hero p{ color:var(--muted); max-width:600px; margin-bottom:18px; }
-.hero-btn{ padding:12px 18px; border-radius:10px; background:var(--green); font-weight:700; }
+.slide-content{
+  position:relative;
+  z-index:2;
+  max-width:550px;
+}
+.slide-content h1{ font-size:38px; line-height:1.1; margin:10px 0; }
+.slide-content h1 span{ color:var(--green); }
+.slide-content p{ color:var(--muted); margin-bottom:18px; font-size:13px; }
+.hero-btn{ padding:12px 18px; border-radius:10px; background:var(--green); font-weight:700; color:#00140a; }
+
+.slider-controls{
+  position:absolute;
+  bottom:15px;
+  right:20px;
+  z-index:10;
+  display:flex;
+  gap:8px;
+}
+.slider-btn{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(16,26,45,0.8);
+  color:white;
+  display:grid;
+  place-items:center;
+  backdrop-filter:blur(5px);
+  border:1px solid var(--border);
+}
+.slider-btn:hover{ background:var(--green); color:#00140a; }
+
+.dots{
+  position:absolute;
+  bottom:15px;
+  left:35px;
+  z-index:10;
+  display:flex;
+  gap:6px;
+}
+.dot-item{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  cursor:pointer;
+  transition:.3s;
+}
+.dot-item.active{
+  background:var(--green);
+  width:25px;
+  border-radius:10px;
+}
 
 .trust{ display:grid; gap:12px; }
 .trust-card{ background:var(--card); border:1px solid var(--border); border-radius:16px; padding:20px; }
@@ -173,7 +229,7 @@ header{
 
 .pactions{ display:flex; gap:7px; margin-top:12px; }
 .pactions button{ flex:1; padding:9px; border-radius:9px; }
-.buy{ background:var(--green); font-weight:700; }
+.buy{ background:var(--green); font-weight:700; color:#00140a; }
 .cartbtn{ background:#1a263c; color:white; }
 
 .load{ display:block; margin:25px auto; padding:11px 22px; border-radius:10px; background:#122036; color:white; border:1px solid var(--border); }
@@ -181,7 +237,7 @@ header{
 .track{ margin:38px 0; padding:28px; border-radius:20px; background:linear-gradient(135deg,#0d192c,#0b1622); border:1px solid var(--border); }
 .track-form{ display:flex; gap:10px; max-width:700px; margin-top:15px; }
 .track-form input{ flex:1; padding:13px 15px; border-radius:10px; background:#070d18; border:1px solid var(--border); color:white; outline:0; }
-.track-form button{ padding:0 18px; border-radius:10px; background:var(--cyan); font-weight:700; }
+.track-form button{ padding:0 18px; border-radius:10px; background:var(--cyan); font-weight:700; color:#00140a; }
 .track-result{ margin-top:18px; }
 
 .order-card{ background:#080f1b; border:1px solid var(--border); border-radius:15px; padding:18px; }
@@ -221,7 +277,12 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 .field label{ display:block; font-size:11px; color:var(--muted); margin-bottom:5px; }
 .field input, .field textarea, .field select{ width:100%; padding:11px 12px; border-radius:9px; background:#070d18; color:white; border:1px solid var(--border); outline:0; }
 
-.primary{ width:100%; padding:12px; border-radius:10px; background:var(--green); font-weight:700; }
+.primary{ width:100%; padding:12px; border-radius:10px; background:var(--green); font-weight:700; color:#00140a; }
+
+.account-details{ background:#070d18; border:1px solid var(--border); border-radius:12px; padding:15px; margin:15px 0; }
+.acc-info-row{ display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:13px; }
+.acc-info-row:last-child{ border-bottom:none; }
+.acc-info-row i{ color:var(--green); width:20px; text-align:center; }
 
 .account{ display:flex; align-items:center; gap:14px; }
 .avatar{ width:65px; height:65px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--green),var(--cyan)); color:#00140a; font-weight:800; font-size:25px; overflow:hidden; }
@@ -245,7 +306,7 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 
 .chatinput{ display:flex; gap:8px; padding:12px; border-top:1px solid var(--border); }
 .chatinput input{ flex:1; padding:10px; border-radius:10px; background:#070d18; border:1px solid var(--border); color:white; }
-.chatinput button{ width:42px; border-radius:10px; background:var(--green); }
+.chatinput button{ width:42px; border-radius:10px; background:var(--green); color:#00140a; }
 
 .toast{ position:fixed; top:80px; right:20px; z-index:200; background:#0d1727; border:1px solid var(--border); padding:15px 17px; border-radius:13px; box-shadow:var(--shadow); display:none; min-width:250px; }
 .toast.show{ display:block; }
@@ -260,7 +321,7 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   .topbar{ display:none; }
   .track-form{ flex-direction:column; }
   .track-form button{ padding:11px; }
-  .hero h1{ font-size:34px; }
+  .slide-content h1{ font-size:28px; }
 }
 
 @media(max-width:520px){
@@ -275,8 +336,8 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
   .price{ font-size:15px; }
   .pactions button{ font-size:11px; padding:8px; }
   .trust{ grid-template-columns:1fr; }
-  .hero-main{ padding:25px; }
-  .hero h1{ font-size:29px; }
+  .slide{ padding:20px; }
+  .slide-content h1{ font-size:24px; }
 }
 </style>
 </head>
@@ -324,17 +385,61 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
       <span class="badge" id="cartCount">0</span>
     </button>
   </div>
-</header><main class="container">
+</header>
 
-<!-- HERO -->
+<main class="container">
+
+<!-- HERO SLIDER SECTION -->
 <section class="hero">
-  <div class="hero-main">
-    <div class="tag">2000+ PRODUCTS</div>
-    <h1>Shop Smart.<br><span>Live Better.</span></h1>
-    <p>Quality products, easy checkout, Cash on Delivery and WhatsApp support — all in one place.</p>
-    <button class="hero-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-      SHOP NOW <i class="fa-solid fa-arrow-right"></i>
-    </button>
+  <div class="hero-slider">
+    <div class="slides" id="heroSlides">
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <div class="tag">MEGA SALE</div>
+          <h1>Shop Smart.<br><span>Live Better.</span></h1>
+          <p>Quality products, easy checkout, Cash on Delivery and WhatsApp support — all in one place.</p>
+          <button class="hero-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            SHOP NOW <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <div class="tag">AUDIO GEAR</div>
+          <h1>Premium Sound<br><span>Best Deals.</span></h1>
+          <p>Get up to 40% OFF on high-quality Bluetooth headphones, TWS Earbuds, & Speakers.</p>
+          <button class="hero-btn" onclick="filterCategory('Audio', document.querySelectorAll('.cat')[2]); document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            EXPLORE AUDIO <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=1200&q=80');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <div class="tag">SMARTWATCHES</div>
+          <h1>Track Fitness<br><span>Stay Connected.</span></h1>
+          <p>Latest Ultra Series Smartwatches with AMOLED Displays now available with COD.</p>
+          <button class="hero-btn" onclick="filterCategory('Watches', document.querySelectorAll('.cat')[3]); document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            BUY WATCHES <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dots" id="heroDots">
+      <span class="dot-item active" onclick="setSlide(0)"></span>
+      <span class="dot-item" onclick="setSlide(1)"></span>
+      <span class="dot-item" onclick="setSlide(2)"></span>
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="slider-btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
   </div>
 
   <div class="trust">
@@ -413,10 +518,11 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
 
 <button class="fab" onclick="openChat()" title="Support"><i class="fa-solid fa-headset"></i></button>
 
-<!-- APP BOTTOM NAVIGATION BAR -->
+<!-- APP BOTTOM NAVIGATION BAR (ADDED ORDERS BUTTON) -->
 <nav class="bottomnav">
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-house"></i><span>HOME</span></button>
   <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-bag-shopping"></i><span>PRODUCTS</span></button>
+  <button onclick="openTrack()"><i class="fa-solid fa-box-open"></i><span>ORDERS</span></button>
   <button onclick="openChat()"><i class="fa-solid fa-comments"></i><span>CHATS</span></button>
   <button onclick="openAccount()"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
 </nav>
@@ -440,6 +546,25 @@ footer{ margin-top:50px; padding:35px 5%; border-top:1px solid var(--border); ba
       <button class="close" onclick="closeModal('accountModal')">×</button>
     </div>
     <div class="modalbody" id="accountBody"></div>
+  </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal" id="editProfileModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <b><i class="fa-solid fa-user-pen"></i> Edit Profile</b>
+      <button class="close" onclick="closeModal('editProfileModal')">×</button>
+    </div>
+    <div class="modalbody">
+      <form id="editProfileForm">
+        <div class="field"><label>Full Name</label><input id="epName" required></div>
+        <div class="field"><label>Phone Number</label><input id="epPhone" required></div>
+        <div class="field"><label>Email Address</label><input id="epEmail" type="email" required></div>
+        <div class="field"><label>Delivery Address</label><textarea id="epAddress" rows="3" required></textarea></div>
+        <button class="primary" type="submit">SAVE CHANGES</button>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -542,6 +667,38 @@ window.onerror = function(msg, url, lineNo, columnNo, error) {
 };
 
 /* =====================================================
+   HERO BANNER SLIDER LOGIC
+   ===================================================== */
+let currentSlide = 0;
+const slidesContainer = document.getElementById("heroSlides");
+const dots = document.querySelectorAll(".dot-item");
+const totalSlides = 3;
+
+function updateSlider() {
+  slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle("active", idx === currentSlide);
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateSlider();
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateSlider();
+}
+
+function setSlide(index) {
+  currentSlide = index;
+  updateSlider();
+}
+
+let slideInterval = setInterval(nextSlide, 5000);
+
+/* =====================================================
    DATA & INITIALIZATION
    ===================================================== */
 const baseProducts = [
@@ -567,7 +724,12 @@ for(let i=0; i<2000; i++){
 
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
+let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || JSON.stringify({
+  name: "HY Business",
+  phone: "033333333333333",
+  email: "hybusiness@store.com",
+  address: "Main Market, Store Location"
+}));
 
 function fallbackImage(name){
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#0c172c"/><stop offset="1" stop-color="#0b3b34"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><circle cx="400" cy="260" r="110" fill="#00e676" opacity=".12"/><rect x="250" y="150" width="300" height="210" rx="28" fill="#172238" stroke="#00e676" stroke-width="5"/><text x="400" y="235" fill="#00e676" font-size="32" text-anchor="middle" font-family="Arial" font-weight="700">HY STORE</text><text x="400" y="285" fill="white" font-size="25" text-anchor="middle" font-family="Arial">${name.slice(0,25)}</text></svg>`;
@@ -600,7 +762,7 @@ function renderProducts(){
 function filterCategory(cat,el){
   activeCat=cat; shown=24;
   document.querySelectorAll(".cat").forEach(x => x.classList.remove("active"));
-  el.classList.add("active");
+  if(el) el.classList.add("active");
   renderProducts();
 }
 
@@ -626,6 +788,14 @@ function saveCart(){
 }
 
 function cartTotal(){ return cart.reduce((s,p)=>s+p.price,0); }
+
+function showModal(id){
+  document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
 
 function openCart(){
   const body = document.getElementById("cartBody");
@@ -657,6 +827,73 @@ function openCheckout(){
     document.getElementById("cAddress").value = currentUser.address || "";
   }
   showModal("checkoutModal");
+}
+
+/* MODAL & ACCOUNT UPGRADE FUNCTIONS */
+function openAccount(){
+  const body = document.getElementById("accountBody");
+  const userInit = currentUser && currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U";
+  
+  body.innerHTML = `
+    <div class="account">
+      <div class="avatar">${userInit}</div>
+      <div>
+        <b style="font-size:16px">${currentUser.name || "Guest User"}</b>
+        <small style="display:block;color:var(--green)">Online Member</small>
+      </div>
+    </div>
+
+    <div class="account-details">
+      <div class="acc-info-row"><i class="fa-solid fa-user"></i> <span><b>Name:</b> ${currentUser.name || "N/A"}</span></div>
+      <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email || "N/A"}</span></div>
+      <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone || "N/A"}</span></div>
+      <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address || "N/A"}</span></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>${cart.length}</b><small>Cart Items</small></div>
+      <div class="stat"><b>Active</b><small>Status</small></div>
+      <div class="stat"><b>COD</b><small>Payment</small></div>
+    </div>
+
+    <button class="primary" style="margin-bottom:10px" onclick="openEditProfile()"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+    <button class="primary" style="background:#ff4d67;color:white" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  `;
+  showModal("accountModal");
+}
+
+function openEditProfile(){
+  closeModal("accountModal");
+  document.getElementById("epName").value = currentUser.name || "";
+  document.getElementById("epPhone").value = currentUser.phone || "";
+  document.getElementById("epEmail").value = currentUser.email || "";
+  document.getElementById("epAddress").value = currentUser.address || "";
+  showModal("editProfileModal");
+}
+
+document.getElementById("editProfileForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  currentUser = {
+    name: document.getElementById("epName").value.trim(),
+    phone: document.getElementById("epPhone").value.trim(),
+    email: document.getElementById("epEmail").value.trim(),
+    address: document.getElementById("epAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  closeModal("editProfileModal");
+  toast("Profile Updated", "Your information has been saved.");
+  openAccount();
+});
+
+function logoutUser(){
+  localStorage.removeItem("hy_user_session");
+  currentUser = { name:"", phone:"", email:"", address:"" };
+  closeModal("accountModal");
+  toast("Logged Out", "You have been logged out.");
+}
+
+function openTrack(){
+  document.getElementById("trackSection").scrollIntoView({behavior:"smooth"});
 }
 
 function generateOrderId(){ return "HY" + Date.now(); }
@@ -723,11 +960,6 @@ function orderHtml(d){
   if(s==="DELIVERED") cls="delivered";
   if(s==="REJECTED") cls="rejected";
 
-  const stages=["PENDING","PAID","SHIPPED","DELIVERED"];
-  let active = stages.indexOf(s);
-  if(s==="APPROVED") active=1;
-  if(s==="REJECTED") active=-1;
-
   return `
     <div class="order-card">
       <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
@@ -738,120 +970,47 @@ function orderHtml(d){
         <b>Customer:</b> ${d.name || "-"}<br>
         <b>Phone:</b> ${d.phone || "-"}<br>
         <b>Total:</b> Rs. ${Number(d.price || 0).toLocaleString()}<br>
-        <b>Payment:</b> ${d.payment || "-"}
-      </div>
-      <div class="timeline">
-        <div class="step ${active >= 0 ? 'done' : ''}"><div class="dot"><i class="fa-solid fa-clock"></i></div>PENDING</div>
-        <div class="step ${active >= 1 ? 'done' : ''}"><div class="dot"><i class="fa-solid fa-check"></i></div>PAID/APPROVED</div>
-        <div class="step ${active >= 2 ? 'done' : ''}"><div class="dot"><i class="fa-solid fa-truck"></i></div>SHIPPED</div>
-        <div class="step ${active >= 3 ? 'done' : ''}"><div class="dot"><i class="fa-solid fa-house"></i></div>DELIVERED</div>
+        <b>Payment:</b> ${d.payment || "COD"}
       </div>
     </div>
   `;
 }
 
-function showModal(id) { document.getElementById(id).classList.add('show'); }
-function closeModal(id) { document.getElementById(id).classList.remove('show'); }
-function openTrack() { showModal('trackModal'); }
-
-function openAccount() {
-  const body = document.getElementById('accountBody');
-  if (currentUser) {
-    body.innerHTML = `
-      <div class="account">
-        <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
-        <div>
-          <b>${currentUser.name || 'User'}</b>
-          <small style="display:block;color:var(--muted)">${currentUser.phone || ''}</small>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><b>${cart.length}</b><small>Cart Items</small></div>
-        <div class="stat"><b>Active</b><small>Status</small></div>
-        <div class="stat"><b>COD</b><small>Payment</small></div>
-      </div>
-      <button class="primary" style="background:var(--red);color:white" onclick="logout()">Logout</button>
-    `;
-  } else {
-    body.innerHTML = `
-      <form onsubmit="saveUser(event)">
-        <div class="field"><label>Your Name</label><input id="uName" required placeholder="Enter your full name"></div>
-        <div class="field"><label>Phone Number</label><input id="uPhone" required placeholder="03001234567"></div>
-        <div class="field"><label>Delivery Address</label><textarea id="uAddress" rows="3" required placeholder="Enter full address"></textarea></div>
-        <button class="primary" type="submit">Save Profile</button>
-      </form>
-    `;
-  }
-  showModal('accountModal');
+function toast(title, text){
+  const t = document.getElementById("toast");
+  document.getElementById("toastTitle").textContent = title;
+  document.getElementById("toastText").textContent = text;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 3000);
 }
 
-function saveUser(e) {
-  e.preventDefault();
-  currentUser = {
-    name: document.getElementById('uName').value.trim(),
-    phone: document.getElementById('uPhone').value.trim(),
-    address: document.getElementById('uAddress').value.trim()
-  };
-  localStorage.setItem('hy_user_session', JSON.stringify(currentUser));
-  toast('Profile Saved', 'Your details have been saved for quick checkout.');
-  closeModal('accountModal');
+function openChat(){ showModal("chatModal"); }
+
+function sendChat(){
+  const input = document.getElementById("chatInput");
+  const msg = input.value.trim();
+  if(!msg) return;
+
+  const msgs = document.getElementById("messages");
+  msgs.innerHTML += `<div class="msg user"><div class="bubble">${msg}</div></div>`;
+  input.value="";
+  msgs.scrollTop = msgs.scrollHeight;
+
+  setTimeout(()=>{
+    msgs.innerHTML += `<div class="msg"><div class="mini">HY</div><div class="bubble">Shukriya contact karne ka! humari team jald aap se rabta karegi. Urgent order ya tracking ke liye WhatsApp par message karein.</div></div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 800);
 }
 
-function logout() {
-  localStorage.removeItem('hy_user_session');
-  currentUser = null;
-  toast('Logged Out', 'Your session has ended.');
-  closeModal('accountModal');
+function botQuick(type){
+  if(type==='order') toast("Order Guide", "Select product -> Buy Now -> Fill Details -> Submit.");
+  if(type==='track') { closeModal("chatModal"); openTrack(); }
+  if(type==='whatsapp') window.open("https://wa.me/" + WHATSAPP, "_blank");
 }
 
-function openChat() {
-  showModal('chatModal');
-  const msgBox = document.getElementById('messages');
-  if (!msgBox.children.length) {
-    msgBox.innerHTML = `<div class="msg"><div class="mini">HY</div><div class="bubble">Assalam-o-Alaikum! HY STORE Support mein khushamdeed. Hum aapki kya madad kar sakte hain?</div></div>`;
-  }
-}
-
-function sendChat() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  const msgBox = document.getElementById('messages');
-  msgBox.innerHTML += `<div class="msg user"><div class="bubble">${text}</div></div>`;
-  input.value = '';
-  msgBox.scrollTop = msgBox.scrollHeight;
-
-  setTimeout(() => {
-    let reply = "Aapka shukriya! Mazeed rehnamai ke liye aap WhatsApp button par click karke direct baat kar sakte hain.";
-    const lower = text.toLowerCase();
-    if (lower.includes('order') || lower.includes('buy')) reply = "Order karne ke liye kisi bhi product par 'Buy Now' dabayein ya Cart mein add karke Checkout karein.";
-    else if (lower.includes('track') || lower.includes('status')) reply = "Order track karne ke liye top bar ya menu mein 'Track Order' par click karke apna Order ID darj karein.";
-    else if (lower.includes('whatsapp') || lower.includes('contact')) reply = `Aap humse WhatsApp par contact kar sakte hain: +${WHATSAPP}`;
-
-    msgBox.innerHTML += `<div class="msg"><div class="mini">HY</div><div class="bubble">${reply}</div></div>`;
-    msgBox.scrollTop = msgBox.scrollHeight;
-  }, 600);
-}
-
-function botQuick(type) {
-  const input = document.getElementById('chatInput');
-  if (type === 'order') input.value = "How to place an order?";
-  if (type === 'track') input.value = "How to track order?";
-  if (type === 'whatsapp') input.value = "Give me WhatsApp support number";
-  sendChat();
-}
-
-function toast(title, text) {
-  const t = document.getElementById('toast');
-  document.getElementById('toastTitle').textContent = title;
-  document.getElementById('toastText').textContent = text;
-  t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); }, 3500);
-}
-
-/* Initialization */
+/* Page Startup */
 renderProducts();
-document.getElementById('cartCount').textContent = cart.length;
+document.getElementById("cartCount").textContent = cart.length;
 </script>
 </body>
 </html>
