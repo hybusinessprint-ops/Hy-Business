@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HY STORE | Official Online Store</title>
 
-<!-- External Fonts & Icons -->
+<!-- Fonts & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +15,6 @@
 :root {
   --bg: #070a10;
   --card: #0f172a;
-  --card2: #111c31;
   --header-bg: #0f1a2d;
   --msg-bg: #152238;
   --text: #f8fafc;
@@ -37,37 +36,13 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   padding-bottom: 85px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button, input, textarea, select { font-family: inherit; }
 button { cursor: pointer; border: 0; outline: none; }
 
-/* Top Notification Banner */
-.error-banner {
-  background: linear-gradient(90deg, #ff4d67, #e60026);
-  color: #fff;
-  padding: 10px 5%;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 4px 15px rgba(255,77,103,0.3);
-  position: relative;
-  z-index: 999;
-}
-.error-banner.hidden { display: none; }
-.error-banner-close {
-  background: rgba(0,0,0,0.2);
-  color: white;
-  border-radius: 50%;
-  width: 22px; height: 22px;
-  display: grid; place-items: center;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-/* Header & Navigation Bar */
+/* Top Notification Bar */
 .topbar {
   background: #05070b;
   border-bottom: 1px solid var(--border);
@@ -84,16 +59,16 @@ header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(7,10,16,.94);
+  background: rgba(7,10,16,.95);
   backdrop-filter: blur(15px);
   border-bottom: 1px solid var(--border);
-  padding: 13px 5%;
+  padding: 12px 4%;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
 }
 
-.logo { font-size: 24px; font-weight: 800; letter-spacing: .5px; white-space: nowrap; cursor: pointer; }
+.logo { font-size: 22px; font-weight: 800; letter-spacing: .5px; white-space: nowrap; cursor: pointer; }
 .logo b { color: var(--green); }
 .logo small { display: block; font-size: 8px; letter-spacing: 2px; color: var(--muted); font-weight: 500; }
 
@@ -105,56 +80,45 @@ header {
   border-radius: 12px;
   overflow: hidden;
 }
-.search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 12px 14px; font-size: 13px; }
-.search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 15px; }
+.search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 10px 12px; font-size: 13px; width: 100%; }
+.search button { background: var(--green); color: #00140a; padding: 0 14px; font-size: 14px; }
 
-.head-actions { display: flex; gap: 8px; }
-.iconbtn { width: 43px; height: 43px; border-radius: 12px; background: #101a2d; color: white; position: relative; font-size: 16px; }
-.badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 3px 6px; border-radius: 20px; font-weight: 700; }
+.head-actions { display: flex; gap: 6px; }
+.iconbtn { width: 40px; height: 40px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 15px; }
+.badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
 .container { width: min(1200px, 92%); margin: auto; padding-top: 15px; }
 
-/* Dynamic Views Logic */
-.app-view {
-  display: none;
-  animation: fadeIn 0.3s ease-in-out;
-}
-.app-view.active-view {
-  display: block;
-}
+.app-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+.app-view.active-view { display: block; }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .page-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
   gap: 10px;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 }
 .page-title i { color: var(--green); }
 
-/* Hero Slider Elements */
+/* Responsive Fixed Hero Banner */
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider {
   position: relative;
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  min-height: 290px;
+  min-height: 280px;
 }
-.slides {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s ease-in-out;
-}
+.slides { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
 .slide {
   min-width: 100%;
   position: relative;
@@ -162,246 +126,154 @@ header {
   align-items: center;
   background-size: cover;
   background-position: center;
-  padding: 35px;
+  padding: 25px;
 }
 .slide-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.4) 100%);
+  background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.6) 100%);
 }
-.slide-content { position: relative; z-index: 2; max-width: 550px; }
-.slide-content h1 { font-size: 38px; line-height: 1.1; margin: 10px 0; }
+.slide-content { position: relative; z-index: 2; max-width: 480px; }
+.slide-content .tag { display: inline-block; background: rgba(0,230,118,0.2); color: var(--green); border: 1px solid var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
+.slide-content h1 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; word-wrap: break-word; }
 .slide-content h1 span { color: var(--green); }
-.slide-content p { color: var(--muted); margin-bottom: 18px; font-size: 13px; }
-.hero-btn { padding: 12px 18px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; }
+.slide-content p { color: var(--muted); margin-bottom: 16px; font-size: 12px; }
+.hero-btn { padding: 10px 18px; border-radius: 8px; background: var(--green); font-weight: 700; color: #00140a; font-size: 12px; }
 
-.slider-controls { position: absolute; bottom: 15px; right: 20px; z-index: 10; display: flex; gap: 8px; }
-.slider-btn { width: 32px; height: 32px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; backdrop-filter: blur(5px); border: 1px solid var(--border); }
-.slider-btn:hover { background: var(--green); color: #00140a; }
+.slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
+.slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
 
-.dots { position: absolute; bottom: 15px; left: 35px; z-index: 10; display: flex; gap: 6px; }
-.dot-item { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
-.dot-item.active { background: var(--green); width: 25px; border-radius: 10px; }
+.dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; }
+.dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
+.dot-item.active { background: var(--green); width: 20px; border-radius: 8px; }
 
-.trust { display: grid; gap: 12px; }
-.trust-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
-.trust-card i { font-size: 24px; color: var(--green); margin-bottom: 10px; }
-.trust-card b { display: block; font-size: 14px; }
-.trust-card small { color: var(--muted); font-size: 11px; }
+.trust { display: grid; gap: 10px; }
+.trust-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 15px; }
+.trust-card i { font-size: 20px; color: var(--green); margin-bottom: 8px; }
+.trust-card b { display: block; font-size: 13px; }
+.trust-card small { color: var(--muted); font-size: 10px; }
 
-/* Categories Bar */
-.categories { display: flex; gap: 10px; overflow-x: auto; padding: 4px 0 18px; }
+/* Categories Scroll */
+.categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 15px; }
 .categories::-webkit-scrollbar { display: none; }
-.cat { white-space: nowrap; padding: 9px 16px; background: #101a2d; border: 1px solid var(--border); border-radius: 20px; color: #dbeafe; font-size: 12px; font-weight: 500; }
-.cat.active, .cat:hover { background: var(--green); color: #00140a; font-weight: 700; }
+.cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; }
+.cat.active { background: var(--green); color: #00140a; font-weight: 700; }
 
-.section-head { display: flex; align-items: center; justify-content: space-between; margin: 18px 0; }
-.section-head h2 { font-size: 22px; }
-.muted { color: var(--muted); }
+.section-head { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
+.section-head h2 { font-size: 18px; }
 
-/* Products Layout */
-.products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.product { background: linear-gradient(180deg,#111b2d,#0c1321); border: 1px solid var(--border); border-radius: 17px; overflow: hidden; transition: .2s; }
-.product:hover { transform: translateY(-4px); border-color: rgba(0,230,118,.4); }
+/* Product Cards Grid */
+.products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.pimg { height: 180px; background: #111827; position: relative; }
+.pimg img { width: 100%; height: 100%; object-fit: cover; }
+.pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; }
 
-.pimg { height: 210px; background: #111827; position: relative; overflow: hidden; }
-.pimg img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.tag { position: absolute; left: 10px; top: 10px; background: rgba(0,0,0,.72); padding: 5px 8px; border-radius: 8px; font-size: 10px; }
-
-.pbody { padding: 14px; }
-.pbody h3 { font-size: 14px; margin-bottom: 8px; min-height: 42px; line-height: 1.3; }
-.price { font-weight: 800; color: var(--green); font-size: 18px; }
+.pbody { padding: 12px; }
+.pbody h3 { font-size: 13px; margin-bottom: 6px; height: 36px; overflow: hidden; line-height: 1.3; }
+.price { font-weight: 800; color: var(--green); font-size: 16px; }
 .old { font-size: 11px; color: var(--muted); text-decoration: line-through; margin-left: 5px; }
 
-.pactions { display: flex; gap: 7px; margin-top: 12px; }
-.pactions button { flex: 1; padding: 9px; border-radius: 9px; font-weight: 600; font-size: 12px; }
+.pactions { display: flex; gap: 6px; margin-top: 10px; }
+.pactions button { flex: 1; padding: 8px; border-radius: 8px; font-weight: 600; font-size: 12px; }
 .buy { background: var(--green); color: #00140a; }
-.cartbtn { background: #1a263c; color: white; flex: 0 0 42px !important; }
+.cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
-.load { display: block; margin: 25px auto; padding: 11px 22px; border-radius: 10px; background: #122036; color: white; border: 1px solid var(--border); font-weight: 600; }
+/* Responsive Track Order Form */
+.track { margin: 15px 0 25px; padding: 20px; border-radius: 16px; background: #0d192c; border: 1px solid var(--border); }
+.track-form { display: flex; gap: 8px; width: 100%; margin-top: 12px; }
+.track-form input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: 0; font-size: 13px; }
+.track-form button { padding: 0 16px; border-radius: 10px; background: var(--cyan); font-weight: 700; color: #00140a; white-space: nowrap; font-size: 12px; flex-shrink: 0; }
 
-/* Track & Orders Area */
-.track { margin: 15px 0 38px; padding: 28px; border-radius: 20px; background: linear-gradient(135deg,#0d192c,#0b1622); border: 1px solid var(--border); }
-.track-form { display: flex; gap: 10px; max-width: 700px; margin-top: 15px; }
-.track-form input { flex: 1; padding: 13px 15px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: 0; }
-.track-form button { padding: 0 18px; border-radius: 10px; background: var(--cyan); font-weight: 700; color: #00140a; }
+.order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+.order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
+.order-header b { font-size: 16px; color: var(--green); }
 
-.order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 20px; }
-.order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
-.order-header b { font-size: 18px; color: var(--green); }
-
-.status { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 30px; font-size: 12px; font-weight: 700; }
+.status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
-.approved { background: rgba(0,230,118,.15); color: var(--green); border: 1px solid rgba(0,230,118,.3); }
-.shipped { background: rgba(77,163,255,.15); color: var(--blue); border: 1px solid rgba(77,163,255,.3); }
-.delivered { background: rgba(0,230,118,.2); color: var(--green); border: 1px solid rgba(0,230,118,.5); }
-.cancelled { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 
-.order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; background: #0d1626; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; }
-.order-grid-info div span { color: var(--muted); display: block; font-size: 11px; }
+.order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
+.order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
 
-/* Timeline Component */
-.timeline-container { margin-top: 22px; padding-top: 15px; border-top: 1px solid var(--border); }
-.timeline-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 15px; text-transform: uppercase; }
-.timeline { display: flex; justify-content: space-between; position: relative; }
-.timeline::before { content: ''; position: absolute; top: 18px; left: 10%; right: 10%; height: 3px; background: #172238; z-index: 1; }
-.timeline-progress { position: absolute; top: 18px; left: 10%; height: 3px; background: var(--green); z-index: 2; transition: width 0.4s ease; }
+/* Customer Support Chat Window */
+.chat-page-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; height: 520px; }
+.chat-header { padding: 12px 16px; background: var(--header-bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.chat-user-info { display: flex; align-items: center; gap: 10px; }
 
-.step { position: relative; z-index: 3; text-align: center; flex: 1; font-size: 11px; color: var(--muted); }
-.step .dot { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 8px; background: #101a2d; border: 2px solid #223352; display: grid; place-items: center; font-size: 13px; color: var(--muted); }
-.step.active .dot { background: var(--green); border-color: var(--green); color: #00140a; box-shadow: 0 0 15px rgba(0,230,118,0.4); }
-.step.active { color: white; font-weight: 600; }
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: #00140a; display: grid; place-items: center; font-weight: 800; font-size: 12px; }
 
-/* Support Chat Section */
-.chat-page-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  height: 600px;
-}
-
-.chat-header {
-  padding: 15px 20px;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.chat-user-info { display: flex; align-items: center; gap: 12px; }
-.chat-user-info b { font-size: 15px; display: block; }
-.chat-user-info small { color: var(--green); font-size: 11px; }
-
-.wa-btn {
-  background: #25d366;
-  color: #000;
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.messages-box {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  background: #07101c;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.msg { display: flex; gap: 10px; max-width: 85%; align-items: flex-end; }
+.messages-box { flex: 1; padding: 16px; overflow-y: auto; background: #07101c; display: flex; flex-direction: column; gap: 12px; }
+.msg { display: flex; gap: 8px; max-width: 85%; align-items: flex-end; }
 .msg.bot { align-self: flex-start; }
 .msg.user { align-self: flex-end; flex-direction: row-reverse; }
 
-.msg .mini-avatar {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--green); color: #00140a;
-  display: grid; place-items: center; font-size: 9px; font-weight: 800; flex-shrink: 0;
-}
+.msg .mini-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: #00140a; display: grid; place-items: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
+.bubble { padding: 10px 14px; border-radius: 14px; background: var(--msg-bg); font-size: 12px; line-height: 1.4; color: #e2e8f0; }
+.msg.user .bubble { background: var(--green); color: #00140a; font-weight: 500; border-bottom-right-radius: 2px; }
+.msg.bot .bubble { border-bottom-left-radius: 2px; }
 
-.bubble {
-  padding: 12px 16px; border-radius: 16px;
-  background: var(--msg-bg); font-size: 13px; line-height: 1.5; color: #e2e8f0;
-}
+.quick-options { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 14px; border-top: 1px solid var(--border); background: rgba(15,26,45,0.5); }
+.quick-btn { padding: 6px 10px; border-radius: 16px; background: var(--msg-bg); color: #dbeafe; font-size: 11px; border: 1px solid var(--border); }
 
-.msg.user .bubble { background: var(--green); color: #00140a; font-weight: 500; border-bottom-right-radius: 4px; }
-.msg.bot .bubble { border-bottom-left-radius: 4px; }
+.chat-input-area { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: var(--card); }
+.chat-input-area input { flex: 1; padding: 10px 12px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: none; font-size: 12px; }
+.chat-input-area button { width: 42px; border-radius: 10px; background: var(--green); color: #00140a; font-size: 14px; }
 
-.quick-options { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 16px; border-top: 1px solid var(--border); background: rgba(15, 26, 45, 0.5); }
-.quick-btn { padding: 7px 12px; border-radius: 20px; background: var(--msg-bg); color: #dbeafe; font-size: 11px; border: 1px solid var(--border); cursor: pointer; }
-.quick-btn:hover { background: var(--green); color: #00140a; }
+/* Profile View & Logout */
+.account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; }
+.account { display: flex; align-items: center; gap: 14px; }
+.avatar { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 24px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+.stat { background: #111c31; border-radius: 12px; padding: 12px; text-align: center; border: 1px solid var(--border); }
+.stat b { display: block; font-size: 18px; color: var(--green); }
+.stat span { font-size: 10px; color: var(--muted); }
 
-.chat-input-area { display: flex; gap: 10px; padding: 15px; border-top: 1px solid var(--border); background: var(--card); }
-.chat-input-area input { flex: 1; padding: 12px 16px; border-radius: 12px; background: #070d18; border: 1px solid var(--border); color: white; outline: none; }
-.chat-input-area button { width: 48px; border-radius: 12px; background: var(--green); color: #00140a; font-size: 16px; cursor: pointer; }
-
-/* User Profile & Account Settings */
-.account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 20px; padding: 25px; }
-.account { display: flex; align-items: center; gap: 18px; }
-.avatar { width: 70px; height: 70px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 28px; }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0; }
-.stat { background: #111c31; border-radius: 14px; padding: 15px; text-align: center; border: 1px solid var(--border); }
-.stat b { display: block; font-size: 20px; color: var(--green); }
-.stat span { font-size: 11px; color: var(--muted); }
-
-.account-details { background: #070d18; border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin: 18px 0; }
-.acc-info-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+.account-details { background: #070d18; border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin: 15px 0; }
+.acc-info-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; word-break: break-word; }
 .acc-info-row:last-child { border-bottom: none; }
-.acc-info-row i { color: var(--green); width: 20px; text-align: center; }
+.acc-info-row i { color: var(--green); margin-top: 2px; }
 
-/* Footer & Bottom Navigation Controls */
-footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border); background: #05080d; color: var(--muted); }
-.footer-grid { width: min(1200px, 92%); margin: auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; }
-.footer-grid h3 { color: white; margin-bottom: 10px; }
+.profile-actions { display: flex; gap: 10px; margin-top: 15px; }
+.btn-edit { flex: 1; padding: 12px; border-radius: 10px; background: #101a2d; color: white; border: 1px solid var(--border); font-weight: 600; font-size: 12px; }
+.btn-logout { width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 700; font-size: 12px; margin-top: 10px; }
 
-.bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-content: space-around; align-items: center; padding: 10px 0; }
-.nav-btn { background: none; border: none; color: var(--muted); font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; cursor: pointer; }
-.nav-btn i { font-size: 18px; }
-.nav-btn.active-nav, .nav-btn:hover { color: var(--green); }
+/* Navigation Bar */
+.bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-content: space-around; align-items: center; padding: 8px 0; }
+.nav-btn { background: none; border: none; color: var(--muted); font-size: 9px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 3px; flex: 1; }
+.nav-btn i { font-size: 16px; }
+.nav-btn.active-nav { color: var(--green); }
 
-.fab { position: fixed; right: 22px; bottom: 75px; z-index: 80; width: 58px; height: 58px; border-radius: 50%; background: var(--green); color: #00140a; font-size: 21px; box-shadow: 0 10px 35px rgba(0,230,118,.25); display: grid; place-items: center; cursor: pointer; }
-
-/* Modals System */
+/* Modals */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 15px; }
 .modal.show { display: flex; }
-.modalbox { width: min(550px, 100%); max-height: 90vh; overflow-y: auto; background: #0b1321; border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); }
-.modalhead { padding: 17px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.close { background: #172238; color: white; width: 35px; height: 35px; border-radius: 9px; cursor: pointer; }
-.modalbody { padding: 20px; }
+.modalbox { width: min(500px, 100%); max-height: 85vh; overflow-y: auto; background: #0b1321; border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
+.modalhead { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.close { background: #172238; color: white; width: 30px; height: 30px; border-radius: 8px; }
+.modalbody { padding: 18px; }
 
-.field { margin-bottom: 14px; }
-.field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
-.field input, .field textarea, .field select { width: 100%; padding: 11px 12px; border-radius: 9px; background: #070d18; color: white; border: 1px solid var(--border); outline: 0; }
-.primary { width: 100%; padding: 12px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; font-size: 14px; cursor: pointer; }
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+.field input, .field textarea, .field select { width: 100%; padding: 10px; border-radius: 8px; background: #070d18; color: white; border: 1px solid var(--border); outline: 0; font-size: 12px; }
+.primary { width: 100%; padding: 12px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; font-size: 13px; }
 
-.toast { position: fixed; top: 80px; right: 20px; z-index: 200; background: #0d1727; border: 1px solid var(--border); padding: 15px 17px; border-radius: 13px; box-shadow: var(--shadow); display: none; min-width: 250px; }
+.toast { position: fixed; top: 70px; right: 15px; z-index: 200; background: #0d1727; border: 1px solid var(--border); padding: 12px 15px; border-radius: 10px; box-shadow: var(--shadow); display: none; }
 .toast.show { display: block; }
 
 @media(max-width:850px){
   .products { grid-template-columns: repeat(2, 1fr); }
   .hero { grid-template-columns: 1fr; }
   .trust { grid-template-columns: repeat(3, 1fr); }
-  .footer-grid { grid-template-columns: 1fr; }
   .topbar { display: none; }
-}
-
-@media(max-width:520px){
-  header { padding: 10px 4%; flex-wrap: wrap; }
-  .search { order: 3; flex-basis: 100%; }
-  .head-actions { margin-left: auto; }
-  .products { gap: 10px; }
-  .pimg { height: 160px; }
-  .pbody h3 { font-size: 12px; }
-  .price { font-size: 15px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Error Notification Banner -->
-<div id="errorBanner" class="error-banner hidden">
-  <div><i class="fa-solid fa-triangle-exclamation"></i> <span id="errorBannerText">System Alert Notice</span></div>
-  <button class="error-banner-close" onclick="closeErrorBanner()">✕</button>
-</div>
-
-<!-- Top Notification Bar -->
 <div class="topbar">
-  <div><span><i class="fa-solid fa-mobile-screen"></i> SAVE MORE ON APP</span><span><i class="fa-solid fa-store"></i> SELL ON HY STORE</span></div>
-  <div><span><i class="fa-solid fa-headset"></i> HELP & SUPPORT</span><span onclick="switchPage('orders')" style="cursor:pointer"><i class="fa-solid fa-box"></i> MY ORDERS</span></div>
+  <div><span><i class="fa-solid fa-mobile-screen"></i> OFFICIAL STORE APP</span><span><i class="fa-solid fa-store"></i> SELL ON HY STORE</span></div>
+  <div><span onclick="switchPage('orders')" style="cursor:pointer"><i class="fa-solid fa-box"></i> MY ORDERS</span></div>
 </div>
 
-<!-- Application Main Header -->
 <header>
   <div class="logo" onclick="switchPage('home')">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
   <div class="search">
@@ -425,18 +297,18 @@ footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border)
           <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80');">
             <div class="slide-overlay"></div>
             <div class="slide-content">
-              <div class="tag">MEGA SALE</div>
+              <span class="tag">MEGA SALE</span>
               <h1>Shop Smart.<br><span>Live Better.</span></h1>
-              <p>Quality products, easy checkout, Cash on Delivery and WhatsApp support.</p>
+              <p>Premium quality items with fast shipping and Cash on Delivery.</p>
               <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </div>
           <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80');">
             <div class="slide-overlay"></div>
             <div class="slide-content">
-              <div class="tag">AUDIO GEAR</div>
-              <h1>Premium Sound<br><span>Best Deals.</span></h1>
-              <p>Up to 40% OFF on Bluetooth headphones & Speakers.</p>
+              <span class="tag">AUDIO GEAR</span>
+              <h1>Premium Sound.<br><span>Best Deals.</span></h1>
+              <p>Get up to 40% off on premium wireless audio equipment.</p>
               <button class="hero-btn" onclick="switchPage('products')">EXPLORE AUDIO <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </div>
@@ -451,9 +323,9 @@ footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border)
         </div>
       </div>
       <div class="trust">
-        <div class="trust-card"><i class="fa-solid fa-circle-check"></i><b>100% Verified</b><small>Safe Shopping</small></div>
-        <div class="trust-card"><i class="fa-solid fa-truck-fast"></i><b>Cash on Delivery</b><small>Easy Checkout</small></div>
-        <div class="trust-card"><i class="fa-brands fa-whatsapp"></i><b>WhatsApp Help</b><small>24/7 Live Support</small></div>
+        <div class="trust-card"><i class="fa-solid fa-circle-check"></i><b>100% Authentic</b><small>Verified Goods</small></div>
+        <div class="trust-card"><i class="fa-solid fa-truck-fast"></i><b>Cash on Delivery</b><small>Pay Upon Receipt</small></div>
+        <div class="trust-card"><i class="fa-brands fa-whatsapp"></i><b>Live Support</b><small>24/7 Customer Care</small></div>
       </div>
     </div>
 
@@ -464,7 +336,7 @@ footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border)
     <div class="products" id="featuredGrid"></div>
   </section>
 
-  <!-- ================= VIEW 2: PRODUCTS CATALOG ================= -->
+  <!-- ================= VIEW 2: PRODUCTS ================= -->
   <section id="view-products" class="app-view">
     <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
     <div class="categories">
@@ -476,17 +348,17 @@ footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border)
     </div>
     <div class="section-head">
       <h2 id="catHeading">All Products</h2>
-      <span class="muted" id="resultCount">2000+ Items</span>
+      <span style="color:var(--muted);font-size:12px" id="resultCount">2000+ Items Available</span>
     </div>
     <div class="products" id="productGrid"></div>
-    <button class="load" id="loadBtn" onclick="loadMore()">Load More Products</button>
+    <button style="display:block;margin:20px auto;padding:10px 20px;border-radius:10px;background:#122036;color:white;border:1px solid var(--border)" onclick="loadMore()">Load More Products</button>
   </section>
 
-  <!-- ================= VIEW 3: ORDERS & TRACKING ================= -->
+  <!-- ================= VIEW 3: TRACKING ================= -->
   <section id="view-orders" class="app-view">
-    <div class="page-title"><i class="fa-solid fa-box-open"></i> My Orders & Live Tracking</div>
+    <div class="page-title"><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
     <div class="track">
-      <b>Search Order Status</b>
+      <b style="font-size:14px">Search Order Status</b>
       <div class="track-form">
         <input id="trackInput" placeholder="Enter Order ID (e.g. HY1001)">
         <button onclick="trackOrder()"><i class="fa-solid fa-magnifying-glass"></i> Track Status</button>
@@ -495,72 +367,48 @@ footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border)
     <div id="ordersListContainer"></div>
   </section>
 
-  <!-- ================= VIEW 4: LIVE SUPPORT CHAT ================= -->
+  <!-- ================= VIEW 4: SUPPORT CHAT ================= -->
   <section id="view-chats" class="app-view">
     <div class="page-title"><i class="fa-solid fa-headset"></i> Customer Support Center</div>
     <div class="chat-page-card">
       <div class="chat-header">
         <div class="chat-user-info">
-          <div class="avatar" style="width:40px;height:40px;font-size:14px">HY</div>
+          <div class="chat-avatar">HY</div>
           <div>
-            <b>HY STORE Live Support</b>
-            <small>● Online Assistant</small>
+            <b style="font-size:14px;display:block">HY STORE Support</b>
+            <small style="color:var(--green);font-size:10px">● Online Assistant</small>
           </div>
         </div>
-        <a href="https://wa.me/923209306672" target="_blank" class="wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/923209306672" target="_blank" style="background:#25d366;color:#000;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
       </div>
       
       <div class="messages-box" id="pageChatBox">
         <div class="msg bot">
           <div class="mini-avatar">HY</div>
-          <div class="bubble">Assalam-o-Alaikum! Main HY STORE Assistant hoon. Aap kis hawale se madad chahte hain?</div>
+          <div class="bubble">Welcome to HY STORE Support! How can I assist you today?</div>
         </div>
       </div>
 
       <div class="quick-options">
-        <button class="quick-btn" onclick="sendQuickChat('Order kesy karon?')">📦 Order Guide</button>
-        <button class="quick-btn" onclick="sendQuickChat('Order Status check krna ha')">🔍 Track Order</button>
-        <button class="quick-btn" onclick="sendQuickChat('Payment Methods konsy hain?')">💳 Payment Info</button>
-        <button class="quick-btn" onclick="sendQuickChat('Direct WhatsApp Contact')">💬 Direct WhatsApp</button>
+        <button class="quick-btn" onclick="sendQuickChat('How to place an order?')">📦 Order Guide</button>
+        <button class="quick-btn" onclick="sendQuickChat('How can I track my order?')">🔍 Track Order</button>
+        <button class="quick-btn" onclick="sendQuickChat('What payment options are available?')">💳 Payment Methods</button>
       </div>
 
       <div class="chat-input-area">
-        <input id="pageChatInput" placeholder="Type message here..." onkeydown="if(event.key==='Enter') sendPageChat()">
+        <input id="pageChatInput" placeholder="Type your message here..." onkeydown="if(event.key==='Enter') sendPageChat()">
         <button onclick="sendPageChat()"><i class="fa-solid fa-paper-plane"></i></button>
       </div>
     </div>
   </section>
 
-  <!-- ================= VIEW 5: USER PROFILE ================= -->
+  <!-- ================= VIEW 5: USER PROFILE & LOGOUT ================= -->
   <section id="view-profile" class="app-view">
-    <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Settings</div>
+    <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Profile</div>
     <div id="profileContainer"></div>
   </section>
 
 </main>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <h3>HY STORE</h3>
-      <p>Official online store with easy ordering, order tracking, fast delivery and WhatsApp support.</p>
-    </div>
-    <div>
-      <h3>Quick Navigation</h3>
-      <p style="line-height:2"><span onclick="switchPage('products')" style="cursor:pointer">Product Catalog</span><br>
-      <span onclick="switchPage('orders')" style="cursor:pointer">Track Order</span><br>
-      <span onclick="switchPage('chats')" style="cursor:pointer">Help & Support</span></p>
-    </div>
-    <div>
-      <h3>Contact Us</h3>
-      <p>Location: KING ROAD MANDI BAHAUDDIN<br>WhatsApp: +92 320 9306672</p>
-    </div>
-  </div>
-</footer>
-
-<!-- Floating Action Button -->
-<button class="fab" onclick="switchPage('chats')"><i class="fa-solid fa-headset"></i></button>
 
 <!-- Bottom Navigation Bar -->
 <nav class="bottomnav">
@@ -586,48 +434,35 @@ footer { margin-top: 50px; padding: 35px 5%; border-top: 1px solid var(--border)
 <div class="modal" id="checkoutModal">
   <div class="modalbox">
     <div class="modalhead">
-      <b><i class="fa-solid fa-credit-card"></i> Complete Checkout</b>
+      <b><i class="fa-solid fa-credit-card"></i> Checkout Order</b>
       <button class="close" onclick="closeModal('checkoutModal')">×</button>
     </div>
     <div class="modalbody">
       <form id="checkoutForm">
         <div class="field"><label>Full Name</label><input id="cName" required placeholder="Enter full name"></div>
         <div class="field"><label>Phone Number</label><input id="cPhone" required placeholder="03XXXXXXXXX"></div>
-        <div class="field"><label>Delivery Address</label><textarea id="cAddress" rows="3" required placeholder="Full shipping address"></textarea></div>
+        <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
         <div class="field">
-          <label>Payment Method</label>
+          <label>Payment Option</label>
           <select id="cPayment">
             <option>Cash on Delivery (COD)</option>
             <option>JazzCash / EasyPaisa</option>
           </select>
         </div>
-        <div class="field"><label>Total Order Price</label><input id="cTotal" readonly style="color:var(--green);font-weight:700"></div>
+        <div class="field"><label>Total Amount</label><input id="cTotal" readonly style="color:var(--green);font-weight:700"></div>
         <button class="primary" type="submit">PLACE ORDER NOW</button>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Product Detail Modal -->
-<div class="modal" id="productModal">
-  <div class="modalbox">
-    <div class="modalhead">
-      <b><i class="fa-solid fa-circle-info"></i> Product Details</b>
-      <button class="close" onclick="closeModal('productModal')">×</button>
-    </div>
-    <div class="modalbody" id="productModalBody"></div>
-  </div>
-</div>
-
-<!-- Toast Popup Notification -->
-<div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:12px;color:var(--muted)"></span></div>
+<!-- Toast Box -->
+<div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-// Backend Google App Script Endpoint
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-1PjDgW6Lc3usyHhmE6XHDu4cctBbPF60xHuCEVcCkjmCeMZXuG_nsuHBq8pf3Q-Q/exec";
 const WHATSAPP = "923209306672";
 
-/* Switch Single Page App Views */
 function switchPage(pageId) {
   document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active-view'));
   document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active-nav'));
@@ -644,7 +479,7 @@ function switchPage(pageId) {
   if (pageId === 'profile') renderProfilePage();
 }
 
-/* Banner Slider Controls */
+/* Hero Banner Controls */
 let currentSlide = 0;
 function updateSlider() {
   const slidesContainer = document.getElementById("heroSlides");
@@ -656,10 +491,9 @@ function updateSlider() {
 function nextSlide() { currentSlide = (currentSlide + 1) % 2; updateSlider(); }
 function prevSlide() { currentSlide = (currentSlide - 1 + 2) % 2; updateSlider(); }
 function setSlide(i) { currentSlide = i; updateSlider(); }
-
 setInterval(nextSlide, 5000);
 
-/* Product Database Generation (2000+ Items) */
+/* Product Catalog Generator */
 const baseProducts = [
   { name:"Fast Charging Power Bank 20000mAh", cat:"Accessories", price:2499, old:3200, img:"https://images.unsplash.com/photo-1609592424690-5e2c7b1f4c4e?auto=format&fit=crop&w=800&q=85", desc:"High capacity fast charging battery bank with dual USB ports." },
   { name:"Wireless Noise Cancelling Headphones", cat:"Audio", price:4999, old:6200, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85", desc:"Crystal clear bass sound with active noise reduction technology." },
@@ -670,20 +504,16 @@ const baseProducts = [
 const products = [];
 for(let i=0; i<2000; i++){
   const b = baseProducts[i % baseProducts.length];
-  products.push({ 
-    ...b, 
-    id: i+1, 
-    name: i < 4 ? b.name : b.name + " — Edition #" + (i+1) 
-  });
+  products.push({ ...b, id: i+1, name: i < 4 ? b.name : b.name + " - Series #" + (i+1) });
 }
 
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || JSON.stringify({ name: "Hy Business", phone: "03478306672", email: "hybusiness@store.com", address: "KING ROAD MANDI BAHAUDDIN" }));
+let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || JSON.stringify({ name: "M.ibrahim Sajid", phone: "03478306672", email: "m.ibrahimsajid830@gmail.com", address: "Pakistan Punjab Mandi Bahauddin King Road Chowk Near Nadra Office Amazon Printing Private Limited" }));
 
 function fallbackImage(name){
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/><text x="400" y="300" fill="#00e676" font-size="30" text-anchor="middle" font-family="Arial">${name.slice(0,25)}</text></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/><text x="400" y="300" fill="#00e676" font-size="28" text-anchor="middle" font-family="Arial">${name.slice(0,20)}</text></svg>`;
   return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
 }
 
@@ -694,12 +524,12 @@ function renderProducts(){
 
   const productHTML = (p) => `
     <article class="product">
-      <div class="pimg" onclick="openProductDetail(${p.id})">
+      <div class="pimg">
         <img src="${p.img}" onerror="this.src=fallbackImage('${p.name.replace(/'/g,"")}')">
         <span class="tag">${p.cat}</span>
       </div>
       <div class="pbody">
-        <h3 onclick="openProductDetail(${p.id})" style="cursor:pointer">${p.name}</h3>
+        <h3>${p.name}</h3>
         <div><span class="price">Rs. ${p.price.toLocaleString()}</span><span class="old">Rs. ${p.old.toLocaleString()}</span></div>
         <div class="pactions">
           <button class="cartbtn" onclick="addCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
@@ -712,7 +542,7 @@ function renderProducts(){
   if(featGrid) featGrid.innerHTML = products.slice(0, 8).map(productHTML).join("");
   
   const countLabel = document.getElementById("resultCount");
-  if(countLabel) countLabel.textContent = `${list.length} shown / ${products.length} items`;
+  if(countLabel) countLabel.textContent = `${list.length} shown / ${products.length} Items`;
 }
 
 function filterCategory(cat,el){
@@ -731,26 +561,7 @@ function searchProducts(){
 
 function loadMore(){ shown+=24; renderProducts(); }
 
-function openProductDetail(id){
-  const p = products.find(x => x.id === id);
-  if(!p) return;
-  
-  document.getElementById("productModalBody").innerHTML = `
-    <div style="text-align:center;margin-bottom:15px">
-      <img src="${p.img}" onerror="this.src=fallbackImage('${p.name}')" style="width:100%;max-height:250px;object-fit:cover;border-radius:12px">
-    </div>
-    <h2 style="font-size:18px;margin-bottom:8px">${p.name}</h2>
-    <div style="margin-bottom:12px"><span class="price">Rs. ${p.price.toLocaleString()}</span><span class="old">Rs. ${p.old.toLocaleString()}</span></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:20px">${p.desc || "High quality official product available with Cash on Delivery."}</p>
-    <div style="display:flex;gap:10px">
-      <button class="primary" onclick="closeModal('productModal'); buyNow(${p.id})">BUY NOW</button>
-      <button style="background:#101a2d;color:white;padding:12px;border-radius:10px;font-weight:600" onclick="addCart(${p.id})">ADD TO CART</button>
-    </div>
-  `;
-  showModal("productModal");
-}
-
-/* Shopping Cart Functions */
+/* Cart Functions */
 function addCart(id){
   const p = products.find(x => x.id === id);
   cart.push(p); saveCart();
@@ -763,25 +574,24 @@ function saveCart(){
 }
 
 function cartTotal(){ return cart.reduce((s,p)=>s+p.price,0); }
-
 function showModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
 function openCart(){
   const body = document.getElementById("cartBody");
-  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Cart is empty.</div>`; showModal("cartModal"); return; }
+  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is currently empty.</div>`; showModal("cartModal"); return; }
   
   body.innerHTML = cart.map((p,i)=>`
     <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
       <div style="flex:1">
-        <b style="font-size:13px">${p.name}</b>
-        <div class="price" style="font-size:14px">Rs. ${p.price.toLocaleString()}</div>
+        <b style="font-size:12px">${p.name}</b>
+        <div class="price" style="font-size:13px">Rs. ${p.price.toLocaleString()}</div>
       </div>
       <button class="close" onclick="removeCart(${i})">×</button>
     </div>
   `).join("") + `
     <div style="padding-top:15px">
-      <div style="display:flex;justify-space-between;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
         <b>Total Amount:</b>
         <b style="color:var(--green)">Rs. ${cartTotal().toLocaleString()}</b>
       </div>
@@ -804,7 +614,7 @@ function openCheckout(){
   showModal("checkoutModal");
 }
 
-/* Support Page Chat Functionality */
+/* Support Chat Engine (100% English) */
 function sendPageChat(){
   const input = document.getElementById("pageChatInput");
   const msg = input.value.trim();
@@ -812,13 +622,12 @@ function sendPageChat(){
 
   appendMsg("user", msg);
   input.value = "";
-
-  setTimeout(() => { autoBotReply(msg); }, 700);
+  setTimeout(() => { autoBotReply(msg); }, 600);
 }
 
 function sendQuickChat(msg){
   appendMsg("user", msg);
-  setTimeout(() => { autoBotReply(msg); }, 700);
+  setTimeout(() => { autoBotReply(msg); }, 600);
 }
 
 function appendMsg(sender, text){
@@ -836,16 +645,14 @@ function appendMsg(sender, text){
 
 function autoBotReply(msg){
   const q = msg.toLowerCase();
-  if(q.includes('order') && q.includes('guide')) {
-    appendMsg("bot", "Order karne ke liye product ke sath <b>Buy Now</b> par click karein aur apna address submit karein.");
+  if(q.includes('order') && (q.includes('place') || q.includes('how') || q.includes('guide'))) {
+    appendMsg("bot", "To place an order, select any product, click <b>Buy Now</b>, fill in your delivery details, and confirm the order.");
   } else if(q.includes('track') || q.includes('status')) {
-    appendMsg("bot", "Apna order track karne ke liye niche <b>ORDERS</b> tab par click karein aur Order ID search karein.");
-  } else if(q.includes('payment')) {
-    appendMsg("bot", "Hum <b>Cash on Delivery (COD)</b>, EasyPaisa aur JazzCash accept karte hain.");
-  } else if(q.includes('whatsapp') || q.includes('contact')) {
-    appendMsg("bot", "Aap direct WhatsApp support par bhi contact kar sakte hain: <a href='https://wa.me/923209306672' target='_blank' style='color:#00e676'>+92 320 9306672</a>");
+    appendMsg("bot", "You can track your order status by clicking the <b>ORDERS</b> tab at the bottom and entering your Order ID.");
+  } else if(q.includes('payment') || q.includes('pay')) {
+    appendMsg("bot", "We support <b>Cash on Delivery (COD)</b>, EasyPaisa, and JazzCash payment options.");
   } else {
-    appendMsg("bot", "Aap ka message receive ho gaya hai. Support team jald aap se rabta kare gi.");
+    appendMsg("bot", "Thank you for reaching out! Our support agent will assist you shortly. For immediate response, click the WhatsApp button above.");
   }
 }
 
@@ -868,22 +675,22 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
 
   try {
     await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
-    const msg = `Assalam-o-Alaikum! HY STORE Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal: Rs. ${payload.price}`;
+    const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal Price: Rs. ${payload.price}`;
     cart=[]; saveCart(); closeModal("checkoutModal");
-    toast("Order Placed", `Order ID: ${orderId}`);
+    toast("Order Submitted", `Order ID #${orderId} generated.`);
     switchPage('orders');
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
   } catch(err) {
-    toast("Order Sent", "Order details sent via WhatsApp");
+    toast("Order Placed", "Sending order via WhatsApp...");
   }
 });
 
-/* Order Status Tracking Renderer */
+/* Order Status Tracker */
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
-  if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in your history.</div>`; return; }
+  if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
   
-  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching live order updates...</div>`;
+  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching live order status...</div>`;
   let cardsHtml = "";
   
   for(let id of userOrders){
@@ -891,9 +698,9 @@ async function renderOrdersPage(){
       const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
       const data = await response.json();
       if(data.result === "success") cardsHtml += buildOrderCard(data);
-      else cardsHtml += `<div class="order-card"><b>Order #${id}</b><br><span class="status pending">PENDING VERIFICATION</span></div>`;
+      else cardsHtml += `<div class="order-card"><div class="order-header"><b>Order #${id}</b><span class="status pending">PENDING</span></div></div>`;
     } catch(e) {
-      cardsHtml += `<div class="order-card"><b>Order #${id}</b><br><span class="status pending">SUBMITTED</span></div>`;
+      cardsHtml += `<div class="order-card"><div class="order-header"><b>Order #${id}</b><span class="status pending">SUBMITTED</span></div></div>`;
     }
   }
   box.innerHTML = cardsHtml;
@@ -916,57 +723,59 @@ function buildOrderCard(d){
       </div>
       <div class="order-grid-info">
         <div><span>Customer:</span> <b>${d.name}</b></div>
-        <div><span>Product:</span> <b>${d.product}</b></div>
-        <div><span>Payment:</span> <b>${d.payment || 'COD'}</b></div>
-        <div><span>Total Price:</span> <b style="color:var(--green)">Rs. ${d.price}</b></div>
-      </div>
-      <div class="timeline-container">
-        <div class="timeline-title">Live Delivery Progress</div>
-        <div class="timeline">
-          <div class="timeline-progress" style="width: 25%;"></div>
-          <div class="step active"><div class="dot"><i class="fa-solid fa-receipt"></i></div>Order</div>
-          <div class="step"><div class="dot"><i class="fa-solid fa-box"></i></div>Packed</div>
-          <div class="step"><div class="dot"><i class="fa-solid fa-truck"></i></div>Shipped</div>
-          <div class="step"><div class="dot"><i class="fa-solid fa-house-chimney"></i></div>Delivered</div>
-        </div>
+        <div><span>Payment Method:</span> <b>${d.payment || 'COD'}</b></div>
+        <div style="grid-column: span 2"><span>Products:</span> <b>${d.product}</b></div>
+        <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price}</b></div>
       </div>
     </div>`;
 }
 
-/* User Account Section Renderer */
+/* User Profile with Logout System */
 function renderProfilePage(){
   document.getElementById("profileContainer").innerHTML = `
     <div class="account-card">
       <div class="account">
         <div class="avatar">${currentUser.name ? currentUser.name.charAt(0) : "U"}</div>
         <div>
-          <b style="font-size:18px">${currentUser.name}</b>
-          <small style="color:var(--green);display:block">Verified Member</small>
+          <b style="font-size:16px">${currentUser.name}</b>
+          <small style="color:var(--green);display:block">Verified Customer Account</small>
         </div>
       </div>
       <div class="stats">
         <div class="stat"><b>${userOrders.length}</b><span>Total Orders</span></div>
-        <div class="stat"><b>0</b><span>In Wishlist</span></div>
+        <div class="stat"><b>0</b><span>Wishlist</span></div>
         <div class="stat"><b>0</b><span>Reviews</span></div>
       </div>
       <div class="account-details">
         <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone}</span></div>
         <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address}</span></div>
+        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Shipping Address:</b> ${currentUser.address}</span></div>
       </div>
-      <button class="primary" style="background:#101a2d;color:white" onclick="editProfile()">EDIT PROFILE DETAILS</button>
+      <div class="profile-actions">
+        <button class="btn-edit" onclick="editProfile()">EDIT PROFILE</button>
+      </div>
+      <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
     </div>`;
 }
 
 function editProfile(){
-  const name = prompt("Enter Name:", currentUser.name);
-  const phone = prompt("Enter Phone:", currentUser.phone);
+  const name = prompt("Enter Full Name:", currentUser.name);
+  const phone = prompt("Enter Phone Number:", currentUser.phone);
   const address = prompt("Enter Address:", currentUser.address);
   if(name && phone && address){
     currentUser = { ...currentUser, name, phone, address };
     localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
     renderProfilePage();
-    toast("Profile Updated", "Your details have been saved.");
+    toast("Profile Saved", "Account details updated successfully.");
+  }
+}
+
+function logoutUser(){
+  if(confirm("Are you sure you want to log out?")){
+    localStorage.removeItem("hy_user_session");
+    currentUser = { name: "Guest User", phone: "Not provided", email: "guest@store.com", address: "Not provided" };
+    renderProfilePage();
+    toast("Logged Out", "You have been logged out.");
   }
 }
 
@@ -975,14 +784,9 @@ function toast(title, text){
   document.getElementById("toastTitle").textContent = title;
   document.getElementById("toastText").textContent = text;
   t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"), 3000);
+  setTimeout(()=>t.classList.remove("show"), 2500);
 }
 
-function closeErrorBanner(){
-  document.getElementById("errorBanner").classList.add("hidden");
-}
-
-// Initial Booting Calls
 renderProducts();
 saveCart();
 </script>
