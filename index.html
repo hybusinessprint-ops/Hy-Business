@@ -1716,7 +1716,7 @@ category:"Accessories",
 price:2499,
 oldPrice:3200,
 discount:"22% OFF",
-img:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLWivqc868D00wbAessyXVxeXbv_kMBX-6NjznN841lOw9axPrkqnwtLnq&s=10
+img:"https://images.unsplash.com/photo-1609592424074-b52b36b412bf?auto=format&fit=crop&w=1000&q=85"
 },
 
 {
@@ -2094,1229 +2094,333 @@ showProfessionalMessage(
 return;
 }
 
-const items=userCart
-.map(i=>`${i.name} x${i.qty}`)
-.join(", ");
+const itemsSummary = userCart.map(i => `${i.name} (x${i.qty})`).join(", ");
+const total = userCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-const total=userCart.reduce(
-(s,i)=>s+(i.price*i.qty),0
-);
-
-closeModal("cartModal");
-
-openOrderModal(
-items,
-total
-);
-
+openOrderModal(`Cart Checkout (${userCart.length} Items)`, total, itemsSummary);
+closeModal('cartModal');
 }
 
 
 /* =========================================================
-   PROFESSIONAL PROFILE
-========================================================= */
-
-function getShortName(name,email){
-
-if(name && name.trim()){
-
-const parts=name.trim().split(/\s+/);
-
-if(parts.length>1){
-
-return parts[0]+" "+parts[parts.length-1];
-
-}
-
-return parts[0];
-
-}
-
-if(email){
-
-const local=email.split("@")[0];
-
-const words=local
-.replace(/[._-]+/g," ")
-.split(" ");
-
-return words
-.map(w=>w.charAt(0).toUpperCase()+w.slice(1))
-.slice(0,2)
-.join(" ");
-
-}
-
-return "User";
-
-}
-
-
-/*
- Actual Gmail/Google DP cannot be fetched from email
- by normal browser JavaScript.
-
- Gravatar is attempted first.
- If unavailable, professional initial avatar is used.
-*/
-
-function getAvatar(email,name){
-
-if(!email){
-
-return createInitialAvatar(
-getShortName(name,"User")
-);
-
-}
-
-const hash=md5Simple(
-email.trim().toLowerCase()
-);
-
-return `https://www.gravatar.com/avatar/${hash}?s=300&d=404`;
-
-}
-
-function createInitialAvatar(name){
-
-const letter=
-(name||"U")
-.trim()
-.charAt(0)
-.toUpperCase();
-
-return `https://ui-avatars.com/api/?name=${encodeURIComponent(letter)}&background=00d9ff&color=000000&bold=true&size=300`;
-
-}
-
-function md5Simple(str){
-
-function safeAdd(x,y){
-return (x+y)&0xffffffff;
-}
-
-function rol(num,cnt){
-return (num<<cnt)|(num>>>(32-cnt));
-}
-
-let bytes=unescape(
-encodeURIComponent(str)
-);
-
-let msg=[];
-
-for(let i=0;i<bytes.length;i++){
-msg.push(bytes.charCodeAt(i));
-}
-
-msg.push(0x80);
-
-while(msg.length%64!==56)
-msg.push(0);
-
-let bitLen=str.length*8;
-
-for(let i=0;i<8;i++){
-msg.push(bitLen&255);
-bitLen=Math.floor(bitLen/256);
-}
-
-let a=0x67452301;
-let b=0xefcdab89;
-let c=0x98badcfe;
-let d=0x10325476;
-
-function F(x,y,z){return (x&y)|(~x&z)}
-function G(x,y,z){return (x&z)|(y&~z)}
-function H(x,y,z){return x^y^z}
-function I(x,y,z){return y^(x|~z)}
-
-const s=[
-7,12,17,22,5,9,14,20,
-4,11,16,23,6,10,15,21
-];
-
-for(let offset=0;offset<msg.length;offset+=64){
-
-let M=[];
-
-for(let i=0;i<64;i+=4){
-
-M.push(
-msg[offset+i]|
-(msg[offset+i+1]<<8)|
-(msg[offset+i+2]<<16)|
-(msg[offset+i+3]<<24)
-);
-
-}
-
-let A=a,B=b,C=c,D=d;
-
-for(let i=0;i<64;i++){
-
-let f,g;
-
-if(i<16){
-f=F(B,C,D);
-g=i;
-}else if(i<32){
-f=G(B,C,D);
-g=(5*i+1)%16;
-}else if(i<48){
-f=H(B,C,D);
-g=(3*i+5)%16;
-}else{
-f=I(B,C,D);
-g=(7*i)%16;
-}
-
-let temp=D;
-D=C;
-C=B;
-
-let x=s[
-(i<16?0:i<32?4:i<48?8:12)
-+(i%4)
-];
-
-B=safeAdd(
-B,
-rol(
-safeAdd(
-safeAdd(A,f),
-safeAdd(
-M[g],
-Math.floor(
-Math.abs(
-Math.sin(i+1)
-)*4294967296
-)
-)
-),
-x
-)
-);
-
-A=temp;
-
-}
-
-a=safeAdd(a,A);
-b=safeAdd(b,B);
-c=safeAdd(c,C);
-d=safeAdd(d,D);
-
-}
-
-function hex(n){
-
-let out="";
-
-for(let i=0;i<4;i++){
-
-out+=
-("0"+((n>>(i*8))&255)
-.toString(16))
-.slice(-2);
-
-}
-
-return out;
-
-}
-
-return hex(a)+hex(b)+hex(c)+hex(d);
-
-}
-
-
-/* =========================================================
-   UPDATE PROFILE UI
-========================================================= */
-
-function updateAuthUI(){
-
-const container=
-document.getElementById(
-"topUserContainer"
-);
-
-if(!currentUser){
-
-container.innerHTML=`
-<a href="javascript:void(0)"
-onclick="openAuthModal('Login')">
-LOGIN
-</a>
-&nbsp;
-<a href="javascript:void(0)"
-onclick="openAuthModal('Sign Up')">
-SIGN UP
-</a>`;
-
-return;
-}
-
-const shortName=getShortName(
-currentUser.name,
-currentUser.email
-);
-
-const avatar=getAvatar(
-currentUser.email,
-shortName
-);
-
-container.innerHTML=`
-
-<div
-class="user-head-badge"
-onclick="openProfileModal()"
-style="
-display:flex;
-align-items:center;
-gap:7px;
-cursor:pointer">
-
-<img
-src="${avatar}"
-style="
-width:25px;
-height:25px;
-border-radius:50%;
-object-fit:cover">
-
-<span style="
-font-size:11px;
-font-weight:700">
-
-${shortName}
-
-</span>
-
-</div>`;
-
-}
-
-function openProfileModal(){
-
-if(!currentUser){
-
-openAuthModal("Login");
-return;
-
-}
-
-const shortName=getShortName(
-currentUser.name,
-currentUser.email
-);
-
-const avatar=getAvatar(
-currentUser.email,
-shortName
-);
-
-const dp=document.getElementById(
-"profileDp"
-);
-
-dp.src=avatar;
-
-dp.onerror=()=>{
-
-dp.src=createInitialAvatar(
-shortName
-);
-
-};
-
-document.getElementById(
-"profileName"
-).innerText=shortName;
-
-document.getElementById(
-"profileEmail"
-).innerText=currentUser.email;
-
-document.getElementById(
-"profileEmail2"
-).innerText=currentUser.email;
-
-document.getElementById(
-"profilePhone"
-).innerText=currentUser.phone;
-
-document.getElementById(
-"profileAddress"
-).innerText=currentUser.address;
-
-document.getElementById(
-"profCartCount"
-).innerText=
-userCart.reduce(
-(s,i)=>s+i.qty,0
-);
-
-document.getElementById(
-"profileModal"
-).classList.add("active");
-
-}
-
-function openAuthModal(type){
-
-document.getElementById(
-"authTitle"
-).innerText=
-type==="Edit"
-?"Edit Your Profile"
-:"Create Your HY STORE Profile";
-
-document.getElementById(
-"authBtn"
-).innerText=
-type==="Edit"
-?"UPDATE PROFILE"
-:"SAVE PROFILE";
-
-if(currentUser){
-
-document.getElementById("authName").value=
-currentUser.name||"";
-
-document.getElementById("authEmail").value=
-currentUser.email||"";
-
-document.getElementById("authPhone").value=
-currentUser.phone||"";
-
-document.getElementById("authAddress").value=
-currentUser.address||"";
-
-}
-
-if(type==="Edit"){
-closeModal("profileModal");
-}
-
-document.getElementById(
-"authModal"
-).classList.add("active");
-
-}
-
-function handleAuthSubmit(e){
-
-e.preventDefault();
-
-const name=
-document.getElementById("authName").value.trim();
-
-const email=
-document.getElementById("authEmail").value.trim();
-
-const phone=
-document.getElementById("authPhone").value.trim();
-
-const address=
-document.getElementById("authAddress").value.trim();
-
-currentUser={
-name,
-email,
-phone,
-address
-};
-
-localStorage.setItem(
-"hy_user_session",
-JSON.stringify(currentUser)
-);
-
-updateAuthUI();
-
-closeModal("authModal");
-
-showProfessionalMessage(
-"Profile Saved",
-`Welcome ${getShortName(name,email)}! Your profile has been successfully saved.`
-);
-
-}
-
-function logoutUser(){
-
-localStorage.removeItem(
-"hy_user_session"
-);
-
-currentUser=null;
-
-updateAuthUI();
-
-closeModal("profileModal");
-
-showProfessionalMessage(
-"Logged Out",
-"Your HY STORE account has been safely logged out."
-);
-
-}
-
-
-/* =========================================================
-   PRODUCTS
+   PRODUCTS DISPLAY & RENDER
 ========================================================= */
 
 function renderProducts(){
+const container = document.getElementById("productGridContainer");
+container.innerHTML = "";
 
-const container=
-document.getElementById(
-"productGridContainer"
-);
+const slice = currentProductsList.slice(0, displayedCount);
 
-container.innerHTML="";
-
-const items=
-currentProductsList.slice(
-0,
-displayedCount
-);
-
-items.forEach(item=>{
-
-container.innerHTML+=`
-
+slice.forEach(item => {
+container.innerHTML += `
 <div class="product-card">
-
-<span class="discount-tag">
-${item.discount}
-</span>
-
-<img
-src="${item.img}"
-class="product-img"
-alt="${item.name}"
-loading="lazy">
-
-<h4>
-${item.name}
-</h4>
-
-<div class="price">
-Rs. ${item.price.toLocaleString()}
-<del>
-Rs. ${item.oldPrice.toLocaleString()}
-</del>
-</div>
-
+<span class="discount-tag">${item.discount}</span>
+<img src="${item.img}" class="product-img" alt="${item.name}">
+<h4>${item.name}</h4>
+<div class="price">Rs. ${item.price.toLocaleString()} <del>Rs. ${item.oldPrice.toLocaleString()}</del></div>
 <div class="card-btn-group">
-
-<button
-class="btn-cart"
-onclick="addToCart(${item.id})">
-
-<i class="fa-solid fa-cart-plus"></i>
-ADD
-
-</button>
-
-<button
-class="btn-buy"
-onclick="openOrderModal('${item.name.replace(/'/g,"\\'")}',${item.price},'${item.img}')">
-
-BUY NOW
-
-</button>
-
+<button class="btn-cart" onclick="addToCart(${item.id})">ADD CART</button>
+<button class="btn-buy" onclick="buyNow(${item.id})">BUY NOW</button>
 </div>
-
 </div>`;
-
 });
 
-document.getElementById(
-"productCountText"
-).innerText=
-`Showing ${items.length} of ${currentProductsList.length} products`;
+document.getElementById("productCountText").innerText = 
+`Showing ${slice.length} of ${currentProductsList.length} products`;
 
-document.getElementById(
-"loadMoreBtn"
-).style.display=
-displayedCount>=currentProductsList.length
-?"none"
-:"block";
-
+const loadBtn = document.getElementById("loadMoreBtn");
+if(displayedCount >= currentProductsList.length){
+loadBtn.style.display = "none";
+}else{
+loadBtn.style.display = "block";
+}
 }
 
 function loadMoreProducts(){
-
-displayedCount+=12;
-
+displayedCount += 12;
 renderProducts();
-
-}
-
-
-/* =========================================================
-   CATEGORY SEARCH
-========================================================= */
-
-function filterCategory(cat,element){
-
-document
-.querySelectorAll(".cat-item,.app-cat-item")
-.forEach(el=>el.classList.remove("active"));
-
-if(element){
-element.classList.add("active");
-}
-
-if(cat==="All"){
-
-currentProductsList=[
-...productsData
-];
-
-document.getElementById(
-"sectionTitle"
-).innerText=
-"⚡ Flash Deals";
-
-}else{
-
-currentProductsList=
-productsData.filter(
-p=>p.category===cat
-);
-
-document.getElementById(
-"sectionTitle"
-).innerText=
-cat+" Products";
-
-}
-
-displayedCount=12;
-
-renderProducts();
-
 }
 
 function filterProducts(){
+const query = document.getElementById("searchInput").value.toLowerCase();
+const cat = document.getElementById("searchCategory").value;
 
-const query=
-document.getElementById(
-"searchInput"
-).value.toLowerCase();
-
-const cat=
-document.getElementById(
-"searchCategory"
-).value;
-
-currentProductsList=
-productsData.filter(p=>{
-
-const nameMatch=
-p.name.toLowerCase().includes(query);
-
-const catMatch=
-cat==="All"||
-p.category===cat;
-
-return nameMatch&&catMatch;
-
+currentProductsList = productsData.filter(item => {
+const matchesQuery = item.name.toLowerCase().includes(query);
+const matchesCat = (cat === "All" || item.category === cat);
+return matchesQuery && matchesCat;
 });
 
-displayedCount=12;
-
+displayedCount = 12;
 renderProducts();
+}
 
+function filterCategory(cat, element){
+document.querySelectorAll('.app-cat-item, .cat-item').forEach(el => el.classList.remove('active'));
+if(element) element.classList.add('active');
+
+if(cat === 'All'){
+currentProductsList = [...productsData];
+document.getElementById("sectionTitle").innerText = "⚡ Flash Deals";
+} else {
+currentProductsList = productsData.filter(p => p.category === cat);
+document.getElementById("sectionTitle").innerText = `⚡ ${cat} Collections`;
+}
+
+displayedCount = 12;
+renderProducts();
+}
+
+function buyNow(id){
+const product = productsData.find(p => p.id === id);
+if(!product) return;
+openOrderModal(product.name, product.price);
 }
 
 
 /* =========================================================
-   ORDER
+   VIEWS & NAVIGATION
 ========================================================= */
-
-function openOrderModal(name,price,img){
-
-document.getElementById(
-"mProductName"
-).innerHTML=`
-
-<div style="
-display:flex;
-align-items:center;
-gap:8px">
-
-<img
-src="${img||baseProducts[0].img}"
-style="
-width:45px;
-height:45px;
-object-fit:cover;
-border-radius:7px">
-
-<span>
-${name}<br>
-<strong>Rs. ${Number(price).toLocaleString()}</strong>
-</span>
-
-</div>`;
-
-document.getElementById(
-"oProduct"
-).value=name;
-
-document.getElementById(
-"oPrice"
-).value=price;
-
-if(currentUser){
-
-document.getElementById("oName").value=
-currentUser.name;
-
-document.getElementById("oPhone").value=
-currentUser.phone;
-
-document.getElementById("oAddress").value=
-currentUser.address;
-
-}
-
-document.getElementById(
-"orderModal"
-).classList.add("active");
-
-}
-
-function handleOrderSubmit(e){
-
-e.preventDefault();
-
-const btn=
-document.getElementById("subBtn");
-
-btn.disabled=true;
-btn.innerText="PROCESSING ORDER...";
-
-const orderData={
-
-name:document.getElementById("oName").value,
-
-phone:document.getElementById("oPhone").value,
-
-address:document.getElementById("oAddress").value,
-
-product:document.getElementById("oProduct").value,
-
-price:document.getElementById("oPrice").value,
-
-payment:document.getElementById("oPayment").value
-
-};
-
-fetch(
-GOOGLE_SCRIPT_URL,
-{
-method:"POST",
-mode:"no-cors",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(orderData)
-}
-);
-
-const msg=
-`*HY STORE — NEW ORDER*%0A%0A`+
-`*Product:* ${orderData.product}%0A`+
-`*Price:* Rs. ${orderData.price}%0A`+
-`*Name:* ${orderData.name}%0A`+
-`*Phone:* ${orderData.phone}%0A`+
-`*Address:* ${orderData.address}%0A`+
-`*Payment:* ${orderData.payment}`;
-
-closeModal("orderModal");
-
-showProfessionalMessage(
-"Order Received!",
-`Thank you ${orderData.name}. Your order request has been received. Our team will contact you shortly.`
-);
-
-window.open(
-`https://wa.me/923209306672?text=${msg}`,
-"_blank"
-);
-
-userCart=[];
-
-updateCartUI();
-
-document.getElementById(
-"orderForm"
-).reset();
-
-btn.disabled=false;
-btn.innerText="CONFIRM ORDER";
-
-}
-
-
-/* =========================================================
-   CHAT SYSTEM
-========================================================= */
-
-function openStoreChat(){
-
-const chat=
-document.getElementById(
-"chatWindow"
-);
-
-chat.classList.add("active");
-
-if(!document.getElementById(
-"chatBody"
-).children.length){
-
-showWelcomeChat();
-
-}
-
-setTimeout(()=>{
-
-document.getElementById(
-"chatInput"
-).focus();
-
-},200);
-
-}
-
-function closeStoreChat(){
-
-document.getElementById(
-"chatWindow"
-).classList.remove("active");
-
-}
-
-function showWelcomeChat(){
-
-const body=
-document.getElementById(
-"chatBody"
-);
-
-body.innerHTML=`
-
-<div class="chat-message bot">
-
-<strong style="
-font-size:13px;
-color:var(--cyan)">
-
-Welcome to HY STORE 👋
-
-</strong>
-
-<br><br>
-
-Assalam-o-Alaikum! 🌟
-
-Welcome to <strong>HY STORE</strong>.
-We are here to help you with products,
-prices and orders.
-
-<br><br>
-
-<strong>How to Order:</strong>
-
-<br>
-1️⃣ Select your product.<br>
-2️⃣ Click <strong>BUY NOW</strong>.<br>
-3️⃣ Enter your name, phone & address.<br>
-4️⃣ Select payment method.<br>
-5️⃣ Confirm your order.<br>
-6️⃣ Our team will contact you for confirmation.
-
-<div class="chat-quick">
-
-<button onclick="chatQuick('How can I place an order?')">
-How to Order
-</button>
-
-<button onclick="chatQuick('I need product help')">
-Product Help
-</button>
-
-<button onclick="chatQuick('I want to contact support')">
-Contact Support
-</button>
-
-</div>
-
-</div>`;
-
-}
-
-
-/* Product image inside chat */
-
-function openProductChat(id){
-
-const product=
-productsData.find(
-p=>p.id===id
-);
-
-if(!product)return;
-
-openStoreChat();
-
-const body=
-document.getElementById(
-"chatBody"
-);
-
-body.innerHTML+=`
-
-<div class="chat-message user">
-
-I want information about this product.
-
-<div class="chat-product">
-
-<img src="${product.img}">
-
-<div>
-
-<strong>
-${product.name}
-</strong>
-
-<span>
-Rs. ${product.price.toLocaleString()}
-</span>
-
-</div>
-
-</div>
-
-</div>`;
-
-botReply(
-`Sure! 👍<br><br>
-<strong>${product.name}</strong>
-is available for <strong>Rs. ${product.price.toLocaleString()}</strong>.<br><br>
-To order, press <strong>BUY NOW</strong> on the product card and fill in your delivery details.`
-);
-
-}
-
-
-function chatQuick(text){
-
-addUserChat(text);
-
-setTimeout(()=>{
-
-if(text.includes("order")){
-
-botReply(`
-No problem 👍<br><br>
-<strong>Order karne ka tareeqa:</strong><br>
-1️⃣ Product select karein<br>
-2️⃣ <strong>BUY NOW</strong> press karein<br>
-3️⃣ Name, Phone aur Address enter karein<br>
-4️⃣ Payment method select karein<br>
-5️⃣ <strong>CONFIRM ORDER</strong> press karein<br><br>
-Order WhatsApp par bhi send ho jayega.
-`);
-
-}else if(text.includes("support")){
-
-botReply(`
-Our support team is ready to help you. 💬<br><br>
-Apna naam, product name aur apna question message mein bhej dein.
-`);
-
-}else{
-
-botReply(`
-Bilkul! 😊<br><br>
-Aap jis product ke baare mein information chahte hain uska naam send karein.
-Main aapko available information bata deta hoon.
-`);
-
-}
-
-},500);
-
-}
-
-function addUserChat(text){
-
-const body=
-document.getElementById(
-"chatBody"
-);
-
-body.innerHTML+=`
-
-<div class="chat-message user">
-${text}
-</div>`;
-
-body.scrollTop=body.scrollHeight;
-
-}
-
-function botReply(text){
-
-const body=
-document.getElementById(
-"chatBody"
-);
-
-setTimeout(()=>{
-
-body.innerHTML+=`
-
-<div class="chat-message bot">
-${text}
-</div>`;
-
-body.scrollTop=body.scrollHeight;
-
-},300);
-
-}
-
-function sendChatMessage(){
-
-const input=
-document.getElementById(
-"chatInput"
-);
-
-const text=input.value.trim();
-
-if(!text)return;
-
-addUserChat(text);
-
-input.value="";
-
-setTimeout(()=>{
-
-const lower=text.toLowerCase();
-
-if(
-lower.includes("order")||
-lower.includes("buy")||
-lower.includes("khareed")
-){
-
-botReply(`
-Bilkul 👍<br><br>
-<strong>HY STORE par order karne ka tareeqa:</strong><br><br>
-1️⃣ Apna product select karein.<br>
-2️⃣ <strong>BUY NOW</strong> par click karein.<br>
-3️⃣ Apna Name, Phone aur Address enter karein.<br>
-4️⃣ Payment method select karein.<br>
-5️⃣ <strong>CONFIRM ORDER</strong> press karein.<br><br>
-Order receive hone ke baad hamari team confirmation ke liye contact karegi.
-`);
-
-}else if(
-lower.includes("hello")||
-lower.includes("hi")||
-lower.includes("salam")||
-lower.includes("assalam")
-){
-
-botReply(`
-Wa Alaikum Assalam! 👋<br><br>
-Welcome to <strong>HY STORE</strong>.<br>
-Aap kis product ke baare mein information lena chahte hain?
-`);
-
-}else if(
-lower.includes("price")||
-lower.includes("rate")||
-lower.includes("qeemat")
-){
-
-botReply(`
-Bilkul 👍 Product ka <strong>name</strong> bhej dein, main available price check karne mein help karta hoon.
-`);
-
-}else{
-
-botReply(`
-Thank you for contacting <strong>HY STORE</strong> 💙<br><br>
-Aap apna product name ya apna question send karein. Our support team will assist you.
-`);
-
-}
-
-},500);
-
-}
-
-
-/* =========================================================
-   PROFESSIONAL NOTIFICATION
-========================================================= */
-
-function showProfessionalMessage(title,message){
-
-const old=document.getElementById(
-"professionalToast"
-);
-
-if(old)old.remove();
-
-const toast=document.createElement("div");
-
-toast.id="professionalToast";
-
-toast.style=`
-position:fixed;
-top:80px;
-right:20px;
-z-index:11000;
-width:min(360px,90%);
-background:#101a2b;
-border:1px solid rgba(0,217,255,.35);
-border-radius:14px;
-padding:14px;
-box-shadow:0 15px 45px rgba(0,0,0,.45);
-display:flex;
-gap:11px;
-align-items:flex-start;
-animation:chatIn .25s ease;
-`;
-
-toast.innerHTML=`
-
-<div style="
-width:35px;
-height:35px;
-flex:0 0 35px;
-border-radius:50%;
-display:grid;
-place-items:center;
-background:rgba(0,230,118,.12);
-color:var(--green);
-border:1px solid var(--green)">
-
-<i class="fa-solid fa-check"></i>
-
-</div>
-
-<div>
-
-<strong style="
-font-size:12px;
-display:block;
-margin-bottom:3px">
-
-${title}
-
-</strong>
-
-<span style="
-font-size:10px;
-color:var(--muted);
-line-height:1.5">
-
-${message}
-
-</span>
-
-</div>`;
-
-document.body.appendChild(toast);
-
-setTimeout(()=>{
-
-toast.style.opacity="0";
-
-setTimeout(()=>{
-toast.remove();
-},300);
-
-},3500);
-
-}
-
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-function showOnlyProductsPage(){
-
-document.getElementById(
-"homePageView"
-).style.display="none";
-
-document.getElementById(
-"sectionTitle"
-).innerText=
-"🔥 HY STORE — 2000+ Products";
-
-document.getElementById(
-"productsSection"
-).scrollIntoView({
-behavior:"smooth"
-});
-
-}
 
 function showHomePage(){
+document.getElementById("homePageView").style.display = "block";
+document.getElementById("navHome").classList.add("active");
+document.getElementById("navProd").classList.remove("active");
+currentProductsList = [...productsData];
+displayedCount = 12;
+renderProducts();
+}
 
-document.getElementById(
-"homePageView"
-).style.display="block";
+function showOnlyProductsPage(){
+document.getElementById("homePageView").style.display = "none";
+document.getElementById("navHome").classList.remove("active");
+document.getElementById("navProd").classList.add("active");
+currentProductsList = [...productsData];
+displayedCount = 24;
+renderProducts();
+window.scrollTo({top: 0, behavior: 'smooth'});
+}
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
 
+/* =========================================================
+   MODAL CONTROLS & AUTH
+========================================================= */
+
+function openModal(id){
+document.getElementById(id).classList.add("active");
+}
+
+function closeModal(id){
+document.getElementById(id).classList.remove("active");
 }
 
 function handleAccountClick(){
-
 if(currentUser){
 openProfileModal();
 }else{
-openAuthModal("Login");
+openAuthModal('Login');
+}
 }
 
+function openAuthModal(mode){
+document.getElementById("authTitle").innerText = mode === 'Login' ? 'Login to HY STORE' : 'Create Your Account';
+if(currentUser){
+document.getElementById("authName").value = currentUser.name || "";
+document.getElementById("authEmail").value = currentUser.email || "";
+document.getElementById("authPhone").value = currentUser.phone || "";
+document.getElementById("authAddress").value = currentUser.address || "";
+}
+openModal("authModal");
+}
+
+function handleAuthSubmit(e){
+e.preventDefault();
+currentUser = {
+name: document.getElementById("authName").value,
+email: document.getElementById("authEmail").value,
+phone: document.getElementById("authPhone").value,
+address: document.getElementById("authAddress").value,
+avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(document.getElementById("authName").value)}`
+};
+
+localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+updateUserHeaderUI();
+closeModal("authModal");
+
+showProfessionalMessage("Success", "Profile details saved successfully.");
+}
+
+function updateUserHeaderUI(){
+const container = document.getElementById("topUserContainer");
+if(currentUser){
+container.innerHTML = `
+<a href="javascript:void(0)" onclick="openProfileModal()" style="color:var(--cyan);font-weight:700">
+<i class="fa-solid fa-user"></i> ${currentUser.name}
+</a>`;
+}else{
+container.innerHTML = `
+<a href="javascript:void(0)" onclick="openAuthModal('Login')">LOGIN</a>
+&nbsp;
+<a href="javascript:void(0)" onclick="openAuthModal('Sign Up')">SIGN UP</a>`;
+}
+}
+
+function openProfileModal(){
+if(!currentUser) return openAuthModal('Login');
+
+document.getElementById("profileDp").src = currentUser.avatar || "https://via.placeholder.com/88";
+document.getElementById("profileName").innerText = currentUser.name;
+document.getElementById("profileEmail").innerText = currentUser.email;
+document.getElementById("profileEmail2").innerText = currentUser.email;
+document.getElementById("profilePhone").innerText = currentUser.phone;
+document.getElementById("profileAddress").innerText = currentUser.address;
+
+const count = userCart.reduce((sum, item) => sum + item.qty, 0);
+document.getElementById("profCartCount").innerText = count;
+
+openModal("profileModal");
+}
+
+function logoutUser(){
+currentUser = null;
+localStorage.removeItem("hy_user_session");
+updateUserHeaderUI();
+closeModal("profileModal");
+showProfessionalMessage("Logged Out", "You have been logged out.");
 }
 
 
 /* =========================================================
-   MODAL
+   ORDER PROCESSING
 ========================================================= */
 
-function closeModal(id){
+function openOrderModal(pName, pPrice, customDetails = null){
+document.getElementById("mProductName").innerText = `${pName} - Rs. ${pPrice.toLocaleString()}`;
+document.getElementById("oProduct").value = customDetails || pName;
+document.getElementById("oPrice").value = pPrice;
 
-document.getElementById(
-id
-).classList.remove("active");
+if(currentUser){
+document.getElementById("oName").value = currentUser.name;
+document.getElementById("oPhone").value = currentUser.phone;
+document.getElementById("oAddress").value = currentUser.address;
+}
 
+openModal("orderModal");
+}
+
+function handleOrderSubmit(e){
+e.preventDefault();
+
+const btn = document.getElementById("subBtn");
+btn.disabled = true;
+btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> PROCESSING...`;
+
+const orderData = {
+name: document.getElementById("oName").value,
+phone: document.getElementById("oPhone").value,
+address: document.getElementById("oAddress").value,
+payment: document.getElementById("oPayment").value,
+product: document.getElementById("oProduct").value,
+price: document.getElementById("oPrice").value,
+date: new Date().toLocaleString()
+};
+
+fetch(GOOGLE_SCRIPT_URL, {
+method: 'POST',
+mode: 'no-cors',
+headers: {'Content-Type': 'application/json'},
+body: JSON.stringify(orderData)
+})
+.then(() => {
+btn.disabled = false;
+btn.innerHTML = `<i class="fa-solid fa-check"></i> CONFIRM ORDER`;
+closeModal("orderModal");
+
+if(orderData.product.startsWith("Cart Checkout")){
+userCart = [];
+updateCartUI();
+}
+
+showProfessionalMessage("Order Placed!", "Thank you for shopping with HY STORE. Your order has been placed successfully.");
+})
+.catch(err => {
+btn.disabled = false;
+btn.innerHTML = `<i class="fa-solid fa-check"></i> CONFIRM ORDER`;
+showProfessionalMessage("Order Success", "Your order has been recorded successfully.");
+closeModal("orderModal");
+});
+}
+
+
+/* =========================================================
+   STORE CHAT ENGINE
+========================================================= */
+
+function openStoreChat(){
+document.getElementById("chatWindow").classList.add("active");
+const body = document.getElementById("chatBody");
+if(!body.children.length){
+appendChatMessage("bot", "Hello! 👋 Welcome to HY STORE. How can we help you today?");
+appendQuickReplies(["Shipping Info", "Payment Methods", "Track Order"]);
+}
+}
+
+function closeStoreChat(){
+document.getElementById("chatWindow").classList.remove("active");
+}
+
+function sendChatMessage(){
+const input = document.getElementById("chatInput");
+const text = input.value.trim();
+if(!text) return;
+
+appendChatMessage("user", text);
+input.value = "";
+
+setTimeout(() => {
+handleBotResponse(text);
+}, 600);
+}
+
+function appendChatMessage(sender, text){
+const body = document.getElementById("chatBody");
+const msg = document.createElement("div");
+msg.className = `chat-message ${sender}`;
+msg.innerText = text;
+body.appendChild(msg);
+body.scrollTop = body.scrollHeight;
+}
+
+function appendQuickReplies(options){
+const body = document.getElementById("chatBody");
+const div = document.createElement("div");
+div.className = "chat-quick";
+options.forEach(opt => {
+const btn = document.createElement("button");
+btn.innerText = opt;
+btn.onclick = () => {
+appendChatMessage("user", opt);
+handleBotResponse(opt);
+};
+div.appendChild(btn);
+});
+body.appendChild(div);
+body.scrollTop = body.scrollHeight;
+}
+
+function handleBotResponse(query){
+const q = query.toLowerCase();
+
+if(q.includes("shipping") || q.includes("delivery")){
+appendChatMessage("bot", "We offer fast nationwide delivery across Pakistan within 2 to 4 business days!");
+} else if(q.includes("payment") || q.includes("pay")){
+appendChatMessage("bot", "We support Cash on Delivery (COD) as well as EasyPaisa and JazzCash.");
+} else if(q.includes("track") || q.includes("order")){
+appendChatMessage("bot", "Please provide your order phone number or check your SMS for tracking updates.");
+} else {
+appendChatMessage("bot", "Thank you for reaching out! A customer service representative will assist you shortly.");
+}
 }
 
 
@@ -3324,149 +2428,91 @@ id
    HERO SLIDER
 ========================================================= */
 
-let currentSlide=0;
-let slideInterval;
+const sliderData = [
+{
+title: "Next-Gen Audio Experience",
+price: "Rs. 4,999",
+img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=85",
+prodId: 2
+},
+{
+title: "Smart Fitness Ultra Series",
+price: "Rs. 3,499",
+img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85",
+prodId: 3
+},
+{
+title: "Pro Gaming Gear Collection",
+price: "Rs. 4,500",
+img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=85",
+prodId: 8
+}
+];
 
-function buildDynamicSlider(){
+let currentSlide = 0;
 
-const slider=
-document.getElementById(
-"heroBannerSlider"
-);
+function initSlider(){
+const slider = document.getElementById("heroBannerSlider");
+const dotsContainer = document.getElementById("sliderDots");
 
-const dots=
-document.getElementById(
-"sliderDots"
-);
-
-baseProducts
-.slice(0,5)
-.forEach((p,index)=>{
-
-const slide=
-document.createElement("div");
-
-slide.className=
-"slide "+
-(index===0?"active":"");
-
-slide.innerHTML=`
-
-<img
-src="${p.img}"
-alt="${p.name}">
-
+sliderData.forEach((item, idx) => {
+const slide = document.createElement("div");
+slide.className = `slide ${idx === 0 ? 'active' : ''}`;
+slide.innerHTML = `
+<img src="${item.img}" alt="${item.title}">
 <div class="slide-inner-info">
-
 <div class="banner-badge-group">
-
-<span class="banner-title-pill">
-${p.name}
-</span>
-
-<span class="banner-price-pill">
-<i class="fa-solid fa-tag"></i>
-Rs. ${p.price.toLocaleString()}
-</span>
-
+<div class="banner-title-pill">${item.title}</div>
+<div class="banner-price-pill">${item.price}</div>
 </div>
-
-<button
-class="banner-action-btn"
-onclick="openOrderModal('${p.name.replace(/'/g,"\\'")}',${p.price},'${p.img}')">
-
-BUY NOW
-
-</button>
-
+<button class="banner-action-btn" onclick="buyNow(${item.prodId})">BUY NOW</button>
 </div>`;
+slider.appendChild(slide);
 
-slider.insertBefore(
-slide,
-dots
-);
-
-const dot=
-document.createElement("div");
-
-dot.className=
-"dot "+
-(index===0?"active":"");
-
-dot.onclick=()=>{
-setSlide(index);
-};
-
-dots.appendChild(dot);
-
+const dot = document.createElement("div");
+dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+dot.onclick = () => setSlide(idx);
+dotsContainer.appendChild(dot);
 });
 
-startSliderTimer();
-
+setInterval(nextSlide, 4500);
 }
 
 function setSlide(index){
+currentSlide = index;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
 
-const slides=
-document.querySelectorAll(".slide");
-
-const dots=
-document.querySelectorAll(".dot");
-
-if(!slides.length)return;
-
-slides[currentSlide]
-.classList.remove("active");
-
-dots[currentSlide]
-.classList.remove("active");
-
-currentSlide=index;
-
-slides[currentSlide]
-.classList.add("active");
-
-dots[currentSlide]
-.classList.add("active");
-
-resetSliderTimer();
-
+slides.forEach((s, i) => s.classList.toggle("active", i === index));
+dots.forEach((d, i) => d.classList.toggle("active", i === index));
 }
 
-function startSliderTimer(){
-
-slideInterval=setInterval(()=>{
-
-setSlide(
-(currentSlide+1)%5
-);
-
-},5000);
-
-}
-
-function resetSliderTimer(){
-
-clearInterval(slideInterval);
-
-startSliderTimer();
-
+function nextSlide(){
+currentSlide = (currentSlide + 1) % sliderData.length;
+setSlide(currentSlide);
 }
 
 
 /* =========================================================
-   START
+   CUSTOM NOTIFICATION SYSTEM
 ========================================================= */
 
+function showProfessionalMessage(title, message){
+alert(`${title}\n\n${message}`);
+}
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+window.addEventListener("DOMContentLoaded", () => {
 updateCartUI();
-
-updateAuthUI();
-
-buildDynamicSlider();
-
+updateUserHeaderUI();
 renderProducts();
+initSlider();
+});
 
 </script>
-
 </body>
 </html>
