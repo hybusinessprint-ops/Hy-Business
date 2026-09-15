@@ -23,7 +23,6 @@
   --cyan: #00d9ff;
   --red: #ff4d67;
   --yellow: #ffd54a;
-  --blue: #4da3ff;
   --border: rgba(255,255,255,.09);
   --shadow: 0 18px 50px rgba(0,0,0,.35);
 }
@@ -55,6 +54,7 @@ button { cursor: pointer; border: 0; outline: none; }
 .topbar span { margin-right: 18px; }
 .topbar i { color: var(--green); margin-right: 5px; }
 
+/* Clean Mobile Header */
 header {
   position: sticky;
   top: 0;
@@ -65,27 +65,34 @@ header {
   padding: 12px 4%;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
 }
 
-.logo { font-size: 22px; font-weight: 800; letter-spacing: .5px; white-space: nowrap; cursor: pointer; }
+.logo { font-size: 20px; font-weight: 800; letter-spacing: .5px; cursor: pointer; }
 .logo b { color: var(--green); }
 .logo small { display: block; font-size: 8px; letter-spacing: 2px; color: var(--muted); font-weight: 500; }
 
+.head-actions { display: flex; gap: 8px; }
+.iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
+.badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
+
+/* Dedicated Full-Width Search Bar Row */
+.search-wrapper {
+  padding: 10px 4% 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .search {
-  flex: 1;
   display: flex;
   background: #0b1220;
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-.search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 10px 12px; font-size: 13px; width: 100%; }
-.search button { background: var(--green); color: #00140a; padding: 0 14px; font-size: 14px; }
-
-.head-actions { display: flex; gap: 6px; }
-.iconbtn { width: 40px; height: 40px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 15px; }
-.badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
+.search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 12px 14px; font-size: 13px; width: 100%; }
+.search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; }
 
 .container { width: min(1200px, 92%); margin: auto; padding-top: 15px; }
 
@@ -178,7 +185,7 @@ header {
 .buy { background: var(--green); color: #00140a; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
-/* Responsive Track Order Form */
+/* Track Order Form */
 .track { margin: 15px 0 25px; padding: 20px; border-radius: 16px; background: #0d192c; border: 1px solid var(--border); }
 .track-form { display: flex; gap: 8px; width: 100%; margin-top: 12px; }
 .track-form input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: 0; font-size: 13px; }
@@ -243,7 +250,7 @@ header {
 .nav-btn.active-nav { color: var(--green); }
 
 /* Modals */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 15px; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 15px; }
 .modal.show { display: flex; }
 .modalbox { width: min(500px, 100%); max-height: 85vh; overflow-y: auto; background: #0b1321; border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
 .modalhead { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
@@ -276,10 +283,6 @@ header {
 
 <header>
   <div class="logo" onclick="switchPage('home')">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
-  <div class="search">
-    <input id="searchInput" placeholder="Search 2000+ products..." onkeydown="if(event.key==='Enter')searchProducts()">
-    <button onclick="searchProducts()"><i class="fa-solid fa-search"></i></button>
-  </div>
   <div class="head-actions">
     <button class="iconbtn" onclick="switchPage('orders')"><i class="fa-solid fa-box"></i></button>
     <button class="iconbtn" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i></button>
@@ -287,9 +290,17 @@ header {
   </div>
 </header>
 
+<!-- Dedicated Mobile Search Row -->
+<div class="search-wrapper">
+  <div class="search">
+    <input id="searchInput" placeholder="Search 2000+ products..." onkeydown="if(event.key==='Enter')searchProducts()">
+    <button onclick="searchProducts()"><i class="fa-solid fa-search"></i></button>
+  </div>
+</div>
+
 <main class="container">
 
-  <!-- ================= VIEW 1: HOME ================= -->
+  <!-- VIEW 1: HOME -->
   <section id="view-home" class="app-view active-view">
     <div class="hero">
       <div class="hero-slider">
@@ -336,7 +347,7 @@ header {
     <div class="products" id="featuredGrid"></div>
   </section>
 
-  <!-- ================= VIEW 2: PRODUCTS ================= -->
+  <!-- VIEW 2: PRODUCTS -->
   <section id="view-products" class="app-view">
     <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
     <div class="categories">
@@ -354,7 +365,7 @@ header {
     <button style="display:block;margin:20px auto;padding:10px 20px;border-radius:10px;background:#122036;color:white;border:1px solid var(--border)" onclick="loadMore()">Load More Products</button>
   </section>
 
-  <!-- ================= VIEW 3: TRACKING ================= -->
+  <!-- VIEW 3: TRACKING -->
   <section id="view-orders" class="app-view">
     <div class="page-title"><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
     <div class="track">
@@ -367,7 +378,7 @@ header {
     <div id="ordersListContainer"></div>
   </section>
 
-  <!-- ================= VIEW 4: SUPPORT CHAT ================= -->
+  <!-- VIEW 4: SUPPORT CHAT -->
   <section id="view-chats" class="app-view">
     <div class="page-title"><i class="fa-solid fa-headset"></i> Customer Support Center</div>
     <div class="chat-page-card">
@@ -402,7 +413,7 @@ header {
     </div>
   </section>
 
-  <!-- ================= VIEW 5: USER PROFILE & LOGOUT ================= -->
+  <!-- VIEW 5: USER PROFILE & LOGOUT -->
   <section id="view-profile" class="app-view">
     <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Profile</div>
     <div id="profileContainer"></div>
@@ -451,6 +462,25 @@ header {
         </div>
         <div class="field"><label>Total Amount</label><input id="cTotal" readonly style="color:var(--green);font-weight:700"></div>
         <button class="primary" type="submit">PLACE ORDER NOW</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Professional Edit Profile Modal -->
+<div class="modal" id="editProfileModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <b><i class="fa-solid fa-user-pen"></i> Edit Profile Details</b>
+      <button class="close" onclick="closeModal('editProfileModal')">×</button>
+    </div>
+    <div class="modalbody">
+      <form id="editProfileForm">
+        <div class="field"><label>Full Name</label><input id="epName" required placeholder="Enter your full name"></div>
+        <div class="field"><label>Phone Number</label><input id="epPhone" required placeholder="03XXXXXXXXX"></div>
+        <div class="field"><label>Email Address</label><input id="epEmail" type="email" required placeholder="your.email@example.com"></div>
+        <div class="field"><label>Shipping Address</label><textarea id="epAddress" rows="3" required placeholder="Full shipping address"></textarea></div>
+        <button class="primary" type="submit" style="margin-top:8px">SAVE CHANGES</button>
       </form>
     </div>
   </div>
@@ -614,7 +644,7 @@ function openCheckout(){
   showModal("checkoutModal");
 }
 
-/* Support Chat Engine (100% English) */
+/* Support Chat Engine */
 function sendPageChat(){
   const input = document.getElementById("pageChatInput");
   const msg = input.value.trim();
@@ -730,7 +760,7 @@ function buildOrderCard(d){
     </div>`;
 }
 
-/* User Profile with Logout System */
+/* User Profile with Custom Modal Edit System */
 function renderProfilePage(){
   document.getElementById("profileContainer").innerHTML = `
     <div class="account-card">
@@ -749,26 +779,35 @@ function renderProfilePage(){
       <div class="account-details">
         <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone}</span></div>
         <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Shipping Address:</b> ${currentUser.address}</span></div>
+        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address}</span></div>
       </div>
       <div class="profile-actions">
-        <button class="btn-edit" onclick="editProfile()">EDIT PROFILE</button>
+        <button class="btn-edit" onclick="openEditProfileModal()"><i class="fa-solid fa-pen-to-square"></i> EDIT PROFILE</button>
       </div>
       <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
     </div>`;
 }
 
-function editProfile(){
-  const name = prompt("Enter Full Name:", currentUser.name);
-  const phone = prompt("Enter Phone Number:", currentUser.phone);
-  const address = prompt("Enter Address:", currentUser.address);
-  if(name && phone && address){
-    currentUser = { ...currentUser, name, phone, address };
-    localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-    renderProfilePage();
-    toast("Profile Saved", "Account details updated successfully.");
-  }
+function openEditProfileModal(){
+  document.getElementById("epName").value = currentUser.name || "";
+  document.getElementById("epPhone").value = currentUser.phone || "";
+  document.getElementById("epEmail").value = currentUser.email || "";
+  document.getElementById("epAddress").value = currentUser.address || "";
+  showModal("editProfileModal");
 }
+
+document.getElementById("editProfileForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  currentUser.name = document.getElementById("epName").value.trim();
+  currentUser.phone = document.getElementById("epPhone").value.trim();
+  currentUser.email = document.getElementById("epEmail").value.trim();
+  currentUser.address = document.getElementById("epAddress").value.trim();
+  
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  closeModal("editProfileModal");
+  renderProfilePage();
+  toast("Profile Updated", "Your profile details have been saved.");
+});
 
 function logoutUser(){
   if(confirm("Are you sure you want to log out?")){
