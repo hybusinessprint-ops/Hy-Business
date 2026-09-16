@@ -1,4 +1,4 @@
-A<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -41,7 +41,6 @@ body {
 button, input, textarea, select { font-family: inherit; }
 button { cursor: pointer; border: 0; outline: none; }
 
-/* Top Notification Bar */
 .topbar {
   background: #05070b;
   border-bottom: 1px solid var(--border);
@@ -54,7 +53,6 @@ button { cursor: pointer; border: 0; outline: none; }
 .topbar span { margin-right: 18px; }
 .topbar i { color: var(--green); margin-right: 5px; }
 
-/* Header */
 header {
   position: sticky;
   top: 0;
@@ -76,26 +74,12 @@ header {
 .iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
-/* Search Bar */
-.search-wrapper {
-  padding: 10px 4% 0;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.search {
-  display: flex;
-  background: #0b1220;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  width: 100%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
+.search-wrapper { padding: 10px 4% 0; max-width: 1200px; margin: 0 auto; }
+.search { display: flex; background: #0b1220; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 .search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 12px 14px; font-size: 13px; width: 100%; }
 .search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; }
 
 .container { width: min(1200px, 92%); margin: auto; padding-top: 15px; }
-
 .app-view { display: none; animation: fadeIn 0.3s ease-in-out; }
 .app-view.active-view { display: block; }
 
@@ -104,41 +88,14 @@ header {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.page-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 10px;
-}
+.page-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
 .page-title i { color: var(--green); }
 
-/* Hero Banner */
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
-.hero-slider {
-  position: relative;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-  min-height: 280px;
-}
+.hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; }
 .slides { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
-.slide {
-  min-width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  padding: 25px;
-}
-.slide-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.6) 100%);
-}
+.slide { min-width: 100%; position: relative; display: flex; align-items: center; background-size: cover; background-position: center; padding: 25px; }
+.slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.6) 100%); }
 .slide-content { position: relative; z-index: 2; max-width: 480px; }
 .slide-content .tag { display: inline-block; background: rgba(0,230,118,0.2); color: var(--green); border: 1px solid var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
 .slide-content h1 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; word-wrap: break-word; }
@@ -148,7 +105,6 @@ header {
 
 .slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
 .slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
-
 .dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; }
 .dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
 .dot-item.active { background: var(--green); width: 20px; border-radius: 8px; }
@@ -159,7 +115,6 @@ header {
 .trust-card b { display: block; font-size: 13px; }
 .trust-card small { color: var(--muted); font-size: 10px; }
 
-/* Categories */
 .categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 15px; }
 .categories::-webkit-scrollbar { display: none; }
 .cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; }
@@ -168,7 +123,6 @@ header {
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
 .section-head h2 { font-size: 18px; }
 
-/* Product Cards */
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
 .pimg { height: 180px; background: #111827; position: relative; }
@@ -185,7 +139,6 @@ header {
 .buy { background: var(--green); color: #00140a; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
-/* Track Order */
 .track { margin: 15px 0 25px; padding: 20px; border-radius: 16px; background: #0d192c; border: 1px solid var(--border); }
 .track-form { display: flex; gap: 8px; width: 100%; margin-top: 12px; }
 .track-form input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: 0; font-size: 13px; }
@@ -201,54 +154,22 @@ header {
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
 .order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
 
-/* Support Chat */
-.chat-page-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; height: 520px; }
-.chat-header { padding: 12px 16px; background: var(--header-bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.chat-user-info { display: flex; align-items: center; gap: 10px; }
-.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: #00140a; display: grid; place-items: center; font-weight: 800; font-size: 12px; }
-
-.messages-box { flex: 1; padding: 16px; overflow-y: auto; background: #07101c; display: flex; flex-direction: column; gap: 12px; }
-.msg { display: flex; gap: 8px; max-width: 85%; align-items: flex-end; }
-.msg.bot { align-self: flex-start; }
-.msg.user { align-self: flex-end; flex-direction: row-reverse; }
-
-.msg .mini-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: #00140a; display: grid; place-items: center; font-size: 10px; font-weight: 800; flex-shrink: 0; }
-.bubble { padding: 10px 14px; border-radius: 14px; background: var(--msg-bg); font-size: 12px; line-height: 1.4; color: #e2e8f0; }
-.msg.user .bubble { background: var(--green); color: #00140a; font-weight: 500; border-bottom-right-radius: 2px; }
-.msg.bot .bubble { border-bottom-left-radius: 2px; }
-
-.quick-options { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 14px; border-top: 1px solid var(--border); background: rgba(15,26,45,0.5); }
-.quick-btn { padding: 6px 10px; border-radius: 16px; background: var(--msg-bg); color: #dbeafe; font-size: 11px; border: 1px solid var(--border); }
-
-.chat-input-area { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: var(--card); }
-.chat-input-area input { flex: 1; padding: 10px 12px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: none; font-size: 12px; }
-.chat-input-area button { width: 42px; border-radius: 10px; background: var(--green); color: #00140a; font-size: 14px; }
-
-/* Profile View */
 .account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; max-width: 600px; margin: 0 auto; }
 .account { display: flex; align-items: center; gap: 14px; }
 .avatar { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 24px; }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
-.stat { background: #111c31; border-radius: 12px; padding: 12px; text-align: center; border: 1px solid var(--border); }
-.stat b { display: block; font-size: 18px; color: var(--green); }
-.stat span { font-size: 10px; color: var(--muted); }
 
 .account-details { background: #070d18; border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin: 15px 0; }
 .acc-info-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; word-break: break-word; }
 .acc-info-row:last-child { border-bottom: none; }
 .acc-info-row i { color: var(--green); margin-top: 2px; }
 
-.profile-actions { display: flex; gap: 10px; margin-top: 15px; }
-.btn-edit { flex: 1; padding: 12px; border-radius: 10px; background: #101a2d; color: white; border: 1px solid var(--border); font-weight: 600; font-size: 12px; }
 .btn-logout { width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 700; font-size: 12px; margin-top: 10px; }
 
-/* Navigation Bar */
 .bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-content: space-around; align-items: center; padding: 8px 0; }
 .nav-btn { background: none; border: none; color: var(--muted); font-size: 9px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 3px; flex: 1; }
 .nav-btn i { font-size: 16px; }
 .nav-btn.active-nav { color: var(--green); }
 
-/* Modals */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 15px; }
 .modal.show { display: flex; }
 .modalbox { width: min(500px, 100%); max-height: 85vh; overflow-y: auto; background: #0b1321; border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
@@ -276,7 +197,7 @@ header {
 <body>
 
 <div class="topbar">
-  <div><span><i class="fa-solid fa-mobile-screen"></i> OFFICIAL STORE APP</span><span><i class="fa-solid fa-store"></i> SELL ON HY STORE</span></div>
+  <div><span><i class="fa-solid fa-mobile-screen"></i> OFFICIAL STORE APP</span><span><i class="fa-solid fa-store"></i> HY BUSINESS STORE</span></div>
   <div><span onclick="switchPage('orders')" style="cursor:pointer"><i class="fa-solid fa-box"></i> MY ORDERS</span></div>
 </div>
 
@@ -289,7 +210,6 @@ header {
   </div>
 </header>
 
-<!-- Search Row -->
 <div class="search-wrapper">
   <div class="search">
     <input id="searchInput" placeholder="Search products..." onkeydown="if(event.key==='Enter')searchProducts()">
@@ -299,7 +219,7 @@ header {
 
 <main class="container">
 
-  <!-- VIEW 1: HOME -->
+  <!-- HOME VIEW -->
   <section id="view-home" class="app-view active-view">
     <div class="hero">
       <div class="hero-slider">
@@ -346,7 +266,7 @@ header {
     <div class="products" id="featuredGrid"></div>
   </section>
 
-  <!-- VIEW 2: PRODUCTS -->
+  <!-- PRODUCTS VIEW -->
   <section id="view-products" class="app-view">
     <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
     <div class="categories">
@@ -361,10 +281,9 @@ header {
       <span style="color:var(--muted);font-size:12px" id="resultCount">Loading items...</span>
     </div>
     <div class="products" id="productGrid"></div>
-    <button style="display:block;margin:20px auto;padding:10px 20px;border-radius:10px;background:#122036;color:white;border:1px solid var(--border)" onclick="loadMore()">Load More Products</button>
   </section>
 
-  <!-- VIEW 3: TRACKING -->
+  <!-- ORDERS VIEW -->
   <section id="view-orders" class="app-view">
     <div class="page-title"><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
     <div class="track">
@@ -377,42 +296,7 @@ header {
     <div id="ordersListContainer"></div>
   </section>
 
-  <!-- VIEW 4: CHATS -->
-  <section id="view-chats" class="app-view">
-    <div class="page-title"><i class="fa-solid fa-headset"></i> Customer Support Center</div>
-    <div class="chat-page-card">
-      <div class="chat-header">
-        <div class="chat-user-info">
-          <div class="chat-avatar">HY</div>
-          <div>
-            <b style="font-size:14px;display:block">HY STORE Support</b>
-            <small style="color:var(--green);font-size:10px">● Online Assistant</small>
-          </div>
-        </div>
-        <a href="https://wa.me/923209306672" target="_blank" style="background:#25d366;color:#000;padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-      </div>
-      
-      <div class="messages-box" id="pageChatBox">
-        <div class="msg bot">
-          <div class="mini-avatar">HY</div>
-          <div class="bubble">Welcome to HY STORE Support! How can I assist you today?</div>
-        </div>
-      </div>
-
-      <div class="quick-options">
-        <button class="quick-btn" onclick="sendQuickChat('How to place an order?')">📦 Order Guide</button>
-        <button class="quick-btn" onclick="sendQuickChat('How can I track my order?')">🔍 Track Order</button>
-        <button class="quick-btn" onclick="sendQuickChat('What payment options are available?')">💳 Payment Methods</button>
-      </div>
-
-      <div class="chat-input-area">
-        <input id="pageChatInput" placeholder="Type your message here..." onkeydown="if(event.key==='Enter') sendPageChat()">
-        <button onclick="sendPageChat()"><i class="fa-solid fa-paper-plane"></i></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- VIEW 5: PROFILE -->
+  <!-- PROFILE VIEW -->
   <section id="view-profile" class="app-view">
     <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Profile</div>
     <div id="profileContainer"></div>
@@ -420,12 +304,10 @@ header {
 
 </main>
 
-<!-- Bottom Nav -->
 <nav class="bottomnav">
   <button class="nav-btn active-nav" id="nav-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>HOME</span></button>
   <button class="nav-btn" id="nav-products" onclick="switchPage('products')"><i class="fa-solid fa-bag-shopping"></i><span>PRODUCTS</span></button>
   <button class="nav-btn" id="nav-orders" onclick="switchPage('orders')"><i class="fa-solid fa-box-open"></i><span>ORDERS</span></button>
-  <button class="nav-btn" id="nav-chats" onclick="switchPage('chats')"><i class="fa-solid fa-comments"></i><span>CHATS</span></button>
   <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
 </nav>
 
@@ -465,48 +347,11 @@ header {
   </div>
 </div>
 
-<div class="modal" id="editProfileModal">
-  <div class="modalbox">
-    <div class="modalhead">
-      <b><i class="fa-solid fa-user-pen"></i> Edit Profile Details</b>
-      <button class="close" onclick="closeModal('editProfileModal')">×</button>
-    </div>
-    <div class="modalbody">
-      <form id="editProfileForm">
-        <div class="field"><label>Full Name</label><input id="epName" required placeholder="Enter your full name"></div>
-        <div class="field"><label>Phone Number</label><input id="epPhone" required placeholder="03XXXXXXXXX"></div>
-        <div class="field"><label>Email Address</label><input id="epEmail" type="email" required placeholder="your.email@example.com"></div>
-        <div class="field"><label>Shipping Address</label><textarea id="epAddress" rows="3" required placeholder="Full shipping address"></textarea></div>
-        <button class="primary" type="submit" style="margin-top:8px">SAVE CHANGES</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Custom Delete Order Modal Popup -->
-<div class="modal" id="deleteConfirmModal">
-  <div class="modalbox" style="max-width: 400px; text-align: center;">
-    <div class="modalhead">
-      <b><i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> Confirm Delete</b>
-      <button class="close" onclick="closeModal('deleteConfirmModal')">×</button>
-    </div>
-    <div class="modalbody" style="padding: 25px 20px;">
-      <p id="deleteModalText" style="font-size: 13px; color: var(--text); margin-bottom: 20px;">
-        Are you sure you want to remove this order from history and database?
-      </p>
-      <div style="display: flex; gap: 10px;">
-        <button onclick="closeModal('deleteConfirmModal')" style="flex: 1; padding: 10px; border-radius: 8px; background: #172238; color: white;">Cancel</button>
-        <button id="confirmDeleteBtn" style="flex: 1; padding: 10px; border-radius: 8px; background: var(--red); color: white; font-weight: 700;">Delete Order</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-// NEW Google Apps Script Web App URL Updated
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEhsvM4rmE_7ZrRHAGTzPN04Nwg_wMjVHrXKKmX113JpGkoyAYZ2eLCWjCqujovNzV/exec";
+// YOUR LATEST UPDATED GOOGLE APPS SCRIPT URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTwVGbiGgoUnn-mNkGnS8uwVblGyehRXcfg_4kIAsF79HNZFM4bPKkuLQneJc_sHIU/exec";
 const WHATSAPP = "923209306672";
 
 function switchPage(pageId) {
@@ -525,7 +370,6 @@ function switchPage(pageId) {
   if (pageId === 'profile') renderProfilePage();
 }
 
-/* Hero Controls */
 let currentSlide = 0;
 function updateSlider() {
   const slidesContainer = document.getElementById("heroSlides");
@@ -540,19 +384,16 @@ function setSlide(i) { currentSlide = i; updateSlider(); }
 setInterval(nextSlide, 5000);
 
 let products = [];
-let shown = 24, activeCat = "All", searchTerm = "";
+let activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
-
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
-/* Fetch Live Products from Google Sheet */
 async function fetchSheetProducts() {
   const grid = document.getElementById("productGrid");
   const featGrid = document.getElementById("featuredGrid");
   
-  if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading products from Google Sheet...</div>`;
-  if(featGrid) featGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading products...</div>`;
+  if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
 
   try {
     const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
@@ -561,11 +402,10 @@ async function fetchSheetProducts() {
       products = data.products;
       renderProducts();
     } else {
-      showEmptyState("No products found in Google Sheet. Please add data to your Sheet.");
+      showEmptyState("No products found in Google Sheet.");
     }
   } catch(e) {
-    console.log("Error loading products from Google Sheet:", e);
-    showEmptyState("Failed to load products. Please check Web App URL permissions.");
+    showEmptyState("Failed to load products. Check connection or script permissions.");
   }
 }
 
@@ -577,26 +417,18 @@ function showEmptyState(msg) {
   if(featGrid) featGrid.innerHTML = html;
 }
 
-function fallbackImage(imgElement){
-  imgElement.onerror = null;
-  imgElement.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/></svg>');
-}
-
 function renderProducts(){
   const grid = document.getElementById("productGrid");
   const featGrid = document.getElementById("featuredGrid");
   
-  if(products.length === 0) {
-    showEmptyState("No products available.");
-    return;
-  }
+  if(products.length === 0) return;
 
-  let list = products.filter(p => (activeCat==="All" || p.cat===activeCat) && p.name.toLowerCase().includes(searchTerm.toLowerCase())).slice(0,shown);
+  let list = products.filter(p => (activeCat==="All" || String(p.cat).toLowerCase()===activeCat.toLowerCase()) && String(p.name).toLowerCase().includes(searchTerm.toLowerCase()));
 
   const productHTML = (p) => `
     <article class="product">
       <div class="pimg">
-        <img src="${p.img}" onerror="fallbackImage(this)">
+        <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500'">
         <span class="tag">${p.cat || 'General'}</span>
       </div>
       <div class="pbody">
@@ -613,11 +445,11 @@ function renderProducts(){
   if(featGrid) featGrid.innerHTML = products.slice(0, 8).map(productHTML).join("");
   
   const countLabel = document.getElementById("resultCount");
-  if(countLabel) countLabel.textContent = `${list.length} shown / ${products.length} Items`;
+  if(countLabel) countLabel.textContent = `${list.length} Items`;
 }
 
 function filterCategory(cat,el){
-  activeCat=cat; shown=24;
+  activeCat=cat;
   document.querySelectorAll(".cat").forEach(x => x.classList.remove("active"));
   if(el) el.classList.add("active");
   document.getElementById("catHeading").textContent = cat + " Products";
@@ -630,9 +462,6 @@ function searchProducts(){
   renderProducts();
 }
 
-function loadMore(){ shown+=24; renderProducts(); }
-
-/* Cart Functions */
 function addCart(id){
   const p = products.find(x => x.id == id);
   if(p) {
@@ -652,7 +481,7 @@ function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
 function openCart(){
   const body = document.getElementById("cartBody");
-  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is currently empty.</div>`; showModal("cartModal"); return; }
+  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is empty.</div>`; showModal("cartModal"); return; }
   
   body.innerHTML = cart.map((p,i)=>`
     <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
@@ -690,49 +519,7 @@ function openCheckout(){
   showModal("checkoutModal");
 }
 
-/* Support Chat Engine */
-function sendPageChat(){
-  const input = document.getElementById("pageChatInput");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  appendMsg("user", msg);
-  input.value = "";
-  setTimeout(() => { autoBotReply(msg); }, 600);
-}
-
-function sendQuickChat(msg){
-  appendMsg("user", msg);
-  setTimeout(() => { autoBotReply(msg); }, 600);
-}
-
-function appendMsg(sender, text){
-  const box = document.getElementById("pageChatBox");
-  const isUser = sender === "user";
-  const html = `
-    <div class="msg ${isUser ? 'user' : 'bot'}">
-      ${!isUser ? '<div class="mini-avatar">HY</div>' : ''}
-      <div class="bubble">${text}</div>
-    </div>
-  `;
-  box.insertAdjacentHTML("beforeend", html);
-  box.scrollTop = box.scrollHeight;
-}
-
-function autoBotReply(msg){
-  const q = msg.toLowerCase();
-  if(q.includes('order') && (q.includes('place') || q.includes('how') || q.includes('guide'))) {
-    appendMsg("bot", "To place an order, select any product, click <b>Buy Now</b>, fill in your delivery details, and confirm the order.");
-  } else if(q.includes('track') || q.includes('status')) {
-    appendMsg("bot", "You can track your order status by clicking the <b>ORDERS</b> tab at the bottom and entering your Order ID.");
-  } else if(q.includes('payment') || q.includes('pay')) {
-    appendMsg("bot", "We support <b>Cash on Delivery (COD)</b>, EasyPaisa, and JazzCash payment options.");
-  } else {
-    appendMsg("bot", "Thank you for reaching out! Our support agent will assist you shortly. For immediate response, click the WhatsApp button above.");
-  }
-}
-
-/* Order Submission Engine */
+// ORDER SUBMISSION TO GOOGLE SHEET
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
   e.preventDefault();
   const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
@@ -753,20 +540,19 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
     await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
     const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal Price: Rs. ${payload.price}`;
     cart=[]; saveCart(); closeModal("checkoutModal");
-    toast("Order Submitted", `Order ID #${orderId} generated successfully.`);
+    toast("Order Submitted", `Order ID #${orderId} generated & saved to Sheet.`);
     switchPage('orders');
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
   } catch(err) {
-    toast("Order Placed", "Sending order details via WhatsApp...");
+    toast("Order Placed", "Order details processed.");
   }
 });
 
-/* Order Status Tracker & Deletion */
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
   if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
   
-  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching live order status...</div>`;
+  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...</div>`;
   let cardsHtml = "";
   
   for(let id of userOrders){
@@ -795,14 +581,9 @@ function trackOrder(){
 function buildOrderCard(d){
   const st = String(d.status || "PENDING").toUpperCase();
   return `
-    <div class="order-card" id="order-card-${d.orderId}">
+    <div class="order-card">
       <div class="order-header">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <b>Order #${d.orderId}</b>
-          <button onclick="deleteOrder('${d.orderId}')" style="background:rgba(255,77,103,0.15); color:var(--red); border:1px solid rgba(255,77,103,0.3); padding:4px 8px; border-radius:6px; font-size:11px;" title="Delete Order">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
+        <b>Order #${d.orderId}</b>
         <span class="status pending">${st}</span>
       </div>
       <div class="order-grid-info">
@@ -814,58 +595,17 @@ function buildOrderCard(d){
     </div>`;
 }
 
-// Delete Order
-let pendingDeleteOrderId = null;
-
-function deleteOrder(orderId) {
-  pendingDeleteOrderId = orderId;
-  document.getElementById("deleteModalText").innerText = `Are you sure you want to remove Order #${orderId} from history and Google Sheet?`;
-  
-  document.getElementById("confirmDeleteBtn").onclick = async function() {
-    try {
-      await fetch(`${GOOGLE_SCRIPT_URL}?action=deleteOrder&orderId=${encodeURIComponent(pendingDeleteOrderId)}`, { mode: "no-cors" });
-    } catch(e) {
-      console.log("Sheet deletion error:", e);
-    }
-
-    userOrders = userOrders.filter(id => id !== pendingDeleteOrderId);
-    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-    
-    closeModal('deleteConfirmModal');
-    renderOrdersPage();
-    toast("Order Removed", `Order #${pendingDeleteOrderId} has been permanently deleted.`);
-    pendingDeleteOrderId = null;
-  };
-
-  showModal('deleteConfirmModal');
-}
-
-/* User Authentication & Profile View */
 function renderProfilePage(){
   const container = document.getElementById("profileContainer");
-  
   if (!currentUser) {
     container.innerHTML = `
       <div class="account-card">
-        <h3 style="text-align:center; margin-bottom: 15px; color: var(--green);"><i class="fa-solid fa-user-lock"></i> Account Access</h3>
-        <p style="text-align:center; font-size: 12px; color: var(--muted); margin-bottom: 20px;">Please enter your details to login or register your account.</p>
+        <h3 style="text-align:center; margin-bottom: 15px; color: var(--green);">Account Access</h3>
         <form id="loginForm">
-          <div class="field">
-            <label>Full Name</label>
-            <input id="lName" required placeholder="Enter full name">
-          </div>
-          <div class="field">
-            <label>Phone Number</label>
-            <input id="lPhone" required placeholder="03XXXXXXXXX">
-          </div>
-          <div class="field">
-            <label>Email Address</label>
-            <input id="lEmail" type="email" required placeholder="your.email@example.com">
-          </div>
-          <div class="field">
-            <label>Shipping Address</label>
-            <textarea id="lAddress" rows="3" required placeholder="Full delivery address"></textarea>
-          </div>
+          <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
+          <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="your.email@example.com"></div>
+          <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Full delivery address"></textarea></div>
           <button class="primary" type="submit" style="margin-top: 10px;">LOGIN / CREATE ACCOUNT</button>
         </form>
       </div>`;
@@ -882,62 +622,27 @@ function renderProfilePage(){
       toast("Welcome!", "Logged in successfully.");
       renderProfilePage();
     });
-
   } else {
     container.innerHTML = `
       <div class="account-card">
         <div class="account">
           <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U"}</div>
-          <div>
-            <b style="font-size:16px">${currentUser.name}</b>
-            <small style="color:var(--green);display:block">Verified Customer Account</small>
-          </div>
+          <div><b style="font-size:16px">${currentUser.name}</b></div>
         </div>
-        <div class="stats">
-          <div class="stat"><b>${userOrders.length}</b><span>Total Orders</span></div>
-          <div class="stat"><b>0</b><span>Wishlist</span></div>
-          <div class="stat"><b>0</b><span>Reviews</span></div>
-        </div>
-        <div class="account-details">
+        <div class="account-details" style="margin-top:15px">
           <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone}</span></div>
           <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email}</span></div>
           <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address}</span></div>
-        </div>
-        <div class="profile-actions">
-          <button class="btn-edit" onclick="openEditProfileModal()"><i class="fa-solid fa-pen-to-square"></i> EDIT PROFILE</button>
         </div>
         <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
       </div>`;
   }
 }
 
-function openEditProfileModal(){
-  if(!currentUser) return;
-  document.getElementById("epName").value = currentUser.name || "";
-  document.getElementById("epPhone").value = currentUser.phone || "";
-  document.getElementById("epEmail").value = currentUser.email || "";
-  document.getElementById("epAddress").value = currentUser.address || "";
-  showModal("editProfileModal");
-}
-
-document.getElementById("editProfileForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  currentUser.name = document.getElementById("epName").value.trim();
-  currentUser.phone = document.getElementById("epPhone").value.trim();
-  currentUser.email = document.getElementById("epEmail").value.trim();
-  currentUser.address = document.getElementById("epAddress").value.trim();
-  
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  closeModal("editProfileModal");
-  renderProfilePage();
-  toast("Profile Updated", "Your profile details have been saved successfully.");
-});
-
 function logoutUser(){
   localStorage.removeItem("hy_user_session");
   currentUser = null;
   renderProfilePage();
-  toast("Logged Out", "You have been logged out successfully.");
 }
 
 function toast(title, text){
