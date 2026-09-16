@@ -486,7 +486,7 @@ header {
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-// Updated Google Apps Script Web App URL
+// Google Apps Script Web App URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0aYdCw5G9MGUWVHAYK0VPkTVdyCGz_V-uW92aEUIoI7deR30lC2wmwmIL7NWI_iZN/exec";
 const WHATSAPP = "923209306672";
 
@@ -520,7 +520,7 @@ function prevSlide() { currentSlide = (currentSlide - 1 + 2) % 2; updateSlider()
 function setSlide(i) { currentSlide = i; updateSlider(); }
 setInterval(nextSlide, 5000);
 
-/* Local Backup Products (if Google Sheet is loading or empty) */
+/* Local Backup Products */
 const fallbackProducts = [
   { id: 1, name:"Fast Charging Power Bank 20000mAh", cat:"Accessories", price:2499, old:3200, img:"https://images.unsplash.com/photo-1609592424690-5e2c7b1f4c4e?auto=format&fit=crop&w=800&q=85", desc:"High capacity fast charging battery bank with dual USB ports." },
   { id: 2, name:"Wireless Noise Cancelling Headphones", cat:"Audio", price:4999, old:6200, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85", desc:"Crystal clear bass sound with active noise reduction technology." },
@@ -726,7 +726,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
   }
 });
 
-/* Order Status Tracker */
+/* Order Status Tracker & Deletion */
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
   if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
@@ -738,10 +738,13 @@ async function renderOrdersPage(){
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
       const data = await response.json();
-      if(data.result === "success") cardsHtml += buildOrderCard(data);
-      else cardsHtml += `<div class="order-card"><div class="order-header"><b>Order #${id}</b><span class="status pending">PENDING</span></div></div>`;
+      if(data.result === "success") {
+        cardsHtml += buildOrderCard(data);
+      } else {
+        cardsHtml += buildOrderCard({ orderId: id, status: "SUBMITTED" });
+      }
     } catch(e) {
-      cardsHtml += `<div class="order-card"><div class="order-header"><b>Order #${id}</b><span class="status pending">SUBMITTED</span></div></div>`;
+      cardsHtml += buildOrderCard({ orderId: id, status: "PENDING" });
     }
   }
   box.innerHTML = cardsHtml;
@@ -757,18 +760,32 @@ function trackOrder(){
 function buildOrderCard(d){
   const st = String(d.status || "PENDING").toUpperCase();
   return `
-    <div class="order-card">
+    <div class="order-card" id="order-card-${d.orderId}">
       <div class="order-header">
-        <b>Order #${d.orderId}</b>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <b>Order #${d.orderId}</b>
+          <button onclick="deleteOrder('${d.orderId}')" style="background:rgba(255,77,103,0.15); color:var(--red); border:1px solid rgba(255,77,103,0.3); padding:4px 8px; border-radius:6px; font-size:11px;" title="Delete Order">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
         <span class="status pending">${st}</span>
       </div>
       <div class="order-grid-info">
-        <div><span>Customer:</span> <b>${d.name}</b></div>
+        <div><span>Customer:</span> <b>${d.name || 'N/A'}</b></div>
         <div><span>Payment Method:</span> <b>${d.payment || 'COD'}</b></div>
-        <div style="grid-column: span 2"><span>Products:</span> <b>${d.product}</b></div>
-        <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price}</b></div>
+        <div style="grid-column: span 2"><span>Products:</span> <b>${d.product || 'N/A'}</b></div>
+        <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price || 0}</b></div>
       </div>
     </div>`;
+}
+
+function deleteOrder(orderId) {
+  if (confirm(`Kya aap Order #${orderId} ko history se delete karna chahte hain?`)) {
+    userOrders = userOrders.filter(id => id !== orderId);
+    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+    renderOrdersPage();
+    toast("Order Deleted", `Order #${orderId} remove ho gaya hai.`);
+  }
 }
 
 /* User Profile System */
@@ -839,7 +856,7 @@ function toast(title, text){
 
 renderProducts();
 saveCart();
-fetchSheetProducts(); // Sync live Google Sheet products
+fetchSheetProducts();
 </script>
 
 </body>
