@@ -492,7 +492,7 @@ header {
     </div>
     <div class="modalbody" style="padding: 25px 20px;">
       <p id="deleteModalText" style="font-size: 13px; color: var(--text); margin-bottom: 20px;">
-        Are you sure you want to remove this order from history?
+        Are you sure you want to remove this order from history and database?
       </p>
       <div style="display: flex; gap: 10px;">
         <button onclick="closeModal('deleteConfirmModal')" style="flex: 1; padding: 10px; border-radius: 8px; background: #172238; color: white;">Cancel</button>
@@ -505,8 +505,8 @@ header {
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-// Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0aYdCw5G9MGUWVHAYK0VPkTVdyCGz_V-uW92aEUIoI7deR30lC2wmwmIL7NWI_iZN/exec";
+// NEW Google Apps Script Web App URL Updated
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywq2AylN2OsdOwFnh3z1PQH8O_CdpaFNiKV2KAtHHn8-IqT3jaLckSLY60KoplEFVX/exec";
 const WHATSAPP = "923209306672";
 
 function switchPage(pageId) {
@@ -747,7 +747,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
   }
 });
 
-/* Order Status Tracker & Custom Deletion */
+/* Order Status Tracker & Deletion */
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
   if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
@@ -800,19 +800,28 @@ function buildOrderCard(d){
     </div>`;
 }
 
-// Custom Styled Delete Action
+// Delete Order from LocalStorage AND Google Sheet
 let pendingDeleteOrderId = null;
 
 function deleteOrder(orderId) {
   pendingDeleteOrderId = orderId;
-  document.getElementById("deleteModalText").innerText = `Are you sure you want to remove Order #${orderId} from your order history?`;
+  document.getElementById("deleteModalText").innerText = `Are you sure you want to remove Order #${orderId} from history and Google Sheet?`;
   
-  document.getElementById("confirmDeleteBtn").onclick = function() {
+  document.getElementById("confirmDeleteBtn").onclick = async function() {
+    // 1. Send delete request to Google Sheet
+    try {
+      await fetch(`${GOOGLE_SCRIPT_URL}?action=deleteOrder&orderId=${encodeURIComponent(pendingDeleteOrderId)}`, { mode: "no-cors" });
+    } catch(e) {
+      console.log("Sheet deletion error:", e);
+    }
+
+    // 2. Remove from LocalStorage
     userOrders = userOrders.filter(id => id !== pendingDeleteOrderId);
     localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+    
     closeModal('deleteConfirmModal');
     renderOrdersPage();
-    toast("Order Removed", `Order #${pendingDeleteOrderId} has been removed from history.`);
+    toast("Order Removed", `Order #${pendingDeleteOrderId} has been permanently deleted.`);
     pendingDeleteOrderId = null;
   };
 
