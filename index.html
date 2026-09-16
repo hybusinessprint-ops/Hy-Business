@@ -54,7 +54,7 @@ button { cursor: pointer; border: 0; outline: none; }
 .topbar span { margin-right: 18px; }
 .topbar i { color: var(--green); margin-right: 5px; }
 
-/* Clean Mobile Header */
+/* Header */
 header {
   position: sticky;
   top: 0;
@@ -76,7 +76,7 @@ header {
 .iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
-/* Search Bar Row */
+/* Search Bar */
 .search-wrapper {
   padding: 10px 4% 0;
   max-width: 1200px;
@@ -116,7 +116,7 @@ header {
 }
 .page-title i { color: var(--green); }
 
-/* Responsive Hero Banner */
+/* Hero Banner */
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider {
   position: relative;
@@ -168,7 +168,7 @@ header {
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
 .section-head h2 { font-size: 18px; }
 
-/* Product Cards Grid */
+/* Product Cards */
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
 .pimg { height: 180px; background: #111827; position: relative; }
@@ -539,15 +539,8 @@ function prevSlide() { currentSlide = (currentSlide - 1 + 2) % 2; updateSlider()
 function setSlide(i) { currentSlide = i; updateSlider(); }
 setInterval(nextSlide, 5000);
 
-/* Local Backup Products */
-const fallbackProducts = [
-  { id: 1, name:"Fast Charging Power Bank 20000mAh", cat:"Accessories", price:2499, old:3200, img:"https://images.unsplash.com/photo-1609592424690-5e2c7b1f4c4e?auto=format&fit=crop&w=800&q=85", desc:"High capacity fast charging battery bank with dual USB ports." },
-  { id: 2, name:"Wireless Noise Cancelling Headphones", cat:"Audio", price:4999, old:6200, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85", desc:"Crystal clear bass sound with active noise reduction technology." },
-  { id: 3, name:"Smart Fitness Watch Ultra Series", cat:"Watches", price:3499, old:4500, img:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=85", desc:"Heart rate tracker, sleep monitor, and full touch display." },
-  { id: 4, name:"Gaming RGB Over-Ear Headset", cat:"Gaming", price:3999, old:4800, img:"https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=800&q=85", desc:"Surround sound gaming headset with omnidirectional mic." }
-];
-
-let products = [...fallbackProducts];
+// Array starts empty (No Demo Items)
+let products = [];
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
@@ -557,40 +550,64 @@ let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
 /* Fetch Live Products from Google Sheet */
 async function fetchSheetProducts() {
+  const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
+  
+  if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading products from Google Sheet...</div>`;
+  if(featGrid) featGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading products...</div>`;
+
   try {
     const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
     const data = await res.json();
     if(data.result === "success" && data.products && data.products.length > 0) {
       products = data.products;
       renderProducts();
+    } else {
+      showEmptyState("No products found in Google Sheet.");
     }
   } catch(e) {
-    console.log("Using local products fallback.");
+    console.log("Error loading products from Google Sheet:", e);
+    showEmptyState("Failed to load products. Please check Google Script connection.");
   }
 }
 
-function fallbackImage(name){
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/><text x="400" y="300" fill="#00e676" font-size="28" text-anchor="middle" font-family="Arial">${name.slice(0,20)}</text></svg>`;
-  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+function showEmptyState(msg) {
+  const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
+  const html = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">${msg}</div>`;
+  if(grid) grid.innerHTML = html;
+  if(featGrid) featGrid.innerHTML = html;
+}
+
+// Clean Dark Placeholder for missing images
+function fallbackImage(imgElement){
+  imgElement.onerror = null;
+  imgElement.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/></svg>');
 }
 
 function renderProducts(){
   const grid = document.getElementById("productGrid");
   const featGrid = document.getElementById("featuredGrid");
+  
+  if(products.length === 0) {
+    showEmptyState("No products available.");
+    return;
+  }
+
   let list = products.filter(p => (activeCat==="All" || p.cat===activeCat) && p.name.toLowerCase().includes(searchTerm.toLowerCase())).slice(0,shown);
 
   const productHTML = (p) => `
     <article class="product">
       <div class="pimg">
-        <img src="${p.img}" onerror="this.src=fallbackImage('${p.name.replace(/'/g,"")}')">
-        <span class="tag">${p.cat}</span>
+        <img src="${p.img}" onerror="fallbackImage(this)">
+        <span class="tag">${p.cat || 'General'}</span>
       </div>
       <div class="pbody">
         <h3>${p.name}</h3>
-        <div><span class="price">Rs. ${p.price.toLocaleString()}</span><span class="old">Rs. ${p.old.toLocaleString()}</span></div>
+        <div><span class="price">Rs. ${Number(p.price || 0).toLocaleString()}</span>${p.old ? `<span class="old">Rs. ${Number(p.old).toLocaleString()}</span>` : ''}</div>
         <div class="pactions">
-          <button class="cartbtn" onclick="addCart(${p.id})"><i class="fa-solid fa-cart-plus"></i></button>
-          <button class="buy" onclick="buyNow(${p.id})">Buy Now</button>
+          <button class="cartbtn" onclick="addCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i></button>
+          <button class="buy" onclick="buyNow('${p.id}')">Buy Now</button>
         </div>
       </div>
     </article>`;
@@ -632,7 +649,7 @@ function saveCart(){
   document.getElementById("cartCount").textContent = cart.length;
 }
 
-function cartTotal(){ return cart.reduce((s,p)=>s+p.price,0); }
+function cartTotal(){ return cart.reduce((s,p)=>s+Number(p.price || 0),0); }
 function showModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
@@ -644,7 +661,7 @@ function openCart(){
     <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
       <div style="flex:1">
         <b style="font-size:12px">${p.name}</b>
-        <div class="price" style="font-size:13px">Rs. ${p.price.toLocaleString()}</div>
+        <div class="price" style="font-size:13px">Rs. ${Number(p.price || 0).toLocaleString()}</div>
       </div>
       <button class="close" onclick="removeCart(${i})">×</button>
     </div>
@@ -800,7 +817,7 @@ function buildOrderCard(d){
     </div>`;
 }
 
-// Delete Order from LocalStorage AND Google Sheet
+// Delete Order
 let pendingDeleteOrderId = null;
 
 function deleteOrder(orderId) {
@@ -808,14 +825,12 @@ function deleteOrder(orderId) {
   document.getElementById("deleteModalText").innerText = `Are you sure you want to remove Order #${orderId} from history and Google Sheet?`;
   
   document.getElementById("confirmDeleteBtn").onclick = async function() {
-    // 1. Send delete request to Google Sheet
     try {
       await fetch(`${GOOGLE_SCRIPT_URL}?action=deleteOrder&orderId=${encodeURIComponent(pendingDeleteOrderId)}`, { mode: "no-cors" });
     } catch(e) {
       console.log("Sheet deletion error:", e);
     }
 
-    // 2. Remove from LocalStorage
     userOrders = userOrders.filter(id => id !== pendingDeleteOrderId);
     localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
     
@@ -936,7 +951,6 @@ function toast(title, text){
   setTimeout(()=>t.classList.remove("show"), 2500);
 }
 
-renderProducts();
 saveCart();
 fetchSheetProducts();
 </script>
