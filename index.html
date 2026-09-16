@@ -201,11 +201,10 @@ header {
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
 .order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
 
-/* Customer Support Chat Window */
+/* Support Chat */
 .chat-page-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; height: 520px; }
 .chat-header { padding: 12px 16px; background: var(--header-bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 .chat-user-info { display: flex; align-items: center; gap: 10px; }
-
 .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: #00140a; display: grid; place-items: center; font-weight: 800; font-size: 12px; }
 
 .messages-box { flex: 1; padding: 16px; overflow-y: auto; background: #07101c; display: flex; flex-direction: column; gap: 12px; }
@@ -225,7 +224,7 @@ header {
 .chat-input-area input { flex: 1; padding: 10px 12px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: none; font-size: 12px; }
 .chat-input-area button { width: 42px; border-radius: 10px; background: var(--green); color: #00140a; font-size: 14px; }
 
-/* Profile View & Logout */
+/* Profile View */
 .account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; }
 .account { display: flex; align-items: center; gap: 14px; }
 .avatar { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 24px; }
@@ -290,10 +289,10 @@ header {
   </div>
 </header>
 
-<!-- Dedicated Mobile Search Row -->
+<!-- Search Row -->
 <div class="search-wrapper">
   <div class="search">
-    <input id="searchInput" placeholder="Search 2000+ products..." onkeydown="if(event.key==='Enter')searchProducts()">
+    <input id="searchInput" placeholder="Search products..." onkeydown="if(event.key==='Enter')searchProducts()">
     <button onclick="searchProducts()"><i class="fa-solid fa-search"></i></button>
   </div>
 </div>
@@ -359,7 +358,7 @@ header {
     </div>
     <div class="section-head">
       <h2 id="catHeading">All Products</h2>
-      <span style="color:var(--muted);font-size:12px" id="resultCount">2000+ Items Available</span>
+      <span style="color:var(--muted);font-size:12px" id="resultCount">Loading items...</span>
     </div>
     <div class="products" id="productGrid"></div>
     <button style="display:block;margin:20px auto;padding:10px 20px;border-radius:10px;background:#122036;color:white;border:1px solid var(--border)" onclick="loadMore()">Load More Products</button>
@@ -378,7 +377,7 @@ header {
     <div id="ordersListContainer"></div>
   </section>
 
-  <!-- VIEW 4: SUPPORT CHAT -->
+  <!-- VIEW 4: CHATS -->
   <section id="view-chats" class="app-view">
     <div class="page-title"><i class="fa-solid fa-headset"></i> Customer Support Center</div>
     <div class="chat-page-card">
@@ -413,7 +412,7 @@ header {
     </div>
   </section>
 
-  <!-- VIEW 5: USER PROFILE & LOGOUT -->
+  <!-- VIEW 5: PROFILE -->
   <section id="view-profile" class="app-view">
     <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Profile</div>
     <div id="profileContainer"></div>
@@ -421,7 +420,7 @@ header {
 
 </main>
 
-<!-- Bottom Navigation Bar -->
+<!-- Bottom Nav -->
 <nav class="bottomnav">
   <button class="nav-btn active-nav" id="nav-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>HOME</span></button>
   <button class="nav-btn" id="nav-products" onclick="switchPage('products')"><i class="fa-solid fa-bag-shopping"></i><span>PRODUCTS</span></button>
@@ -430,7 +429,7 @@ header {
   <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
 </nav>
 
-<!-- Shopping Cart Modal -->
+<!-- Modals -->
 <div class="modal" id="cartModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -441,7 +440,6 @@ header {
   </div>
 </div>
 
-<!-- Order Checkout Modal -->
 <div class="modal" id="checkoutModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -467,7 +465,6 @@ header {
   </div>
 </div>
 
-<!-- Professional Edit Profile Modal -->
 <div class="modal" id="editProfileModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -486,11 +483,11 @@ header {
   </div>
 </div>
 
-<!-- Toast Box -->
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-1PjDgW6Lc3usyHhmE6XHDu4cctBbPF60xHuCEVcCkjmCeMZXuG_nsuHBq8pf3Q-Q/exec";
+// Updated Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0aYdCw5G9MGUWVHAYK0VPkTVdyCGz_V-uW92aEUIoI7deR30lC2wmwmIL7NWI_iZN/exec";
 const WHATSAPP = "923209306672";
 
 function switchPage(pageId) {
@@ -509,7 +506,7 @@ function switchPage(pageId) {
   if (pageId === 'profile') renderProfilePage();
 }
 
-/* Hero Banner Controls */
+/* Hero Controls */
 let currentSlide = 0;
 function updateSlider() {
   const slidesContainer = document.getElementById("heroSlides");
@@ -523,24 +520,33 @@ function prevSlide() { currentSlide = (currentSlide - 1 + 2) % 2; updateSlider()
 function setSlide(i) { currentSlide = i; updateSlider(); }
 setInterval(nextSlide, 5000);
 
-/* Product Catalog Generator */
-const baseProducts = [
-  { name:"Fast Charging Power Bank 20000mAh", cat:"Accessories", price:2499, old:3200, img:"https://images.unsplash.com/photo-1609592424690-5e2c7b1f4c4e?auto=format&fit=crop&w=800&q=85", desc:"High capacity fast charging battery bank with dual USB ports." },
-  { name:"Wireless Noise Cancelling Headphones", cat:"Audio", price:4999, old:6200, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85", desc:"Crystal clear bass sound with active noise reduction technology." },
-  { name:"Smart Fitness Watch Ultra Series", cat:"Watches", price:3499, old:4500, img:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=85", desc:"Heart rate tracker, sleep monitor, and full touch display." },
-  { name:"Gaming RGB Over-Ear Headset", cat:"Gaming", price:3999, old:4800, img:"https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=800&q=85", desc:"Surround sound gaming headset with omnidirectional mic." }
+/* Local Backup Products (if Google Sheet is loading or empty) */
+const fallbackProducts = [
+  { id: 1, name:"Fast Charging Power Bank 20000mAh", cat:"Accessories", price:2499, old:3200, img:"https://images.unsplash.com/photo-1609592424690-5e2c7b1f4c4e?auto=format&fit=crop&w=800&q=85", desc:"High capacity fast charging battery bank with dual USB ports." },
+  { id: 2, name:"Wireless Noise Cancelling Headphones", cat:"Audio", price:4999, old:6200, img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=85", desc:"Crystal clear bass sound with active noise reduction technology." },
+  { id: 3, name:"Smart Fitness Watch Ultra Series", cat:"Watches", price:3499, old:4500, img:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=85", desc:"Heart rate tracker, sleep monitor, and full touch display." },
+  { id: 4, name:"Gaming RGB Over-Ear Headset", cat:"Gaming", price:3999, old:4800, img:"https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=800&q=85", desc:"Surround sound gaming headset with omnidirectional mic." }
 ];
 
-const products = [];
-for(let i=0; i<2000; i++){
-  const b = baseProducts[i % baseProducts.length];
-  products.push({ ...b, id: i+1, name: i < 4 ? b.name : b.name + " - Series #" + (i+1) });
-}
-
+let products = [...fallbackProducts];
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || JSON.stringify({ name: "M.ibrahim Sajid", phone: "03478306672", email: "m.ibrahimsajid830@gmail.com", address: "Pakistan Punjab Mandi Bahauddin King Road Chowk Near Nadra Office Amazon Printing Private Limited" }));
+
+/* Fetch Live Products from Google Sheet */
+async function fetchSheetProducts() {
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
+    const data = await res.json();
+    if(data.result === "success" && data.products && data.products.length > 0) {
+      products = data.products;
+      renderProducts();
+    }
+  } catch(e) {
+    console.log("Using local products fallback.");
+  }
+}
 
 function fallbackImage(name){
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/><text x="400" y="300" fill="#00e676" font-size="28" text-anchor="middle" font-family="Arial">${name.slice(0,20)}</text></svg>`;
@@ -593,9 +599,11 @@ function loadMore(){ shown+=24; renderProducts(); }
 
 /* Cart Functions */
 function addCart(id){
-  const p = products.find(x => x.id === id);
-  cart.push(p); saveCart();
-  toast("Cart Updated", `${p.name} added to cart.`);
+  const p = products.find(x => x.id == id);
+  if(p) {
+    cart.push(p); saveCart();
+    toast("Cart Updated", `${p.name} added to cart.`);
+  }
 }
 
 function saveCart(){
@@ -631,7 +639,10 @@ function openCart(){
 }
 
 function removeCart(i){ cart.splice(i,1); saveCart(); openCart(); }
-function buyNow(id){ cart=[products.find(x=>x.id===id)]; saveCart(); openCheckout(); }
+function buyNow(id){ 
+  const p = products.find(x => x.id == id);
+  if(p){ cart=[p]; saveCart(); openCheckout(); }
+}
 
 function openCheckout(){
   closeModal("cartModal");
@@ -760,7 +771,7 @@ function buildOrderCard(d){
     </div>`;
 }
 
-/* User Profile with Custom Modal Edit System */
+/* User Profile System */
 function renderProfilePage(){
   document.getElementById("profileContainer").innerHTML = `
     <div class="account-card">
@@ -828,6 +839,7 @@ function toast(title, text){
 
 renderProducts();
 saveCart();
+fetchSheetProducts(); // Sync live Google Sheet products
 </script>
 
 </body>
