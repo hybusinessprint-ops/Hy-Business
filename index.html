@@ -76,7 +76,7 @@ header {
 .iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
-/* Dedicated Full-Width Search Bar Row */
+/* Dedicated Search Bar Row */
 .search-wrapper {
   padding: 10px 4% 0;
   max-width: 1200px;
@@ -224,8 +224,8 @@ header {
 .chat-input-area input { flex: 1; padding: 10px 12px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: none; font-size: 12px; }
 .chat-input-area button { width: 42px; border-radius: 10px; background: var(--green); color: #00140a; font-size: 14px; }
 
-/* Profile View */
-.account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; }
+/* Profile & Login Views */
+.account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; max-width: 600px; margin: 0 auto; }
 .account { display: flex; align-items: center; gap: 14px; }
 .avatar { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 24px; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
@@ -532,7 +532,9 @@ let products = [...fallbackProducts];
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || JSON.stringify({ name: "M.ibrahim Sajid", phone: "03478306672", email: "m.ibrahimsajid830@gmail.com", address: "Pakistan Punjab Mandi Bahauddin King Road Chowk Near Nadra Office Amazon Printing Private Limited" }));
+
+// Dynamic User Management System
+let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
 /* Fetch Live Products from Google Sheet */
 async function fetchSheetProducts() {
@@ -718,11 +720,11 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
     await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
     const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal Price: Rs. ${payload.price}`;
     cart=[]; saveCart(); closeModal("checkoutModal");
-    toast("Order Submitted", `Order ID #${orderId} generated.`);
+    toast("Order Submitted", `Order ID #${orderId} generated successfully.`);
     switchPage('orders');
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
   } catch(err) {
-    toast("Order Placed", "Sending order via WhatsApp...");
+    toast("Order Placed", "Sending order details via WhatsApp...");
   }
 });
 
@@ -780,43 +782,89 @@ function buildOrderCard(d){
 }
 
 function deleteOrder(orderId) {
-  if (confirm(`Kya aap Order #${orderId} ko history se delete karna chahte hain?`)) {
+  if (confirm(`Are you sure you want to remove Order #${orderId} from your order history?`)) {
     userOrders = userOrders.filter(id => id !== orderId);
     localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
     renderOrdersPage();
-    toast("Order Deleted", `Order #${orderId} remove ho gaya hai.`);
+    toast("Order Removed", `Order #${orderId} has been removed from history.`);
   }
 }
 
-/* User Profile System */
+/* Dynamic User Authentication & Profile System */
 function renderProfilePage(){
-  document.getElementById("profileContainer").innerHTML = `
-    <div class="account-card">
-      <div class="account">
-        <div class="avatar">${currentUser.name ? currentUser.name.charAt(0) : "U"}</div>
-        <div>
-          <b style="font-size:16px">${currentUser.name}</b>
-          <small style="color:var(--green);display:block">Verified Customer Account</small>
+  const container = document.getElementById("profileContainer");
+  
+  if (!currentUser) {
+    // Show Login/Signup Form if no active user session
+    container.innerHTML = `
+      <div class="account-card">
+        <h3 style="text-align:center; margin-bottom: 15px; color: var(--green);"><i class="fa-solid fa-user-lock"></i> Account Access</h3>
+        <p style="text-align:center; font-size: 12px; color: var(--muted); margin-bottom: 20px;">Please enter your details to login or register your account.</p>
+        <form id="loginForm">
+          <div class="field">
+            <label>Full Name</label>
+            <input id="lName" required placeholder="Enter full name">
+          </div>
+          <div class="field">
+            <label>Phone Number</label>
+            <input id="lPhone" required placeholder="03XXXXXXXXX">
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input id="lEmail" type="email" required placeholder="your.email@example.com">
+          </div>
+          <div class="field">
+            <label>Shipping Address</label>
+            <textarea id="lAddress" rows="3" required placeholder="Full delivery address"></textarea>
+          </div>
+          <button class="primary" type="submit" style="margin-top: 10px;">LOGIN / CREATE ACCOUNT</button>
+        </form>
+      </div>`;
+
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      currentUser = {
+        name: document.getElementById("lName").value.trim(),
+        phone: document.getElementById("lPhone").value.trim(),
+        email: document.getElementById("lEmail").value.trim(),
+        address: document.getElementById("lAddress").value.trim()
+      };
+      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+      toast("Welcome!", "Logged in successfully.");
+      renderProfilePage();
+    });
+
+  } else {
+    // Show Profile View if user is logged in
+    container.innerHTML = `
+      <div class="account-card">
+        <div class="account">
+          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U"}</div>
+          <div>
+            <b style="font-size:16px">${currentUser.name}</b>
+            <small style="color:var(--green);display:block">Verified Customer Account</small>
+          </div>
         </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><b>${userOrders.length}</b><span>Total Orders</span></div>
-        <div class="stat"><b>0</b><span>Wishlist</span></div>
-        <div class="stat"><b>0</b><span>Reviews</span></div>
-      </div>
-      <div class="account-details">
-        <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address}</span></div>
-      </div>
-      <div class="profile-actions">
-        <button class="btn-edit" onclick="openEditProfileModal()"><i class="fa-solid fa-pen-to-square"></i> EDIT PROFILE</button>
-      </div>
-      <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
-    </div>`;
+        <div class="stats">
+          <div class="stat"><b>${userOrders.length}</b><span>Total Orders</span></div>
+          <div class="stat"><b>0</b><span>Wishlist</span></div>
+          <div class="stat"><b>0</b><span>Reviews</span></div>
+        </div>
+        <div class="account-details">
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address}</span></div>
+        </div>
+        <div class="profile-actions">
+          <button class="btn-edit" onclick="openEditProfileModal()"><i class="fa-solid fa-pen-to-square"></i> EDIT PROFILE</button>
+        </div>
+        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
+      </div>`;
+  }
 }
 
 function openEditProfileModal(){
+  if(!currentUser) return;
   document.getElementById("epName").value = currentUser.name || "";
   document.getElementById("epPhone").value = currentUser.phone || "";
   document.getElementById("epEmail").value = currentUser.email || "";
@@ -834,15 +882,15 @@ document.getElementById("editProfileForm").addEventListener("submit", function(e
   localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
   closeModal("editProfileModal");
   renderProfilePage();
-  toast("Profile Updated", "Your profile details have been saved.");
+  toast("Profile Updated", "Your profile details have been saved successfully.");
 });
 
 function logoutUser(){
-  if(confirm("Are you sure you want to log out?")){
+  if(confirm("Are you sure you want to log out of your account?")){
     localStorage.removeItem("hy_user_session");
-    currentUser = { name: "Guest User", phone: "Not provided", email: "guest@store.com", address: "Not provided" };
+    currentUser = null;
     renderProfilePage();
-    toast("Logged Out", "You have been logged out.");
+    toast("Logged Out", "You have been logged out successfully.");
   }
 }
 
