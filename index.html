@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+A<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -506,7 +506,7 @@ header {
 
 <script>
 // NEW Google Apps Script Web App URL Updated
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywq2AylN2OsdOwFnh3z1PQH8O_CdpaFNiKV2KAtHHn8-IqT3jaLckSLY60KoplEFVX/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEhsvM4rmE_7ZrRHAGTzPN04Nwg_wMjVHrXKKmX113JpGkoyAYZ2eLCWjCqujovNzV/exec";
 const WHATSAPP = "923209306672";
 
 function switchPage(pageId) {
@@ -539,13 +539,11 @@ function prevSlide() { currentSlide = (currentSlide - 1 + 2) % 2; updateSlider()
 function setSlide(i) { currentSlide = i; updateSlider(); }
 setInterval(nextSlide, 5000);
 
-// Array starts empty (No Demo Items)
 let products = [];
 let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
 
-// Dynamic User Session
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
 /* Fetch Live Products from Google Sheet */
@@ -563,11 +561,11 @@ async function fetchSheetProducts() {
       products = data.products;
       renderProducts();
     } else {
-      showEmptyState("No products found in Google Sheet.");
+      showEmptyState("No products found in Google Sheet. Please add data to your Sheet.");
     }
   } catch(e) {
     console.log("Error loading products from Google Sheet:", e);
-    showEmptyState("Failed to load products. Please check Google Script connection.");
+    showEmptyState("Failed to load products. Please check Web App URL permissions.");
   }
 }
 
@@ -579,7 +577,6 @@ function showEmptyState(msg) {
   if(featGrid) featGrid.innerHTML = html;
 }
 
-// Clean Dark Placeholder for missing images
 function fallbackImage(imgElement){
   imgElement.onerror = null;
   imgElement.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="#0c172c"/></svg>');
