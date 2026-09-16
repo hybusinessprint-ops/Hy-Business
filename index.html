@@ -76,7 +76,7 @@ header {
 .iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
-/* Dedicated Search Bar Row */
+/* Search Bar Row */
 .search-wrapper {
   padding: 10px 4% 0;
   max-width: 1200px;
@@ -116,7 +116,7 @@ header {
 }
 .page-title i { color: var(--green); }
 
-/* Responsive Fixed Hero Banner */
+/* Responsive Hero Banner */
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider {
   position: relative;
@@ -159,7 +159,7 @@ header {
 .trust-card b { display: block; font-size: 13px; }
 .trust-card small { color: var(--muted); font-size: 10px; }
 
-/* Categories Scroll */
+/* Categories */
 .categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 15px; }
 .categories::-webkit-scrollbar { display: none; }
 .cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; }
@@ -185,7 +185,7 @@ header {
 .buy { background: var(--green); color: #00140a; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
-/* Track Order Form */
+/* Track Order */
 .track { margin: 15px 0 25px; padding: 20px; border-radius: 16px; background: #0d192c; border: 1px solid var(--border); }
 .track-form { display: flex; gap: 8px; width: 100%; margin-top: 12px; }
 .track-form input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: 0; font-size: 13px; }
@@ -224,7 +224,7 @@ header {
 .chat-input-area input { flex: 1; padding: 10px 12px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: none; font-size: 12px; }
 .chat-input-area button { width: 42px; border-radius: 10px; background: var(--green); color: #00140a; font-size: 14px; }
 
-/* Profile & Login Views */
+/* Profile View */
 .account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; max-width: 600px; margin: 0 auto; }
 .account { display: flex; align-items: center; gap: 14px; }
 .avatar { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 24px; }
@@ -483,6 +483,25 @@ header {
   </div>
 </div>
 
+<!-- Custom Delete Order Modal Popup -->
+<div class="modal" id="deleteConfirmModal">
+  <div class="modalbox" style="max-width: 400px; text-align: center;">
+    <div class="modalhead">
+      <b><i class="fa-solid fa-triangle-exclamation" style="color:var(--red)"></i> Confirm Delete</b>
+      <button class="close" onclick="closeModal('deleteConfirmModal')">×</button>
+    </div>
+    <div class="modalbody" style="padding: 25px 20px;">
+      <p id="deleteModalText" style="font-size: 13px; color: var(--text); margin-bottom: 20px;">
+        Are you sure you want to remove this order from history?
+      </p>
+      <div style="display: flex; gap: 10px;">
+        <button onclick="closeModal('deleteConfirmModal')" style="flex: 1; padding: 10px; border-radius: 8px; background: #172238; color: white;">Cancel</button>
+        <button id="confirmDeleteBtn" style="flex: 1; padding: 10px; border-radius: 8px; background: var(--red); color: white; font-weight: 700;">Delete Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
@@ -533,7 +552,7 @@ let shown = 24, activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
 
-// Dynamic User Management System
+// Dynamic User Session
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
 /* Fetch Live Products from Google Sheet */
@@ -728,7 +747,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
   }
 });
 
-/* Order Status Tracker & Deletion */
+/* Order Status Tracker & Custom Deletion */
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
   if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
@@ -781,21 +800,30 @@ function buildOrderCard(d){
     </div>`;
 }
 
+// Custom Styled Delete Action
+let pendingDeleteOrderId = null;
+
 function deleteOrder(orderId) {
-  if (confirm(`Are you sure you want to remove Order #${orderId} from your order history?`)) {
-    userOrders = userOrders.filter(id => id !== orderId);
+  pendingDeleteOrderId = orderId;
+  document.getElementById("deleteModalText").innerText = `Are you sure you want to remove Order #${orderId} from your order history?`;
+  
+  document.getElementById("confirmDeleteBtn").onclick = function() {
+    userOrders = userOrders.filter(id => id !== pendingDeleteOrderId);
     localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+    closeModal('deleteConfirmModal');
     renderOrdersPage();
-    toast("Order Removed", `Order #${orderId} has been removed from history.`);
-  }
+    toast("Order Removed", `Order #${pendingDeleteOrderId} has been removed from history.`);
+    pendingDeleteOrderId = null;
+  };
+
+  showModal('deleteConfirmModal');
 }
 
-/* Dynamic User Authentication & Profile System */
+/* User Authentication & Profile View */
 function renderProfilePage(){
   const container = document.getElementById("profileContainer");
   
   if (!currentUser) {
-    // Show Login/Signup Form if no active user session
     container.innerHTML = `
       <div class="account-card">
         <h3 style="text-align:center; margin-bottom: 15px; color: var(--green);"><i class="fa-solid fa-user-lock"></i> Account Access</h3>
@@ -835,7 +863,6 @@ function renderProfilePage(){
     });
 
   } else {
-    // Show Profile View if user is logged in
     container.innerHTML = `
       <div class="account-card">
         <div class="account">
@@ -886,12 +913,10 @@ document.getElementById("editProfileForm").addEventListener("submit", function(e
 });
 
 function logoutUser(){
-  if(confirm("Are you sure you want to log out of your account?")){
-    localStorage.removeItem("hy_user_session");
-    currentUser = null;
-    renderProfilePage();
-    toast("Logged Out", "You have been logged out successfully.");
-  }
+  localStorage.removeItem("hy_user_session");
+  currentUser = null;
+  renderProfilePage();
+  toast("Logged Out", "You have been logged out successfully.");
 }
 
 function toast(title, text){
