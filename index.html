@@ -17,7 +17,7 @@
         body {
             background-color: #060b13;
             color: #ffffff;
-            padding-bottom: 75px;
+            padding-bottom: 70px;
         }
 
         /* HEADER SECTION */
@@ -38,7 +38,7 @@
         }
 
         .logo-area h1 {
-            color: #0088ff;
+            color: #0088ff; /* CHANGED TO BLUE */
             font-size: 20px;
             font-weight: 800;
             letter-spacing: 0.5px;
@@ -120,7 +120,7 @@
         }
 
         .search-btn {
-            background-color: #0088ff;
+            background-color: #0088ff; /* CHANGED TO BLUE */
             border: none;
             width: 42px;
             height: 38px;
@@ -131,39 +131,22 @@
             cursor: pointer;
         }
 
-        /* MAIN CONTAINER & SECTIONS */
+        /* MAIN CONTAINER */
         .container {
             padding: 16px;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        h2.section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* HERO BANNER */
+        /* HERO BANNER CAROUSEL */
         .banner-card {
-            background: linear-gradient(135deg, #0b1a30 0%, #0f2b48 50%, #123860 100%);
+            background: linear-gradient(135deg, #0b1a30 0%, #0f2b48 50%, #123860 100%); /* BLUE GRADIENT */
             border-radius: 16px;
             padding: 20px;
             position: relative;
             overflow: hidden;
             margin-bottom: 20px;
-            min-height: 170px;
+            min-height: 180px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -171,36 +154,38 @@
 
         .banner-tag {
             background-color: #091b33;
-            color: #0088ff;
+            color: #0088ff; /* CHANGED TO BLUE */
             font-size: 10px;
             font-weight: 700;
             padding: 4px 10px;
             border-radius: 6px;
             display: inline-block;
             width: fit-content;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             border: 1px solid #133863;
         }
 
         .banner-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            max-width: 65%;
         }
 
         .banner-title span {
-            color: #0088ff;
+            color: #0088ff; /* CHANGED TO BLUE */
         }
 
         .banner-desc {
             font-size: 11px;
             color: #cbd5e1;
-            margin-bottom: 12px;
+            max-width: 60%;
+            margin-bottom: 16px;
         }
 
         .banner-btn {
-            background-color: #0088ff;
+            background-color: #0088ff; /* CHANGED TO BLUE */
             color: #ffffff;
             border: none;
             padding: 8px 14px;
@@ -214,133 +199,96 @@
             width: fit-content;
         }
 
-        /* CARD BOX STYLING */
-        .card-box {
-            background-color: #0d1522;
-            border: 1px solid #1e2d42;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
+        .headphone-img {
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 170px;
+            pointer-events: none;
         }
 
-        /* ORDERS STYLING */
-        .order-item {
+        /* CAROUSEL CONTROLS */
+        .carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 16px;
             display: flex;
-            justify-content: space-between;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dot.active {
+            width: 16px;
+            border-radius: 4px;
+            background-color: #0088ff; /* CHANGED TO BLUE */
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .arrow-btn {
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-        }
-
-        .order-info h4 {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .order-info p {
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
-        .btn-danger {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
+            justify-content: center;
             cursor: pointer;
         }
 
-        /* PROFILE FORM STYLING */
-        .form-group {
-            margin-bottom: 12px;
+        /* FEATURES GRID */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 11px;
-            color: #94a3b8;
-            margin-bottom: 4px;
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: #060b13;
-            border: 1px solid #1e2d42;
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
-            font-size: 13px;
-            outline: none;
-        }
-
-        .btn-primary {
-            background-color: #0088ff;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 6px;
-        }
-
-        /* CHAT STYLING */
-        .chat-box {
-            background-color: #0d1522;
-            border: 1px solid #1e2d42;
+        .feature-card {
+            background-color: #0a111c;
+            border: 1px solid #162032;
             border-radius: 12px;
-            padding: 12px;
+            padding: 12px 8px;
+            text-align: left;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #0c1f38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0088ff; /* CHANGED TO BLUE */
             margin-bottom: 10px;
         }
 
-        .chat-msg-support {
-            background-color: #121c2e;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 12px;
-            color: #cbd5e1;
-            margin-bottom: 8px;
-            width: fit-content;
-            max-width: 85%;
+        .feature-title {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.2;
         }
 
-        .chat-msg-user {
-            background-color: #0088ff;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 12px;
-            color: white;
-            margin-bottom: 8px;
-            margin-left: auto;
-            width: fit-content;
-            max-width: 85%;
-        }
-
-        /* PROFESSIONAL TOAST NOTIFICATION */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #10b981;
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            padding: 12px;
-            position: fixed;
-            z-index: 1000;
-            left: 50%;
-            bottom: 80px;
-            transform: translateX(-50%);
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: opacity 0.3s ease;
-        }
-
-        #toast.show {
-            visibility: visible;
+        .feature-sub {
+            font-size: 9px;
+            color: #64748b;
         }
 
         /* BOTTOM NAVIGATION */
@@ -366,11 +314,11 @@
             text-decoration: none;
             font-size: 9px;
             font-weight: 600;
-            cursor: pointer;
+            letter-spacing: 0.5px;
         }
 
         .nav-item.active {
-            color: #0088ff;
+            color: #0088ff; /* CHANGED TO BLUE */
         }
     </style>
 </head>
@@ -384,191 +332,102 @@
                 <div class="tagline">OFFICIAL ONLINE STORE</div>
             </div>
             <div class="header-actions">
+                <button class="icon-btn" aria-label="Box"><i data-lucide="package" size="18"></i></button>
+                <button class="icon-btn" aria-label="Profile"><i data-lucide="user" size="18"></i></button>
                 <button class="icon-btn" aria-label="Cart">
                     <i data-lucide="shopping-cart" size="18"></i>
                     <span class="badge">0</span>
                 </button>
             </div>
         </div>
+
+        <!-- SEARCH BAR -->
         <div class="search-container">
             <input type="text" placeholder="Search 2000+ products..." class="search-input">
-            <button class="search-btn" aria-label="Search"><i data-lucide="search" size="18"></i></button>
+            <button class="search-btn" aria-label="Search">
+                <i data-lucide="search" size="18"></i>
+            </button>
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
+    <!-- MAIN BODY CONTENT -->
     <div class="container">
         
-        <!-- 1. HOME SECTION -->
-        <div id="home-section" class="section active">
-            <div class="banner-card">
-                <div>
-                    <span class="banner-tag">AUDIO GEAR</span>
-                    <h2 class="banner-title">Premium Sound.<br><span>Best Deals.</span></h2>
-                    <p class="banner-desc">Get up to 40% off on premium wireless audio equipment.</p>
-                    <button class="banner-btn" onclick="switchTab('products')">
-                        EXPLORE AUDIO <i data-lucide="arrow-right" size="14"></i>
-                    </button>
-                </div>
+        <!-- HERO BANNER CAROUSEL -->
+        <div class="banner-card">
+            <div>
+                <span class="banner-tag">AUDIO GEAR</span>
+                <h2 class="banner-title">Premium Sound.<br><span>Best Deals.</span></h2>
+                <p class="banner-desc">Get up to 40% off on premium wireless audio equipment.</p>
+                <button class="banner-btn">
+                    EXPLORE AUDIO <i data-lucide="arrow-right" size="14"></i>
+                </button>
             </div>
 
-            <h2 class="section-title"><i data-lucide="sparkles" size="18"></i> Store Highlights</h2>
-            <div class="card-box">
-                <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">Welcome to HY Store! Explore verified audio gear, simple cash on delivery options, and seamless live tracking right from your mobile device.</p>
-            </div>
-        </div>
+            <!-- Headphone Image Placeholder -->
+            <img src="https://i.ibb.co/6P0L83N/headphones.png" alt="Audio Gear" class="headphone-img" onerror="this.style.display='none'">
 
-        <!-- 2. PRODUCTS SECTION -->
-        <div id="products-section" class="section">
-            <h2 class="section-title"><i data-lucide="shopping-bag" size="18"></i> All Products</h2>
-            <div class="card-box">
-                <h4 style="font-size: 14px; margin-bottom: 6px;">Audionic Wireless Headphones</h4>
-                <p style="font-size: 12px; color: #0088ff; font-weight: bold; margin-bottom: 10px;">Rs. 4,500</p>
-                <button class="btn-primary" onclick="showToast('Product added to cart!')">Add to Cart</button>
+            <!-- Carousel Indicators & Arrows -->
+            <div class="carousel-dots">
+                <div class="dot"></div>
+                <div class="dot active"></div>
             </div>
-            <div class="card-box">
-                <h4 style="font-size: 14px; margin-bottom: 6px;">Bluetooth Speaker System</h4>
-                <p style="font-size: 12px; color: #0088ff; font-weight: bold; margin-bottom: 10px;">Rs. 8,200</p>
-                <button class="btn-primary" onclick="showToast('Product added to cart!')">Add to Cart</button>
+            <div class="carousel-arrows">
+                <button class="arrow-btn" aria-label="Previous"><i data-lucide="chevron-left" size="14"></i></button>
+                <button class="arrow-btn" aria-label="Next"><i data-lucide="chevron-right" size="14"></i></button>
             </div>
         </div>
 
-        <!-- 3. ORDERS SECTION (WITH DELETE/CANCEL) -->
-        <div id="orders-section" class="section">
-            <h2 class="section-title"><i data-lucide="box" size="18"></i> Order Tracking & History</h2>
-            
-            <div id="orders-list">
-                <div class="card-box order-item" id="order-101">
-                    <div class="order-info">
-                        <h4>Order #HY-101</h4>
-                        <p>Audionic Headphones - COD</p>
-                    </div>
-                    <button class="btn-danger" onclick="deleteOrder('order-101')">Cancel Order</button>
-                </div>
-
-                <div class="card-box order-item" id="order-102">
-                    <div class="order-info">
-                        <h4>Order #HY-102</h4>
-                        <p>Bluetooth Speaker - Paid</p>
-                    </div>
-                    <button class="btn-danger" onclick="deleteOrder('order-102')">Cancel Order</button>
-                </div>
+        <!-- THREE FEATURES SECTION -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="check-circle-2" size="14"></i></div>
+                <div class="feature-title">100% Authentic</div>
+                <div class="feature-sub">Verified<br>Goods</div>
             </div>
-            <p id="no-orders" style="display:none; text-align:center; color:#64748b; font-size:12px; margin-top:20px;">No active orders found.</p>
-        </div>
 
-        <!-- 4. CHATS SECTION -->
-        <div id="chats-section" class="section">
-            <h2 class="section-title"><i data-lucide="message-circle" size="18"></i> Live Support</h2>
-            <div class="chat-box">
-                <div class="chat-msg-support">Hum Cash on Delivery (COD), EasyPaisa aur JazzCash accept karte hain.</div>
-                <div class="chat-msg-user">Order Status check krna ha</div>
-                <div class="chat-msg-support">Apna order track karne ke liye niche <b>ORDERS</b> tab par click karein.</div>
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="truck" size="14"></i></div>
+                <div class="feature-title">Cash on Delivery</div>
+                <div class="feature-sub">Pay Upon<br>Receipt</div>
             </div>
-        </div>
 
-        <!-- 5. PROFILE SECTION (WITH EDIT) -->
-        <div id="profile-section" class="section">
-            <h2 class="section-title"><i data-lucide="user" size="18"></i> Edit Profile</h2>
-            <div class="card-box">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="profile-name" class="form-control" value="Hassan Ali">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="text" id="profile-phone" class="form-control" value="+92 300 1234567">
-                </div>
-                <div class="form-group">
-                    <label>Delivery Address</label>
-                    <input type="text" id="profile-address" class="form-control" value="Lahore, Pakistan">
-                </div>
-                <button class="btn-primary" onclick="saveProfile()">Save Changes</button>
+            <div class="feature-card">
+                <div class="feature-icon"><i data-lucide="message-square" size="14"></i></div>
+                <div class="feature-title">Live Support</div>
+                <div class="feature-sub">24/7<br>Customer Care</div>
             </div>
         </div>
 
     </div>
 
-    <!-- TOAST NOTIFICATION POPUP -->
-    <div id="toast">Notification Message</div>
-
-    <!-- BOTTOM NAVIGATION BAR -->
+    <!-- BOTTOM NAVIGATION -->
     <nav class="bottom-nav">
-        <a class="nav-item active" onclick="switchTab('home', this)">
+        <a href="#" class="nav-item active">
             <i data-lucide="home" size="18"></i>
             <span>HOME</span>
         </a>
-        <a class="nav-item" onclick="switchTab('products', this)">
+        <a href="#" class="nav-item">
             <i data-lucide="shopping-bag" size="18"></i>
             <span>PRODUCTS</span>
         </a>
-        <a class="nav-item" onclick="switchTab('orders', this)">
+        <a href="#" class="nav-item">
             <i data-lucide="box" size="18"></i>
             <span>ORDERS</span>
         </a>
-        <a class="nav-item" onclick="switchTab('chats', this)">
+        <a href="#" class="nav-item">
             <i data-lucide="message-circle" size="18"></i>
             <span>CHATS</span>
         </a>
-        <a class="nav-item" onclick="switchTab('profile', this)">
+        <a href="#" class="nav-item">
             <i data-lucide="user" size="18"></i>
             <span>PROFILE</span>
         </a>
     </nav>
 
-    <!-- SCRIPT LOGIC -->
+    <!-- Icons Initialization -->
     <script>
         lucide.createIcons();
-
-        // Tab Switching Logic
-        function switchTab(tabName, element) {
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-
-            document.getElementById(tabName + '-section').classList.add('active');
-            if(element) {
-                element.classList.add('active');
-            } else {
-                // Find matching nav item if triggered programmatically
-                const items = document.querySelectorAll('.nav-item');
-                if(tabName === 'products') items[1].classList.add('active');
-                if(tabName === 'home') items[0].classList.add('active');
-            }
-            window.scrollTo(0, 0);
-        }
-
-        // Professional Toast Notification Function
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
-            toast.className = "show";
-            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
-        // Delete Order Function
-        function deleteOrder(orderId) {
-            const element = document.getElementById(orderId);
-            if(element) {
-                element.remove();
-                showToast("Order cancelled & deleted successfully!", true);
-                
-                // Check if any orders remain
-                if(document.getElementById('orders-list').children.length === 0) {
-                    document.getElementById('no-orders').style.display = 'block';
-                }
-            }
-        }
-
-        // Save Profile Function
-        function saveProfile() {
-            const name = document.getElementById('profile-name').value;
-            if(name.trim() === "") {
-                showToast("Name cannot be empty!", true);
-                return;
-            }
-            showToast("Profile updated successfully!");
-        }
     </script>
 </body>
 </html>
