@@ -93,7 +93,7 @@ header {
 
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; }
-.slides { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+.slides { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
 .slide { min-width: 100%; position: relative; display: flex; align-items: center; background-size: cover; background-position: center; padding: 25px; }
 .slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.6) 100%); }
 .slide-content { position: relative; z-index: 2; max-width: 480px; }
@@ -105,9 +105,9 @@ header {
 
 .slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
 .slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
-.dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; }
+.dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; flex-wrap: wrap; }
 .dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
-.dot-item.active { background: var(--green); width: 20px; border-radius: 8px; }
+.dot-item.active { background: var(--green); width: 22px; border-radius: 8px; }
 
 .trust { display: grid; gap: 10px; }
 .trust-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 15px; }
@@ -365,7 +365,7 @@ let totalSlidesCount = 1;
 
 function updateSlider() {
   const slidesContainer = document.getElementById("heroSlides");
-  const dots = document.querySelectorAll(".dot-item");
+  const dots = document.querySelectorAll("#heroDots .dot-item");
   if(!slidesContainer) return;
   slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
   dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentSlide));
@@ -386,7 +386,9 @@ function prevSlide() {
 }
 
 function setSlide(i) { currentSlide = i; updateSlider(); }
-setInterval(nextSlide, 5000);
+
+// 1 Second Auto-Slide Interval
+setInterval(nextSlide, 1000);
 
 let products = [];
 let activeCat = "All", searchTerm = "";
@@ -402,7 +404,7 @@ function toast(title, text) {
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 
-// SAFE BANNER FETCH FROM GOOGLE SHEET (CSV Multi-line Fix)
+// FETCH BANNER FROM GOOGLE SHEET WITH FIX FOR MULTIPLE DOTS
 async function fetchSheetBanners() {
   const slidesContainer = document.getElementById("heroSlides");
   const dotsContainer = document.getElementById("heroDots");
@@ -431,7 +433,8 @@ async function fetchSheetBanners() {
         imgUrl = imgUrl.split('](')[1].replace(')', '').trim();
       }
 
-      if (!imgUrl.startsWith('http')) continue;
+      // Check if image link is present
+      if (!imgUrl || imgUrl.length < 5) continue;
 
       slidesHtml += `
         <div class="slide" style="background-image: url('${imgUrl}');">
