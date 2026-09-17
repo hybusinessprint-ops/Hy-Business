@@ -233,19 +233,9 @@ header {
               <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </div>
-          <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1200&q=80');">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-              <span class="tag">AUDIO GEAR</span>
-              <h1>Premium Sound.<br><span>Best Deals.</span></h1>
-              <p>Get up to 40% off on premium wireless audio equipment.</p>
-              <button class="hero-btn" onclick="switchPage('products')">EXPLORE AUDIO <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
         </div>
         <div class="dots" id="heroDots">
           <span class="dot-item active" onclick="setSlide(0)"></span>
-          <span class="dot-item" onclick="setSlide(1)"></span>
         </div>
         <div class="slider-controls">
           <button class="slider-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
@@ -350,8 +340,8 @@ header {
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-// YOUR LATEST UPDATED GOOGLE APPS SCRIPT URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTwVGbiGgoUnn-mNkGnS8uwVblGyehRXcfg_4kIAsF79HNZFM4bPKkuLQneJc_sHIU/exec";
+const BANNER_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
 const WHATSAPP = "923209306672";
 
 function switchPage(pageId) {
@@ -371,6 +361,8 @@ function switchPage(pageId) {
 }
 
 let currentSlide = 0;
+let totalSlidesCount = 1;
+
 function updateSlider() {
   const slidesContainer = document.getElementById("heroSlides");
   const dots = document.querySelectorAll(".dot-item");
@@ -378,8 +370,21 @@ function updateSlider() {
   slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
   dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentSlide));
 }
-function nextSlide() { currentSlide = (currentSlide + 1) % 2; updateSlider(); }
-function prevSlide() { currentSlide = (currentSlide - 1 + 2) % 2; updateSlider(); }
+
+function nextSlide() { 
+  if (totalSlidesCount > 0) {
+    currentSlide = (currentSlide + 1) % totalSlidesCount; 
+    updateSlider(); 
+  }
+}
+
+function prevSlide() { 
+  if (totalSlidesCount > 0) {
+    currentSlide = (currentSlide - 1 + totalSlidesCount) % totalSlidesCount; 
+    updateSlider(); 
+  }
+}
+
 function setSlide(i) { currentSlide = i; updateSlider(); }
 setInterval(nextSlide, 5000);
 
@@ -388,6 +393,55 @@ let activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
+
+// DYNAMIC BANNER FETCH FROM GOOGLE SHEET
+async function fetchSheetBanners() {
+  const slidesContainer = document.getElementById("heroSlides");
+  const dotsContainer = document.getElementById("heroDots");
+  
+  try {
+    const res = await fetch(BANNER_SHEET_CSV);
+    const csvData = await res.text();
+    const rows = csvData.split('\n').slice(1);
+    
+    let slidesHtml = "";
+    let dotsHtml = "";
+    let validCount = 0;
+
+    rows.forEach((row) => {
+      const cols = row.split(',');
+      if (cols.length >= 3 && cols[0].trim() !== '') {
+        const imgUrl = cols[0].trim();
+        const tag = cols[1].trim();
+        const title = cols[2].trim();
+        const btnLink = cols[3] ? cols[3].trim() : '#';
+
+        slidesHtml += `
+          <div class="slide" style="background-image: url('${imgUrl}');">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+              <span class="tag">${tag}</span>
+              <h1>${title}</h1>
+              <button class="hero-btn" onclick="window.location.href='${btnLink}'">EXPLORE NOW <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>`;
+
+        dotsHtml += `<span class="dot-item ${validCount === 0 ? 'active' : ''}" onclick="setSlide(${validCount})"></span>`;
+        validCount++;
+      }
+    });
+
+    if (validCount > 0 && slidesContainer && dotsContainer) {
+      slidesContainer.innerHTML = slidesHtml;
+      dotsContainer.innerHTML = dotsHtml;
+      totalSlidesCount = validCount;
+      currentSlide = 0;
+      updateSlider();
+    }
+  } catch(e) {
+    console.error("Banner Sync Error:", e);
+  }
+}
 
 async function fetchSheetProducts() {
   const grid = document.getElementById("productGrid");
@@ -650,11 +704,15 @@ function toast(title, text){
   document.getElementById("toastTitle").textContent = title;
   document.getElementById("toastText").textContent = text;
   t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"), 2500);
+  setTimeout(() => t.classList.remove("show"), 3000);
 }
 
-saveCart();
-fetchSheetProducts();
+// Page initialization
+document.addEventListener('DOMContentLoaded', () => {
+  saveCart();
+  fetchSheetBanners();
+  fetchSheetProducts();
+});
 </script>
 
 </body>
