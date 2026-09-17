@@ -165,7 +165,7 @@ header {
 
 .btn-logout { width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 700; font-size: 12px; margin-top: 10px; }
 
-.bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-around: space-around; align-items: center; padding: 8px 0; }
+.bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-content: space-around; align-items: center; padding: 8px 0; }
 .nav-btn { background: none; border: none; color: var(--muted); font-size: 9px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 3px; flex: 1; }
 .nav-btn i { font-size: 16px; }
 .nav-btn.active-nav { color: var(--green); }
@@ -340,7 +340,7 @@ header {
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
 <script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTwVGbiGgoUnn-mNkGnS8uwVblGyehRXcfg_4kIAsF79HNZFM4bPKkuLQneJc_sHIU/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
 const BANNER_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
 const WHATSAPP = "923209306672";
 
@@ -459,7 +459,6 @@ async function fetchSheetBanners() {
 
 async function fetchSheetProducts() {
   const grid = document.getElementById("productGrid");
-  const featGrid = document.getElementById("featuredGrid");
   
   if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
 
@@ -668,54 +667,53 @@ function renderProfilePage(){
     container.innerHTML = `
       <div class="account-card">
         <h3 style="text-align:center; margin-bottom: 15px; color: var(--green);">Account Access</h3>
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="saveUserProfile(event)">
           <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
           <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
           <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="your.email@example.com"></div>
           <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Full delivery address"></textarea></div>
-          <button class="primary" type="submit" style="margin-top: 10px;">LOGIN / CREATE ACCOUNT</button>
+          <button type="submit" class="primary">SAVE PROFILE</button>
         </form>
       </div>`;
-
-    document.getElementById("loginForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      currentUser = {
-        name: document.getElementById("lName").value.trim(),
-        phone: document.getElementById("lPhone").value.trim(),
-        email: document.getElementById("lEmail").value.trim(),
-        address: document.getElementById("lAddress").value.trim()
-      };
-      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-      toast("Welcome!", "Logged in successfully.");
-      renderProfilePage();
-    });
   } else {
     container.innerHTML = `
       <div class="account-card">
         <div class="account">
-          <div class="avatar">${currentUser.name.charAt(0).toUpperCase()}</div>
+          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
           <div>
-            <h3 style="font-size:16px;">${currentUser.name}</h3>
-            <span style="font-size:11px; color:var(--muted);">${currentUser.email}</span>
+            <h3 style="margin-bottom:2px">${currentUser.name}</h3>
+            <span style="color:var(--muted);font-size:12px">${currentUser.phone}</span>
           </div>
         </div>
         <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span>${currentUser.email || 'N/A'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span>${currentUser.address || 'N/A'}</span></div>
         </div>
-        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button>
+        <button class="btn-logout" onclick="logoutUser()">LOGOUT</button>
       </div>`;
   }
 }
 
-function logoutUser(){
-  localStorage.removeItem("hy_user_session");
-  currentUser = null;
-  toast("Logged Out", "Account session ended.");
+function saveUserProfile(e) {
+  e.preventDefault();
+  currentUser = {
+    name: document.getElementById("lName").value.trim(),
+    phone: document.getElementById("lPhone").value.trim(),
+    email: document.getElementById("lEmail").value.trim(),
+    address: document.getElementById("lAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  toast("Profile Saved", "Your information has been stored locally.");
   renderProfilePage();
 }
 
-// INITIALIZE APP
+function logoutUser() {
+  localStorage.removeItem("hy_user_session");
+  currentUser = null;
+  toast("Logged Out", "Profile session cleared.");
+  renderProfilePage();
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   saveCart();
   fetchSheetBanners();
