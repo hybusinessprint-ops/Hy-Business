@@ -663,6 +663,26 @@ function buildOrderCard(d){
     </div>`;
 }
 
+function saveUserProfile(e){
+  e.preventDefault();
+  currentUser = {
+    name: document.getElementById("lName").value.trim(),
+    phone: document.getElementById("lPhone").value.trim(),
+    email: document.getElementById("lEmail").value.trim(),
+    address: document.getElementById("lAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  toast("Profile Saved", "Account information updated.");
+  renderProfilePage();
+}
+
+function logoutUser(){
+  localStorage.removeItem("hy_user_session");
+  currentUser = null;
+  toast("Logged Out", "Account session cleared.");
+  renderProfilePage();
+}
+
 function renderProfilePage(){
   const container = document.getElementById("profileContainer");
   if (!currentUser) {
@@ -674,52 +694,34 @@ function renderProfilePage(){
           <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
           <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="your.email@example.com"></div>
           <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Full delivery address"></textarea></div>
-          <button type="submit" class="primary">SAVE PROFILE</button>
+          <button class="primary" type="submit" style="margin-top:10px;">SAVE PROFILE</button>
         </form>
       </div>`;
   } else {
+    const initial = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
     container.innerHTML = `
       <div class="account-card">
         <div class="account">
-          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
+          <div class="avatar">${initial}</div>
           <div>
-            <h3 style="margin-bottom:2px">${currentUser.name}</h3>
-            <span style="color:var(--muted);font-size:12px">${currentUser.phone}</span>
+            <b style="font-size:16px">${currentUser.name}</b>
+            <small style="display:block;color:var(--muted)">${currentUser.email}</small>
           </div>
         </div>
         <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span>${currentUser.email || 'N/A'}</span></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span>${currentUser.address || 'N/A'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span>${currentUser.phone}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span>${currentUser.address}</span></div>
         </div>
-        <button class="btn-logout" onclick="logoutUser()">LOGOUT</button>
+        <button class="btn-logout" onclick="logoutUser()">LOGOUT ACCOUNT</button>
       </div>`;
   }
 }
 
-function saveUserProfile(e) {
-  e.preventDefault();
-  currentUser = {
-    name: document.getElementById("lName").value.trim(),
-    phone: document.getElementById("lPhone").value.trim(),
-    email: document.getElementById("lEmail").value.trim(),
-    address: document.getElementById("lAddress").value.trim()
-  };
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  toast("Profile Saved", "Your information has been stored locally.");
-  renderProfilePage();
-}
-
-function logoutUser() {
-  localStorage.removeItem("hy_user_session");
-  currentUser = null;
-  toast("Logged Out", "Profile session cleared.");
-  renderProfilePage();
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  saveCart();
+// Initialize application on load
+window.addEventListener('DOMContentLoaded', () => {
   fetchSheetBanners();
   fetchSheetProducts();
+  saveCart();
 });
 </script>
 
