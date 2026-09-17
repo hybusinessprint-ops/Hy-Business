@@ -93,8 +93,8 @@ header {
 
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; }
-.slides { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
-.slide { flex: 1; position: relative; display: flex; align-items: center; background-size: cover; background-position: center; padding: 25px; }
+.slides { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+.slide { min-width: 100%; position: relative; display: flex; align-items: center; background-size: cover; background-position: center; padding: 25px; }
 .slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.6) 100%); }
 .slide-content { position: relative; z-index: 2; max-width: 480px; }
 .slide-content .tag { display: inline-block; background: rgba(0,230,118,0.2); color: var(--green); border: 1px solid var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
@@ -105,9 +105,8 @@ header {
 
 .slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
 .slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
-.dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; max-width: 60%; overflow-x: auto; padding-bottom: 2px; }
-.dots::-webkit-scrollbar { display: none; }
-.dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; flex-shrink: 0; }
+.dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; }
+.dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
 .dot-item.active { background: var(--green); width: 20px; border-radius: 8px; }
 
 .trust { display: grid; gap: 10px; }
@@ -368,16 +367,8 @@ function updateSlider() {
   const slidesContainer = document.getElementById("heroSlides");
   const dots = document.querySelectorAll(".dot-item");
   if(!slidesContainer) return;
-  // Percentage move based on slide index and total width
-  const stepPercentage = 100 / totalSlidesCount;
-  slidesContainer.style.transform = `translateX(-${currentSlide * stepPercentage}%)`;
-  
+  slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
   dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentSlide));
-  
-  // Auto scroll dot into view if many slides exist
-  if (dots[currentSlide]) {
-    dots[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  }
 }
 
 function nextSlide() { 
@@ -411,7 +402,7 @@ function toast(title, text) {
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 
-// DYNAMIC UNLIMITED SLIDER FETCH
+// SAFE BANNER FETCH FROM GOOGLE SHEET (CSV Multi-line Fix)
 async function fetchSheetBanners() {
   const slidesContainer = document.getElementById("heroSlides");
   const dotsContainer = document.getElementById("heroDots");
@@ -425,7 +416,7 @@ async function fetchSheetBanners() {
     let dotsHtml = "";
     let validCount = 0;
 
-    for (let i = 0; i < lines.length; i++) {
+    for (let i = 1; i < lines.length; i++) {
       let row = lines[i].trim();
       if (!row) continue;
 
@@ -460,10 +451,6 @@ async function fetchSheetBanners() {
     if (validCount > 0 && slidesContainer && dotsContainer) {
       slidesContainer.innerHTML = slidesHtml;
       dotsContainer.innerHTML = dotsHtml;
-      
-      // FIX: Dynamically expand container width for ALL slides (32, 50, 100+)
-      slidesContainer.style.width = `${validCount * 100}%`;
-      
       totalSlidesCount = validCount;
       currentSlide = 0;
       updateSlider();
@@ -702,41 +689,41 @@ function renderProfilePage(){
   if (!currentUser) {
     container.innerHTML = `
       <div class="account-card">
-        <h3 style="text-align:center; margin-bottom:15px">Save Profile Details</h3>
+        <h3 style="margin-bottom: 15px; font-size: 16px;">Save Account Details</h3>
         <form onsubmit="saveUserProfile(event)">
           <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
           <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Email Address</label><input id="lEmail" type="email" placeholder="example@gmail.com"></div>
-          <div class="field"><label>Default Delivery Address</label><textarea id="lAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
-          <button class="primary" type="submit">SAVE USER PROFILE</button>
+          <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="name@example.com"></div>
+          <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+          <button class="primary" type="submit">SAVE PROFILE</button>
         </form>
       </div>`;
   } else {
+    const initial = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
     container.innerHTML = `
       <div class="account-card">
         <div class="account">
-          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
+          <div class="avatar">${initial}</div>
           <div>
-            <h3>${currentUser.name}</h3>
-            <span style="color:var(--muted);font-size:12px">${currentUser.phone}</span>
+            <h3 style="font-size: 16px;">${currentUser.name}</h3>
+            <span style="font-size: 12px; color: var(--muted);">${currentUser.email}</span>
           </div>
         </div>
         <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><b>Email:</b> ${currentUser.email || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address || 'N/A'}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address}</div></div>
         </div>
-        <button class="btn-logout" onclick="logoutUser()">LOGOUT SESSION</button>
+        <button class="btn-logout" onclick="logoutUser()">LOGOUT ACCOUNT</button>
       </div>`;
   }
 }
 
-// Initial Load
+// Initialize application on load
 window.addEventListener("DOMContentLoaded", () => {
-  saveCart();
   fetchSheetBanners();
   fetchSheetProducts();
+  document.getElementById("cartCount").textContent = cart.length;
 });
 </script>
-
 </body>
 </html>
