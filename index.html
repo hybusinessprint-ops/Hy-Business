@@ -148,11 +148,12 @@ header {
 .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
 .order-header b { font-size: 16px; color: var(--green); }
 
-.status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
-.cancelled { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
+.cancelled, .rejected, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
+.confirmed, .shipped, .delivered { background: rgba(0,150,255,.15); color: var(--green); border: 1px solid rgba(0,150,255,.3); }
 
-/* Improved Professional Tracker Line UI */
+/* Tracker Line UI */
 .tracker-container {
   display: flex;
   align-items: center;
@@ -201,6 +202,18 @@ header {
   color: #ffffff;
 }
 
+/* Red / Rejected Status UI */
+.tracker-step.rejected-step .circle {
+  background-color: var(--red) !important;
+  border-color: var(--red) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(255, 77, 103, 0.6) !important;
+}
+
+.tracker-step.rejected-step span {
+  color: var(--red) !important;
+}
+
 .tracker-line {
   flex-grow: 1;
   height: 3px;
@@ -213,6 +226,11 @@ header {
 .tracker-line.active {
   background: var(--green);
   box-shadow: 0 0 8px rgba(0, 150, 255, 0.5);
+}
+
+.tracker-line.rejected-line {
+  background: var(--red) !important;
+  box-shadow: 0 0 8px rgba(255, 77, 103, 0.5) !important;
 }
 
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
@@ -665,6 +683,84 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
 
 function openTrackModal() { showModal("trackModal"); }
 
+function buildOrderCard(data, isLocalCancelled) {
+  const statusStr = (data.status || "CONFIRMED").toUpperCase();
+  const isRejected = isLocalCancelled || statusStr === "REJECT" || statusStr === "REJECTED" || statusStr === "CANCELLED";
+
+  let statusClass = "confirmed";
+  if (isRejected) {
+    statusClass = "rejected";
+  } else if (statusStr === "PENDING") {
+    statusClass = "pending";
+  }
+
+  // Determine Timeline Active States
+  let confClass = "", shipClass = "", delClass = "";
+  let line1Class = "", line2Class = "";
+  let confIcon = "fa-check", shipIcon = "fa-truck", delIcon = "fa-house";
+
+  if (isRejected) {
+    confClass = "rejected-step";
+    shipClass = "rejected-step";
+    delClass = "rejected-step";
+    line1Class = "rejected-line";
+    line2Class = "rejected-line";
+    confIcon = "fa-xmark";
+    shipIcon = "fa-xmark";
+    delIcon = "fa-xmark";
+  } else {
+    if (statusStr === "CONFIRMED" || statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+      confClass = "active";
+    }
+    if (statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+      shipClass = "active";
+      line1Class = "active";
+    }
+    if (statusStr === "DELIVERED") {
+      delClass = "active";
+      line2Class = "active";
+    }
+  }
+
+  return `
+    <div class="order-card">
+      <div class="order-header">
+        <b>Order #${data.orderId || 'HY1001'}</b>
+        <span class="status ${statusClass}">${isRejected ? 'REJECTED' : statusStr}</span>
+      </div>
+
+      <div class="tracker-container">
+        <div class="tracker-step ${confClass}">
+          <div class="circle"><i class="fa-solid ${confIcon}"></i></div>
+          <span>Confirmed</span>
+        </div>
+        <div class="tracker-line ${line1Class}"></div>
+        <div class="tracker-step ${shipClass}">
+          <div class="circle"><i class="fa-solid ${shipIcon}"></i></div>
+          <span>Shipped</span>
+        </div>
+        <div class="tracker-line ${line2Class}"></div>
+        <div class="tracker-step ${delClass}">
+          <div class="circle"><i class="fa-solid ${delIcon}"></i></div>
+          <span>Delivered</span>
+        </div>
+      </div>
+
+      <div class="order-grid-info">
+        <div><span>Customer:</span><b>${data.name || currentUser.name || 'Hy Business'}</b></div>
+        <div><span>Payment:</span><b>${data.payment || 'Cash on Delivery (COD)'}</b></div>
+        <div style="grid-column:1/-1"><span>Products:</span><b>${data.product || 'Wireless Bluetooth Headphones'}</b></div>
+        <div><span>Total Amount:</span><b style="color:var(--green)">Rs. ${data.price ? Number(data.price).toLocaleString() : '2500'}</b></div>
+      </div>
+
+      <div class="order-card-actions">
+        ${!isRejected ? `<button class="btn-cancel-small" onclick="cancelOrder('${data.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>` : ''}
+        <button class="btn-delete-small" onclick="deleteOrder('${data.orderId}')"><i class="fa-solid fa-trash"></i> Delete</button>
+      </div>
+    </div>
+  `;
+}
+
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
 
@@ -691,7 +787,7 @@ async function renderOrdersPage(){
     let isCancelled = item.cancelled;
 
     if (isCancelled) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "CANCELLED" }, true);
+      cardsHtml += buildOrderCard({ orderId: id, status: "REJECTED" }, true);
       continue;
     }
 
@@ -718,7 +814,7 @@ function cancelOrder(orderId) {
     return item;
   });
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Cancelled", `Order #${orderId} was marked as cancelled.`);
+  toast("Order Cancelled", `Order #${orderId} was marked as rejected.`);
   renderOrdersPage();
 }
 
@@ -743,109 +839,58 @@ function trackOrder(){
     userOrders.unshift({ id: query, email: currentUser.email, cancelled: false });
     localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
   }
-  renderOrdersPage();
-}
-
-function buildOrderCard(d, isCancelled){
-  const st = isCancelled ? "CANCELLED" : String(d.status || "CONFIRMED").toUpperCase();
-  const statusClass = isCancelled ? "cancelled" : "pending";
-
-  const isConfirmed = !isCancelled;
-  const isShipped = st === 'SHIPPED' || st === 'DELIVERED';
-  const isDelivered = st === 'DELIVERED';
-
-  return `
-    <div class="order-card">
-      <div class="order-header">
-        <b>Order #${d.orderId}</b>
-        <span class="status ${statusClass}">${st}</span>
-      </div>
-
-      <!-- Professional Dynamic Tracking Line & Stepper -->
-      <div class="tracker-container">
-        <div class="tracker-step ${isConfirmed ? 'active' : ''}">
-          <div class="circle"><i class="fa-solid fa-check"></i></div>
-          <span>Confirmed</span>
-        </div>
-        <div class="tracker-line ${isShipped ? 'active' : ''}"></div>
-        <div class="tracker-step ${isShipped ? 'active' : ''}">
-          <div class="circle"><i class="fa-solid fa-truck"></i></div>
-          <span>Shipped</span>
-        </div>
-        <div class="tracker-line ${isDelivered ? 'active' : ''}"></div>
-        <div class="tracker-step ${isDelivered ? 'active' : ''}">
-          <div class="circle"><i class="fa-solid fa-house"></i></div>
-          <span>Delivered</span>
-        </div>
-      </div>
-
-      <div class="order-grid-info">
-        <div><span>Customer:</span> <b>${d.name || currentUser.name || 'N/A'}</b></div>
-        <div><span>Payment:</span> <b>${d.payment || 'COD'}</b></div>
-        <div style="grid-column: span 2"><span>Products:</span> <b>${d.product || 'N/A'}</b></div>
-        <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price || 0}</b></div>
-      </div>
-
-      <div class="order-card-actions">
-        ${!isCancelled ? `<button class="btn-cancel-small" onclick="cancelOrder('${d.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>` : ''}
-        ${isCancelled ? `<button class="btn-delete-small" onclick="deleteOrder('${d.orderId}')"><i class="fa-solid fa-trash"></i> Delete Order</button>` : ''}
-      </div>
-    </div>`;
+  switchPage('orders');
 }
 
 function renderProfilePage() {
   const box = document.getElementById("profileContainer");
-  if (!box) return;
-
-  if (currentUser) {
+  if (!currentUser) {
     box.innerHTML = `
       <div class="account-card">
-        <div class="account">
-          <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
-          <div>
-            <b style="font-size:16px;display:block">${currentUser.name || 'User Profile'}</b>
-            <small style="color:var(--muted)">HY Store Member</small>
-          </div>
-        </div>
-        <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><b>Email:</b> ${currentUser.email || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address || 'N/A'}</div></div>
-        </div>
-        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Logout Account</button>
+        <h3 style="margin-bottom:15px;font-size:16px;">Set Account Profile</h3>
+        <form id="profileForm">
+          <div class="field"><label>Full Name</label><input id="pName" required placeholder="John Doe"></div>
+          <div class="field"><label>Email Address</label><input type="email" id="pEmail" required placeholder="name@email.com"></div>
+          <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Default Address</label><textarea id="pAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+          <button class="primary" type="submit">SAVE PROFILE</button>
+        </form>
       </div>`;
+    document.getElementById("profileForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      currentUser = {
+        name: document.getElementById("pName").value.trim(),
+        email: document.getElementById("pEmail").value.trim().toLowerCase(),
+        phone: document.getElementById("pPhone").value.trim(),
+        address: document.getElementById("pAddress").value.trim()
+      };
+      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+      toast("Profile Saved", "Your information has been updated.");
+      renderProfilePage();
+    });
   } else {
     box.innerHTML = `
       <div class="account-card">
-        <b style="font-size:16px;display:block;margin-bottom:15px;text-align:center"><i class="fa-solid fa-user-lock"></i> Account Login / Profile</b>
-        <form onsubmit="saveProfile(event)">
-          <div class="field"><label>Full Name</label><input id="pName" required placeholder="Enter full name"></div>
-          <div class="field"><label>Email Address</label><input type="email" id="pEmail" required placeholder="name@example.com"></div>
-          <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Shipping Address</label><textarea id="pAddress" rows="3" required placeholder="Delivery address"></textarea></div>
-          <button class="primary" type="submit">SAVE PROFILE & LOGIN</button>
-        </form>
+        <div class="account">
+          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
+          <div>
+            <b style="font-size:16px;">${currentUser.name || 'User'}</b>
+            <small style="display:block;color:var(--muted);">${currentUser.email}</small>
+          </div>
+        </div>
+        <div class="account-details">
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span>${currentUser.phone || 'N/A'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span>${currentUser.address || 'N/A'}</span></div>
+        </div>
+        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Clear Profile Data</button>
       </div>`;
   }
-}
-
-function saveProfile(e) {
-  e.preventDefault();
-  currentUser = {
-    name: document.getElementById("pName").value.trim(),
-    email: document.getElementById("pEmail").value.trim().toLowerCase(),
-    phone: document.getElementById("pPhone").value.trim(),
-    address: document.getElementById("pAddress").value.trim()
-  };
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  toast("Profile Saved", "Account login details saved.");
-  renderProfilePage();
 }
 
 function logoutUser() {
   localStorage.removeItem("hy_user_session");
   currentUser = null;
-  toast("Logged Out", "You have been logged out.");
+  toast("Logged Out", "Session cleared successfully.");
   renderProfilePage();
 }
 
