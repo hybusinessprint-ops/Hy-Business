@@ -66,18 +66,21 @@ header {
   justify-content: space-between;
 }
 
-.logo { font-size: 20px; font-weight: 800; letter-spacing: .5px; cursor: pointer; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: .5px; cursor: pointer; }
+.logo img { height: 40px; width: auto; object-fit: contain; }
 .logo b { color: var(--green); }
 .logo small { display: block; font-size: 8px; letter-spacing: 2px; color: var(--muted); font-weight: 500; }
 
 .head-actions { display: flex; gap: 8px; }
-.iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
+.iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); transition: all 0.2s ease; }
+.iconbtn:hover { background: #1a2942; border-color: var(--green); }
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
 .search-wrapper { padding: 10px 4% 0; max-width: 1200px; margin: 0 auto; }
 .search { display: flex; background: #0b1220; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 .search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 12px 14px; font-size: 13px; width: 100%; }
-.search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; }
+.search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; transition: background 0.2s; }
+.search button:hover { background: #33aaff; }
 
 .container { width: min(1200px, 92%); margin: auto; padding-top: 15px; }
 .app-view { display: none; animation: fadeIn 0.3s ease-in-out; }
@@ -121,19 +124,19 @@ header {
 
 .categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 15px; }
 .categories::-webkit-scrollbar { display: none; }
-.cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; }
+.cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; cursor: pointer; }
 .cat.active { background: var(--green); color: #00140a; font-weight: 700; }
 
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
 .section-head h2 { font-size: 18px; }
 
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
 .pimg { height: 180px; background: #111827; position: relative; }
 .pimg img { width: 100%; height: 100%; object-fit: cover; }
 .pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; }
 
-.pbody { padding: 12px; }
+.pbody { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
 .pbody h3 { font-size: 13px; margin-bottom: 6px; height: 36px; overflow: hidden; line-height: 1.3; }
 .price { font-weight: 800; color: var(--green); font-size: 16px; }
 .old { font-size: 11px; color: var(--muted); text-decoration: line-through; margin-left: 5px; }
@@ -141,9 +144,10 @@ header {
 .pactions { display: flex; gap: 6px; margin-top: 10px; }
 .pactions button { flex: 1; padding: 8px; border-radius: 8px; font-weight: 600; font-size: 12px; }
 .buy { background: var(--green); color: #00140a; }
+.buy:hover { background: #33aaff; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
+.cartbtn:hover { background: #263859; }
 
-/* Professional Timeline Order Card */
 .order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; position: relative; }
 .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
 .order-header b { font-size: 16px; color: var(--green); }
@@ -153,7 +157,6 @@ header {
 .cancelled, .rejected, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 .confirmed, .shipped, .delivered { background: rgba(0,150,255,.15); color: var(--green); border: 1px solid rgba(0,150,255,.3); }
 
-/* Tracker Line UI */
 .tracker-container {
   display: flex;
   align-items: center;
@@ -202,7 +205,6 @@ header {
   color: #ffffff;
 }
 
-/* Red / Rejected Status UI */
 .tracker-step.rejected-step .circle {
   background-color: var(--red) !important;
   border-color: var(--red) !important;
@@ -292,7 +294,12 @@ header {
 </div>
 
 <header>
-  <div class="logo" onclick="switchPage('home')">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
+  <div class="logo" onclick="switchPage('home')">
+    <img src="logo.png" alt="HY Store Logo" onerror="this.style.display='none'">
+    <div>
+      HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small>
+    </div>
+  </div>
   <div class="head-actions">
     <button class="iconbtn" onclick="switchPage('orders')"><i class="fa-solid fa-box"></i></button>
     <button class="iconbtn" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i></button>
@@ -513,6 +520,7 @@ function toast(title, text) {
 
 async function fetchSheetProducts() {
   const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
   
   if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
 
@@ -694,7 +702,6 @@ function buildOrderCard(data, isLocalCancelled) {
     statusClass = "pending";
   }
 
-  // Determine Timeline Active States
   let confClass = "", shipClass = "", delClass = "";
   let line1Class = "", line2Class = "";
   let confIcon = "fa-check", shipIcon = "fa-truck", delIcon = "fa-house";
@@ -747,157 +754,126 @@ function buildOrderCard(data, isLocalCancelled) {
       </div>
 
       <div class="order-grid-info">
-        <div><span>Customer:</span><b>${data.name || currentUser.name || 'Hy Business'}</b></div>
-        <div><span>Payment:</span><b>${data.payment || 'Cash on Delivery (COD)'}</b></div>
-        <div style="grid-column:1/-1"><span>Products:</span><b>${data.product || 'Wireless Bluetooth Headphones'}</b></div>
-        <div><span>Total Amount:</span><b style="color:var(--green)">Rs. ${data.price ? Number(data.price).toLocaleString() : '2500'}</b></div>
+        <div><span>Customer:</span><b>${data.name || currentUser?.name || 'Hy Business'}</b></div>
+        <div><span>Payment:</span><b>${data.payment || 'COD'}</b></div>
+        <div><span>Product:</span><b>${data.product || 'N/A'}</b></div>
+        <div><span>Total:</span><b style="color:var(--green)">Rs. ${Number(data.price || 0).toLocaleString()}</b></div>
       </div>
 
       <div class="order-card-actions">
-        ${!isRejected ? `<button class="btn-cancel-small" onclick="cancelOrder('${data.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>` : ''}
-        <button class="btn-delete-small" onclick="deleteOrder('${data.orderId}')"><i class="fa-solid fa-trash"></i> Delete</button>
+        ${!isRejected ? `<button class="btn-cancel-small" onclick="cancelOrder('${data.orderId}')">Cancel Order</button>` : ''}
+        <button class="btn-delete-small" onclick="deleteOrder('${data.orderId}')">Remove</button>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
-async function renderOrdersPage(){
-  const box = document.getElementById("ordersListContainer");
+async function renderOrdersPage() {
+  const container = document.getElementById("ordersListContainer");
+  if (!container) return;
 
-  if (!currentUser || !currentUser.email) {
-    box.innerHTML = `
-      <div class="order-card" style="text-align:center;padding:30px;">
-        <i class="fa-solid fa-lock fa-2x" style="color:var(--yellow);margin-bottom:10px;"></i>
-        <b style="display:block;font-size:15px;margin-bottom:5px;">Login / Account Required</b>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:15px;">Please set your Profile Email and details to view account orders.</p>
-        <button class="primary" style="max-width:200px;margin:auto;" onclick="switchPage('profile')">Go to Profile</button>
-      </div>`;
+  if (!userOrders.length) {
+    container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--muted)"><i class="fa-solid fa-box-open fa-3x"></i><br><br>No active or past orders found.</div>`;
     return;
   }
 
-  let myOrders = userOrders.filter(o => typeof o === 'object' && o.email === currentUser.email);
+  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Fetching live order statuses...</div>`;
 
-  if(!myOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No active orders found for ${currentUser.email}</div>`; return; }
-  
-  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Loading tracking details...</div>`;
-  let cardsHtml = "";
-  
-  for(let item of myOrders){
-    let id = item.id;
-    let isCancelled = item.cancelled;
-
-    if (isCancelled) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "REJECTED" }, true);
-      continue;
-    }
-
+  let html = "";
+  for (let localOrd of userOrders) {
     try {
-      const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
-      const data = await response.json();
-      if(data.result === "success") {
-        cardsHtml += buildOrderCard(data, false);
+      const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${localOrd.id}`);
+      const data = await res.json();
+      if (data.result === "success" && data.order) {
+        html += buildOrderCard(data.order, localOrd.cancelled);
       } else {
-        cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
+        html += buildOrderCard({ orderId: localOrd.id, status: localOrd.cancelled ? 'REJECTED' : 'CONFIRMED' }, localOrd.cancelled);
       }
     } catch(e) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
+      html += buildOrderCard({ orderId: localOrd.id, status: localOrd.cancelled ? 'REJECTED' : 'CONFIRMED' }, localOrd.cancelled);
     }
   }
-  box.innerHTML = cardsHtml;
+  container.innerHTML = html;
 }
 
-function cancelOrder(orderId) {
-  userOrders = userOrders.map(item => {
-    if (item.id === orderId) {
-      return { ...item, cancelled: true };
-    }
-    return item;
-  });
-  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Cancelled", `Order #${orderId} was marked as rejected.`);
-  renderOrdersPage();
-}
-
-function deleteOrder(orderId) {
-  userOrders = userOrders.filter(item => item.id !== orderId);
-  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Deleted", `Order #${orderId} removed permanently.`);
-  renderOrdersPage();
-}
-
-function trackOrder(){
+async function trackOrder() {
+  const input = document.getElementById("trackInput").value.trim().toUpperCase();
+  if (!input) return toast("Error", "Please enter an Order ID.");
   closeModal("trackModal");
-  if (!currentUser || !currentUser.email) {
-    toast("Login Required", "Please set Profile info first.");
-    return;
-  }
-  const query = document.getElementById("trackInput").value.trim();
-  if(!query) return;
-  
-  let exists = userOrders.find(item => item.id === query);
-  if (!exists) {
-    userOrders.unshift({ id: query, email: currentUser.email, cancelled: false });
-    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  }
+
   switchPage('orders');
+  const container = document.getElementById("ordersListContainer");
+  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Searching Order #${input}...</div>`;
+
+  try {
+    const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${input}`);
+    const data = await res.json();
+    if (data.result === "success" && data.order) {
+      const isLocCancelled = userOrders.some(x => x.id === input && x.cancelled);
+      container.innerHTML = buildOrderCard(data.order, isLocCancelled);
+    } else {
+      container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--red)"><i class="fa-solid fa-circle-exclamation fa-2x"></i><br><br>Order #${input} not found in database.</div>`;
+    }
+  } catch(e) {
+    toast("Search Error", "Could not fetch order data.");
+  }
+}
+
+function cancelOrder(id) {
+  if (confirm(`Are you sure you want to cancel order #${id}?`)) {
+    const item = userOrders.find(x => x.id === id);
+    if (item) {
+      item.cancelled = true;
+      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+      toast("Order Cancelled", `Order #${id} status updated to REJECTED.`);
+      renderOrdersPage();
+    }
+  }
+}
+
+function deleteOrder(id) {
+  userOrders = userOrders.filter(x => x.id !== id);
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  toast("Order Removed", `Order #${id} removed from history.`);
+  renderOrdersPage();
 }
 
 function renderProfilePage() {
-  const box = document.getElementById("profileContainer");
+  const container = document.getElementById("profileContainer");
+  if (!container) return;
+
   if (!currentUser) {
-    box.innerHTML = `
-      <div class="account-card">
-        <h3 style="margin-bottom:15px;font-size:16px;">Set Account Profile</h3>
-        <form id="profileForm">
-          <div class="field"><label>Full Name</label><input id="pName" required placeholder="John Doe"></div>
-          <div class="field"><label>Email Address</label><input type="email" id="pEmail" required placeholder="name@email.com"></div>
-          <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Default Address</label><textarea id="pAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
-          <button class="primary" type="submit">SAVE PROFILE</button>
-        </form>
-      </div>`;
-    document.getElementById("profileForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      currentUser = {
-        name: document.getElementById("pName").value.trim(),
-        email: document.getElementById("pEmail").value.trim().toLowerCase(),
-        phone: document.getElementById("pPhone").value.trim(),
-        address: document.getElementById("pAddress").value.trim()
-      };
-      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-      toast("Profile Saved", "Your information has been updated.");
-      renderProfilePage();
-    });
-  } else {
-    box.innerHTML = `
-      <div class="account-card">
-        <div class="account">
-          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
-          <div>
-            <b style="font-size:16px;">${currentUser.name || 'User'}</b>
-            <small style="display:block;color:var(--muted);">${currentUser.email}</small>
-          </div>
-        </div>
-        <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span>${currentUser.phone || 'N/A'}</span></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span>${currentUser.address || 'N/A'}</span></div>
-        </div>
-        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Clear Profile Data</button>
-      </div>`;
+    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted)">No active profile session. Place an order to log in automatically.</div>`;
+    return;
   }
+
+  container.innerHTML = `
+    <div class="account-card">
+      <div class="account">
+        <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
+        <div>
+          <b style="font-size:16px">${currentUser.name || 'HY Customer'}</b>
+          <small style="display:block;color:var(--muted)">Valued Customer</small>
+        </div>
+      </div>
+      <div class="account-details">
+        <div class="acc-info-row"><i class="fa-solid fa-envelope"></i><span>${currentUser.email || 'N/A'}</span></div>
+        <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span>${currentUser.phone || 'N/A'}</span></div>
+        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span>${currentUser.address || 'N/A'}</span></div>
+      </div>
+      <button class="btn-logout" onclick="logoutUser()">LOGOUT SESSION</button>
+    </div>`;
 }
 
 function logoutUser() {
   localStorage.removeItem("hy_user_session");
   currentUser = null;
-  toast("Logged Out", "Session cleared successfully.");
-  renderProfilePage();
+  toast("Logged Out", "Profile session cleared.");
+  switchPage('home');
 }
 
-window.onload = function() {
-  fetchSheetProducts();
-  saveCart();
-};
+saveCart();
+fetchSheetProducts();
 </script>
+
 </body>
 </html>
