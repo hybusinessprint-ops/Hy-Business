@@ -93,27 +93,17 @@ header {
 
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; background: #070d18; }
-.slides { display: flex; width: 100%; height: 100%; transition: transform 0.15s ease-in-out; }
+.slides { display: flex; width: 100%; height: 100%; transition: transform 0.3s ease-in-out; }
 
 /* Image sizing configuration */
 .slide { 
   min-width: 100%; 
+  height: 100%;
   position: relative; 
-  display: flex; 
-  align-items: center; 
-  background-size: contain; 
+  background-size: 100% 100%; 
   background-position: center; 
   background-repeat: no-repeat;
-  padding: 25px; 
 }
-
-.slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,10,16,0.8) 0%, rgba(7,10,16,0.3) 100%); }
-.slide-content { position: relative; z-index: 2; max-width: 480px; }
-.slide-content .tag { display: inline-block; background: rgba(0,230,118,0.2); color: var(--green); border: 1px solid var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
-.slide-content h1 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; word-wrap: break-word; }
-.slide-content h1 span { color: var(--green); }
-.slide-content p { color: var(--muted); margin-bottom: 16px; font-size: 12px; }
-.hero-btn { padding: 10px 18px; border-radius: 8px; background: var(--green); font-weight: 700; color: #00140a; font-size: 12px; }
 
 .slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
 .slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
@@ -238,59 +228,19 @@ header {
         <div class="slides" id="heroSlides">
           
           <!-- Slide 1 -->
-          <div class="slide" style="background-image: url('slide1.png');">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-              <span class="tag">MEGA SALE</span>
-              <h1>Shop Smart.<br><span>Live Better.</span></h1>
-              <p>Premium quality items with fast shipping and Cash on Delivery.</p>
-              <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
+          <div class="slide" style="background-image: url('slide1.png');"></div>
 
           <!-- Slide 2 -->
-          <div class="slide" style="background-image: url('slide2.png');">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-              <span class="tag">NEW ARRIVAL</span>
-              <h1>Exclusive Deals.<br><span>Best Quality.</span></h1>
-              <p>Get top trending products delivered to your doorstep.</p>
-              <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
+          <div class="slide" style="background-image: url('slide2.png');"></div>
 
           <!-- Slide 3 -->
-          <div class="slide" style="background-image: url('slide3.png');">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-              <span class="tag">HOT OFFER</span>
-              <h1>Special Discount.<br><span>Limited Time.</span></h1>
-              <p>Save big on your favorite accessories and gadgets.</p>
-              <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
+          <div class="slide" style="background-image: url('slide3.png');"></div>
 
           <!-- Slide 4 -->
-          <div class="slide" style="background-image: url('slide4.png');">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-              <span class="tag">BEST SELLER</span>
-              <h1>Top Products.<br><span>Trusted Quality.</span></h1>
-              <p>Verified items recommended by hundreds of users.</p>
-              <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
+          <div class="slide" style="background-image: url('slide4.png');"></div>
 
           <!-- Slide 5 -->
-          <div class="slide" style="background-image: url('slide5.png');">
-            <div class="slide-overlay"></div>
-            <div class="slide-content">
-              <span class="tag">EXPRESS DELIVERY</span>
-              <h1>Fast Shipping.<br><span>Safe Payment.</span></h1>
-              <p>Pay cash upon receiving your packages safely.</p>
-              <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-          </div>
+          <div class="slide" style="background-image: url('slide5.png');"></div>
 
         </div>
 
@@ -452,8 +402,8 @@ function prevSlide() {
 
 function setSlide(i) { currentSlide = i; updateSlider(); }
 
-// 3 Seconds Auto-Slide Interval
-setInterval(nextSlide, 3000);
+// 15 Seconds Auto-Slide Interval
+setInterval(nextSlide, 15000);
 
 let products = [];
 let activeCat = "All", searchTerm = "";
@@ -673,68 +623,7 @@ function buildOrderCard(d){
     </div>`;
 }
 
-function saveUserProfile(e){
-  e.preventDefault();
-  currentUser = {
-    name: document.getElementById("lName").value.trim(),
-    phone: document.getElementById("lPhone").value.trim(),
-    email: document.getElementById("lEmail").value.trim(),
-    address: document.getElementById("lAddress").value.trim()
-  };
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  toast("Profile Saved", "Account information updated.");
-  renderProfilePage();
-}
-
-function logoutUser(){
-  localStorage.removeItem("hy_user_session");
-  currentUser = null;
-  toast("Logged Out", "Account session cleared.");
-  renderProfilePage();
-}
-
-function renderProfilePage(){
-  const container = document.getElementById("profileContainer");
-  if(!container) return;
-  
-  if(!currentUser){
-    container.innerHTML = `
-      <div class="account-card">
-        <h3 style="margin-bottom:15px;text-align:center">User Login / Profile</h3>
-        <form onsubmit="saveUserProfile(event)">
-          <div class="field"><label>Your Name</label><input id="lName" required placeholder="Full Name"></div>
-          <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Email Address</label><input id="lEmail" type="email" placeholder="name@example.com"></div>
-          <div class="field"><label>Default Address</label><textarea id="lAddress" rows="2" placeholder="Full Address"></textarea></div>
-          <button class="primary" type="submit">SAVE SESSION</button>
-        </form>
-      </div>`;
-  } else {
-    container.innerHTML = `
-      <div class="account-card">
-        <div class="account">
-          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
-          <div>
-            <h3 style="font-size:16px">${currentUser.name || 'User'}</h3>
-            <span style="font-size:11px;color:var(--muted)">Active Account Session</span>
-          </div>
-        </div>
-        <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><span>Phone:</span><br>${currentUser.phone || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><span>Email:</span><br>${currentUser.email || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><span>Address:</span><br>${currentUser.address || 'N/A'}</div></div>
-        </div>
-        <button class="btn-logout" onclick="logoutUser()">LOGOUT SESSION</button>
-      </div>`;
-  }
-}
-
-// Page initialization
-window.addEventListener("DOMContentLoaded", () => {
-  saveCart();
-  fetchSheetProducts();
-});
+fetchSheetProducts();
 </script>
-
 </body>
 </html>
