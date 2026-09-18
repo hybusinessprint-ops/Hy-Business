@@ -133,9 +133,9 @@ header {
 
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-.pimg { height: 180px; background: #111827; position: relative; }
+.pimg { height: 180px; background: #111827; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .pimg img { width: 100%; height: 100%; object-fit: cover; }
-.pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; }
+.pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; z-index: 2; }
 
 .pbody { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
 .pbody h3 { font-size: 13px; margin-bottom: 6px; height: 36px; overflow: hidden; line-height: 1.3; }
@@ -155,9 +155,10 @@ header {
 
 .status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
-.cancelled, .rejected, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
+.rejected, .cancelled, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 .confirmed, .shipped, .delivered { background: rgba(0,150,255,.15); color: var(--green); border: 1px solid rgba(0,150,255,.3); }
 
+/* TRACKER TIMELINE STYLES */
 .tracker-container {
   display: flex;
   align-items: center;
@@ -202,9 +203,7 @@ header {
   box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
 }
 
-.tracker-step.active span {
-  color: #ffffff;
-}
+.tracker-step.active span { color: #ffffff; }
 
 .tracker-step.rejected-step .circle {
   background-color: var(--red) !important;
@@ -213,9 +212,7 @@ header {
   box-shadow: 0 0 12px rgba(255, 77, 103, 0.6) !important;
 }
 
-.tracker-step.rejected-step span {
-  color: var(--red) !important;
-}
+.tracker-step.rejected-step span { color: var(--red) !important; }
 
 .tracker-line {
   flex-grow: 1;
@@ -441,7 +438,7 @@ header {
   </div>
 </div>
 
-<!-- Save Password Prompt Modal -->
+<!-- Save Password Modal -->
 <div class="modal" id="savePasswordModal">
   <div class="modalbox" style="text-align: center;">
     <div class="modalhead">
@@ -457,7 +454,7 @@ header {
   </div>
 </div>
 
-<!-- Forgot / Change Password Modal -->
+<!-- Password Change Modal -->
 <div class="modal" id="passwordModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -538,18 +535,15 @@ header {
 
 <script>
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
-const WHATSAPP = "923209306672";
 
 let registeredUsers = JSON.parse(localStorage.getItem("hy_registered_users") || "[]");
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
-let pendingSaveAuth = null;
 
-// Initial Default Products so page is never empty
 let products = [
-  { title: "Azure Luxury Perfume (MTJ)", price: 3499, oldPrice: 4500, category: "Perfumes", image: "https://via.placeholder.com/300x200/0f172a/7DF9FF?text=Azure+Perfume" },
-  { title: "Wireless Bluetooth Earbuds", price: 2199, oldPrice: 2999, category: "Audio", image: "https://via.placeholder.com/300x200/0f172a/0096FF?text=Wireless+Earbuds" },
-  { title: "Smart Watch Ultra Series", price: 4299, oldPrice: 5500, category: "Watches", image: "https://via.placeholder.com/300x200/0f172a/7DF9FF?text=Smart+Watch" },
-  { title: "Gaming RGB Headset", price: 2899, oldPrice: 3800, category: "Audio", image: "https://via.placeholder.com/300x200/0f172a/0096FF?text=Gaming+Headset" }
+  { title: "Azure Luxury Perfume (MTJ)", price: 3499, oldPrice: 4500, category: "Perfumes", image: "pictuer.png" },
+  { title: "Wireless Bluetooth Earbuds", price: 2199, oldPrice: 2999, category: "Audio", image: "pictuer.png" },
+  { title: "Smart Watch Ultra Series", price: 4299, oldPrice: 5500, category: "Watches", image: "pictuer.png" },
+  { title: "Gaming RGB Headset", price: 2899, oldPrice: 3800, category: "Audio", image: "pictuer.png" }
 ];
 
 function switchPage(pageId) {
@@ -643,9 +637,7 @@ document.getElementById("registerForm").addEventListener("submit", function(e){
   const pass = document.getElementById("rPassword").value;
   const cPass = document.getElementById("rConfirmPassword").value;
 
-  if (pass !== cPass) {
-    return toast("Error", "Passwords do not match!");
-  }
+  if (pass !== cPass) return toast("Error", "Passwords do not match!");
 
   if (registeredUsers.some(u => u.email === email)) {
     return toast("Account Exists", "This email is already registered. Please Login.");
@@ -666,7 +658,6 @@ document.getElementById("registerForm").addEventListener("submit", function(e){
   localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
   closeModal("authModal");
 
-  pendingSaveAuth = newUser;
   showModal("savePasswordModal");
 });
 
@@ -677,25 +668,18 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
 
   const user = registeredUsers.find(u => u.email === email && u.password === pass);
 
-  if (!user) {
-    return toast("Access Denied", "Invalid Email or Password.");
-  }
+  if (!user) return toast("Access Denied", "Invalid Email or Password.");
 
   currentUser = user;
   localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
   closeModal("authModal");
 
-  pendingSaveAuth = user;
   showModal("savePasswordModal");
 });
 
 function confirmSavePassword(shouldSave) {
   closeModal("savePasswordModal");
-  if(shouldSave) {
-    toast("Saved", "Login credentials saved securely.");
-  } else {
-    toast("Notice", "Password save skipped.");
-  }
+  if(shouldSave) toast("Saved", "Login credentials saved securely.");
   renderProfilePage();
   renderOrdersPage();
 }
@@ -722,9 +706,7 @@ document.getElementById("changePasswordForm").addEventListener("submit", functio
 
   if(!currentUser) return;
 
-  if(currentUser.password !== oldPass) {
-    return toast("Error", "Incorrect old password!");
-  }
+  if(currentUser.password !== oldPass) return toast("Error", "Incorrect old password!");
 
   currentUser.password = newPass;
   const idx = registeredUsers.findIndex(u => u.email === currentUser.email);
@@ -743,9 +725,7 @@ document.getElementById("forgetPasswordForm").addEventListener("submit", functio
   const newPass = document.getElementById("fNewPass").value;
 
   const idx = registeredUsers.findIndex(u => u.email === email);
-  if(idx === -1) {
-    return toast("Error", "Email address not registered.");
-  }
+  if(idx === -1) return toast("Error", "Email address not registered.");
 
   registeredUsers[idx].password = newPass;
   localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
@@ -767,29 +747,41 @@ function logoutUser() {
   toast("Logged Out", "You have been logged out.");
 }
 
-/* FETCH DATA & SYNC STATUS WITH GOOGLE SHEET */
+/* FETCH DATA & LIVE SYNC WITH GOOGLE SHEET */
 async function fetchSheetData() {
   try {
     const res = await fetch(GOOGLE_SCRIPT_URL);
     const data = await res.json();
+    
     if(data.products && Array.isArray(data.products) && data.products.length > 0) {
       products = data.products;
       renderProducts();
     }
+
     if(data.orders && Array.isArray(data.orders)) {
       data.orders.forEach(remoteOrder => {
-        const localIdx = userOrders.findIndex(o => o.id === remoteOrder.id || o.id === remoteOrder.orderId);
+        const localIdx = userOrders.findIndex(o => 
+          (o.id && o.id.toString().trim() === remoteOrder.id.toString().trim()) || 
+          (o.orderId && o.orderId.toString().trim() === remoteOrder.id.toString().trim())
+        );
+
         if(localIdx !== -1) {
-          userOrders[localIdx].status = remoteOrder.status || remoteOrder.orderStatus;
+          userOrders[localIdx].status = remoteOrder.status || "Confirmed";
+        } else if(currentUser) {
+          // If order exists in Sheet but not local, sync it automatically
+          if(remoteOrder.customer && remoteOrder.customer.toLowerCase() === currentUser.name.toLowerCase()) {
+            userOrders.push(remoteOrder);
+          }
         }
       });
+      
       localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
       if(document.getElementById('view-orders').classList.contains('active-view')) {
         renderOrdersPage();
       }
     }
   } catch(e) {
-    console.log("Sheet Sync Info:", e);
+    console.log("Sheet Sync Status:", e);
   }
 }
 
@@ -813,10 +805,15 @@ function renderProducts() {
   filtered.forEach(p => {
     const card = document.createElement("div");
     card.className = "product";
+    
+    const imgHtml = p.image ? 
+      `<img src="${p.image}" alt="${p.title}" onerror="this.onerror=null; this.src='pictuer.png';">` : 
+      `<i class="fa-solid fa-box-open" style="font-size:40px;color:var(--muted)"></i>`;
+
     card.innerHTML = `
       <div class="pimg">
-        <img src="${p.image}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
         <span class="tag">${p.category || 'General'}</span>
+        ${imgHtml}
       </div>
       <div class="pbody">
         <h3>${p.title}</h3>
@@ -975,16 +972,14 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
       body: JSON.stringify(orderData)
     });
   } catch(err) {
-    console.log("Sheet post error", err);
+    console.log("Sheet Post Error:", err);
   }
 });
 
-/* ORDERS & TRACKER PAGE */
+/* LIVE ORDER TRACKER & HISTORIES */
 function renderOrdersPage() {
   const container = document.getElementById("ordersListContainer");
   if(!container) return;
-
-  fetchSheetData();
 
   if(!currentUser) {
     container.innerHTML = `
@@ -998,7 +993,7 @@ function renderOrdersPage() {
     return;
   }
 
-  const myOrders = userOrders.filter(o => o.email === currentUser.email);
+  const myOrders = userOrders.filter(o => o.email === currentUser.email || (o.customer && o.customer.toLowerCase() === currentUser.name.toLowerCase()));
 
   if(myOrders.length === 0) {
     container.innerHTML = `
@@ -1013,36 +1008,36 @@ function renderOrdersPage() {
 
   let html = "";
   myOrders.forEach((o, index) => {
-    const st = (o.status || "Confirmed").toLowerCase();
-    let isRejected = st.includes("reject") || st.includes("cancel");
+    const rawStatus = (o.status || "Confirmed").trim();
+    const st = rawStatus.toLowerCase();
     
-    let step1Active = true;
-    let step2Active = st.includes("shipped") || st.includes("delivered");
-    let step3Active = st.includes("delivered");
+    let isRejected = st.includes("reject") || st.includes("cancel");
+    let isShipped = st.includes("shipped") || st.includes("delivered");
+    let isDelivered = st.includes("delivered");
 
     html += `
       <div class="order-card">
         <div class="order-header">
           <b>Order #${o.id || o.orderId}</b>
-          <span class="status ${isRejected ? 'rejected' : st}">${o.status || 'Confirmed'}</span>
+          <span class="status ${isRejected ? 'rejected' : st}">${rawStatus}</span>
         </div>
 
         <div class="tracker-container">
-          <div class="tracker-step ${isRejected ? 'rejected-step' : (step1Active ? 'active' : '')}">
+          <div class="tracker-step ${isRejected ? 'rejected-step' : 'active'}">
             <div class="circle"><i class="fa-solid ${isRejected ? 'fa-xmark' : 'fa-check'}"></i></div>
             <span>${isRejected ? 'Rejected' : 'Confirmed'}</span>
           </div>
 
-          <div class="tracker-line ${isRejected ? 'rejected-line' : (step2Active ? 'active' : '')}"></div>
+          <div class="tracker-line ${isRejected ? 'rejected-line' : (isShipped ? 'active' : '')}"></div>
 
-          <div class="tracker-step ${isRejected ? '' : (step2Active ? 'active' : '')}">
+          <div class="tracker-step ${isRejected ? '' : (isShipped ? 'active' : '')}">
             <div class="circle"><i class="fa-solid fa-truck-fast"></i></div>
             <span>Shipped</span>
           </div>
 
-          <div class="tracker-line ${isRejected ? 'rejected-line' : (step3Active ? 'active' : '')}"></div>
+          <div class="tracker-line ${isRejected ? 'rejected-line' : (isDelivered ? 'active' : '')}"></div>
 
-          <div class="tracker-step ${isRejected ? '' : (step3Active ? 'active' : '')}">
+          <div class="tracker-step ${isRejected ? '' : (isDelivered ? 'active' : '')}">
             <div class="circle"><i class="fa-solid fa-house"></i></div>
             <span>Delivered</span>
           </div>
@@ -1056,7 +1051,7 @@ function renderOrdersPage() {
         </div>
 
         <div class="order-card-actions">
-          ${(!isRejected && !step3Active) ? `<button class="btn-cancel-small" onclick="cancelOrder('${o.id}')">Cancel Order</button>` : ''}
+          ${(!isRejected && !isDelivered) ? `<button class="btn-cancel-small" onclick="cancelOrder('${o.id}')">Cancel Order</button>` : ''}
           <button class="btn-delete-small" onclick="removeOrderRecord(${index})">Remove</button>
         </div>
       </div>
@@ -1091,14 +1086,14 @@ function trackOrder() {
   const query = document.getElementById("trackInput").value.trim().toLowerCase();
   if(!query) return toast("Error", "Enter an Order ID");
 
-  const found = userOrders.find(o => (o.id && o.id.toLowerCase() === query) || (o.orderId && o.orderId.toLowerCase() === query));
+  const found = userOrders.find(o => (o.id && o.id.toString().toLowerCase() === query) || (o.orderId && o.orderId.toString().toLowerCase() === query));
   closeModal("trackModal");
 
   if(found) {
     switchPage("orders");
     toast("Order Found", `Status: ${found.status || 'Confirmed'}`);
   } else {
-    toast("Not Found", "No order matching this ID locally.");
+    toast("Not Found", "No order matching this ID.");
   }
 }
 
@@ -1140,10 +1135,15 @@ function renderProfilePage() {
   `;
 }
 
-// Initial Setup
+// Initial System Setup
 renderProducts();
 updateCart();
 fetchSheetData();
+
+// Auto-Sync Order Status with Google Sheet every 4 Seconds
+setInterval(() => {
+  fetchSheetData();
+}, 4000);
 </script>
 
 </body>
