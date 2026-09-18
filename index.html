@@ -1,800 +1,1500 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>HY STORE | Official Online Store</title>
 
+
+
 <!-- Fonts & Icons -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+
+
 <style>
+
 :root {
+
   --bg: #00001C;
+
   --card: #0f172a;
+
   --header-bg: #0f1a2d;
+
   --msg-bg: #152238;
+
   --text: #f8fafc;
+
   --muted: #94a3b8;
-  --green: #0086d3;
-  --cyan: #297683;
+
+  --green: #0096FF;
+
+  --cyan: #7DF9FF;
+
   --red: #ff4d67;
+
   --yellow: #ffd54a;
+
   --border: rgba(255,255,255,.09);
+
   --shadow: 0 18px 50px rgba(0,0,0,.35);
+
 }
+
+
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 html { scroll-behavior: smooth; }
+
 body {
+
   background: radial-gradient(circle at 10% 0,#0b2030 0,transparent 30%), var(--bg);
+
   color: var(--text);
+
   font-family: 'Poppins', Arial, sans-serif;
+
   padding-bottom: 85px;
+
   min-height: 100vh;
+
   overflow-x: hidden;
+
 }
+
+
 
 button, input, textarea, select { font-family: inherit; }
+
 button { cursor: pointer; border: 0; outline: none; }
 
+
+
 .topbar {
+
   background: #05070b;
+
   border-bottom: 1px solid var(--border);
+
   padding: 8px 5%;
+
   display: flex;
+
   justify-content: space-between;
+
   font-size: 12px;
+
   color: var(--muted);
+
 }
+
 .topbar span { margin-right: 18px; }
+
 .topbar i { color: var(--green); margin-right: 5px; }
 
+
+
 header {
+
   position: sticky;
+
   top: 0;
+
   z-index: 50;
+
   background: rgba(7,10,16,.95);
+
   backdrop-filter: blur(15px);
+
   border-bottom: 1px solid var(--border);
+
   padding: 12px 4%;
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
 }
+
+
 
 .logo { font-size: 20px; font-weight: 800; letter-spacing: .5px; cursor: pointer; }
+
 .logo b { color: var(--green); }
+
 .logo small { display: block; font-size: 8px; letter-spacing: 2px; color: var(--muted); font-weight: 500; }
 
+
+
 .head-actions { display: flex; gap: 8px; }
+
 .iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
+
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
+
+
 .search-wrapper { padding: 10px 4% 0; max-width: 1200px; margin: 0 auto; }
+
 .search { display: flex; background: #0b1220; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
 .search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 12px 14px; font-size: 13px; width: 100%; }
+
 .search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; }
 
+
+
 .container { width: min(1200px, 92%); margin: auto; padding-top: 15px; }
+
 .app-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+
 .app-view.active-view { display: block; }
 
+
+
 @keyframes fadeIn {
+
   from { opacity: 0; transform: translateY(6px); }
+
   to { opacity: 1; transform: translateY(0); }
+
 }
 
+
+
 .page-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+
 .page-title div { display: flex; align-items: center; gap: 10px; }
+
 .page-title i { color: var(--green); }
+
+
 
 .track-btn-top { background: var(--cyan); color: #00140a; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
 
+
+
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
+
 .hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; background: #070d18; }
+
 .slides { display: flex; width: 100%; height: 100%; transition: transform 0.3s ease-in-out; }
 
+
+
 .slide { 
+
   min-width: 100%; 
+
   height: 100%;
+
   position: relative; 
+
   background-size: cover; 
+
   background-position: center; 
+
   background-repeat: no-repeat;
+
 }
 
+
+
 .slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
+
 .slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
+
 .dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; flex-wrap: wrap; }
+
 .dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
+
 .dot-item.active { background: var(--green); width: 22px; border-radius: 8px; }
 
+
+
 .trust { display: grid; gap: 10px; }
+
 .trust-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 15px; }
+
 .trust-card i { font-size: 20px; color: var(--green); margin-bottom: 8px; }
+
 .trust-card b { display: block; font-size: 13px; }
+
 .trust-card small { color: var(--muted); font-size: 10px; }
 
+
+
 .categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 15px; }
+
 .categories::-webkit-scrollbar { display: none; }
+
 .cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; }
+
 .cat.active { background: var(--green); color: #00140a; font-weight: 700; }
 
+
+
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
+
 .section-head h2 { font-size: 18px; }
 
+
+
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
 .product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+
 .pimg { height: 180px; background: #111827; position: relative; }
+
 .pimg img { width: 100%; height: 100%; object-fit: cover; }
+
 .pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; }
 
+
+
 .pbody { padding: 12px; }
+
 .pbody h3 { font-size: 13px; margin-bottom: 6px; height: 36px; overflow: hidden; line-height: 1.3; }
+
 .price { font-weight: 800; color: var(--green); font-size: 16px; }
+
 .old { font-size: 11px; color: var(--muted); text-decoration: line-through; margin-left: 5px; }
 
+
+
 .pactions { display: flex; gap: 6px; margin-top: 10px; }
+
 .pactions button { flex: 1; padding: 8px; border-radius: 8px; font-weight: 600; font-size: 12px; }
+
 .buy { background: var(--green); color: #00140a; }
+
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
+
+
 /* Professional Timeline Order Card */
+
 .order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; position: relative; }
+
 .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
+
 .order-header b { font-size: 16px; color: var(--green); }
 
-.status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-.pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
-.cancelled { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 
-/* Timeline Stepper UI */
-.order-stepper { display: flex; justify-content: space-between; margin: 18px 0; position: relative; }
-.order-stepper::before { content: ''; position: absolute; top: 12px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
-.step { position: relative; z-index: 2; text-align: center; flex: 1; }
-.step-icon { width: 26px; height: 26px; border-radius: 50%; background: #101a2d; border: 1px solid var(--border); display: grid; place-items: center; margin: 0 auto 6px; font-size: 10px; color: var(--muted); }
-.step.active .step-icon { background: var(--green); color: #000; border-color: var(--green); }
-.step-label { font-size: 10px; color: var(--muted); }
-.step.active .step-label { color: white; font-weight: 600; }
+
+.status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+.pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
+
+.cancelled, .rejected, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
+
+.confirmed, .shipped, .delivered { background: rgba(0,150,255,.15); color: var(--green); border: 1px solid rgba(0,150,255,.3); }
+
+
+
+/* Tracker Line UI */
+
+.tracker-container {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 15px 5px 20px;
+
+  position: relative;
+
+}
+
+
+
+.tracker-step {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+
+
+.tracker-step .circle {
+
+  width: 36px;
+
+  height: 36px;
+
+  border-radius: 50%;
+
+  background-color: #101a2d;
+
+  border: 2px solid var(--border);
+
+  color: var(--muted);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 14px;
+
+  transition: all 0.3s ease;
+
+}
+
+
+
+.tracker-step span {
+
+  margin-top: 8px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: var(--muted);
+
+}
+
+
+
+.tracker-step.active .circle {
+
+  background-color: var(--green);
+
+  border-color: var(--green);
+
+  color: #000;
+
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
+
+}
+
+
+
+.tracker-step.active span {
+
+  color: #ffffff;
+
+}
+
+
+
+/* Red / Rejected Status UI */
+
+.tracker-step.rejected-step .circle {
+
+  background-color: var(--red) !important;
+
+  border-color: var(--red) !important;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 0 12px rgba(255, 77, 103, 0.6) !important;
+
+}
+
+
+
+.tracker-step.rejected-step span {
+
+  color: var(--red) !important;
+
+}
+
+
+
+.tracker-line {
+
+  flex-grow: 1;
+
+  height: 3px;
+
+  background-color: rgba(255, 255, 255, 0.1);
+
+  margin: 0 -5px 20px;
+
+  position: relative;
+
+  z-index: 1;
+
+}
+
+
+
+.tracker-line.active {
+
+  background: var(--green);
+
+  box-shadow: 0 0 8px rgba(0, 150, 255, 0.5);
+
+}
+
+
+
+.tracker-line.rejected-line {
+
+  background: var(--red) !important;
+
+  box-shadow: 0 0 8px rgba(255, 77, 103, 0.5) !important;
+
+}
+
+
 
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
+
 .order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
 
+
+
 .order-card-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
 .btn-cancel-small { padding: 5px 12px; border-radius: 6px; background: rgba(255,77,103,0.1); color: var(--red); border: 1px solid rgba(255,77,103,0.25); font-weight: 600; font-size: 10px; }
+
 .btn-delete-small { padding: 5px 12px; border-radius: 6px; background: var(--red); color: white; font-weight: 600; font-size: 10px; }
 
+
+
 .account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; max-width: 600px; margin: 0 auto; }
+
 .account { display: flex; align-items: center; gap: 14px; }
+
 .avatar { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,var(--green),var(--cyan)); color: #00140a; font-weight: 800; font-size: 24px; }
 
+
+
 .account-details { background: #070d18; border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin: 15px 0; }
+
 .acc-info-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; word-break: break-word; }
+
 .acc-info-row:last-child { border-bottom: none; }
+
 .acc-info-row i { color: var(--green); margin-top: 2px; }
+
+
 
 .btn-logout { width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 700; font-size: 12px; margin-top: 10px; }
 
+
+
 .bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-content: space-around; align-items: center; padding: 8px 0; }
+
 .nav-btn { background: none; border: none; color: var(--muted); font-size: 9px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 3px; flex: 1; }
+
 .nav-btn i { font-size: 16px; }
+
 .nav-btn.active-nav { color: var(--green); }
 
+
+
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 15px; }
+
 .modal.show { display: flex; }
+
 .modalbox { width: min(500px, 100%); max-height: 85vh; overflow-y: auto; background: #0b1321; border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
+
 .modalhead { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+
 .close { background: #172238; color: white; width: 30px; height: 30px; border-radius: 8px; }
+
 .modalbody { padding: 18px; }
 
+
+
 .field { margin-bottom: 12px; }
+
 .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+
 .field input, .field textarea, .field select { width: 100%; padding: 10px; border-radius: 8px; background: #070d18; color: white; border: 1px solid var(--border); outline: 0; font-size: 12px; }
+
 .primary { width: 100%; padding: 12px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; font-size: 13px; }
 
+
+
 .toast { position: fixed; top: 20px; right: 20px; z-index: 300; background: #0d1727; border: 1px solid var(--green); padding: 12px 18px; border-radius: 12px; box-shadow: var(--shadow); display: none; animation: slideIn 0.3s ease; }
+
 .toast.show { display: block; }
+
+
 
 @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
+
+
 @media(max-width:850px){
+
   .products { grid-template-columns: repeat(2, 1fr); }
+
   .hero { grid-template-columns: 1fr; }
+
   .hero-slider { min-height: 180px; height: 210px; }
+
   .slide { background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #050a14; }
+
   .trust { grid-template-columns: repeat(3, 1fr); }
+
   .topbar { display: none; }
+
 }
+
 </style>
+
 </head>
+
+
 
 <body>
 
+
+
 <div class="topbar">
+
   <div><span><i class="fa-solid fa-mobile-screen"></i> OFFICIAL STORE APP</span><span><i class="fa-solid fa-store"></i> HY BUSINESS STORE</span></div>
+
   <div><span onclick="switchPage('orders')" style="cursor:pointer"><i class="fa-solid fa-box"></i> MY ORDERS</span></div>
+
 </div>
+
+
 
 <header>
+
   <div class="logo" onclick="switchPage('home')">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
+
   <div class="head-actions">
+
     <button class="iconbtn" onclick="switchPage('orders')"><i class="fa-solid fa-box"></i></button>
+
     <button class="iconbtn" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i></button>
+
     <button class="iconbtn" onclick="openCart()"><i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartCount">0</span></button>
+
   </div>
+
 </header>
 
+
+
 <div class="search-wrapper">
+
   <div class="search">
+
     <input id="searchInput" placeholder="Search products..." onkeydown="if(event.key==='Enter')searchProducts()">
+
     <button onclick="searchProducts()"><i class="fa-solid fa-search"></i></button>
+
   </div>
+
 </div>
+
+
 
 <main class="container">
 
+
+
   <!-- HOME VIEW -->
+
   <section id="view-home" class="app-view active-view">
+
     <div class="hero">
+
       <div class="hero-slider">
+
         <div class="slides" id="heroSlides">
+
           <div class="slide" style="background-image: url('slide1.png');"></div>
+
           <div class="slide" style="background-image: url('slide2.png');"></div>
+
           <div class="slide" style="background-image: url('slide3.png');"></div>
+
           <div class="slide" style="background-image: url('slide4.png');"></div>
+
           <div class="slide" style="background-image: url('slide5.png');"></div>
+
         </div>
+
+
 
         <div class="dots" id="heroDots">
+
           <span class="dot-item active" onclick="setSlide(0)"></span>
+
           <span class="dot-item" onclick="setSlide(1)"></span>
+
           <span class="dot-item" onclick="setSlide(2)"></span>
+
           <span class="dot-item" onclick="setSlide(3)"></span>
+
           <span class="dot-item" onclick="setSlide(4)"></span>
+
         </div>
+
+
 
         <div class="slider-controls">
+
           <button class="slider-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+
           <button class="slider-btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+
         </div>
+
       </div>
+
+
 
       <div class="trust">
+
         <div class="trust-card"><i class="fa-solid fa-circle-check"></i><b>100% Authentic</b><small>Verified Goods</small></div>
+
         <div class="trust-card"><i class="fa-solid fa-truck-fast"></i><b>Cash on Delivery</b><small>Pay Upon Receipt</small></div>
+
         <div class="trust-card"><i class="fa-brands fa-whatsapp"></i><b>Live Support</b><small>24/7 Customer Care</small></div>
+
       </div>
+
     </div>
 
+
+
     <div class="section-head">
+
       <h2>Featured Products</h2>
+
       <button onclick="switchPage('products')" style="background:none;color:var(--green);font-weight:600">View All <i class="fa-solid fa-arrow-right"></i></button>
+
     </div>
+
     <div class="products" id="featuredGrid"></div>
+
   </section>
+
+
 
   <!-- PRODUCTS VIEW -->
+
   <section id="view-products" class="app-view">
+
     <div class="page-title">
+
       <div><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
+
     </div>
+
     <div class="categories">
+
       <button class="cat active" onclick="filterCategory('All',this)">All Items</button>
+
       <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
+
       <button class="cat" onclick="filterCategory('Audio',this)">Audio & Sound</button>
+
       <button class="cat" onclick="filterCategory('Watches',this)">Smart Watches</button>
+
       <button class="cat" onclick="filterCategory('Gaming',this)">Gaming Gear</button>
+
     </div>
+
     <div class="section-head">
+
       <h2 id="catHeading">All Products</h2>
+
       <span style="color:var(--muted);font-size:12px" id="resultCount">Loading items...</span>
+
     </div>
+
     <div class="products" id="productGrid"></div>
+
   </section>
+
+
 
   <!-- ORDERS VIEW -->
+
   <section id="view-orders" class="app-view">
+
     <div class="page-title">
+
       <div><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
+
       <button class="track-btn-top" onclick="openTrackModal()"><i class="fa-solid fa-magnifying-glass"></i> Track ID</button>
+
     </div>
+
     <div id="ordersListContainer"></div>
+
   </section>
 
+
+
   <!-- PROFILE VIEW -->
+
   <section id="view-profile" class="app-view">
+
     <div class="page-title"><div><i class="fa-solid fa-user-gear"></i> Account Profile</div></div>
+
     <div id="profileContainer"></div>
+
   </section>
+
+
 
 </main>
 
+
+
 <nav class="bottomnav">
+
   <button class="nav-btn active-nav" id="nav-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>HOME</span></button>
+
   <button class="nav-btn" id="nav-products" onclick="switchPage('products')"><i class="fa-solid fa-bag-shopping"></i><span>PRODUCTS</span></button>
+
   <button class="nav-btn" id="nav-orders" onclick="switchPage('orders')"><i class="fa-solid fa-box-open"></i><span>ORDERS</span></button>
+
   <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
+
 </nav>
 
+
+
 <!-- Modals -->
+
 <div class="modal" id="cartModal">
+
   <div class="modalbox">
+
     <div class="modalhead">
+
       <b><i class="fa-solid fa-cart-shopping"></i> Shopping Cart</b>
+
       <button class="close" onclick="closeModal('cartModal')">×</button>
+
     </div>
+
     <div class="modalbody" id="cartBody"></div>
+
   </div>
+
 </div>
+
+
 
 <div class="modal" id="checkoutModal">
+
   <div class="modalbox">
+
     <div class="modalhead">
+
       <b><i class="fa-solid fa-credit-card"></i> Checkout Order</b>
+
       <button class="close" onclick="closeModal('checkoutModal')">×</button>
+
     </div>
+
     <div class="modalbody">
+
       <form id="checkoutForm">
+
         <div class="field"><label>Full Name</label><input id="cName" required placeholder="Enter full name"></div>
+
         <div class="field"><label>Email Address</label><input type="email" id="cEmail" required placeholder="example@mail.com"></div>
+
         <div class="field"><label>Phone Number</label><input id="cPhone" required placeholder="03XXXXXXXXX"></div>
+
         <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+
         <div class="field">
+
           <label>Payment Option</label>
+
           <select id="cPayment">
+
             <option>Cash on Delivery (COD)</option>
+
             <option>JazzCash / EasyPaisa</option>
+
           </select>
+
         </div>
+
         <div class="field"><label>Total Amount</label><input id="cTotal" readonly style="color:var(--green);font-weight:700"></div>
+
         <button class="primary" type="submit">PLACE ORDER NOW</button>
+
       </form>
+
     </div>
+
   </div>
+
 </div>
 
+
+
 <!-- Track Modal -->
+
 <div class="modal" id="trackModal">
+
   <div class="modalbox">
+
     <div class="modalhead">
+
       <b><i class="fa-solid fa-truck-fast"></i> Quick Track</b>
+
       <button class="close" onclick="closeModal('trackModal')">×</button>
+
     </div>
+
     <div class="modalbody">
+
       <div class="field">
+
         <label>Enter Order ID</label>
+
         <input id="trackInput" placeholder="e.g. HY1001">
+
       </div>
+
       <button class="primary" onclick="trackOrder()">SEARCH ORDER</button>
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <div class="toast" id="toast"><b id="toastTitle"></b><br><span id="toastText" style="font-size:11px;color:var(--muted)"></span></div>
 
+
+
 <script>
+
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
+
 const WHATSAPP = "923209306672";
 
+
+
 function switchPage(pageId) {
+
   document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active-view'));
+
   document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active-nav'));
 
+
+
   const targetView = document.getElementById(`view-${pageId}`);
+
   const targetNav = document.getElementById(`nav-${pageId}`);
 
+
+
   if (targetView) targetView.classList.add('active-view');
+
   if (targetNav) targetNav.classList.add('active-nav');
+
+
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
+
+
   if (pageId === 'orders') renderOrdersPage();
+
   if (pageId === 'profile') renderProfilePage();
+
 }
+
+
 
 let currentSlide = 0;
+
 let totalSlidesCount = 5;
 
+
+
 function updateSlider() {
+
   const slidesContainer = document.getElementById("heroSlides");
+
   const dots = document.querySelectorAll("#heroDots .dot-item");
+
   if(!slidesContainer) return;
+
   slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
   dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentSlide));
+
 }
+
+
 
 function nextSlide() { 
+
   if (totalSlidesCount > 0) {
+
     currentSlide = (currentSlide + 1) % totalSlidesCount; 
+
     updateSlider(); 
+
   }
+
 }
 
+
+
 function prevSlide() { 
+
   if (totalSlidesCount > 0) {
+
     currentSlide = (currentSlide - 1 + totalSlidesCount) % totalSlidesCount; 
+
     updateSlider(); 
+
   }
+
 }
+
+
 
 function setSlide(i) { currentSlide = i; updateSlider(); }
 
+
+
 setInterval(nextSlide, 10000);
 
+
+
 let products = [];
+
 let activeCat = "All", searchTerm = "";
+
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
+
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
+
 let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
+
+
 function toast(title, text) {
+
   const t = document.getElementById("toast");
+
   document.getElementById("toastTitle").textContent = title;
+
   document.getElementById("toastText").textContent = text;
+
   t.classList.add("show");
+
   setTimeout(() => t.classList.remove("show"), 3000);
+
 }
+
+
 
 async function fetchSheetProducts() {
+
   const grid = document.getElementById("productGrid");
+
   
+
   if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
 
+
+
   try {
+
     const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
+
     const data = await res.json();
+
     if(data.result === "success" && data.products && data.products.length > 0) {
+
       products = data.products;
+
       renderProducts();
+
     } else {
+
       showEmptyState("No products found in Google Sheet.");
+
     }
+
   } catch(e) {
+
     showEmptyState("Failed to load products. Check connection.");
+
   }
+
 }
+
+
 
 function showEmptyState(msg) {
+
   const grid = document.getElementById("productGrid");
+
   const featGrid = document.getElementById("featuredGrid");
+
   const html = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">${msg}</div>`;
+
   if(grid) grid.innerHTML = html;
+
   if(featGrid) featGrid.innerHTML = html;
+
 }
 
+
+
 function renderProducts(){
+
   const grid = document.getElementById("productGrid");
+
   const featGrid = document.getElementById("featuredGrid");
+
   
+
   if(products.length === 0) return;
+
+
 
   let list = products.filter(p => (activeCat==="All" || String(p.cat).toLowerCase()===activeCat.toLowerCase()) && String(p.name).toLowerCase().includes(searchTerm.toLowerCase()));
 
+
+
   const productHTML = (p) => `
+
     <article class="product">
+
       <div class="pimg">
+
         <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500'">
+
         <span class="tag">${p.cat || 'General'}</span>
+
       </div>
+
       <div class="pbody">
+
         <h3>${p.name}</h3>
+
         <div><span class="price">Rs. ${Number(p.price || 0).toLocaleString()}</span>${p.old ? `<span class="old">Rs. ${Number(p.old).toLocaleString()}</span>` : ''}</div>
+
         <div class="pactions">
+
           <button class="cartbtn" onclick="addCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i></button>
+
           <button class="buy" onclick="buyNow('${p.id}')">Buy Now</button>
+
         </div>
+
       </div>
+
     </article>`;
 
+
+
   if(grid) grid.innerHTML = list.map(productHTML).join("");
+
   if(featGrid) featGrid.innerHTML = products.slice(0, 8).map(productHTML).join("");
+
   
+
   const countLabel = document.getElementById("resultCount");
+
   if(countLabel) countLabel.textContent = `${list.length} Items`;
+
 }
+
+
 
 function filterCategory(cat,el){
+
   activeCat=cat;
+
   document.querySelectorAll(".cat").forEach(x => x.classList.remove("active"));
+
   if(el) el.classList.add("active");
+
   document.getElementById("catHeading").textContent = cat + " Products";
+
   renderProducts();
+
 }
+
+
 
 function searchProducts(){
+
   searchTerm = document.getElementById("searchInput").value.trim();
+
   switchPage('products');
+
   renderProducts();
+
 }
+
+
 
 function addCart(id){
+
   const p = products.find(x => x.id == id);
+
   if(p) {
+
     cart.push(p); saveCart();
+
     toast("Cart Updated", `${p.name} added to cart.`);
+
   }
+
 }
+
+
 
 function saveCart(){
+
   localStorage.setItem("hy_user_cart", JSON.stringify(cart));
+
   document.getElementById("cartCount").textContent = cart.length;
+
 }
+
+
 
 function cartTotal(){ return cart.reduce((s,p)=>s+Number(p.price || 0),0); }
+
 function showModal(id){ document.getElementById(id).classList.add("show"); }
+
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
+
+
 function openCart(){
+
   const body = document.getElementById("cartBody");
+
   if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is empty.</div>`; showModal("cartModal"); return; }
+
   
+
   body.innerHTML = cart.map((p,i)=>`
+
     <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
+
       <div style="flex:1">
+
         <b style="font-size:12px">${p.name}</b>
+
         <div class="price" style="font-size:13px">Rs. ${Number(p.price || 0).toLocaleString()}</div>
+
       </div>
+
       <button class="close" onclick="removeCart(${i})">×</button>
+
     </div>
+
   `).join("") + `
+
     <div style="padding-top:15px">
+
       <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+
         <b>Total Amount:</b>
+
         <b style="color:var(--green)">Rs. ${cartTotal().toLocaleString()}</b>
+
       </div>
+
       <button class="primary" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
+
     </div>`;
+
   showModal("cartModal");
+
 }
+
+
 
 function removeCart(i){ cart.splice(i,1); saveCart(); openCart(); }
+
 function buyNow(id){ 
+
   const p = products.find(x => x.id == id);
+
   if(p){ cart=[p]; saveCart(); openCheckout(); }
+
 }
+
+
 
 function openCheckout(){
+
   closeModal("cartModal");
+
   document.getElementById("cTotal").value = "Rs. " + cartTotal().toLocaleString();
+
   if(currentUser){
+
     document.getElementById("cName").value = currentUser.name || "";
+
     document.getElementById("cEmail").value = currentUser.email || "";
+
     document.getElementById("cPhone").value = currentUser.phone || "";
+
     document.getElementById("cAddress").value = currentUser.address || "";
+
   }
+
   showModal("checkoutModal");
+
 }
 
+
+
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
+
   e.preventDefault();
+
   const emailVal = document.getElementById("cEmail").value.trim().toLowerCase();
+
   const phoneVal = document.getElementById("cPhone").value.trim();
+
   
-  // Set current user login dynamically based on email & phone
+
   currentUser = {
+
     name: document.getElementById("cName").value.trim(),
+
     email: emailVal,
+
     phone: phoneVal,
+
     address: document.getElementById("cAddress").value.trim()
+
   };
+
   localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
 
+
+
   const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
+
   const payload = {
+
     orderId: orderId,
+
     name: currentUser.name,
+
     email: currentUser.email,
+
     phone: currentUser.phone,
+
     address: currentUser.address,
+
     product: cart.map(x=>x.name).join(", "),
+
     price: cartTotal(),
+
     payment: document.getElementById("cPayment").value
+
   };
 
+
+
   userOrders.unshift({ id: orderId, email: currentUser.email, cancelled: false });
+
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
 
+
+
   try {
+
     await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
+
     const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nEmail: ${payload.email}\nTotal Price: Rs. ${payload.price}`;
+
     cart=[]; saveCart(); closeModal("checkoutModal");
+
     toast("Order Placed Successfully", `Order ID #${orderId} generated & saved.`);
+
     switchPage('orders');
+
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+
   } catch(err) {
+
     toast("Order Saved Local", "Order details processed.");
+
   }
+
 });
+
+
 
 function openTrackModal() { showModal("trackModal"); }
 
-async function renderOrdersPage(){
-  const box = document.getElementById("ordersListContainer");
 
-  if (!currentUser || !currentUser.email) {
-    box.innerHTML = `
-      <div class="order-card" style="text-align:center;padding:30px;">
-        <i class="fa-solid fa-lock fa-2x" style="color:var(--yellow);margin-bottom:10px;"></i>
-        <b style="display:block;font-size:15px;margin-bottom:5px;">Login / Account Required</b>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:15px;">Please set your Profile Email and details to view account orders.</p>
-        <button class="primary" style="max-width:200px;margin:auto;" onclick="switchPage('profile')">Go to Profile</button>
-      </div>`;
-    return;
+
+function buildOrderCard(data, isLocalCancelled) {
+
+  const statusStr = (data.status || "CONFIRMED").toUpperCase();
+
+  const isRejected = isLocalCancelled || statusStr === "REJECT" || statusStr === "REJECTED" || statusStr === "CANCELLED";
+
+
+
+  let statusClass = "confirmed";
+
+  if (isRejected) {
+
+    statusClass = "rejected";
+
+  } else if (statusStr === "PENDING") {
+
+    statusClass = "pending";
+
   }
 
-  // Filter orders matching ONLY current logged-in user email
-  let myOrders = userOrders.filter(o => typeof o === 'object' && o.email === currentUser.email);
 
-  if(!myOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No active orders found for ${currentUser.email}</div>`; return; }
-  
-  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Loading tracking details...</div>`;
-  let cardsHtml = "";
-  
-  for(let item of myOrders){
-    let id = item.id;
-    let isCancelled = item.cancelled;
 
-    if (isCancelled) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "CANCELLED" }, true);
-      continue;
+  // Determine Timeline Active States
+
+  let confClass = "", shipClass = "", delClass = "";
+
+  let line1Class = "", line2Class = "";
+
+  let confIcon = "fa-check", shipIcon = "fa-truck", delIcon = "fa-house";
+
+
+
+  if (isRejected) {
+
+    confClass = "rejected-step";
+
+    shipClass = "rejected-step";
+
+    delClass = "rejected-step";
+
+    line1Class = "rejected-line";
+
+    line2Class = "rejected-line";
+
+    confIcon = "fa-xmark";
+
+    shipIcon = "fa-xmark";
+
+    delIcon = "fa-xmark";
+
+  } else {
+
+    if (statusStr === "CONFIRMED" || statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+
+      confClass = "active";
+
     }
 
-    try {
-      const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
-      const data = await response.json();
-      if(data.result === "success") {
-        cardsHtml += buildOrderCard(data, false);
-      } else {
-        cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
-      }
-    } catch(e) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
+    if (statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+
+      shipClass = "active";
+
+      line1Class = "active";
+
     }
-  }
-  box.innerHTML = cardsHtml;
-}
 
-function cancelOrder(orderId) {
-  userOrders = userOrders.map(item => {
-    if (item.id === orderId) {
-      return { ...item, cancelled: true };
+    if (statusStr === "DELIVERED") {
+
+      delClass = "active";
+
+      line2Class = "active";
+
     }
-    return item;
-  });
-  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Cancelled", `Order #${orderId} was marked as cancelled.`);
-  renderOrdersPage();
-}
 
-function deleteOrder(orderId) {
-  userOrders = userOrders.filter(item => item.id !== orderId);
-  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Deleted", `Order #${orderId} removed permanently.`);
-  renderOrdersPage();
-}
-
-function trackOrder(){
-  closeModal("trackModal");
-  if (!currentUser || !currentUser.email) {
-    toast("Login Required", "Please set Profile info first.");
-    return;
   }
-  const query = document.getElementById("trackInput").value.trim();
-  if(!query) return;
-  
-  let exists = userOrders.find(item => item.id === query);
-  if (!exists) {
-    userOrders.unshift({ id: query, email: currentUser.email, cancelled: false });
-    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  }
-  renderOrdersPage();
-}
 
-function buildOrderCard(d, isCancelled){
-  const st = isCancelled ? "CANCELLED" : String(d.status || "CONFIRMED").toUpperCase();
-  const statusClass = isCancelled ? "cancelled" : "pending";
+
 
   return `
+
     <div class="order-card">
+
       <div class="order-header">
-        <b>Order #${d.orderId}</b>
-        <span class="status ${statusClass}">${st}</span>
+
+        <b>Order #${data.orderId || 'HY1001'}</b>
+
+        <span class="status ${statusClass}">${isRejected ? 'REJECTED' : statusStr}</span>
+
       </div>
 
-      <!-- Professional Tracking Stepper -->
-      <div class="order-stepper">
-        <div class="step ${!isCancelled ? 'active' : ''}">
-          <div class="step-icon"><i class="fa-solid fa-check"></i></div>
-          <div class="step-label">Confirmed</div>
+
+
+      <div class="tracker-container">
+
+        <div class="tracker-step ${confClass}">
+
+          <div class="circle"><i class="fa-solid ${confIcon}"></i></div>
+
+          <span>Confirmed</span>
+
         </div>
-        <div class="step ${st==='SHIPPED'||st==='DELIVERED' ? 'active' : ''}">
-          <div class="step-icon"><i class="fa-solid fa-truck"></i></div>
-          <div class="step-label">Shipped</div>
+
+        <div class="tracker-line ${line1Class}"></div>
+
+        <div class="tracker-step ${shipClass}">
+
+          <div class="circle"><i class="fa-solid ${shipIcon}"></i></div>
+
+          <span>Shipped</span>
+
         </div>
-        <div class="step ${st==='DELIVERED' ? 'active' : ''}">
-          <div class="step-icon"><i class="fa-solid fa-house"></i></div>
-          <div class="step-label">Delivered</div>
+
+        <div class="tracker-line ${line2Class}"></div>
+
+        <div class="tracker-step ${delClass}">
+
+          <div class="circle"><i class="fa-solid ${delIcon}"></i></div>
+
+          <span>Delivered</span>
+
         </div>
+
       </div>
+
+
 
       <div class="order-grid-info">
-        <div><span>Customer:</span> <b>${d.name || currentUser.name || 'N/A'}</b></div>
-        <div><span>Payment:</span> <b>${d.payment || 'COD'}</b></div>
-        <div style="grid-column: span 2"><span>Products:</span> <b>${d.product || 'N/A'}</b></div>
-        <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price || 0}</b></div>
-      </div>
 
-      <div class="order-card-actions">
-        ${!isCancelled ? `<button class="btn-cancel-small" onclick="cancelOrder('${d.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>` : ''}
-        ${isCancelled ? `<button class="btn-delete-small" onclick="deleteOrder('${d.orderId}')"><i class="fa-solid fa-trash"></i> Delete Order</button>` : ''}
-      </div>
-    </div>`;
-}
+        <div><span>Customer:</span><b>${data.name || currentUser.name || 'Hy Business' 
 
-function renderProfilePage() {
-  const box = document.getElementById("profileContainer");
-  if (!box) return;
-
-  if (currentUser) {
-    box.innerHTML = `
-      <div class="account-card">
-        <div class="account">
-          <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
-          <div>
-            <b style="font-size:16px;display:block">${currentUser.name || 'User Profile'}</b>
-            <small style="color:var(--muted)">HY Store Member</small>
-          </div>
-        </div>
-        <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><b>Email:</b> ${currentUser.email || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone || 'N/A'}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address || 'N/A'}</div></div>
-        </div>
-        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Logout Account</button>
-      </div>`;
-  } else {
-    box.innerHTML = `
-      <div class="account-card">
-        <b style="font-size:16px;display:block;margin-bottom:15px;text-align:center"><i class="fa-solid fa-user-lock"></i> Account Login / Profile</b>
-        <form onsubmit="saveProfile(event)">
-          <div class="field"><label>Full Name</label><input id="pName" required placeholder="Enter full name"></div>
-          <div class="field"><label>Email Address</label><input type="email" id="pEmail" required placeholder="name@example.com"></div>
-          <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Shipping Address</label><textarea id="pAddress" rows="3" required placeholder="Delivery address"></textarea></div>
-          <button class="primary" type="submit">SAVE PROFILE & LOGIN</button>
-        </form>
-      </div>`;
-  }
-}
-
-function saveProfile(e) {
-  e.preventDefault();
-  currentUser = {
-    name: document.getElementById("pName").value.trim(),
-    email: document.getElementById("pEmail").value.trim().toLowerCase(),
-    phone: document.getElementById("pPhone").value.trim(),
-    address: document.getElementById("pAddress").value.trim()
-  };
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  toast("Profile Saved", "Account login details saved.");
-  renderProfilePage();
-}
-
-function logoutUser() {
-  localStorage.removeItem("hy_user_session");
-  currentUser = null;
-  toast("Logged Out", "You have been logged out.");
-  renderProfilePage();
-}
-
-window.onload = function() {
-  fetchSheetProducts();
-  saveCart();
-};
-</script>
-</body>
-</html>
