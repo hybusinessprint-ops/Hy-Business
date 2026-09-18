@@ -625,6 +625,60 @@ function buildOrderCard(d){
     </div>`;
 }
 
+// Added Missing renderProfilePage & Account Management Functions
+function renderProfilePage() {
+  const box = document.getElementById("profileContainer");
+  if (!box) return;
+
+  if (currentUser) {
+    box.innerHTML = `
+      <div class="account-card">
+        <div class="account">
+          <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
+          <div>
+            <b style="font-size:16px;display:block">${currentUser.name || 'User Profile'}</b>
+            <small style="color:var(--muted)">HY Store Member</small>
+          </div>
+        </div>
+        <div class="account-details">
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span><b>Phone:</b> ${currentUser.phone || 'Not Provided'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span><b>Address:</b> ${currentUser.address || 'Not Provided'}</span></div>
+        </div>
+        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Logout Account</button>
+      </div>`;
+  } else {
+    box.innerHTML = `
+      <div class="account-card">
+        <b style="font-size:14px;display:block;margin-bottom:12px">Save Profile Details</b>
+        <form onsubmit="saveUserProfile(event)">
+          <div class="field"><label>Full Name</label><input id="pName" required placeholder="Enter full name"></div>
+          <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Default Address</label><textarea id="pAddress" rows="2" required placeholder="Shipping address"></textarea></div>
+          <button class="primary" type="submit" style="margin-top:8px">Save Profile</button>
+        </form>
+      </div>`;
+  }
+}
+
+function saveUserProfile(e) {
+  e.preventDefault();
+  currentUser = {
+    name: document.getElementById("pName").value.trim(),
+    phone: document.getElementById("pPhone").value.trim(),
+    address: document.getElementById("pAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  toast("Profile Saved", "User details updated successfully.");
+  renderProfilePage();
+}
+
+function logoutUser() {
+  currentUser = null;
+  localStorage.removeItem("hy_user_session");
+  toast("Logged Out", "Session cleared.");
+  renderProfilePage();
+}
+
 fetchSheetProducts();
 </script>
 </body>
