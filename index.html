@@ -713,21 +713,21 @@ document.getElementById("changePasswordForm").addEventListener("submit", functio
   const oldPass = document.getElementById("oldPass").value;
   const newPass = document.getElementById("newPass").value;
 
+  if(!currentUser) return;
+
   if(currentUser.password !== oldPass) {
-    return toast("Error", "Old password incorrect.");
+    return toast("Error", "Incorrect old password!");
   }
 
   currentUser.password = newPass;
+  const idx = registeredUsers.findIndex(u => u.email === currentUser.email);
+  if(idx !== -1) registeredUsers[idx].password = newPass;
+
+  localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
   localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
 
-  const idx = registeredUsers.findIndex(u => u.email === currentUser.email);
-  if(idx !== -1) {
-    registeredUsers[idx].password = newPass;
-    localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
-  }
-
   closeModal("passwordModal");
-  toast("Success", "Password changed successfully.");
+  toast("Success", "Password updated successfully.");
 });
 
 document.getElementById("forgetPasswordForm").addEventListener("submit", function(e){
@@ -737,382 +737,404 @@ document.getElementById("forgetPasswordForm").addEventListener("submit", functio
 
   const idx = registeredUsers.findIndex(u => u.email === email);
   if(idx === -1) {
-    return toast("Not Found", "No account registered with this email.");
+    return toast("Error", "Email address not registered.");
   }
 
   registeredUsers[idx].password = newPass;
   localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
 
+  if(currentUser && currentUser.email === email) {
+    currentUser.password = newPass;
+    localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  }
+
   closeModal("passwordModal");
-  toast("Success", "Password reset successfully! Please Login.");
-  openAuthModal('login');
+  toast("Success", "Password reset successfully! Please login.");
 });
 
-/* PRODUCTS & CART */
-async function fetchSheetProducts() {
-  const grid = document.getElementById("productGrid");
-  const featGrid = document.getElementById("featuredGrid");
-  
-  if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
+function logoutUser() {
+  currentUser = null;
+  localStorage.removeItem("hy_user_session");
+  renderProfilePage();
+  renderOrdersPage();
+  toast("Logged Out", "You have been logged out.");
+}
 
+/* FETCH DATA & SYNC STATUS WITH GOOGLE SHEET */
+async function fetchSheetData() {
   try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
+    const res = await fetch(GOOGLE_SCRIPT_URL);
     const data = await res.json();
-    if(data.result === "success" && data.products && data.products.length > 0) {
+    if(data.products) {
       products = data.products;
       renderProducts();
-    } else {
-      showEmptyState("No products found in Google Sheet.");
+    }
+    if(data.orders && Array.isArray(data.orders)) {
+      data.orders.forEach(remoteOrder => {
+        const localIdx = userOrders.findIndex(o => o.id === remoteOrder.id || o.id === remoteOrder.orderId);
+        if(localIdx !== -1) {
+          userOrders[localIdx].status = remoteOrder.status || remoteOrder.orderStatus;
+        }
+      });
+      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+      if(document.getElementById('view-orders').classList.contains('active-view')) {
+        renderOrdersPage();
+      }
     }
   } catch(e) {
-    showEmptyState("Failed to load products. Check connection.");
+    console.log("Sheet Sync Info:", e);
   }
 }
 
-function showEmptyState(msg) {
+function renderProducts() {
   const grid = document.getElementById("productGrid");
-  const featGrid = document.getElementById("featuredGrid");
-  const html = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">${msg}</div>`;
-  if(grid) grid.innerHTML = html;
-  if(featGrid) featGrid.innerHTML = html;
-}
+  const featured = document.getElementById("featuredGrid");
+  if(!grid) return;
 
-function renderProducts(){
-  const grid = document.getElementById("productGrid");
-  const featGrid = document.getElementById("featuredGrid");
-  
-  if(products.length === 0) return;
+  grid.innerHTML = "";
+  if(featured) featured.innerHTML = "";
 
-  let list = products.filter(p => (activeCat==="All" || String(p.cat).toLowerCase()===activeCat.toLowerCase()) && String(p.name).toLowerCase().includes(searchTerm.toLowerCase()));
+  let filtered = products.filter(p => {
+    const matchCat = activeCat === "All" || p.category === activeCat;
+    const matchSearch = p.title.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchCat && matchSearch;
+  });
 
-  const productHTML = (p) => `
-    <article class="product">
+  document.getElementById("resultCount").textContent = `${filtered.length} Items Available`;
+
+  filtered.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "product";
+    card.innerHTML = `
       <div class="pimg">
-        <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500'">
-        <span class="tag">${p.cat || 'General'}</span>
+        <img src="${p.image}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+        <span class="tag">${p.category}</span>
       </div>
       <div class="pbody">
-        <h3>${p.name}</h3>
-        <div><span class="price">Rs. ${Number(p.price || 0).toLocaleString()}</span>${p.old ? `<span class="old">Rs. ${Number(p.old).toLocaleString()}</span>` : ''}</div>
+        <h3>${p.title}</h3>
+        <div>
+          <span class="price">Rs. ${p.price}</span>
+          ${p.oldPrice ? `<span class="old">Rs. ${p.oldPrice}</span>` : ''}
+        </div>
         <div class="pactions">
-          <button class="cartbtn" onclick="addCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i></button>
-          <button class="buy" onclick="buyNow('${p.id}')">Buy Now</button>
+          <button class="buy" onclick="quickBuy('${p.title}', ${p.price})">Buy Now</button>
+          <button class="cartbtn" onclick="addToCart('${p.title}', ${p.price})"><i class="fa-solid fa-cart-plus"></i></button>
         </div>
       </div>
-    </article>`;
+    `;
+    grid.appendChild(card);
 
-  if(grid) grid.innerHTML = list.map(productHTML).join("");
-  if(featGrid) featGrid.innerHTML = products.slice(0, 8).map(productHTML).join("");
-  
-  const countLabel = document.getElementById("resultCount");
-  if(countLabel) countLabel.textContent = `${list.length} Items`;
+    if(featured && featured.children.length < 4) {
+      featured.appendChild(card.cloneNode(true));
+    }
+  });
 }
 
-function filterCategory(cat,el){
-  activeCat=cat;
-  document.querySelectorAll(".cat").forEach(x => x.classList.remove("active"));
+function filterCategory(cat, el) {
+  activeCat = cat;
+  document.querySelectorAll(".cat").forEach(c => c.classList.remove("active"));
   if(el) el.classList.add("active");
-  document.getElementById("catHeading").textContent = cat + " Products";
+  document.getElementById("catHeading").textContent = cat === "All" ? "All Products" : cat;
   renderProducts();
 }
 
-function searchProducts(){
+function searchProducts() {
   searchTerm = document.getElementById("searchInput").value.trim();
-  switchPage('products');
+  switchPage("products");
   renderProducts();
 }
 
-function addCart(id){
-  const p = products.find(x => x.id == id);
-  if(p) {
-    cart.push(p); saveCart();
-    toast("Cart Updated", `${p.name} added to cart.`);
+/* CART SYSTEM */
+function addToCart(title, price) {
+  const existing = cart.find(i => i.title === title);
+  if(existing) {
+    existing.qty++;
+  } else {
+    cart.push({ title, price, qty: 1 });
   }
+  updateCart();
+  toast("Added to Cart", `${title} added.`);
 }
 
-function saveCart(){
+function updateCart() {
   localStorage.setItem("hy_user_cart", JSON.stringify(cart));
-  document.getElementById("cartCount").textContent = cart.length;
+  const count = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cartCount").textContent = count;
 }
 
-function cartTotal(){ return cart.reduce((s,p)=>s+Number(p.price || 0),0); }
-
-function openCart(){
+function openCart() {
   const body = document.getElementById("cartBody");
-  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is empty.</div>`; showModal("cartModal"); return; }
-  
-  body.innerHTML = cart.map((p,i)=>`
-    <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
-      <div style="flex:1">
-        <b style="font-size:12px">${p.name}</b>
-        <div class="price" style="font-size:13px">Rs. ${Number(p.price || 0).toLocaleString()}</div>
+  if(cart.length === 0) {
+    body.innerHTML = `<p style="text-align:center; color:var(--muted); padding:20px;">Your cart is empty.</p>`;
+  } else {
+    let total = 0;
+    let html = `<div style="display:flex; flex-direction:column; gap:10px;">`;
+    cart.forEach((item, idx) => {
+      total += item.price * item.qty;
+      html += `
+        <div style="display:flex; justify-size:space-between; align-items:center; background:#070d18; padding:10px; border-radius:8px; border:1px solid var(--border)">
+          <div style="flex:1;">
+            <b style="font-size:12px; display:block;">${item.title}</b>
+            <span style="font-size:11px; color:var(--green)">Rs. ${item.price} x ${item.qty}</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button onclick="changeQty(${idx}, -1)" style="padding:2px 8px; background:#101a2d; color:white; border-radius:4px;">-</button>
+            <span style="font-size:12px;">${item.qty}</span>
+            <button onclick="changeQty(${idx}, 1)" style="padding:2px 8px; background:#101a2d; color:white; border-radius:4px;">+</button>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>
+      <div style="margin-top:15px; border-top:1px solid var(--border); padding-top:10px; display:flex; justify-content:space-between; font-weight:700;">
+        <span>Total:</span>
+        <span style="color:var(--green)">Rs. ${total}</span>
       </div>
-      <button class="close" onclick="removeCart(${i})">×</button>
-    </div>
-  `).join("") + `
-    <div style="padding-top:15px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
-        <b>Total Amount:</b>
-        <b style="color:var(--green)">Rs. ${cartTotal().toLocaleString()}</b>
-      </div>
-      <button class="primary" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
-    </div>`;
+      <button class="primary" style="margin-top:15px;" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
+    `;
+    body.innerHTML = html;
+  }
   showModal("cartModal");
 }
 
-function removeCart(i){ cart.splice(i,1); saveCart(); openCart(); }
-
-function buyNow(id){ 
-  const p = products.find(x => x.id == id);
-  if(p){ cart=[p]; saveCart(); openCheckout(); }
+function changeQty(idx, delta) {
+  cart[idx].qty += delta;
+  if(cart[idx].qty <= 0) cart.splice(idx, 1);
+  updateCart();
+  openCart();
 }
 
-function openCheckout(){
-  if (!currentUser) {
-    closeModal("cartModal");
-    toast("REQUIRED LOGIN", "Please Login or Register to place an order.");
-    openAuthModal('login');
-    return;
-  }
+function quickBuy(title, price) {
+  cart = [{ title, price, qty: 1 }];
+  updateCart();
+  openCheckout();
+}
 
+function openCheckout() {
+  if(!currentUser) {
+    closeModal("cartModal");
+    return openAuthModal('login');
+  }
   closeModal("cartModal");
-  document.getElementById("cTotal").value = "Rs. " + cartTotal().toLocaleString();
-  document.getElementById("cName").value = currentUser.name || "";
-  document.getElementById("cEmail").value = currentUser.email || "";
-  document.getElementById("cPhone").value = currentUser.phone || "";
-  document.getElementById("cAddress").value = currentUser.address || "";
+
+  document.getElementById("cName").value = currentUser.name;
+  document.getElementById("cEmail").value = currentUser.email;
+  document.getElementById("cPhone").value = currentUser.phone;
+  document.getElementById("cAddress").value = currentUser.address;
+
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  document.getElementById("cTotal").value = `Rs. ${total}`;
+
   showModal("checkoutModal");
 }
 
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  if(!currentUser) return toast("REQUIRED LOGIN", "Please login to proceed.");
-
   const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
-  const payload = {
+  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const prodNames = cart.map(i => `${i.title} (${i.qty})`).join(", ");
+
+  const orderData = {
+    id: orderId,
     orderId: orderId,
-    name: currentUser.name,
+    customer: currentUser.name,
     email: currentUser.email,
     phone: currentUser.phone,
-    address: document.getElementById("cAddress").value.trim(),
-    product: cart.map(x=>x.name).join(", "),
-    price: cartTotal(),
-    payment: document.getElementById("cPayment").value
+    address: document.getElementById("cAddress").value,
+    product: prodNames,
+    price: total,
+    total: total,
+    payment: document.getElementById("cPayment").value,
+    status: "Confirmed",
+    date: new Date().toLocaleString()
   };
 
-  userOrders.unshift({ id: orderId, email: currentUser.email, cancelled: false });
+  userOrders.unshift(orderData);
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
 
+  cart = [];
+  updateCart();
+  closeModal("checkoutModal");
+
+  toast("Order Placed!", `Order ID: ${orderId}`);
+  switchPage("orders");
+
   try {
-    await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
-    const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nEmail: ${payload.email}\nTotal Price: Rs. ${payload.price}`;
-    cart=[]; saveCart(); closeModal("checkoutModal");
-    toast("Order Placed Successfully", `Order ID #${orderId} generated & saved.`);
-    switchPage('orders');
-    window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderData)
+    });
   } catch(err) {
-    toast("Order Saved Local", "Order details processed.");
+    console.log("Sheet post error", err);
   }
 });
 
-function openTrackModal() { showModal("trackModal"); }
-
-function buildOrderCard(data, isLocalCancelled) {
-  const statusStr = (data.status || "CONFIRMED").toUpperCase();
-  const isRejected = isLocalCancelled || statusStr === "REJECT" || statusStr === "REJECTED" || statusStr === "CANCELLED";
-
-  let statusClass = "confirmed";
-  if (isRejected) {
-    statusClass = "rejected";
-  } else if (statusStr === "PENDING") {
-    statusClass = "pending";
-  }
-
-  let confClass = "", shipClass = "", delClass = "";
-  let line1Class = "", line2Class = "";
-  let confIcon = "fa-check", shipIcon = "fa-truck", delIcon = "fa-house";
-
-  if (isRejected) {
-    confClass = "rejected-step";
-    shipClass = "rejected-step";
-    delClass = "rejected-step";
-    line1Class = "rejected-line";
-    line2Class = "rejected-line";
-    confIcon = "fa-xmark";
-    shipIcon = "fa-xmark";
-    delIcon = "fa-xmark";
-  } else {
-    if (statusStr === "CONFIRMED" || statusStr === "SHIPPED" || statusStr === "DELIVERED") {
-      confClass = "active";
-    }
-    if (statusStr === "SHIPPED" || statusStr === "DELIVERED") {
-      shipClass = "active";
-      line1Class = "active";
-    }
-    if (statusStr === "DELIVERED") {
-      delClass = "active";
-      line2Class = "active";
-    }
-  }
-
-  return `
-    <div class="order-card">
-      <div class="order-header">
-        <b>Order #${data.orderId || 'HY1001'}</b>
-        <span class="status ${statusClass}">${isRejected ? 'REJECTED' : statusStr}</span>
-      </div>
-
-      <div class="tracker-container">
-        <div class="tracker-step ${confClass}">
-          <div class="circle"><i class="fa-solid ${confIcon}"></i></div>
-          <span>Confirmed</span>
-        </div>
-        <div class="tracker-line ${line1Class}"></div>
-        <div class="tracker-step ${shipClass}">
-          <div class="circle"><i class="fa-solid ${shipIcon}"></i></div>
-          <span>Shipped</span>
-        </div>
-        <div class="tracker-line ${line2Class}"></div>
-        <div class="tracker-step ${delClass}">
-          <div class="circle"><i class="fa-solid ${delIcon}"></i></div>
-          <span>Delivered</span>
-        </div>
-      </div>
-
-      <div class="order-grid-info">
-        <div><span>Customer:</span><b>${data.name || currentUser?.name || 'HY Customer'}</b></div>
-        <div><span>Payment:</span><b>${data.payment || 'COD'}</b></div>
-        <div><span>Product:</span><b>${data.product || 'N/A'}</b></div>
-        <div><span>Total:</span><b style="color:var(--green)">Rs. ${Number(data.price || 0).toLocaleString()}</b></div>
-      </div>
-
-      <div class="order-card-actions">
-        ${!isRejected ? `<button class="btn-cancel-small" onclick="cancelOrder('${data.orderId}')">Cancel Order</button>` : ''}
-        <button class="btn-delete-small" onclick="deleteOrder('${data.orderId}')">Remove</button>
-      </div>
-    </div>`;
-}
-
-async function renderOrdersPage() {
+/* ORDERS & TRACKER PAGE */
+function renderOrdersPage() {
   const container = document.getElementById("ordersListContainer");
-  if (!container) return;
+  if(!container) return;
 
-  if (!currentUser) {
-    container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--red)"><i class="fa-solid fa-lock fa-3x"></i><br><br><b>REQUIRED LOGIN</b><br><span style="font-size:12px;color:var(--muted)">Please login to view your order history.</span><br><br><button class="primary" style="width:200px" onclick="openAuthModal('login')">LOGIN NOW</button></div>`;
+  fetchSheetData();
+
+  if(!currentUser) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:40px 10px; background:#080f1b; border-radius:16px; border:1px solid var(--border)">
+        <i class="fa-solid fa-user-lock" style="font-size:40px; color:var(--muted); margin-bottom:10px;"></i>
+        <h3 style="margin-bottom:8px;">Login Required</h3>
+        <p style="color:var(--muted); font-size:12px; margin-bottom:15px;">Please login to view your active orders and track shipment status.</p>
+        <button class="primary" style="max-width:200px;" onclick="openAuthModal('login')">LOGIN NOW</button>
+      </div>
+    `;
     return;
   }
 
   const myOrders = userOrders.filter(o => o.email === currentUser.email);
 
-  if (!myOrders.length) {
-    container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--muted)"><i class="fa-solid fa-box-open fa-3x"></i><br><br>No active or past orders found.</div>`;
+  if(myOrders.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:40px 10px; background:#080f1b; border-radius:16px; border:1px solid var(--border)">
+        <i class="fa-solid fa-box-open" style="font-size:40px; color:var(--muted); margin-bottom:10px;"></i>
+        <h3>No Orders Found</h3>
+        <p style="color:var(--muted); font-size:12px;">You have not placed any orders yet.</p>
+      </div>
+    `;
     return;
   }
 
-  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Fetching live order statuses...</div>`;
-
   let html = "";
-  for (let localOrd of myOrders) {
-    try {
-      const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${localOrd.id}`);
-      const data = await res.json();
-      if (data.result === "success" && data.order) {
-        html += buildOrderCard(data.order, localOrd.cancelled);
-      } else {
-        html += buildOrderCard({ orderId: localOrd.id, status: localOrd.cancelled ? 'REJECTED' : 'CONFIRMED' }, localOrd.cancelled);
-      }
-    } catch(e) {
-      html += buildOrderCard({ orderId: localOrd.id, status: localOrd.cancelled ? 'REJECTED' : 'CONFIRMED' }, localOrd.cancelled);
-    }
-  }
+  myOrders.forEach((o, index) => {
+    const st = (o.status || "Confirmed").toLowerCase();
+    let isRejected = st.includes("reject") || st.includes("cancel");
+    
+    let step1Active = true;
+    let step2Active = st.includes("shipped") || st.includes("delivered");
+    let step3Active = st.includes("delivered");
+
+    html += `
+      <div class="order-card">
+        <div class="order-header">
+          <b>Order #${o.id || o.orderId}</b>
+          <span class="status ${isRejected ? 'rejected' : st}">${o.status || 'Confirmed'}</span>
+        </div>
+
+        <div class="tracker-container">
+          <div class="tracker-step ${isRejected ? 'rejected-step' : (step1Active ? 'active' : '')}">
+            <div class="circle"><i class="fa-solid ${isRejected ? 'fa-xmark' : 'fa-check'}"></i></div>
+            <span>${isRejected ? 'Rejected' : 'Confirmed'}</span>
+          </div>
+
+          <div class="tracker-line ${isRejected ? 'rejected-line' : (step2Active ? 'active' : '')}"></div>
+
+          <div class="tracker-step ${isRejected ? '' : (step2Active ? 'active' : '')}">
+            <div class="circle"><i class="fa-solid fa-truck-fast"></i></div>
+            <span>Shipped</span>
+          </div>
+
+          <div class="tracker-line ${isRejected ? 'rejected-line' : (step3Active ? 'active' : '')}"></div>
+
+          <div class="tracker-step ${isRejected ? '' : (step3Active ? 'active' : '')}">
+            <div class="circle"><i class="fa-solid fa-house"></i></div>
+            <span>Delivered</span>
+          </div>
+        </div>
+
+        <div class="order-grid-info">
+          <div><span>Customer:</span><b>${o.customer}</b></div>
+          <div><span>Payment:</span><b>${o.payment || 'COD'}</b></div>
+          <div><span>Product:</span><b>${o.product || 'N/A'}</b></div>
+          <div><span>Total:</span><b style="color:var(--green)">Rs. ${o.price || o.total || 0}</b></div>
+        </div>
+
+        <div class="order-card-actions">
+          ${(!isRejected && !step3Active) ? `<button class="btn-cancel-small" onclick="cancelOrder('${o.id}')">Cancel Order</button>` : ''}
+          <button class="btn-delete-small" onclick="removeOrderRecord(${index})">Remove</button>
+        </div>
+      </div>
+    `;
+  });
+
   container.innerHTML = html;
 }
 
-async function trackOrder() {
-  const input = document.getElementById("trackInput").value.trim().toUpperCase();
-  if (!input) return toast("Error", "Please enter an Order ID.");
+function cancelOrder(id) {
+  const idx = userOrders.findIndex(o => o.id === id);
+  if(idx !== -1) {
+    userOrders[idx].status = "Cancelled";
+    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+    renderOrdersPage();
+    toast("Order Cancelled", "Your order status was updated.");
+  }
+}
+
+function removeOrderRecord(idx) {
+  userOrders.splice(idx, 1);
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  renderOrdersPage();
+  toast("Removed", "Order history removed.");
+}
+
+function openTrackModal() {
+  showModal("trackModal");
+}
+
+function trackOrder() {
+  const query = document.getElementById("trackInput").value.trim().toLowerCase();
+  if(!query) return toast("Error", "Enter an Order ID");
+
+  const found = userOrders.find(o => (o.id && o.id.toLowerCase() === query) || (o.orderId && o.orderId.toLowerCase() === query));
   closeModal("trackModal");
 
-  switchPage('orders');
-  const container = document.getElementById("ordersListContainer");
-  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Searching Order #${input}...</div>`;
-
-  try {
-    const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${input}`);
-    const data = await res.json();
-    if (data.result === "success" && data.order) {
-      const isLocCancelled = userOrders.some(x => x.id === input && x.cancelled);
-      container.innerHTML = buildOrderCard(data.order, isLocCancelled);
-    } else {
-      container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--red)"><i class="fa-solid fa-circle-exclamation fa-2x"></i><br><br>Order #${input} not found in database.</div>`;
-    }
-  } catch(e) {
-    toast("Search Error", "Could not fetch order data.");
+  if(found) {
+    switchPage("orders");
+    toast("Order Found", `Status: ${found.status || 'Confirmed'}`);
+  } else {
+    toast("Not Found", "No order matching this ID locally.");
   }
 }
 
-function cancelOrder(id) {
-  if (confirm(`Are you sure you want to cancel order #${id}?`)) {
-    const item = userOrders.find(x => x.id === id);
-    if (item) {
-      item.cancelled = true;
-      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-      toast("Order Cancelled", `Order #${id} status updated to REJECTED.`);
-      renderOrdersPage();
-    }
-  }
-}
-
-function deleteOrder(id) {
-  userOrders = userOrders.filter(x => x.id !== id);
-  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Removed", `Order #${id} removed from history.`);
-  renderOrdersPage();
-}
-
+/* PROFILE PAGE */
 function renderProfilePage() {
   const container = document.getElementById("profileContainer");
-  if (!container) return;
+  if(!container) return;
 
-  if (!currentUser) {
+  if(!currentUser) {
     container.innerHTML = `
       <div class="account-card" style="text-align:center;">
-        <i class="fa-solid fa-user-lock fa-3x" style="color:var(--green); margin-bottom:15px;"></i>
-        <h3 style="margin-bottom:10px">Account Required</h3>
-        <p style="font-size:12px; color:var(--muted); margin-bottom:20px">Please login or create a new account to manage profile & view orders.</p>
-        <button class="primary" onclick="openAuthModal('login')">LOGIN / REGISTER NOW</button>
-      </div>`;
+        <i class="fa-solid fa-user-gear" style="font-size:45px; color:var(--muted); margin-bottom:12px;"></i>
+        <h3 style="margin-bottom:8px;">Guest User</h3>
+        <p style="color:var(--muted); font-size:12px; margin-bottom:20px;">Sign in to access your profile settings and order history.</p>
+        <button class="primary" onclick="openAuthModal('login')">LOGIN / REGISTER</button>
+      </div>
+    `;
     return;
   }
 
   container.innerHTML = `
     <div class="account-card">
       <div class="account">
-        <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
+        <div class="avatar">${currentUser.name.charAt(0).toUpperCase()}</div>
         <div>
-          <b style="font-size:16px">${currentUser.name || 'HY Customer'}</b>
-          <small style="display:block;color:var(--muted)">Verified Customer</small>
+          <b style="font-size:16px;">${currentUser.name}</b>
+          <span style="display:block; font-size:11px; color:var(--muted);">${currentUser.email}</span>
         </div>
       </div>
+
       <div class="account-details">
-        <div class="acc-info-row"><i class="fa-solid fa-envelope"></i><span>${currentUser.email || 'N/A'}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span>${currentUser.phone || 'N/A'}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span>${currentUser.address || 'N/A'}</span></div>
+        <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span>${currentUser.phone}</span></div>
+        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span>${currentUser.address}</span></div>
       </div>
-      <button class="secondary-btn" style="margin-bottom:8px;" onclick="openChangePasswordModal()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button>
-      <button class="btn-logout" onclick="logoutUser()">LOGOUT SESSION</button>
-    </div>`;
+
+      <button class="secondary-btn" onclick="openChangePasswordModal()"><i class="fa-solid fa-key"></i> Change Password</button>
+      <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
+    </div>
+  `;
 }
 
-function logoutUser() {
-  localStorage.removeItem("hy_user_session");
-  currentUser = null;
-  toast("Logged Out", "Profile session logged out.");
-  switchPage('home');
-}
-
-saveCart();
-fetchSheetProducts();
+// Initial Setup
+updateCart();
+fetchSheetData();
 </script>
 
 </body>
