@@ -88,8 +88,11 @@ header {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.page-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.page-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.page-title div { display: flex; align-items: center; gap: 10px; }
 .page-title i { color: var(--green); }
+
+.track-btn-top { background: var(--cyan); color: #00140a; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; }
 
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
 .hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; background: #070d18; }
@@ -99,7 +102,7 @@ header {
   min-width: 100%; 
   height: 100%;
   position: relative; 
-  background-size: 100% 100%; 
+  background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat;
 }
@@ -140,12 +143,8 @@ header {
 .buy { background: var(--green); color: #00140a; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
-.track { margin: 15px 0 25px; padding: 20px; border-radius: 16px; background: #0d192c; border: 1px solid var(--border); }
-.track-form { display: flex; gap: 8px; width: 100%; margin-top: 12px; }
-.track-form input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 10px; background: #070d18; border: 1px solid var(--border); color: white; outline: 0; font-size: 13px; }
-.track-form button { padding: 0 16px; border-radius: 10px; background: var(--cyan); font-weight: 700; color: #00140a; white-space: nowrap; font-size: 12px; flex-shrink: 0; }
-
-.order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+/* Professional Timeline Order Card */
+.order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; position: relative; }
 .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
 .order-header b { font-size: 16px; color: var(--green); }
 
@@ -153,10 +152,21 @@ header {
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
 .cancelled { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 
+/* Timeline Stepper UI */
+.order-stepper { display: flex; justify-content: space-between; margin: 18px 0; position: relative; }
+.order-stepper::before { content: ''; position: absolute; top: 12px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
+.step { position: relative; z-index: 2; text-align: center; flex: 1; }
+.step-icon { width: 26px; height: 26px; border-radius: 50%; background: #101a2d; border: 1px solid var(--border); display: grid; place-items: center; margin: 0 auto 6px; font-size: 10px; color: var(--muted); }
+.step.active .step-icon { background: var(--green); color: #000; border-color: var(--green); }
+.step-label { font-size: 10px; color: var(--muted); }
+.step.active .step-label { color: white; font-weight: 600; }
+
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
 .order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
 
-.btn-cancel-order { width: 100%; margin-top: 12px; padding: 8px; border-radius: 8px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 600; font-size: 11px; }
+.order-card-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+.btn-cancel-small { padding: 5px 12px; border-radius: 6px; background: rgba(255,77,103,0.1); color: var(--red); border: 1px solid rgba(255,77,103,0.25); font-weight: 600; font-size: 10px; }
+.btn-delete-small { padding: 5px 12px; border-radius: 6px; background: var(--red); color: white; font-weight: 600; font-size: 10px; }
 
 .account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; max-width: 600px; margin: 0 auto; }
 .account { display: flex; align-items: center; gap: 14px; }
@@ -186,14 +196,16 @@ header {
 .field input, .field textarea, .field select { width: 100%; padding: 10px; border-radius: 8px; background: #070d18; color: white; border: 1px solid var(--border); outline: 0; font-size: 12px; }
 .primary { width: 100%; padding: 12px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; font-size: 13px; }
 
-.toast { position: fixed; top: 70px; right: 15px; z-index: 200; background: #0d1727; border: 1px solid var(--border); padding: 12px 15px; border-radius: 10px; box-shadow: var(--shadow); display: none; }
+.toast { position: fixed; top: 20px; right: 20px; z-index: 300; background: #0d1727; border: 1px solid var(--green); padding: 12px 18px; border-radius: 12px; box-shadow: var(--shadow); display: none; animation: slideIn 0.3s ease; }
 .toast.show { display: block; }
+
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
 @media(max-width:850px){
   .products { grid-template-columns: repeat(2, 1fr); }
   .hero { grid-template-columns: 1fr; }
-  .hero-slider { min-height: 180px; height: 200px; }
-  .slide { background-size: cover; }
+  .hero-slider { min-height: 180px; height: 210px; }
+  .slide { background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #050a14; }
   .trust { grid-template-columns: repeat(3, 1fr); }
   .topbar { display: none; }
 }
@@ -267,7 +279,9 @@ header {
 
   <!-- PRODUCTS VIEW -->
   <section id="view-products" class="app-view">
-    <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
+    <div class="page-title">
+      <div><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
+    </div>
     <div class="categories">
       <button class="cat active" onclick="filterCategory('All',this)">All Items</button>
       <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
@@ -284,20 +298,16 @@ header {
 
   <!-- ORDERS VIEW -->
   <section id="view-orders" class="app-view">
-    <div class="page-title"><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
-    <div class="track">
-      <b style="font-size:14px">Search Order Status</b>
-      <div class="track-form">
-        <input id="trackInput" placeholder="Enter Order ID (e.g. HY1001)">
-        <button onclick="trackOrder()"><i class="fa-solid fa-magnifying-glass"></i> Track Status</button>
-      </div>
+    <div class="page-title">
+      <div><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
+      <button class="track-btn-top" onclick="openTrackModal()"><i class="fa-solid fa-magnifying-glass"></i> Track ID</button>
     </div>
     <div id="ordersListContainer"></div>
   </section>
 
   <!-- PROFILE VIEW -->
   <section id="view-profile" class="app-view">
-    <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Profile</div>
+    <div class="page-title"><div><i class="fa-solid fa-user-gear"></i> Account Profile</div></div>
     <div id="profileContainer"></div>
   </section>
 
@@ -330,6 +340,7 @@ header {
     <div class="modalbody">
       <form id="checkoutForm">
         <div class="field"><label>Full Name</label><input id="cName" required placeholder="Enter full name"></div>
+        <div class="field"><label>Email Address</label><input type="email" id="cEmail" required placeholder="example@mail.com"></div>
         <div class="field"><label>Phone Number</label><input id="cPhone" required placeholder="03XXXXXXXXX"></div>
         <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
         <div class="field">
@@ -342,6 +353,23 @@ header {
         <div class="field"><label>Total Amount</label><input id="cTotal" readonly style="color:var(--green);font-weight:700"></div>
         <button class="primary" type="submit">PLACE ORDER NOW</button>
       </form>
+    </div>
+  </div>
+</div>
+
+<!-- Track Modal -->
+<div class="modal" id="trackModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <b><i class="fa-solid fa-truck-fast"></i> Quick Track</b>
+      <button class="close" onclick="closeModal('trackModal')">×</button>
+    </div>
+    <div class="modalbody">
+      <div class="field">
+        <label>Enter Order ID</label>
+        <input id="trackInput" placeholder="e.g. HY1001">
+      </div>
+      <button class="primary" onclick="trackOrder()">SEARCH ORDER</button>
     </div>
   </div>
 </div>
@@ -426,7 +454,7 @@ async function fetchSheetProducts() {
       showEmptyState("No products found in Google Sheet.");
     }
   } catch(e) {
-    showEmptyState("Failed to load products. Check connection or script permissions.");
+    showEmptyState("Failed to load products. Check connection.");
   }
 }
 
@@ -534,6 +562,7 @@ function openCheckout(){
   document.getElementById("cTotal").value = "Rs. " + cartTotal().toLocaleString();
   if(currentUser){
     document.getElementById("cName").value = currentUser.name || "";
+    document.getElementById("cEmail").value = currentUser.email || "";
     document.getElementById("cPhone").value = currentUser.phone || "";
     document.getElementById("cAddress").value = currentUser.address || "";
   }
@@ -542,55 +571,72 @@ function openCheckout(){
 
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
   e.preventDefault();
+  const emailVal = document.getElementById("cEmail").value.trim().toLowerCase();
+  const phoneVal = document.getElementById("cPhone").value.trim();
+  
+  // Set current user login dynamically based on email & phone
+  currentUser = {
+    name: document.getElementById("cName").value.trim(),
+    email: emailVal,
+    phone: phoneVal,
+    address: document.getElementById("cAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+
   const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
   const payload = {
     orderId: orderId,
-    name: document.getElementById("cName").value.trim(),
-    phone: document.getElementById("cPhone").value.trim(),
-    address: document.getElementById("cAddress").value.trim(),
+    name: currentUser.name,
+    email: currentUser.email,
+    phone: currentUser.phone,
+    address: currentUser.address,
     product: cart.map(x=>x.name).join(", "),
     price: cartTotal(),
     payment: document.getElementById("cPayment").value
   };
 
-  userOrders.unshift({ id: orderId, cancelled: false });
+  userOrders.unshift({ id: orderId, email: currentUser.email, cancelled: false });
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
 
   try {
     await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
-    const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal Price: Rs. ${payload.price}`;
+    const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nEmail: ${payload.email}\nTotal Price: Rs. ${payload.price}`;
     cart=[]; saveCart(); closeModal("checkoutModal");
-    toast("Order Submitted", `Order ID #${orderId} generated & saved.`);
+    toast("Order Placed Successfully", `Order ID #${orderId} generated & saved.`);
     switchPage('orders');
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
   } catch(err) {
-    toast("Order Placed", "Order details processed.");
+    toast("Order Saved Local", "Order details processed.");
   }
 });
+
+function openTrackModal() { showModal("trackModal"); }
 
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
 
-  // Condition: Check if user is logged in before fetching orders
-  if (!currentUser) {
+  if (!currentUser || !currentUser.email) {
     box.innerHTML = `
       <div class="order-card" style="text-align:center;padding:30px;">
         <i class="fa-solid fa-lock fa-2x" style="color:var(--yellow);margin-bottom:10px;"></i>
-        <b style="display:block;font-size:15px;margin-bottom:5px;">Login Required</b>
-        <p style="color:var(--muted);font-size:12px;margin-bottom:15px;">Please save your Profile details first to fetch and view your orders.</p>
+        <b style="display:block;font-size:15px;margin-bottom:5px;">Login / Account Required</b>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:15px;">Please set your Profile Email and details to view account orders.</p>
         <button class="primary" style="max-width:200px;margin:auto;" onclick="switchPage('profile')">Go to Profile</button>
       </div>`;
     return;
   }
 
-  if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
+  // Filter orders matching ONLY current logged-in user email
+  let myOrders = userOrders.filter(o => typeof o === 'object' && o.email === currentUser.email);
+
+  if(!myOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No active orders found for ${currentUser.email}</div>`; return; }
   
-  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...</div>`;
+  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Loading tracking details...</div>`;
   let cardsHtml = "";
   
-  for(let item of userOrders){
-    let id = typeof item === 'object' ? item.id : item;
-    let isCancelled = typeof item === 'object' ? item.cancelled : false;
+  for(let item of myOrders){
+    let id = item.id;
+    let isCancelled = item.cancelled;
 
     if (isCancelled) {
       cardsHtml += buildOrderCard({ orderId: id, status: "CANCELLED" }, true);
@@ -603,47 +649,53 @@ async function renderOrdersPage(){
       if(data.result === "success") {
         cardsHtml += buildOrderCard(data, false);
       } else {
-        cardsHtml += buildOrderCard({ orderId: id, status: "SUBMITTED" }, false);
+        cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
       }
     } catch(e) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "PENDING" }, false);
+      cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
     }
   }
   box.innerHTML = cardsHtml;
 }
 
 function cancelOrder(orderId) {
-  if (confirm(`Are you sure you want to cancel Order #${orderId}?`)) {
-    userOrders = userOrders.map(item => {
-      let id = typeof item === 'object' ? item.id : item;
-      if (id === orderId) {
-        return { id: id, cancelled: true };
-      }
-      return typeof item === 'object' ? item : { id: item, cancelled: false };
-    });
-    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-    toast("Order Cancelled", `Order #${orderId} has been cancelled.`);
-    renderOrdersPage();
-  }
+  userOrders = userOrders.map(item => {
+    if (item.id === orderId) {
+      return { ...item, cancelled: true };
+    }
+    return item;
+  });
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  toast("Order Cancelled", `Order #${orderId} was marked as cancelled.`);
+  renderOrdersPage();
+}
+
+function deleteOrder(orderId) {
+  userOrders = userOrders.filter(item => item.id !== orderId);
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  toast("Order Deleted", `Order #${orderId} removed permanently.`);
+  renderOrdersPage();
 }
 
 function trackOrder(){
-  if (!currentUser) {
-    toast("Login Required", "Please login from Profile page first.");
+  closeModal("trackModal");
+  if (!currentUser || !currentUser.email) {
+    toast("Login Required", "Please set Profile info first.");
     return;
   }
   const query = document.getElementById("trackInput").value.trim();
   if(!query) return;
   
-  let exists = userOrders.find(item => (typeof item === 'object' ? item.id : item) === query);
+  let exists = userOrders.find(item => item.id === query);
   if (!exists) {
-    userOrders.unshift({ id: query, cancelled: false });
+    userOrders.unshift({ id: query, email: currentUser.email, cancelled: false });
+    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
   }
   renderOrdersPage();
 }
 
 function buildOrderCard(d, isCancelled){
-  const st = isCancelled ? "CANCELLED" : String(d.status || "PENDING").toUpperCase();
+  const st = isCancelled ? "CANCELLED" : String(d.status || "CONFIRMED").toUpperCase();
   const statusClass = isCancelled ? "cancelled" : "pending";
 
   return `
@@ -652,13 +704,34 @@ function buildOrderCard(d, isCancelled){
         <b>Order #${d.orderId}</b>
         <span class="status ${statusClass}">${st}</span>
       </div>
+
+      <!-- Professional Tracking Stepper -->
+      <div class="order-stepper">
+        <div class="step ${!isCancelled ? 'active' : ''}">
+          <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+          <div class="step-label">Confirmed</div>
+        </div>
+        <div class="step ${st==='SHIPPED'||st==='DELIVERED' ? 'active' : ''}">
+          <div class="step-icon"><i class="fa-solid fa-truck"></i></div>
+          <div class="step-label">Shipped</div>
+        </div>
+        <div class="step ${st==='DELIVERED' ? 'active' : ''}">
+          <div class="step-icon"><i class="fa-solid fa-house"></i></div>
+          <div class="step-label">Delivered</div>
+        </div>
+      </div>
+
       <div class="order-grid-info">
         <div><span>Customer:</span> <b>${d.name || currentUser.name || 'N/A'}</b></div>
-        <div><span>Payment Method:</span> <b>${d.payment || 'COD'}</b></div>
+        <div><span>Payment:</span> <b>${d.payment || 'COD'}</b></div>
         <div style="grid-column: span 2"><span>Products:</span> <b>${d.product || 'N/A'}</b></div>
         <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price || 0}</b></div>
       </div>
-      ${!isCancelled ? `<button class="btn-cancel-order" onclick="cancelOrder('${d.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel Order</button>` : ''}
+
+      <div class="order-card-actions">
+        ${!isCancelled ? `<button class="btn-cancel-small" onclick="cancelOrder('${d.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>` : ''}
+        ${isCancelled ? `<button class="btn-delete-small" onclick="deleteOrder('${d.orderId}')"><i class="fa-solid fa-trash"></i> Delete Order</button>` : ''}
+      </div>
     </div>`;
 }
 
@@ -677,45 +750,51 @@ function renderProfilePage() {
           </div>
         </div>
         <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span><b>Phone:</b> ${currentUser.phone || 'Not Provided'}</span></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span><b>Address:</b> ${currentUser.address || 'Not Provided'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><b>Email:</b> ${currentUser.email || 'N/A'}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone || 'N/A'}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address || 'N/A'}</div></div>
         </div>
         <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Logout Account</button>
       </div>`;
   } else {
     box.innerHTML = `
       <div class="account-card">
-        <b style="font-size:14px;display:block;margin-bottom:12px">Save Profile Details</b>
-        <form onsubmit="saveUserProfile(event)">
+        <b style="font-size:16px;display:block;margin-bottom:15px;text-align:center"><i class="fa-solid fa-user-lock"></i> Account Login / Profile</b>
+        <form onsubmit="saveProfile(event)">
           <div class="field"><label>Full Name</label><input id="pName" required placeholder="Enter full name"></div>
+          <div class="field"><label>Email Address</label><input type="email" id="pEmail" required placeholder="name@example.com"></div>
           <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Default Address</label><textarea id="pAddress" rows="2" required placeholder="Shipping address"></textarea></div>
-          <button class="primary" type="submit" style="margin-top:8px">Save Profile</button>
+          <div class="field"><label>Shipping Address</label><textarea id="pAddress" rows="3" required placeholder="Delivery address"></textarea></div>
+          <button class="primary" type="submit">SAVE PROFILE & LOGIN</button>
         </form>
       </div>`;
   }
 }
 
-function saveUserProfile(e) {
+function saveProfile(e) {
   e.preventDefault();
   currentUser = {
     name: document.getElementById("pName").value.trim(),
+    email: document.getElementById("pEmail").value.trim().toLowerCase(),
     phone: document.getElementById("pPhone").value.trim(),
     address: document.getElementById("pAddress").value.trim()
   };
   localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  toast("Profile Saved", "User details updated successfully.");
+  toast("Profile Saved", "Account login details saved.");
   renderProfilePage();
 }
 
 function logoutUser() {
-  currentUser = null;
   localStorage.removeItem("hy_user_session");
-  toast("Logged Out", "Session cleared.");
+  currentUser = null;
+  toast("Logged Out", "You have been logged out.");
   renderProfilePage();
 }
 
-fetchSheetProducts();
+window.onload = function() {
+  fetchSheetProducts();
+  saveCart();
+};
 </script>
 </body>
 </html>
