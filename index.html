@@ -270,6 +270,11 @@ header {
 .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
 .field input, .field textarea, .field select { width: 100%; padding: 10px; border-radius: 8px; background: #070d18; color: white; border: 1px solid var(--border); outline: 0; font-size: 12px; }
 .primary { width: 100%; padding: 12px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; font-size: 13px; }
+.secondary-btn { width: 100%; padding: 10px; border-radius: 10px; background: transparent; color: var(--muted); border: 1px solid var(--border); font-weight: 600; font-size: 12px; margin-top: 8px; }
+
+.auth-tabs { display: flex; margin-bottom: 15px; border-bottom: 1px solid var(--border); }
+.auth-tab { flex: 1; padding: 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.auth-tab.active { color: var(--green); border-bottom: 2px solid var(--green); }
 
 .toast { position: fixed; top: 20px; right: 20px; z-index: 300; background: #0d1727; border: 1px solid var(--green); padding: 12px 18px; border-radius: 12px; box-shadow: var(--shadow); display: none; animation: slideIn 0.3s ease; }
 .toast.show { display: block; }
@@ -401,7 +406,81 @@ header {
   <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
 </nav>
 
-<!-- Modals -->
+<!-- Auth Modal (Login / Register) -->
+<div class="modal" id="authModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <b id="authModalTitle"><i class="fa-solid fa-user-lock"></i> Account Access</b>
+      <button class="close" onclick="closeModal('authModal')">×</button>
+    </div>
+    <div class="modalbody">
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login" onclick="toggleAuthTab('login')">LOGIN</div>
+        <div class="auth-tab" id="tab-register" onclick="toggleAuthTab('register')">REGISTER ACCOUNT</div>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm">
+        <div class="field"><label>Email Address</label><input type="email" id="lEmail" required placeholder="Enter your email"></div>
+        <div class="field"><label>Password</label><input type="password" id="lPassword" required placeholder="Enter password"></div>
+        <button class="primary" type="submit">LOGIN NOW</button>
+        <button type="button" class="secondary-btn" onclick="openForgetModal()">Forgot Password?</button>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" style="display:none;">
+        <div class="field"><label>Full Name</label><input id="rName" required placeholder="Enter full name"></div>
+        <div class="field"><label>Email Address</label><input type="email" id="rEmail" required placeholder="example@mail.com"></div>
+        <div class="field"><label>Mobile Number</label><input id="rPhone" required placeholder="03XXXXXXXXX"></div>
+        <div class="field"><label>Shipping Address</label><textarea id="rAddress" rows="2" required placeholder="Complete delivery address"></textarea></div>
+        <div class="field"><label>Password</label><input type="password" id="rPassword" required placeholder="Create password"></div>
+        <div class="field"><label>Confirm Password</label><input type="password" id="rConfirmPassword" required placeholder="Confirm password"></div>
+        <button class="primary" type="submit">REGISTER ACCOUNT</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Save Password Prompt Modal -->
+<div class="modal" id="savePasswordModal">
+  <div class="modalbox" style="text-align: center;">
+    <div class="modalhead">
+      <b><i class="fa-solid fa-key" style="color:var(--green)"></i> Save Credentials</b>
+    </div>
+    <div class="modalbody">
+      <p style="font-size:13px; margin-bottom:15px; color:var(--text)">Would you like to save your account password for faster login on this browser?</p>
+      <div style="display:flex; gap:10px;">
+        <button class="primary" style="flex:1" onclick="confirmSavePassword(true)">OK</button>
+        <button class="secondary-btn" style="flex:1; margin-top:0" onclick="confirmSavePassword(false)">NOT NOW</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot / Change Password Modal -->
+<div class="modal" id="passwordModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <b id="passModalTitle"><i class="fa-solid fa-key"></i> Security Settings</b>
+      <button class="close" onclick="closeModal('passwordModal')">×</button>
+    </div>
+    <div class="modalbody">
+      <form id="changePasswordForm" style="display:none;">
+        <div class="field"><label>Current Old Password</label><input type="password" id="oldPass" required placeholder="Enter current password"></div>
+        <div class="field"><label>New Password</label><input type="password" id="newPass" required placeholder="Enter new password"></div>
+        <button class="primary" type="submit">UPDATE PASSWORD</button>
+      </form>
+
+      <form id="forgetPasswordForm" style="display:none;">
+        <div class="field"><label>Registered Email Address</label><input type="email" id="fEmail" required placeholder="Enter registered email"></div>
+        <div class="field"><label>New Password</label><input type="password" id="fNewPass" required placeholder="Set new password"></div>
+        <button class="primary" type="submit">RESET PASSWORD</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Cart & Checkout Modals -->
 <div class="modal" id="cartModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -420,10 +499,10 @@ header {
     </div>
     <div class="modalbody">
       <form id="checkoutForm">
-        <div class="field"><label>Full Name</label><input id="cName" required placeholder="Enter full name"></div>
-        <div class="field"><label>Email Address</label><input type="email" id="cEmail" required placeholder="example@mail.com"></div>
-        <div class="field"><label>Phone Number</label><input id="cPhone" required placeholder="03XXXXXXXXX"></div>
-        <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+        <div class="field"><label>Full Name</label><input id="cName" required readonly style="opacity:0.8"></div>
+        <div class="field"><label>Email Address</label><input type="email" id="cEmail" required readonly style="opacity:0.8"></div>
+        <div class="field"><label>Phone Number</label><input id="cPhone" required readonly style="opacity:0.8"></div>
+        <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required></textarea></div>
         <div class="field">
           <label>Payment Option</label>
           <select id="cPayment">
@@ -460,6 +539,10 @@ header {
 <script>
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
 const WHATSAPP = "923209306672";
+
+let registeredUsers = JSON.parse(localStorage.getItem("hy_registered_users") || "[]");
+let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
+let pendingSaveAuth = null;
 
 function switchPage(pageId) {
   document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active-view'));
@@ -510,7 +593,6 @@ let products = [];
 let activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
 function toast(title, text) {
   const t = document.getElementById("toast");
@@ -520,6 +602,153 @@ function toast(title, text) {
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 
+function showModal(id){ document.getElementById(id).classList.add("show"); }
+function closeModal(id){ document.getElementById(id).classList.remove("show"); }
+
+/* AUTH SYSTEM */
+function openAuthModal(tab) {
+  toggleAuthTab(tab || 'login');
+  showModal("authModal");
+}
+
+function toggleAuthTab(tab) {
+  const loginForm = document.getElementById("loginForm");
+  const regForm = document.getElementById("registerForm");
+  const tabL = document.getElementById("tab-login");
+  const tabR = document.getElementById("tab-register");
+
+  if(tab === 'login') {
+    loginForm.style.display = "block";
+    regForm.style.display = "none";
+    tabL.classList.add("active");
+    tabR.classList.remove("active");
+  } else {
+    loginForm.style.display = "none";
+    regForm.style.display = "block";
+    tabR.classList.add("active");
+    tabL.classList.remove("active");
+  }
+}
+
+document.getElementById("registerForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const email = document.getElementById("rEmail").value.trim().toLowerCase();
+  const pass = document.getElementById("rPassword").value;
+  const cPass = document.getElementById("rConfirmPassword").value;
+
+  if (pass !== cPass) {
+    return toast("Error", "Passwords do not match!");
+  }
+
+  if (registeredUsers.some(u => u.email === email)) {
+    return toast("Account Exists", "This email is already registered. Please Login.");
+  }
+
+  const newUser = {
+    name: document.getElementById("rName").value.trim(),
+    email: email,
+    phone: document.getElementById("rPhone").value.trim(),
+    address: document.getElementById("rAddress").value.trim(),
+    password: pass
+  };
+
+  registeredUsers.push(newUser);
+  localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
+
+  currentUser = newUser;
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  closeModal("authModal");
+
+  pendingSaveAuth = newUser;
+  showModal("savePasswordModal");
+});
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const email = document.getElementById("lEmail").value.trim().toLowerCase();
+  const pass = document.getElementById("lPassword").value;
+
+  const user = registeredUsers.find(u => u.email === email && u.password === pass);
+
+  if (!user) {
+    return toast("Access Denied", "Invalid Email or Password.");
+  }
+
+  currentUser = user;
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  closeModal("authModal");
+
+  pendingSaveAuth = user;
+  showModal("savePasswordModal");
+});
+
+function confirmSavePassword(shouldSave) {
+  closeModal("savePasswordModal");
+  if(shouldSave) {
+    toast("Saved", "Login credentials saved securely.");
+  } else {
+    toast("Notice", "Password save skipped.");
+  }
+  renderProfilePage();
+  renderOrdersPage();
+}
+
+function openChangePasswordModal() {
+  document.getElementById("passModalTitle").innerHTML = `<i class="fa-solid fa-key"></i> Change Password`;
+  document.getElementById("changePasswordForm").style.display = "block";
+  document.getElementById("forgetPasswordForm").style.display = "none";
+  showModal("passwordModal");
+}
+
+function openForgetModal() {
+  closeModal("authModal");
+  document.getElementById("passModalTitle").innerHTML = `<i class="fa-solid fa-unlock"></i> Reset Password`;
+  document.getElementById("changePasswordForm").style.display = "none";
+  document.getElementById("forgetPasswordForm").style.display = "block";
+  showModal("passwordModal");
+}
+
+document.getElementById("changePasswordForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const oldPass = document.getElementById("oldPass").value;
+  const newPass = document.getElementById("newPass").value;
+
+  if(currentUser.password !== oldPass) {
+    return toast("Error", "Old password incorrect.");
+  }
+
+  currentUser.password = newPass;
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+
+  const idx = registeredUsers.findIndex(u => u.email === currentUser.email);
+  if(idx !== -1) {
+    registeredUsers[idx].password = newPass;
+    localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
+  }
+
+  closeModal("passwordModal");
+  toast("Success", "Password changed successfully.");
+});
+
+document.getElementById("forgetPasswordForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const email = document.getElementById("fEmail").value.trim().toLowerCase();
+  const newPass = document.getElementById("fNewPass").value;
+
+  const idx = registeredUsers.findIndex(u => u.email === email);
+  if(idx === -1) {
+    return toast("Not Found", "No account registered with this email.");
+  }
+
+  registeredUsers[idx].password = newPass;
+  localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
+
+  closeModal("passwordModal");
+  toast("Success", "Password reset successfully! Please Login.");
+  openAuthModal('login');
+});
+
+/* PRODUCTS & CART */
 async function fetchSheetProducts() {
   const grid = document.getElementById("productGrid");
   const featGrid = document.getElementById("featuredGrid");
@@ -607,8 +836,6 @@ function saveCart(){
 }
 
 function cartTotal(){ return cart.reduce((s,p)=>s+Number(p.price || 0),0); }
-function showModal(id){ document.getElementById(id).classList.add("show"); }
-function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
 function openCart(){
   const body = document.getElementById("cartBody");
@@ -634,35 +861,32 @@ function openCart(){
 }
 
 function removeCart(i){ cart.splice(i,1); saveCart(); openCart(); }
+
 function buyNow(id){ 
   const p = products.find(x => x.id == id);
   if(p){ cart=[p]; saveCart(); openCheckout(); }
 }
 
 function openCheckout(){
+  if (!currentUser) {
+    closeModal("cartModal");
+    toast("REQUIRED LOGIN", "Please Login or Register to place an order.");
+    openAuthModal('login');
+    return;
+  }
+
   closeModal("cartModal");
   document.getElementById("cTotal").value = "Rs. " + cartTotal().toLocaleString();
-  if(currentUser){
-    document.getElementById("cName").value = currentUser.name || "";
-    document.getElementById("cEmail").value = currentUser.email || "";
-    document.getElementById("cPhone").value = currentUser.phone || "";
-    document.getElementById("cAddress").value = currentUser.address || "";
-  }
+  document.getElementById("cName").value = currentUser.name || "";
+  document.getElementById("cEmail").value = currentUser.email || "";
+  document.getElementById("cPhone").value = currentUser.phone || "";
+  document.getElementById("cAddress").value = currentUser.address || "";
   showModal("checkoutModal");
 }
 
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  const emailVal = document.getElementById("cEmail").value.trim().toLowerCase();
-  const phoneVal = document.getElementById("cPhone").value.trim();
-  
-  currentUser = {
-    name: document.getElementById("cName").value.trim(),
-    email: emailVal,
-    phone: phoneVal,
-    address: document.getElementById("cAddress").value.trim()
-  };
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  if(!currentUser) return toast("REQUIRED LOGIN", "Please login to proceed.");
 
   const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
   const payload = {
@@ -670,7 +894,7 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
     name: currentUser.name,
     email: currentUser.email,
     phone: currentUser.phone,
-    address: currentUser.address,
+    address: document.getElementById("cAddress").value.trim(),
     product: cart.map(x=>x.name).join(", "),
     price: cartTotal(),
     payment: document.getElementById("cPayment").value
@@ -756,7 +980,7 @@ function buildOrderCard(data, isLocalCancelled) {
       </div>
 
       <div class="order-grid-info">
-        <div><span>Customer:</span><b>${data.name || currentUser?.name || 'Hy Business'}</b></div>
+        <div><span>Customer:</span><b>${data.name || currentUser?.name || 'HY Customer'}</b></div>
         <div><span>Payment:</span><b>${data.payment || 'COD'}</b></div>
         <div><span>Product:</span><b>${data.product || 'N/A'}</b></div>
         <div><span>Total:</span><b style="color:var(--green)">Rs. ${Number(data.price || 0).toLocaleString()}</b></div>
@@ -773,7 +997,14 @@ async function renderOrdersPage() {
   const container = document.getElementById("ordersListContainer");
   if (!container) return;
 
-  if (!userOrders.length) {
+  if (!currentUser) {
+    container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--red)"><i class="fa-solid fa-lock fa-3x"></i><br><br><b>REQUIRED LOGIN</b><br><span style="font-size:12px;color:var(--muted)">Please login to view your order history.</span><br><br><button class="primary" style="width:200px" onclick="openAuthModal('login')">LOGIN NOW</button></div>`;
+    return;
+  }
+
+  const myOrders = userOrders.filter(o => o.email === currentUser.email);
+
+  if (!myOrders.length) {
     container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--muted)"><i class="fa-solid fa-box-open fa-3x"></i><br><br>No active or past orders found.</div>`;
     return;
   }
@@ -781,7 +1012,7 @@ async function renderOrdersPage() {
   container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Fetching live order statuses...</div>`;
 
   let html = "";
-  for (let localOrd of userOrders) {
+  for (let localOrd of myOrders) {
     try {
       const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${localOrd.id}`);
       const data = await res.json();
@@ -844,7 +1075,13 @@ function renderProfilePage() {
   if (!container) return;
 
   if (!currentUser) {
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted)">No active profile session. Place an order to log in automatically.</div>`;
+    container.innerHTML = `
+      <div class="account-card" style="text-align:center;">
+        <i class="fa-solid fa-user-lock fa-3x" style="color:var(--green); margin-bottom:15px;"></i>
+        <h3 style="margin-bottom:10px">Account Required</h3>
+        <p style="font-size:12px; color:var(--muted); margin-bottom:20px">Please login or create a new account to manage profile & view orders.</p>
+        <button class="primary" onclick="openAuthModal('login')">LOGIN / REGISTER NOW</button>
+      </div>`;
     return;
   }
 
@@ -854,7 +1091,7 @@ function renderProfilePage() {
         <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
         <div>
           <b style="font-size:16px">${currentUser.name || 'HY Customer'}</b>
-          <small style="display:block;color:var(--muted)">Valued Customer</small>
+          <small style="display:block;color:var(--muted)">Verified Customer</small>
         </div>
       </div>
       <div class="account-details">
@@ -862,6 +1099,7 @@ function renderProfilePage() {
         <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span>${currentUser.phone || 'N/A'}</span></div>
         <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span>${currentUser.address || 'N/A'}</span></div>
       </div>
+      <button class="secondary-btn" style="margin-bottom:8px;" onclick="openChangePasswordModal()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button>
       <button class="btn-logout" onclick="logoutUser()">LOGOUT SESSION</button>
     </div>`;
 }
@@ -869,7 +1107,7 @@ function renderProfilePage() {
 function logoutUser() {
   localStorage.removeItem("hy_user_session");
   currentUser = null;
-  toast("Logged Out", "Profile session cleared.");
+  toast("Logged Out", "Profile session logged out.");
   switchPage('home');
 }
 
