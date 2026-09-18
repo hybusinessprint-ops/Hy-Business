@@ -152,14 +152,68 @@ header {
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
 .cancelled { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 
-/* Timeline Stepper UI */
-.order-stepper { display: flex; justify-content: space-between; margin: 18px 0; position: relative; }
-.order-stepper::before { content: ''; position: absolute; top: 12px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
-.step { position: relative; z-index: 2; text-align: center; flex: 1; }
-.step-icon { width: 26px; height: 26px; border-radius: 50%; background: #101a2d; border: 1px solid var(--border); display: grid; place-items: center; margin: 0 auto 6px; font-size: 10px; color: var(--muted); }
-.step.active .step-icon { background: var(--green); color: #000; border-color: var(--green); }
-.step-label { font-size: 10px; color: var(--muted); }
-.step.active .step-label { color: white; font-weight: 600; }
+/* Improved Professional Tracker Line UI */
+.tracker-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 5px 20px;
+  position: relative;
+}
+
+.tracker-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.tracker-step .circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #101a2d;
+  border: 2px solid var(--border);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.tracker-step span {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.tracker-step.active .circle {
+  background-color: var(--green);
+  border-color: var(--green);
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
+}
+
+.tracker-step.active span {
+  color: #ffffff;
+}
+
+.tracker-line {
+  flex-grow: 1;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0 -5px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tracker-line.active {
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(0, 150, 255, 0.5);
+}
 
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
 .order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
@@ -574,7 +628,6 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
   const emailVal = document.getElementById("cEmail").value.trim().toLowerCase();
   const phoneVal = document.getElementById("cPhone").value.trim();
   
-  // Set current user login dynamically based on email & phone
   currentUser = {
     name: document.getElementById("cName").value.trim(),
     email: emailVal,
@@ -626,7 +679,6 @@ async function renderOrdersPage(){
     return;
   }
 
-  // Filter orders matching ONLY current logged-in user email
   let myOrders = userOrders.filter(o => typeof o === 'object' && o.email === currentUser.email);
 
   if(!myOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No active orders found for ${currentUser.email}</div>`; return; }
@@ -698,6 +750,10 @@ function buildOrderCard(d, isCancelled){
   const st = isCancelled ? "CANCELLED" : String(d.status || "CONFIRMED").toUpperCase();
   const statusClass = isCancelled ? "cancelled" : "pending";
 
+  const isConfirmed = !isCancelled;
+  const isShipped = st === 'SHIPPED' || st === 'DELIVERED';
+  const isDelivered = st === 'DELIVERED';
+
   return `
     <div class="order-card">
       <div class="order-header">
@@ -705,19 +761,21 @@ function buildOrderCard(d, isCancelled){
         <span class="status ${statusClass}">${st}</span>
       </div>
 
-      <!-- Professional Tracking Stepper -->
-      <div class="order-stepper">
-        <div class="step ${!isCancelled ? 'active' : ''}">
-          <div class="step-icon"><i class="fa-solid fa-check"></i></div>
-          <div class="step-label">Confirmed</div>
+      <!-- Professional Dynamic Tracking Line & Stepper -->
+      <div class="tracker-container">
+        <div class="tracker-step ${isConfirmed ? 'active' : ''}">
+          <div class="circle"><i class="fa-solid fa-check"></i></div>
+          <span>Confirmed</span>
         </div>
-        <div class="step ${st==='SHIPPED'||st==='DELIVERED' ? 'active' : ''}">
-          <div class="step-icon"><i class="fa-solid fa-truck"></i></div>
-          <div class="step-label">Shipped</div>
+        <div class="tracker-line ${isShipped ? 'active' : ''}"></div>
+        <div class="tracker-step ${isShipped ? 'active' : ''}">
+          <div class="circle"><i class="fa-solid fa-truck"></i></div>
+          <span>Shipped</span>
         </div>
-        <div class="step ${st==='DELIVERED' ? 'active' : ''}">
-          <div class="step-icon"><i class="fa-solid fa-house"></i></div>
-          <div class="step-label">Delivered</div>
+        <div class="tracker-line ${isDelivered ? 'active' : ''}"></div>
+        <div class="tracker-step ${isDelivered ? 'active' : ''}">
+          <div class="circle"><i class="fa-solid fa-house"></i></div>
+          <span>Delivered</span>
         </div>
       </div>
 
