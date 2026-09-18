@@ -92,21 +92,21 @@ header {
 .page-title i { color: var(--green); }
 
 .hero { margin: 10px 0 22px; display: grid; grid-template-columns: 1fr 300px; gap: 18px; }
-.hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; height: 280px; }
+.hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; }
 .slides { display: flex; width: 100%; height: 100%; transition: transform 0.4s ease-in-out; }
-.slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: flex-end; background-size: cover; background-position: center; padding: 25px; }
-.slide-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,10,16,0.1) 0%, rgba(7,10,16,0.85) 100%); }
+.slide { min-width: 100%; position: relative; display: flex; align-items: center; background-size: cover; background-position: center; padding: 25px; }
+.slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,10,16,0.95) 0%, rgba(7,10,16,0.6) 100%); }
 .slide-content { position: relative; z-index: 2; max-width: 480px; }
 .slide-content .tag { display: inline-block; background: rgba(0,230,118,0.2); color: var(--green); border: 1px solid var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-bottom: 8px; }
-.slide-content h1 { font-size: 24px; line-height: 1.2; margin-bottom: 8px; word-wrap: break-word; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+.slide-content h1 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; word-wrap: break-word; }
 .slide-content h1 span { color: var(--green); }
 .slide-content p { color: var(--muted); margin-bottom: 16px; font-size: 12px; }
-.hero-btn { padding: 8px 16px; border-radius: 8px; background: var(--green); font-weight: 700; color: #00140a; font-size: 12px; }
+.hero-btn { padding: 10px 18px; border-radius: 8px; background: var(--green); font-weight: 700; color: #00140a; font-size: 12px; }
 
 .slider-controls { position: absolute; bottom: 15px; right: 15px; z-index: 10; display: flex; gap: 6px; }
 .slider-btn { width: 30px; height: 30px; border-radius: 50%; background: rgba(16,26,45,0.8); color: white; display: grid; place-items: center; border: 1px solid var(--border); }
 .dots { position: absolute; bottom: 15px; left: 25px; z-index: 10; display: flex; gap: 6px; flex-wrap: wrap; }
-.dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: .3s; }
+.dot-item { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: .3s; }
 .dot-item.active { background: var(--green); width: 22px; border-radius: 8px; }
 
 .trust { display: grid; gap: 10px; }
@@ -188,7 +188,6 @@ header {
 @media(max-width:850px){
   .products { grid-template-columns: repeat(2, 1fr); }
   .hero { grid-template-columns: 1fr; }
-  .hero-slider { height: 220px; min-height: 220px; }
   .trust { grid-template-columns: repeat(3, 1fr); }
   .topbar { display: none; }
 }
@@ -225,9 +224,19 @@ header {
     <div class="hero">
       <div class="hero-slider">
         <div class="slides" id="heroSlides">
-          <!-- Banners Loaded Dynamically from Sheet or Fallback -->
+          <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80');">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+              <span class="tag">MEGA SALE</span>
+              <h1>Shop Smart.<br><span>Live Better.</span></h1>
+              <p>Premium quality items with fast shipping and Cash on Delivery.</p>
+              <button class="hero-btn" onclick="switchPage('products')">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
         </div>
-        <div class="dots" id="heroDots"></div>
+        <div class="dots" id="heroDots">
+          <span class="dot-item active" onclick="setSlide(0)"></span>
+        </div>
         <div class="slider-controls">
           <button class="slider-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
           <button class="slider-btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
@@ -378,9 +387,346 @@ function prevSlide() {
 
 function setSlide(i) { currentSlide = i; updateSlider(); }
 
-// 3 Seconds Auto-Slide Interval for clean banner view
-setInterval(nextSlide, 3000);
+// 1 Second Auto-Slide Interval
+setInterval(nextSlide, 1000);
 
 let products = [];
 let activeCat = "All", searchTerm = "";
-let cart = JSON.parse(localStorage.getItem("hy_user
+let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
+let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
+let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
+
+function toast(title, text) {
+  const t = document.getElementById("toast");
+  document.getElementById("toastTitle").textContent = title;
+  document.getElementById("toastText").textContent = text;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+// FETCH BANNER FROM GOOGLE SHEET WITH FIX FOR MULTIPLE DOTS
+async function fetchSheetBanners() {
+  const slidesContainer = document.getElementById("heroSlides");
+  const dotsContainer = document.getElementById("heroDots");
+  
+  try {
+    const res = await fetch(BANNER_SHEET_CSV + "&t=" + new Date().getTime());
+    const csvData = await res.text();
+    const lines = csvData.split(/\r?\n/);
+    
+    let slidesHtml = "";
+    let dotsHtml = "";
+    let validCount = 0;
+
+    for (let i = 1; i < lines.length; i++) {
+      let row = lines[i].trim();
+      if (!row) continue;
+
+      let cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+      
+      let imgUrl = cols[0] ? cols[0].replace(/^"|"$/g, '').trim() : '';
+      let tag = (cols[1] && cols[1].trim()) ? cols[1].replace(/^"|"$/g, '').trim() : 'MEGA SALE';
+      let title = (cols[2] && cols[2].trim()) ? cols[2].replace(/^"|"$/g, '').trim() : 'Shop Smart. Live Better.';
+      let btnLink = (cols[3] && cols[3].trim()) ? cols[3].replace(/^"|"$/g, '').trim() : '#';
+
+      if (imgUrl.includes('](')) {
+        imgUrl = imgUrl.split('](')[1].replace(')', '').trim();
+      }
+
+      // Check if image link is present
+      if (!imgUrl || imgUrl.length < 5) continue;
+
+      slidesHtml += `
+        <div class="slide" style="background-image: url('${imgUrl}');">
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <span class="tag">${tag}</span>
+            <h1>${title}</h1>
+            <p>Premium quality items with fast shipping and Cash on Delivery.</p>
+            <button class="hero-btn" onclick="window.location.href='${btnLink}'">SHOP NOW <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>`;
+
+      dotsHtml += `<span class="dot-item ${validCount === 0 ? 'active' : ''}" onclick="setSlide(${validCount})"></span>`;
+      validCount++;
+    }
+
+    if (validCount > 0 && slidesContainer && dotsContainer) {
+      slidesContainer.innerHTML = slidesHtml;
+      dotsContainer.innerHTML = dotsHtml;
+      totalSlidesCount = validCount;
+      currentSlide = 0;
+      updateSlider();
+    }
+  } catch(e) {
+    console.error("Banner Sync Error:", e);
+  }
+}
+
+async function fetchSheetProducts() {
+  const grid = document.getElementById("productGrid");
+  
+  if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
+
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
+    const data = await res.json();
+    if(data.result === "success" && data.products && data.products.length > 0) {
+      products = data.products;
+      renderProducts();
+    } else {
+      showEmptyState("No products found in Google Sheet.");
+    }
+  } catch(e) {
+    showEmptyState("Failed to load products. Check connection or script permissions.");
+  }
+}
+
+function showEmptyState(msg) {
+  const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
+  const html = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">${msg}</div>`;
+  if(grid) grid.innerHTML = html;
+  if(featGrid) featGrid.innerHTML = html;
+}
+
+function renderProducts(){
+  const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
+  
+  if(products.length === 0) return;
+
+  let list = products.filter(p => (activeCat==="All" || String(p.cat).toLowerCase()===activeCat.toLowerCase()) && String(p.name).toLowerCase().includes(searchTerm.toLowerCase()));
+
+  const productHTML = (p) => `
+    <article class="product">
+      <div class="pimg">
+        <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500'">
+        <span class="tag">${p.cat || 'General'}</span>
+      </div>
+      <div class="pbody">
+        <h3>${p.name}</h3>
+        <div><span class="price">Rs. ${Number(p.price || 0).toLocaleString()}</span>${p.old ? `<span class="old">Rs. ${Number(p.old).toLocaleString()}</span>` : ''}</div>
+        <div class="pactions">
+          <button class="cartbtn" onclick="addCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i></button>
+          <button class="buy" onclick="buyNow('${p.id}')">Buy Now</button>
+        </div>
+      </div>
+    </article>`;
+
+  if(grid) grid.innerHTML = list.map(productHTML).join("");
+  if(featGrid) featGrid.innerHTML = products.slice(0, 8).map(productHTML).join("");
+  
+  const countLabel = document.getElementById("resultCount");
+  if(countLabel) countLabel.textContent = `${list.length} Items`;
+}
+
+function filterCategory(cat,el){
+  activeCat=cat;
+  document.querySelectorAll(".cat").forEach(x => x.classList.remove("active"));
+  if(el) el.classList.add("active");
+  document.getElementById("catHeading").textContent = cat + " Products";
+  renderProducts();
+}
+
+function searchProducts(){
+  searchTerm = document.getElementById("searchInput").value.trim();
+  switchPage('products');
+  renderProducts();
+}
+
+function addCart(id){
+  const p = products.find(x => x.id == id);
+  if(p) {
+    cart.push(p); saveCart();
+    toast("Cart Updated", `${p.name} added to cart.`);
+  }
+}
+
+function saveCart(){
+  localStorage.setItem("hy_user_cart", JSON.stringify(cart));
+  document.getElementById("cartCount").textContent = cart.length;
+}
+
+function cartTotal(){ return cart.reduce((s,p)=>s+Number(p.price || 0),0); }
+function showModal(id){ document.getElementById(id).classList.add("show"); }
+function closeModal(id){ document.getElementById(id).classList.remove("show"); }
+
+function openCart(){
+  const body = document.getElementById("cartBody");
+  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is empty.</div>`; showModal("cartModal"); return; }
+  
+  body.innerHTML = cart.map((p,i)=>`
+    <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
+      <div style="flex:1">
+        <b style="font-size:12px">${p.name}</b>
+        <div class="price" style="font-size:13px">Rs. ${Number(p.price || 0).toLocaleString()}</div>
+      </div>
+      <button class="close" onclick="removeCart(${i})">×</button>
+    </div>
+  `).join("") + `
+    <div style="padding-top:15px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <b>Total Amount:</b>
+        <b style="color:var(--green)">Rs. ${cartTotal().toLocaleString()}</b>
+      </div>
+      <button class="primary" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
+    </div>`;
+  showModal("cartModal");
+}
+
+function removeCart(i){ cart.splice(i,1); saveCart(); openCart(); }
+function buyNow(id){ 
+  const p = products.find(x => x.id == id);
+  if(p){ cart=[p]; saveCart(); openCheckout(); }
+}
+
+function openCheckout(){
+  closeModal("cartModal");
+  document.getElementById("cTotal").value = "Rs. " + cartTotal().toLocaleString();
+  if(currentUser){
+    document.getElementById("cName").value = currentUser.name || "";
+    document.getElementById("cPhone").value = currentUser.phone || "";
+    document.getElementById("cAddress").value = currentUser.address || "";
+  }
+  showModal("checkoutModal");
+}
+
+document.getElementById("checkoutForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
+  const payload = {
+    orderId: orderId,
+    name: document.getElementById("cName").value.trim(),
+    phone: document.getElementById("cPhone").value.trim(),
+    address: document.getElementById("cAddress").value.trim(),
+    product: cart.map(x=>x.name).join(", "),
+    price: cartTotal(),
+    payment: document.getElementById("cPayment").value
+  };
+
+  userOrders.unshift(orderId);
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
+    const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal Price: Rs. ${payload.price}`;
+    cart=[]; saveCart(); closeModal("checkoutModal");
+    toast("Order Submitted", `Order ID #${orderId} generated & saved to Sheet.`);
+    switchPage('orders');
+    window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+  } catch(err) {
+    toast("Order Placed", "Order details processed.");
+  }
+});
+
+async function renderOrdersPage(){
+  const box = document.getElementById("ordersListContainer");
+  if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
+  
+  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...</div>`;
+  let cardsHtml = "";
+  
+  for(let id of userOrders){
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
+      const data = await response.json();
+      if(data.result === "success") {
+        cardsHtml += buildOrderCard(data);
+      } else {
+        cardsHtml += buildOrderCard({ orderId: id, status: "SUBMITTED" });
+      }
+    } catch(e) {
+      cardsHtml += buildOrderCard({ orderId: id, status: "PENDING" });
+    }
+  }
+  box.innerHTML = cardsHtml;
+}
+
+function trackOrder(){
+  const query = document.getElementById("trackInput").value.trim();
+  if(!query) return;
+  userOrders = [query, ...userOrders.filter(id => id !== query)];
+  renderOrdersPage();
+}
+
+function buildOrderCard(d){
+  const st = String(d.status || "PENDING").toUpperCase();
+  return `
+    <div class="order-card">
+      <div class="order-header">
+        <b>Order #${d.orderId}</b>
+        <span class="status pending">${st}</span>
+      </div>
+      <div class="order-grid-info">
+        <div><span>Customer:</span> <b>${d.name || 'N/A'}</b></div>
+        <div><span>Payment Method:</span> <b>${d.payment || 'COD'}</b></div>
+        <div style="grid-column: span 2"><span>Products:</span> <b>${d.product || 'N/A'}</b></div>
+        <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price || 0}</b></div>
+      </div>
+    </div>`;
+}
+
+function saveUserProfile(e){
+  e.preventDefault();
+  currentUser = {
+    name: document.getElementById("lName").value.trim(),
+    phone: document.getElementById("lPhone").value.trim(),
+    email: document.getElementById("lEmail").value.trim(),
+    address: document.getElementById("lAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+  toast("Profile Saved", "Account information updated.");
+  renderProfilePage();
+}
+
+function logoutUser(){
+  localStorage.removeItem("hy_user_session");
+  currentUser = null;
+  toast("Logged Out", "Account session cleared.");
+  renderProfilePage();
+}
+
+function renderProfilePage(){
+  const container = document.getElementById("profileContainer");
+  if (!currentUser) {
+    container.innerHTML = `
+      <div class="account-card">
+        <h3 style="margin-bottom: 15px; font-size: 16px;">Save Account Details</h3>
+        <form onsubmit="saveUserProfile(event)">
+          <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
+          <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="name@example.com"></div>
+          <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+          <button class="primary" type="submit">SAVE PROFILE</button>
+        </form>
+      </div>`;
+  } else {
+    const initial = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
+    container.innerHTML = `
+      <div class="account-card">
+        <div class="account">
+          <div class="avatar">${initial}</div>
+          <div>
+            <h3 style="font-size: 16px;">${currentUser.name}</h3>
+            <span style="font-size: 12px; color: var(--muted);">${currentUser.email}</span>
+          </div>
+        </div>
+        <div class="account-details">
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address}</div></div>
+        </div>
+        <button class="btn-logout" onclick="logoutUser()">LOGOUT ACCOUNT</button>
+      </div>`;
+  }
+}
+
+// Initialize application on load
+window.addEventListener("DOMContentLoaded", () => {
+  fetchSheetBanners();
+  fetchSheetProducts();
+  document.getElementById("cartCount").textContent = cart.length;
+});
+</script>
+</body>
+</html>
