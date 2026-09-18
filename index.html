@@ -130,9 +130,9 @@ header {
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
 
-/* Image Cutting Fix Applied Here */
-.pimg { height: 180px; background: #050a14; position: relative; display: flex; align-items: center; justify-content: center; }
-.pimg img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+/* Image Display Fix */
+.pimg { height: 180px; background: #08101d; position: relative; display: flex; align-items: center; justify-content: center; }
+.pimg img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
 .pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; z-index: 2; }
 
 .pbody { padding: 12px; }
@@ -145,7 +145,7 @@ header {
 .buy { background: var(--green); color: #00140a; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
 
-/* Professional Timeline Order Card */
+/* Order Card & Timeline UI */
 .order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; position: relative; }
 .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
 .order-header b { font-size: 16px; color: var(--green); }
@@ -200,11 +200,8 @@ header {
   box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
 }
 
-.tracker-step.active span {
-  color: #ffffff;
-}
+.tracker-step.active span { color: #ffffff; }
 
-/* Red / Rejected Status UI */
 .tracker-step.rejected-step .circle {
   background-color: var(--red) !important;
   border-color: var(--red) !important;
@@ -212,9 +209,7 @@ header {
   box-shadow: 0 0 12px rgba(255, 77, 103, 0.6) !important;
 }
 
-.tracker-step.rejected-step span {
-  color: var(--red) !important;
-}
+.tracker-step.rejected-step span { color: var(--red) !important; }
 
 .tracker-line {
   flex-grow: 1;
@@ -685,8 +680,9 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
 
 function openTrackModal() { showModal("trackModal"); }
 
+/* BUILD ORDER CARD WITH DYNAMIC TRACKING LINE */
 function buildOrderCard(data, isLocalCancelled) {
-  const statusStr = (data.status || "CONFIRMED").toUpperCase();
+  const statusStr = String(data.status || "CONFIRMED").toUpperCase().trim();
   const isRejected = isLocalCancelled || statusStr === "REJECT" || statusStr === "REJECTED" || statusStr === "CANCELLED";
 
   let statusClass = "confirmed";
@@ -694,9 +690,13 @@ function buildOrderCard(data, isLocalCancelled) {
     statusClass = "rejected";
   } else if (statusStr === "PENDING") {
     statusClass = "pending";
+  } else if (statusStr === "SHIPPED") {
+    statusClass = "shipped";
+  } else if (statusStr === "DELIVERED") {
+    statusClass = "delivered";
   }
 
-  // Determine Timeline Active States
+  // Timeline UI Calculation
   let confClass = "", shipClass = "", delClass = "";
   let line1Class = "", line2Class = "";
   let confIcon = "fa-check", shipIcon = "fa-truck", delIcon = "fa-house";
@@ -711,7 +711,7 @@ function buildOrderCard(data, isLocalCancelled) {
     shipIcon = "fa-xmark";
     delIcon = "fa-xmark";
   } else {
-    if (statusStr === "CONFIRMED" || statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+    if (statusStr === "CONFIRMED" || statusStr === "SHIPPED" || statusStr === "DELIVERED" || statusStr === "PENDING") {
       confClass = "active";
     }
     if (statusStr === "SHIPPED" || statusStr === "DELIVERED") {
@@ -749,98 +749,98 @@ function buildOrderCard(data, isLocalCancelled) {
       </div>
 
       <div class="order-grid-info">
-        <div><span>Product(s)</span><b>${data.product || 'Standard Items'}</b></div>
-        <div><span>Total Price</span><b>Rs. ${Number(data.price || 0).toLocaleString()}</b></div>
+        <div><span>Product(s)</span><b>${data.product || 'Items'}</b></div>
+        <div><span>Total Price</span><b style="color:var(--green)">Rs. ${Number(data.price || 0).toLocaleString()}</b></div>
         <div><span>Customer</span><b>${data.name || 'Valued Customer'}</b></div>
         <div><span>Payment Method</span><b>${data.payment || 'COD'}</b></div>
       </div>
 
       <div class="order-card-actions">
         ${!isRejected ? `<button class="btn-cancel-small" onclick="cancelOrderLocal('${data.orderId}')">Cancel Order</button>` : ''}
-        <button class="btn-delete-small" onclick="deleteOrderLocal('${data.orderId}')">Delete History</button>
+        <button class="btn-delete-small" onclick="deleteOrderHistory('${data.orderId}')">Delete History</button>
       </div>
-    </div>`;
+    </div>
+  `;
 }
 
 async function renderOrdersPage() {
   const container = document.getElementById("ordersListContainer");
+  if (!container) return;
+
   if (!userOrders.length) {
-    container.innerHTML = `<div style="text-align:center;padding:50px 20px;color:var(--muted)"><i class="fa-solid fa-box-open fa-3x"></i><br><br>No recent orders found.</div>`;
+    container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--muted)"><i class="fa-solid fa-box-open fa-2x"></i><br><br>No orders placed yet.</div>`;
     return;
   }
 
-  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Fetching live order statuses...</div>`;
+  container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Fetching Live Orders Status...</div>`;
 
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getOrders");
-    const data = await res.json();
-    
-    let html = "";
-    userOrders.forEach(localOrd => {
-      const liveData = (data.orders || []).find(o => String(o.orderId).toLowerCase() === String(localOrd.id).toLowerCase()) || { orderId: localOrd.id, status: "CONFIRMED" };
-      html += buildOrderCard(liveData, localOrd.cancelled);
-    });
-
-    container.innerHTML = html;
-  } catch(e) {
-    let html = "";
-    userOrders.forEach(localOrd => {
-      html += buildOrderCard({ orderId: localOrd.id, status: "CONFIRMED" }, localOrd.cancelled);
-    });
-    container.innerHTML = html;
+  let htmlArr = [];
+  for (let localOrd of userOrders) {
+    try {
+      const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${localOrd.id}`);
+      const data = await res.json();
+      if (data.result === "success" && data.order) {
+        htmlArr.push(buildOrderCard(data.order, localOrd.cancelled));
+      } else {
+        htmlArr.push(buildOrderCard({ orderId: localOrd.id, product: 'Saved Order', price: 0, status: localOrd.cancelled ? 'REJECTED' : 'CONFIRMED' }, localOrd.cancelled));
+      }
+    } catch(e) {
+      htmlArr.push(buildOrderCard({ orderId: localOrd.id, product: 'Saved Order', price: 0, status: localOrd.cancelled ? 'REJECTED' : 'CONFIRMED' }, localOrd.cancelled));
+    }
   }
+
+  container.innerHTML = htmlArr.join("");
 }
 
 async function trackOrder() {
-  const idInput = document.getElementById("trackInput").value.trim();
-  if(!idInput) return toast("Error", "Please enter an Order ID.");
+  const idInput = document.getElementById("trackInput").value.trim().toUpperCase();
+  if (!idInput) return toast("Error", "Please enter Order ID.");
 
   closeModal("trackModal");
-  switchPage("orders");
-
+  switchPage('orders');
   const container = document.getElementById("ordersListContainer");
   container.innerHTML = `<div style="text-align:center;padding:30px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Searching Order #${idInput}...</div>`;
 
   try {
-    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getOrders");
+    const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=trackOrder&orderId=${idInput}`);
     const data = await res.json();
-    const liveData = (data.orders || []).find(o => String(o.orderId).toLowerCase() === idInput.toLowerCase());
-
-    if(liveData) {
-      container.innerHTML = buildOrderCard(liveData, false);
+    if (data.result === "success" && data.order) {
+      container.innerHTML = buildOrderCard(data.order, false);
     } else {
-      container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--red)"><i class="fa-solid fa-circle-xmark fa-2x"></i><br><br>Order #${idInput} not found in live system.</div>`;
+      container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--red)"><i class="fa-solid fa-circle-xmark fa-2x"></i><br><br>Order #${idInput} not found in live system.</div>`;
     }
   } catch(e) {
-    container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--red)">Failed to fetch live tracking details.</div>`;
+    container.innerHTML = `<div style="text-align:center;padding:50px;color:var(--red)"><i class="fa-solid fa-circle-exclamation fa-2x"></i><br><br>Error connecting to system.</div>`;
   }
 }
 
-function cancelOrderLocal(id) {
-  const ord = userOrders.find(o => String(o.id) === String(id));
-  if(ord) {
-    ord.cancelled = true;
+function cancelOrderLocal(orderId) {
+  const item = userOrders.find(x => x.id === orderId);
+  if (item) {
+    item.cancelled = true;
     localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-    toast("Order Cancelled", `Order #${id} has been marked as cancelled.`);
+    toast("Order Cancelled", `Order #${orderId} has been cancelled.`);
     renderOrdersPage();
   }
 }
 
-function deleteOrderLocal(id) {
-  userOrders = userOrders.filter(o => String(o.id) !== String(id));
+function deleteOrderHistory(orderId) {
+  userOrders = userOrders.filter(x => x.id !== orderId);
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  toast("Order Removed", `Order #${id} removed from history.`);
+  toast("Removed", `Order #${orderId} deleted from history.`);
   renderOrdersPage();
 }
 
 function renderProfilePage() {
   const container = document.getElementById("profileContainer");
-  if(!currentUser) {
+  if (!container) return;
+
+  if (!currentUser) {
     container.innerHTML = `
       <div class="account-card" style="text-align:center">
         <i class="fa-solid fa-user-lock fa-3x" style="color:var(--muted);margin-bottom:15px"></i>
-        <h3>No Profile Saved</h3>
-        <p style="color:var(--muted);font-size:12px;margin:10px 0">Place an order to automatically create your local account details.</p>
+        <h3>No Account Profile Found</h3>
+        <p style="color:var(--muted);font-size:12px;margin:10px 0 20px">Place an order to automatically create your session profile.</p>
         <button class="primary" onclick="switchPage('products')">BROWSE PRODUCTS</button>
       </div>`;
     return;
@@ -849,33 +849,32 @@ function renderProfilePage() {
   container.innerHTML = `
     <div class="account-card">
       <div class="account">
-        <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
+        <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
         <div>
-          <b style="font-size:16px">${currentUser.name || 'User Name'}</b>
-          <small style="display:block;color:var(--muted)">Verified Customer</small>
+          <h3 style="font-size:16px">${currentUser.name}</h3>
+          <span style="font-size:11px;color:var(--green)">Verified Customer</span>
         </div>
       </div>
       <div class="account-details">
-        <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><b>Email:</b> ${currentUser.email || 'N/A'}</div></div>
-        <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone || 'N/A'}</div></div>
-        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address || 'N/A'}</div></div>
+        <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <div><b>Email</b><br>${currentUser.email}</div></div>
+        <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone</b><br>${currentUser.phone}</div></div>
+        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address</b><br>${currentUser.address}</div></div>
       </div>
-      <button class="btn-logout" onclick="clearProfileData()">CLEAR USER DATA</button>
+      <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Clear Session / Logout</button>
     </div>`;
 }
 
-function clearProfileData() {
+function logoutUser() {
   localStorage.removeItem("hy_user_session");
   currentUser = null;
-  toast("Profile Reset", "Saved details cleared successfully.");
+  toast("Logged Out", "Profile session cleared.");
   renderProfilePage();
 }
 
-// Initial Booting
-window.addEventListener("DOMContentLoaded", () => {
-  saveCart();
+window.onload = function() {
   fetchSheetProducts();
-});
+  saveCart();
+};
 </script>
 </body>
 </html>
