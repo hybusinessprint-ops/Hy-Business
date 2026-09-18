@@ -190,6 +190,8 @@ header {
 @media(max-width:850px){
   .products { grid-template-columns: repeat(2, 1fr); }
   .hero { grid-template-columns: 1fr; }
+  .hero-slider { min-height: 180px; height: 200px; }
+  .slide { background-size: cover; }
   .trust { grid-template-columns: repeat(3, 1fr); }
   .topbar { display: none; }
 }
@@ -403,7 +405,7 @@ function prevSlide() {
 function setSlide(i) { currentSlide = i; updateSlider(); }
 
 // 10 Seconds Auto-Slide Interval
-setInterval(nextSlide, 15000);
+setInterval(nextSlide, 10000);
 
 let products = [];
 let activeCat = "All", searchTerm = "";
