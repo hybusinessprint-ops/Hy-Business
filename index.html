@@ -95,7 +95,6 @@ header {
 .hero-slider { position: relative; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; min-height: 280px; background: #070d18; }
 .slides { display: flex; width: 100%; height: 100%; transition: transform 0.3s ease-in-out; }
 
-/* Image sizing configuration */
 .slide { 
   min-width: 100%; 
   height: 100%;
@@ -152,9 +151,12 @@ header {
 
 .status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
+.cancelled { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 
 .order-grid-info { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #0d1626; padding: 12px; border-radius: 10px; font-size: 12px; }
 .order-grid-info div span { color: var(--muted); display: block; font-size: 10px; }
+
+.btn-cancel-order { width: 100%; margin-top: 12px; padding: 8px; border-radius: 8px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 600; font-size: 11px; }
 
 .account-card { background: #080f1b; border: 1px solid var(--border); border-radius: 18px; padding: 20px; max-width: 600px; margin: 0 auto; }
 .account { display: flex; align-items: center; gap: 14px; }
@@ -228,22 +230,11 @@ header {
     <div class="hero">
       <div class="hero-slider">
         <div class="slides" id="heroSlides">
-          
-          <!-- Slide 1 -->
           <div class="slide" style="background-image: url('slide1.png');"></div>
-
-          <!-- Slide 2 -->
           <div class="slide" style="background-image: url('slide2.png');"></div>
-
-          <!-- Slide 3 -->
           <div class="slide" style="background-image: url('slide3.png');"></div>
-
-          <!-- Slide 4 -->
           <div class="slide" style="background-image: url('slide4.png');"></div>
-
-          <!-- Slide 5 -->
           <div class="slide" style="background-image: url('slide5.png');"></div>
-
         </div>
 
         <div class="dots" id="heroDots">
@@ -404,7 +395,6 @@ function prevSlide() {
 
 function setSlide(i) { currentSlide = i; updateSlider(); }
 
-// 10 Seconds Auto-Slide Interval
 setInterval(nextSlide, 10000);
 
 let products = [];
@@ -563,14 +553,14 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
     payment: document.getElementById("cPayment").value
   };
 
-  userOrders.unshift(orderId);
+  userOrders.unshift({ id: orderId, cancelled: false });
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
 
   try {
     await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
     const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nTotal Price: Rs. ${payload.price}`;
     cart=[]; saveCart(); closeModal("checkoutModal");
-    toast("Order Submitted", `Order ID #${orderId} generated & saved to Sheet.`);
+    toast("Order Submitted", `Order ID #${orderId} generated & saved.`);
     switchPage('orders');
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
   } catch(err) {
@@ -580,52 +570,98 @@ document.getElementById("checkoutForm").addEventListener("submit", async functio
 
 async function renderOrdersPage(){
   const box = document.getElementById("ordersListContainer");
+
+  // Condition: Check if user is logged in before fetching orders
+  if (!currentUser) {
+    box.innerHTML = `
+      <div class="order-card" style="text-align:center;padding:30px;">
+        <i class="fa-solid fa-lock fa-2x" style="color:var(--yellow);margin-bottom:10px;"></i>
+        <b style="display:block;font-size:15px;margin-bottom:5px;">Login Required</b>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:15px;">Please save your Profile details first to fetch and view your orders.</p>
+        <button class="primary" style="max-width:200px;margin:auto;" onclick="switchPage('profile')">Go to Profile</button>
+      </div>`;
+    return;
+  }
+
   if(!userOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No orders found in history.</div>`; return; }
   
   box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...</div>`;
   let cardsHtml = "";
   
-  for(let id of userOrders){
+  for(let item of userOrders){
+    let id = typeof item === 'object' ? item.id : item;
+    let isCancelled = typeof item === 'object' ? item.cancelled : false;
+
+    if (isCancelled) {
+      cardsHtml += buildOrderCard({ orderId: id, status: "CANCELLED" }, true);
+      continue;
+    }
+
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
       const data = await response.json();
       if(data.result === "success") {
-        cardsHtml += buildOrderCard(data);
+        cardsHtml += buildOrderCard(data, false);
       } else {
-        cardsHtml += buildOrderCard({ orderId: id, status: "SUBMITTED" });
+        cardsHtml += buildOrderCard({ orderId: id, status: "SUBMITTED" }, false);
       }
     } catch(e) {
-      cardsHtml += buildOrderCard({ orderId: id, status: "PENDING" });
+      cardsHtml += buildOrderCard({ orderId: id, status: "PENDING" }, false);
     }
   }
   box.innerHTML = cardsHtml;
 }
 
+function cancelOrder(orderId) {
+  if (confirm(`Are you sure you want to cancel Order #${orderId}?`)) {
+    userOrders = userOrders.map(item => {
+      let id = typeof item === 'object' ? item.id : item;
+      if (id === orderId) {
+        return { id: id, cancelled: true };
+      }
+      return typeof item === 'object' ? item : { id: item, cancelled: false };
+    });
+    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+    toast("Order Cancelled", `Order #${orderId} has been cancelled.`);
+    renderOrdersPage();
+  }
+}
+
 function trackOrder(){
+  if (!currentUser) {
+    toast("Login Required", "Please login from Profile page first.");
+    return;
+  }
   const query = document.getElementById("trackInput").value.trim();
   if(!query) return;
-  userOrders = [query, ...userOrders.filter(id => id !== query)];
+  
+  let exists = userOrders.find(item => (typeof item === 'object' ? item.id : item) === query);
+  if (!exists) {
+    userOrders.unshift({ id: query, cancelled: false });
+  }
   renderOrdersPage();
 }
 
-function buildOrderCard(d){
-  const st = String(d.status || "PENDING").toUpperCase();
+function buildOrderCard(d, isCancelled){
+  const st = isCancelled ? "CANCELLED" : String(d.status || "PENDING").toUpperCase();
+  const statusClass = isCancelled ? "cancelled" : "pending";
+
   return `
     <div class="order-card">
       <div class="order-header">
         <b>Order #${d.orderId}</b>
-        <span class="status pending">${st}</span>
+        <span class="status ${statusClass}">${st}</span>
       </div>
       <div class="order-grid-info">
-        <div><span>Customer:</span> <b>${d.name || 'N/A'}</b></div>
+        <div><span>Customer:</span> <b>${d.name || currentUser.name || 'N/A'}</b></div>
         <div><span>Payment Method:</span> <b>${d.payment || 'COD'}</b></div>
         <div style="grid-column: span 2"><span>Products:</span> <b>${d.product || 'N/A'}</b></div>
         <div style="grid-column: span 2"><span>Total Amount:</span> <b style="color:var(--green)">Rs. ${d.price || 0}</b></div>
       </div>
+      ${!isCancelled ? `<button class="btn-cancel-order" onclick="cancelOrder('${d.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel Order</button>` : ''}
     </div>`;
 }
 
-// Added Missing renderProfilePage & Account Management Functions
 function renderProfilePage() {
   const box = document.getElementById("profileContainer");
   if (!box) return;
