@@ -165,7 +165,7 @@ header {
 
 .btn-logout { width: 100%; padding: 12px; border-radius: 10px; background: rgba(255,77,103,0.15); color: var(--red); border: 1px solid rgba(255,77,103,0.3); font-weight: 700; font-size: 12px; margin-top: 10px; }
 
-.bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-content: space-around; align-items: center; padding: 8px 0; }
+.bottomnav { position: fixed; display: flex; bottom: 0; left: 0; right: 0; z-index: 70; background: #080d16; border-top: 1px solid var(--border); justify-around; align-items: center; padding: 8px 0; }
 .nav-btn { background: none; border: none; color: var(--muted); font-size: 9px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 3px; flex: 1; }
 .nav-btn i { font-size: 16px; }
 .nav-btn.active-nav { color: var(--green); }
@@ -689,44 +689,47 @@ function logoutUser(){
 
 function renderProfilePage(){
   const container = document.getElementById("profileContainer");
-  if (!currentUser) {
-    container.innerHTML = `
-      <div class="account-card">
-        <h3 style="margin-bottom: 15px; font-size: 16px;">Save Account Details</h3>
-        <form onsubmit="saveUserProfile(event)">
-          <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
-          <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
-          <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="name@example.com"></div>
-          <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
-          <button class="primary" type="submit">SAVE PROFILE</button>
-        </form>
-      </div>`;
-  } else {
-    const initial = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
+  if(!container) return;
+
+  if (currentUser) {
     container.innerHTML = `
       <div class="account-card">
         <div class="account">
-          <div class="avatar">${initial}</div>
+          <div class="avatar">${(currentUser.name || 'U').charAt(0).toUpperCase()}</div>
           <div>
-            <h3 style="font-size: 16px;">${currentUser.name}</h3>
-            <span style="font-size: 12px; color: var(--muted);">${currentUser.email}</span>
+            <h3 style="font-size:16px">${currentUser.name || 'User'}</h3>
+            <span style="font-size:11px;color:var(--muted)">Verified Customer</span>
           </div>
         </div>
         <div class="account-details">
-          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <div><b>Phone:</b> ${currentUser.phone}</div></div>
-          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <div><b>Address:</b> ${currentUser.address}</div></div>
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span><b>Phone:</b> ${currentUser.phone || 'N/A'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-envelope"></i> <span><b>Email:</b> ${currentUser.email || 'N/A'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span><b>Address:</b> ${currentUser.address || 'N/A'}</span></div>
         </div>
-        <button class="btn-logout" onclick="logoutUser()">LOGOUT ACCOUNT</button>
+        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>`;
+  } else {
+    container.innerHTML = `
+      <div class="account-card">
+        <h3 style="margin-bottom:15px;font-size:16px"><i class="fa-solid fa-user-pen"></i> Enter Profile Info</h3>
+        <form onsubmit="saveUserProfile(event)">
+          <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
+          <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Email Address</label><input id="lEmail" type="email" placeholder="example@mail.com"></div>
+          <div class="field"><label>Default Address</label><textarea id="lAddress" rows="2" placeholder="Delivery address"></textarea></div>
+          <button class="primary" type="submit">SAVE PROFILE</button>
+        </form>
       </div>`;
   }
 }
 
-// Initialize application on load
-window.addEventListener("DOMContentLoaded", () => {
+// Initial Loading
+window.onload = function() {
+  saveCart();
   fetchSheetBanners();
   fetchSheetProducts();
-  document.getElementById("cartCount").textContent = cart.length;
-});
+};
 </script>
+
 </body>
 </html>
