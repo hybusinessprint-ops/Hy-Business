@@ -1027,12 +1027,48 @@
     }
 
     function buildOrderCard(d) {
-      const status = escapeHTML(String(d.status || "PENDING").toUpperCase());
+      const rawStatus = String(d.status || "PENDING").trim().toUpperCase();
+      const status = escapeHTML(rawStatus);
+      const orderId = escapeHTML(d.orderId || "N/A");
+
+      const rejected = rawStatus.includes("REJECT");
+      let stage = 0;
+      if (rawStatus.includes("DELIVERED")) stage = 4;
+      else if (rawStatus.includes("OUT FOR DELIVERY") || rawStatus.includes("OUT_FOR_DELIVERY")) stage = 3;
+      else if (rawStatus.includes("SHIPPED")) stage = 2;
+      else if (rawStatus.includes("READY") || rawStatus.includes("PROCESS") || rawStatus.includes("CONFIRM")) stage = 1;
+      else stage = 0;
+
+      const steps = [
+        {label:"Ordered", icon:"fa-cart-shopping"},
+        {label:"Order Ready", icon:"fa-box"},
+        {label:"Shipped", icon:"fa-truck-fast"},
+        {label:"Out for Delivery", icon:"fa-truck"},
+        {label:"Delivered", icon:"fa-house-circle-check"}
+      ];
+
+      const progress = rejected ? 0 : (stage / 4) * 86;
+      const timeline = rejected ? `
+        <div class="order-timeline">
+          <div class="timeline-title"><b><i class="fa-solid fa-location-dot"></i> Shipment Tracking</b><span>Order #${orderId}</span></div>
+          <div class="timeline-rejected"><i class="fa-solid fa-circle-xmark"></i><span>This order has been marked <b>Rejected</b>.</span></div>
+        </div>` : `
+        <div class="order-timeline">
+          <div class="timeline-title"><b><i class="fa-solid fa-route"></i> Shipment Tracking</b><span>${status}</span></div>
+          <div class="timeline">
+            <div class="timeline-line"></div>
+            <div class="timeline-progress" style="width:${progress}%"></div>
+            ${steps.map((step,i)=>{
+              const cls = i < stage ? "done" : (i === stage ? "active" : "");
+              return `<div class="timeline-step ${cls}"><div class="timeline-dot"><i class="fa-solid ${step.icon}"></i></div><b>${step.label}</b><small>${i < stage ? "Completed" : (i === stage ? "Current" : "Pending")}</small></div>`;
+            }).join("")}
+          </div>
+        </div>`;
 
       return `
         <div class="order-card">
           <div class="order-header">
-            <b>Order #${escapeHTML(d.orderId || "N/A")}</b>
+            <b>Order #${orderId}</b>
             <span class="status pending">${status}</span>
           </div>
           <div class="order-grid-info">
@@ -1041,6 +1077,7 @@
             <div style="grid-column:span 2"><span>Products</span><b>${escapeHTML(d.product || "N/A")}</b></div>
             <div style="grid-column:span 2"><span>Total Amount</span><b style="color:var(--primary)">Rs. ${money(d.price)}</b></div>
           </div>
+          ${timeline}
         </div>`;
     }
 
