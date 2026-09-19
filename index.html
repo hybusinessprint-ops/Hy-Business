@@ -162,37 +162,26 @@
     .cat:hover{border-color:rgba(24,169,255,.35)}
     .cat.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:transparent;font-weight:800}
 
-    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-    .product{
-      min-width:0;overflow:hidden;background:linear-gradient(150deg,#0d1728,#09101d);
-      border:1px solid var(--border);border-radius:16px;transition:.25s;cursor:pointer
-    }
-    .product:hover{transform:translateY(-3px);border-color:rgba(24,169,255,.35);box-shadow:0 15px 35px rgba(0,0,0,.25)}
-    .pimg{position:relative;width:100%;height:220px;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center}
-    .pimg img{width:100%;height:100%;object-fit:contain;object-position:center;transition:.35s}
-    .product:hover .pimg img{transform:scale(1.02)}
-    .pbody{padding:13px}
-    .pbody h3{height:38px;overflow:hidden;margin-bottom:7px;font-size:13px;line-height:1.45}
-    .price{color:var(--primary);font-size:16px;font-weight:800}
-    .old{margin-left:6px;color:var(--muted);font-size:10px;text-decoration:line-through}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .product{min-width:0;overflow:hidden;background:linear-gradient(155deg,#0d1728,#08101d);border:1px solid rgba(255,255,255,.075);border-radius:18px;transition:.25s;cursor:pointer;position:relative}
+    .product:hover{transform:translateY(-4px);border-color:rgba(24,169,255,.42);box-shadow:0 18px 42px rgba(0,0,0,.3)}
+    .pimg{position:relative;width:100%;height:235px;background:linear-gradient(145deg,#fff,#f4f7fb);overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .pimg:after{content:'VIEW DETAILS';position:absolute;right:10px;bottom:10px;padding:5px 8px;border-radius:7px;background:rgba(5,8,18,.78);color:#fff;font-size:8px;font-weight:800;letter-spacing:.6px;opacity:0;transform:translateY(4px);transition:.2s}
+    .product:hover .pimg:after{opacity:1;transform:none}
+    .pimg img{width:100%;height:100%;padding:8px;object-fit:contain;object-position:center;transition:.35s}
+    .product:hover .pimg img{transform:scale(1.035)}
+    .pbody{padding:14px 14px 15px}.pbody h3{height:40px;overflow:hidden;margin-bottom:9px;font-size:13px;line-height:1.5;font-weight:700}.price{color:var(--primary);font-size:16px;font-weight:800}.old{margin-left:7px;color:var(--muted);font-size:10px;text-decoration:line-through}
+    .product-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.055);color:var(--muted);font-size:9px}.product-meta span:first-child{color:#b9c8db}.product-meta i{color:var(--primary);margin-right:4px}
+    .products-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding:22px;margin-bottom:17px;border-radius:20px;background:radial-gradient(circle at 90% 0%,rgba(24,169,255,.16),transparent 38%),linear-gradient(145deg,#0e192b,#080f1c);border:1px solid var(--border);box-shadow:0 15px 40px rgba(0,0,0,.2)}
+    .products-hero-copy{max-width:650px}.products-hero-copy .eyebrow{display:inline-flex;align-items:center;gap:6px;color:#aee3ff;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}.products-hero-copy .eyebrow i{color:var(--primary)}.products-hero h1{font-size:clamp(22px,4vw,32px);line-height:1.15;margin-bottom:7px}.products-hero p{font-size:10px;line-height:1.7;color:var(--muted)}.products-stat{min-width:120px;padding:13px;border-radius:14px;background:rgba(5,8,18,.45);border:1px solid var(--border);text-align:center}.products-stat b{display:block;color:var(--primary);font-size:22px;line-height:1.1}.products-stat span{display:block;margin-top:4px;color:var(--muted);font-size:8px;text-transform:uppercase;letter-spacing:.8px}
+    .product-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;padding:10px 12px;border-radius:13px;background:rgba(10,17,31,.7);border:1px solid var(--border)}.product-toolbar-left{display:flex;align-items:center;gap:8px;min-width:0}.live-dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 0 4px rgba(39,209,127,.08)}.product-toolbar small{color:var(--muted);font-size:9px}.product-toolbar strong{font-size:10px;color:#dbeafe}.product-toolbar-right{color:var(--muted);font-size:9px}
 
-    /* Product detail / 3-image gallery */
-    .product-detail-modal{width:min(980px,100%);max-height:92vh;overflow-y:auto}
-    .product-detail{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
-    .gallery{min-width:0}
-    .gallery-main{position:relative;width:100%;height:430px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-    .gallery-main img{width:100%;height:100%;object-fit:contain;object-position:center}
-    .gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(5,8,18,.78);color:#fff;border:1px solid rgba(255,255,255,.15);z-index:2}
-    .gallery-arrow.prev{left:12px}.gallery-arrow.next{right:12px}
-    .gallery-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
-    .gallery-thumb{height:82px;border-radius:10px;overflow:hidden;background:#fff;border:2px solid transparent;padding:0}
-    .gallery-thumb.active{border-color:var(--primary)}
-    .gallery-thumb img{width:100%;height:100%;object-fit:contain}
-    .detail-info{padding:4px 2px}.detail-cat{display:inline-flex;padding:5px 9px;border-radius:7px;color:#cfe9ff;background:rgba(24,169,255,.1);border:1px solid rgba(24,169,255,.25);font-size:9px;font-weight:800;margin-bottom:10px}
-    .detail-info h2{font-size:23px;line-height:1.3;margin-bottom:10px}.detail-price{font-size:22px;color:var(--primary);font-weight:800}.detail-old{margin-left:8px;color:var(--muted);font-size:11px;text-decoration:line-through}.detail-desc{margin:15px 0;color:#b7c2d2;font-size:11px;line-height:1.8;white-space:pre-line}.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.detail-actions button{padding:12px;border-radius:10px;font-size:11px;font-weight:800}.detail-buy{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2))}.detail-cart{color:#dbeafe;background:var(--surface-3);border:1px solid var(--border)}
+    /* Professional product detail / 3-image gallery */
+    .product-detail-modal{width:min(1040px,100%);max-height:92vh;overflow-y:auto}.product-detail{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}.gallery{min-width:0}.gallery-main{position:relative;width:100%;height:455px;background:linear-gradient(145deg,#fff,#f4f7fb);border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;box-shadow:0 15px 40px rgba(0,0,0,.18)}.gallery-main img{width:100%;height:100%;padding:14px;object-fit:contain;object-position:center;transition:.25s}.gallery-count{position:absolute;left:14px;top:14px;padding:6px 9px;border-radius:8px;background:rgba(5,8,18,.78);color:#fff;font-size:9px;font-weight:800;letter-spacing:.4px;z-index:3}.gallery-label{position:absolute;right:14px;top:14px;padding:6px 9px;border-radius:8px;color:#cfe9ff;background:rgba(24,169,255,.16);border:1px solid rgba(24,169,255,.25);font-size:8px;font-weight:800;z-index:3}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(5,8,18,.82);color:#fff;border:1px solid rgba(255,255,255,.16);z-index:4;transition:.2s}.gallery-arrow:hover{background:var(--primary);transform:translateY(-50%) scale(1.04)}.gallery-arrow.prev{left:13px}.gallery-arrow.next{right:13px}.gallery-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:11px}.gallery-thumb{height:88px;position:relative;border-radius:12px;overflow:hidden;background:#fff;border:2px solid transparent;padding:0;transition:.2s}.gallery-thumb:hover{border-color:rgba(24,169,255,.5)}.gallery-thumb.active{border-color:var(--primary);box-shadow:0 0 0 2px rgba(24,169,255,.12)}.gallery-thumb img{width:100%;height:100%;padding:3px;object-fit:contain}.thumb-number{position:absolute;left:6px;bottom:6px;padding:3px 5px;border-radius:5px;background:rgba(5,8,18,.78);color:#fff;font-size:7px;font-weight:800}.gallery-hint{text-align:center;color:var(--muted);font-size:8px;margin-top:7px}.detail-info{padding:8px 3px}.detail-topline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.detail-cat{display:inline-flex;padding:6px 9px;border-radius:7px;color:#cfe9ff;background:rgba(24,169,255,.1);border:1px solid rgba(24,169,255,.25);font-size:9px;font-weight:800}.detail-views{color:var(--muted);font-size:8px}.detail-info h2{font-size:25px;line-height:1.3;margin-bottom:10px}.detail-price{font-size:24px;color:var(--primary);font-weight:800}.detail-old{margin-left:8px;color:var(--muted);font-size:11px;text-decoration:line-through}.detail-desc{margin:16px 0;color:#b7c2d2;font-size:11px;line-height:1.85;white-space:pre-line}.detail-feature-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.detail-feature{padding:9px;border-radius:10px;background:#0d1727;border:1px solid var(--border);color:#bcd0e5;font-size:8px}.detail-feature i{color:var(--primary);margin-right:5px}.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.detail-actions button{padding:13px;border-radius:11px;font-size:10px;font-weight:800}.detail-buy{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));box-shadow:0 8px 22px rgba(24,169,255,.17)}.detail-cart{color:#dbeafe;background:var(--surface-3);border:1px solid var(--border)}
 
     @media(max-width:680px){
-      .pimg{height:175px}
+      .products-hero{align-items:stretch;flex-direction:column;padding:17px}.products-stat{min-width:0}.product-toolbar{padding:9px}.product-toolbar-right{display:none}
+      .pimg{height:190px}
       .product-detail{grid-template-columns:1fr;gap:15px}
       .gallery-main{height:310px}
       .gallery-thumb{height:68px}
@@ -588,10 +577,17 @@
 
     <section id="view-products" class="app-view">
       <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
-
-      <div class="section-head">
-        <h2 id="catHeading">All Products</h2>
-        <span style="color:var(--muted);font-size:11px" id="resultCount">Loading items...</span>
+      <div class="products-hero">
+        <div class="products-hero-copy">
+          <div class="eyebrow"><i class="fa-solid fa-bolt"></i> HY STORE COLLECTION</div>
+          <h1>Shop Quality. Choose With Confidence.</h1>
+          <p>Browse our latest products. Tap any product to view full details, price and all available product images.</p>
+        </div>
+        <div class="products-stat"><b id="catalogTotal">0</b><span>Live Products</span></div>
+      </div>
+      <div class="product-toolbar">
+        <div class="product-toolbar-left"><span class="live-dot"></span><strong id="catHeading">All Products</strong><small id="resultCount">Loading items...</small></div>
+        <div class="product-toolbar-right"><i class="fa-solid fa-images"></i> Multi-image product details</div>
       </div>
       <div class="products" id="productGrid"></div>
     </section>
@@ -750,7 +746,7 @@
     /* =========================
        HY STORE CONFIGURATION
        ========================= */
-    const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbw7LyRAR6o-WKlQe6EZc-ZiRoo88k5eekGQ-eCquFWsvM3rK6oExqnNxEKrzzUHbDqC/exec";
+    const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbzRwvIwWVtNWGNmJc39did89yfThIm_lJYsQB867s6TEPs1vse-xnXGhQihtAXWtntS/exec";
     const ADMIN_BANNER_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
     const WHATSAPP = "923209306672";
     const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80";
@@ -921,32 +917,40 @@
       }
     }
 
+    function cleanImageUrl(value) {
+      let url = String(value || '').trim();
+      if (!url) return '';
+      if (url.includes('](')) url = url.split('](')[1].replace(/\)$/, '').trim();
+      if (url.startsWith('=IMAGE(')) url = url.replace(/^=IMAGE\(["']?/, '').replace(/["']?\)$/, '').trim();
+      return url;
+    }
+
     function productImages(p) {
-      const list = [p.img1, p.img, p.img2, p.img3]
-        .map(x => String(x || '').trim())
+      const list = [p.img1, p.img2, p.img3, p.img]
+        .map(cleanImageUrl)
         .filter(Boolean);
       const unique = [];
       list.forEach(x => { if (!unique.includes(x)) unique.push(x); });
-      if (!unique.length) unique.push(FALLBACK_IMAGE);
-      return unique.slice(0,3);
+      return unique.length ? unique.slice(0,3) : [FALLBACK_IMAGE];
     }
 
     function productCard(p) {
       const id = escapeHTML(p.id);
-      const image = escapeHTML(productImages(p)[0]);
+      const images = productImages(p);
+      const image = escapeHTML(images[0]);
       const name = escapeHTML(p.name);
       const price = money(p.price);
-      const oldPrice = p.old ? `<span class="old">Rs. ${money(p.old)}</span>` : "";
-
+      const oldPrice = p.old ? `<span class="old">Rs. ${money(p.old)}</span>` : '';
+      const views = images.length > 1 ? `<span><i class="fa-solid fa-images"></i>${images.length} Images</span>` : `<span><i class="fa-regular fa-image"></i>Product</span>`;
       return `
-        <article class="product" onclick="openProduct('${id}')" tabindex="0" onkeydown="if(event.key==='Enter')openProduct('${id}')">
+        <article class="product" onclick="openProduct('${id}')" tabindex="0" onkeydown="if(event.key==='Enter')openProduct('${id}')" aria-label="View ${name}">
           <div class="pimg">
-            <img src="${image}" alt="${name}" loading="lazy"
-                 onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
+            <img src="${image}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
           </div>
           <div class="pbody">
             <h3>${name}</h3>
             <div><span class="price">Rs. ${price}</span>${oldPrice}</div>
+            <div class="product-meta"><span>Tap to view details</span>${views}</div>
           </div>
         </article>`;
     }
@@ -967,27 +971,41 @@
       const p = activeGalleryProduct;
       if (!p) return;
       const images = productImages(p);
+      if (activeGalleryIndex >= images.length) activeGalleryIndex = 0;
       const main = images[activeGalleryIndex] || images[0];
       const oldPrice = p.old ? `<span class="detail-old">Rs. ${money(p.old)}</span>` : '';
       const thumbs = images.map((img,i)=>`
         <button class="gallery-thumb ${i===activeGalleryIndex?'active':''}" onclick="setProductImage(${i})" aria-label="Product image ${i+1}">
-          <img src="${escapeHTML(img)}" alt="${escapeHTML(p.name)} ${i+1}" onerror="this.src='${FALLBACK_IMAGE}'">
+          <img src="${escapeHTML(img)}" alt="${escapeHTML(p.name)} ${i+1}" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
+          <span class="thumb-number">0${i+1}</span>
         </button>`).join('');
 
       $('productDetailBody').innerHTML = `
         <div class="product-detail">
           <div class="gallery">
             <div class="gallery-main">
+              <span class="gallery-count">${String(activeGalleryIndex+1).padStart(2,'0')} / ${String(images.length).padStart(2,'0')}</span>
+              <span class="gallery-label"><i class="fa-solid fa-images"></i> ${images.length} VIEW${images.length===1?'':'S'}</span>
               ${images.length > 1 ? `<button class="gallery-arrow prev" onclick="prevProductImage()" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>` : ''}
-              <img src="${escapeHTML(main)}" alt="${escapeHTML(p.name)}" onerror="this.src='${FALLBACK_IMAGE}'">
+              <img src="${escapeHTML(main)}" alt="${escapeHTML(p.name)}" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
               ${images.length > 1 ? `<button class="gallery-arrow next" onclick="nextProductImage()" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>` : ''}
             </div>
             <div class="gallery-thumbs">${thumbs}</div>
+            ${images.length > 1 ? `<div class="gallery-hint"><i class="fa-solid fa-hand-pointer"></i> Select another image or use the arrows</div>` : ''}
           </div>
           <div class="detail-info">
-            <span class="detail-cat">${escapeHTML(p.cat || 'Product')}</span>
+            <div class="detail-topline">
+              <span class="detail-cat">${escapeHTML(p.cat || 'Product')}</span>
+              <span class="detail-views"><i class="fa-solid fa-circle-check"></i> HY STORE PRODUCT</span>
+            </div>
             <h2>${escapeHTML(p.name)}</h2>
             <div><span class="detail-price">Rs. ${money(p.price)}</span>${oldPrice}</div>
+            <div class="detail-feature-list">
+              <div class="detail-feature"><i class="fa-solid fa-truck-fast"></i> Fast Delivery</div>
+              <div class="detail-feature"><i class="fa-solid fa-shield-halved"></i> Secure Order</div>
+              <div class="detail-feature"><i class="fa-solid fa-images"></i> ${images.length} Product Image${images.length===1?'':'s'}</div>
+              <div class="detail-feature"><i class="fa-solid fa-headset"></i> Live Support</div>
+            </div>
             <div class="detail-desc">${escapeHTML(p.desc || 'Quality product available at HY STORE.')}</div>
             <div class="detail-actions">
               <button class="detail-cart" onclick="addCartFromDetail()"><i class="fa-solid fa-cart-plus"></i> ADD TO CART</button>
@@ -1050,6 +1068,7 @@
         : `<div class="empty">No featured products.</div>`;
 
       $('resultCount').textContent = `${list.length} Item${list.length === 1 ? '' : 's'}`;
+      if ($('catalogTotal')) $('catalogTotal').textContent = products.length;
     }
 
     function filterCategory(category, element) {
