@@ -32,15 +32,9 @@
       --radius:18px;
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0
-    }
+    *{box-sizing:border-box;margin:0;padding:0}
 
-    html{
-      scroll-behavior:smooth
-    }
+    html{scroll-behavior:smooth}
 
     body{
       min-height:100vh;
@@ -54,9 +48,7 @@
         var(--bg);
     }
 
-    button,input,textarea,select{
-      font:inherit
-    }
+    button,input,textarea,select{font:inherit}
 
     button{
       cursor:pointer;
@@ -274,29 +266,18 @@
 
     .slide{
       min-width:100%;
+      height:100%;
+      min-height:320px;
       position:relative;
-      display:flex;
-      align-items:center;
-      padding:35px;
       background-position:center;
-      background-size:cover
+      background-size:cover;
+      background-repeat:no-repeat;
+      filter:saturate(1.18) contrast(1.08) brightness(1.04)
     }
 
-    .slide-overlay{
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        90deg,
-        rgba(4,8,16,.96),
-        rgba(4,8,16,.65) 54%,
-        rgba(4,8,16,.2)
-      )
-    }
-
+    .slide-overlay,
     .slide-content{
-      position:relative;
-      z-index:2;
-      max-width:570px
+      display:none!important
     }
 
     .tag{
@@ -1404,8 +1385,7 @@
       <img
         src="logo.png"
         alt="HY Store Logo"
-        onerror="this.style.display='none'"
-      >
+        onerror="this.style.display='none'">
 
       <div class="logo-text">
         HY <b>STORE</b>
@@ -1419,26 +1399,30 @@
       <button
         class="iconbtn"
         aria-label="Orders"
-        onclick="switchPage('orders')"
-      >
+        onclick="switchPage('orders')">
         <i class="fa-solid fa-box"></i>
       </button>
 
       <button
         class="iconbtn"
         aria-label="Profile"
-        onclick="switchPage('profile')"
-      >
+        onclick="switchPage('profile')">
         <i class="fa-solid fa-user"></i>
       </button>
 
       <button
         class="iconbtn"
         aria-label="Cart"
-        onclick="openCart()"
-      >
+        onclick="openCart()">
+
         <i class="fa-solid fa-cart-shopping"></i>
-        <span class="badge" id="cartCount">0</span>
+
+        <span
+          class="badge"
+          id="cartCount">
+          0
+        </span>
+
       </button>
 
     </div>
@@ -1453,19 +1437,20 @@
         id="searchInput"
         autocomplete="off"
         placeholder="Search products..."
-        onkeydown="if(event.key==='Enter') searchProducts()"
-      >
+        onkeydown="if(event.key==='Enter') searchProducts()">
 
       <button
         aria-label="Search"
-        onclick="searchProducts()"
-      >
+        onclick="searchProducts()">
+
         <i class="fa-solid fa-search"></i>
+
       </button>
 
     </div>
 
   </div>
+
 
   <main class="container">
 
@@ -1473,8 +1458,7 @@
 
     <section
       id="view-home"
-      class="app-view active-view"
-    >
+      class="app-view active-view">
 
       <div class="hero">
 
@@ -1482,54 +1466,64 @@
 
           <div
             class="slides"
-            id="heroSlides"
-          >
+            id="heroSlides">
 
             <div
               class="slide"
-              style="background-image:url('slide1.png')"
-            >
+              style="background-image:url('slide1.png')">
+            </div>
 
-              <div class="slide-overlay"></div>
+            <div
+              class="slide"
+              style="background-image:url('slide2.png')">
+            </div>
 
-              <div class="slide-content">
+            <div
+              class="slide"
+              style="background-image:url('slide3.png')">
+            </div>
 
-                <span class="tag">
-                  MEGA SALE
-                </span>
+            <div
+              class="slide"
+              style="background-image:url('slide4.png')">
+            </div>
 
-                <h1>
-                  Shop Smart.<br>
-                  <span>Live Better.</span>
-                </h1>
-
-                <p>
-                  Premium quality items with fast shipping
-                  and Cash on Delivery.
-                </p>
-
-                <button
-                  class="hero-btn"
-                  onclick="switchPage('products')"
-                >
-                  SHOP NOW
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-
-              </div>
-
+            <div
+              class="slide"
+              style="background-image:url('slide5.png')">
             </div>
 
           </div>
 
           <div
             class="dots"
-            id="heroDots"
-          >
+            id="heroDots">
+
             <span
               class="dot-item active"
-              onclick="setSlide(0)"
-            ></span>
+              onclick="setSlide(0)">
+            </span>
+
+            <span
+              class="dot-item"
+              onclick="setSlide(1)">
+            </span>
+
+            <span
+              class="dot-item"
+              onclick="setSlide(2)">
+            </span>
+
+            <span
+              class="dot-item"
+              onclick="setSlide(3)">
+            </span>
+
+            <span
+              class="dot-item"
+              onclick="setSlide(4)">
+            </span>
+
           </div>
 
           <div class="slider-controls">
@@ -1537,76 +1531,87 @@
             <button
               class="slider-btn"
               aria-label="Previous banner"
-              onclick="prevSlide()"
-            >
+              onclick="prevSlide()">
+
               <i class="fa-solid fa-chevron-left"></i>
+
             </button>
 
             <button
               class="slider-btn"
               aria-label="Next banner"
-              onclick="nextSlide()"
-            >
+              onclick="nextSlide()">
+
               <i class="fa-solid fa-chevron-right"></i>
+
             </button>
 
           </div>
 
         </div>
 
+
         <div class="trust">
 
           <div class="trust-card">
+
             <i class="fa-solid fa-circle-check"></i>
 
             <div>
               <b>100% Authentic</b>
               <small>Verified Goods</small>
             </div>
+
           </div>
 
+
           <div class="trust-card">
+
             <i class="fa-solid fa-truck-fast"></i>
 
             <div>
               <b>Cash on Delivery</b>
               <small>Pay Upon Receipt</small>
             </div>
+
           </div>
 
+
           <div class="trust-card">
+
             <i class="fa-brands fa-whatsapp"></i>
 
             <div>
               <b>Live Support</b>
               <small>Customer Care</small>
             </div>
+
           </div>
 
         </div>
 
       </div>
 
+
       <div class="section-head">
 
-        <h2>
-          Featured Products
-        </h2>
+        <h2>Featured Products</h2>
 
         <button
           class="view-all"
-          onclick="switchPage('products')"
-        >
+          onclick="switchPage('products')">
+
           View All
           <i class="fa-solid fa-arrow-right"></i>
+
         </button>
 
       </div>
 
       <div
         class="products"
-        id="featuredGrid"
-      ></div>
+        id="featuredGrid">
+      </div>
 
     </section>
 
@@ -1615,52 +1620,51 @@
 
     <section
       id="view-products"
-      class="app-view"
-    >
+      class="app-view">
 
       <div class="page-title">
+
         <i class="fa-solid fa-bag-shopping"></i>
+
         Product Catalog
+
       </div>
+
 
       <div class="categories">
 
         <button
           class="cat active"
-          onclick="filterCategory('All',this)"
-        >
+          onclick="filterCategory('All',this)">
           All Items
         </button>
 
         <button
           class="cat"
-          onclick="filterCategory('Accessories',this)"
-        >
+          onclick="filterCategory('Accessories',this)">
           Accessories
         </button>
 
         <button
           class="cat"
-          onclick="filterCategory('Audio',this)"
-        >
+          onclick="filterCategory('Audio',this)">
           Audio & Sound
         </button>
 
         <button
           class="cat"
-          onclick="filterCategory('Watches',this)"
-        >
+          onclick="filterCategory('Watches',this)">
           Smart Watches
         </button>
 
         <button
           class="cat"
-          onclick="filterCategory('Gaming',this)"
-        >
+          onclick="filterCategory('Gaming',this)">
           Gaming Gear
         </button>
 
       </div>
+
 
       <div class="section-head">
 
@@ -1670,17 +1674,17 @@
 
         <span
           style="color:var(--muted);font-size:11px"
-          id="resultCount"
-        >
+          id="resultCount">
           Loading items...
         </span>
 
       </div>
 
+
       <div
         class="products"
-        id="productGrid"
-      ></div>
+        id="productGrid">
+      </div>
 
     </section>
 
@@ -1689,13 +1693,16 @@
 
     <section
       id="view-orders"
-      class="app-view"
-    >
+      class="app-view">
 
       <div class="page-title">
+
         <i class="fa-solid fa-box-open"></i>
+
         Order Tracking & History
+
       </div>
+
 
       <div class="track">
 
@@ -1707,17 +1714,20 @@
 
           <input
             id="trackInput"
-            placeholder="Enter Order ID (e.g. HY1001)"
-          >
+            placeholder="Enter Order ID (e.g. HY1001)">
 
           <button onclick="trackOrder()">
+
             <i class="fa-solid fa-magnifying-glass"></i>
+
             Track Status
+
           </button>
 
         </div>
 
       </div>
+
 
       <div id="ordersListContainer"></div>
 
@@ -1728,12 +1738,14 @@
 
     <section
       id="view-profile"
-      class="app-view"
-    >
+      class="app-view">
 
       <div class="page-title">
+
         <i class="fa-solid fa-user-gear"></i>
+
         Account Profile
+
       </div>
 
       <div id="profileContainer"></div>
@@ -1750,37 +1762,44 @@
     <button
       class="nav-btn active-nav"
       id="nav-home"
-      onclick="switchPage('home')"
-    >
+      onclick="switchPage('home')">
+
       <i class="fa-solid fa-house"></i>
       <span>HOME</span>
+
     </button>
+
 
     <button
       class="nav-btn"
       id="nav-products"
-      onclick="switchPage('products')"
-    >
+      onclick="switchPage('products')">
+
       <i class="fa-solid fa-bag-shopping"></i>
       <span>PRODUCTS</span>
+
     </button>
+
 
     <button
       class="nav-btn"
       id="nav-orders"
-      onclick="switchPage('orders')"
-    >
+      onclick="switchPage('orders')">
+
       <i class="fa-solid fa-box-open"></i>
       <span>ORDERS</span>
+
     </button>
+
 
     <button
       class="nav-btn"
       id="nav-profile"
-      onclick="switchPage('profile')"
-    >
+      onclick="switchPage('profile')">
+
       <i class="fa-solid fa-user"></i>
       <span>PROFILE</span>
+
     </button>
 
   </nav>
@@ -1792,8 +1811,7 @@
     class="modal"
     id="cartModal"
     role="dialog"
-    aria-modal="true"
-  >
+    aria-modal="true">
 
     <div class="modalbox">
 
@@ -1807,8 +1825,7 @@
         <button
           class="close"
           onclick="closeModal('cartModal')"
-          aria-label="Close"
-        >
+          aria-label="Close">
           ×
         </button>
 
@@ -1816,8 +1833,8 @@
 
       <div
         class="modalbody"
-        id="cartBody"
-      ></div>
+        id="cartBody">
+      </div>
 
     </div>
 
@@ -1830,8 +1847,7 @@
     class="modal"
     id="authModal"
     role="dialog"
-    aria-modal="true"
-  >
+    aria-modal="true">
 
     <div class="modalbox">
 
@@ -1844,8 +1860,7 @@
 
         <button
           class="close"
-          onclick="closeModal('authModal')"
-        >
+          onclick="closeModal('authModal')">
           ×
         </button>
 
@@ -1853,8 +1868,8 @@
 
       <div
         class="modalbody"
-        id="authBody"
-      ></div>
+        id="authBody">
+      </div>
 
     </div>
 
@@ -1867,8 +1882,7 @@
     class="modal"
     id="savePasswordModal"
     role="dialog"
-    aria-modal="true"
-  >
+    aria-modal="true">
 
     <div class="modalbox">
 
@@ -1881,8 +1895,7 @@
 
         <button
           class="close"
-          onclick="closeModal('savePasswordModal')"
-        >
+          onclick="closeModal('savePasswordModal')">
           ×
         </button>
 
@@ -1893,7 +1906,9 @@
         <div class="save-password-box">
 
           <div class="save-icon">
+
             <i class="fa-solid fa-shield-halved"></i>
+
           </div>
 
           <h3>
@@ -1901,24 +1916,21 @@
           </h3>
 
           <p>
-            Your account session will stay active on this device
-            until you log out. You won't need to enter your password
-            again while you're logged in.
+            Your account session will stay active on this device until you log out.
+            You won't need to enter your password again while you're logged in.
           </p>
 
           <div class="save-actions">
 
             <button
               class="save-ok"
-              onclick="rememberLogin(true)"
-            >
+              onclick="rememberLogin(true)">
               OK, SAVE
             </button>
 
             <button
               class="save-no"
-              onclick="rememberLogin(false)"
-            >
+              onclick="rememberLogin(false)">
               NOT NOW
             </button>
 
@@ -1939,8 +1951,7 @@
     class="modal"
     id="checkoutModal"
     role="dialog"
-    aria-modal="true"
-  >
+    aria-modal="true">
 
     <div class="modalbox">
 
@@ -1954,8 +1965,7 @@
         <button
           class="close"
           onclick="closeModal('checkoutModal')"
-          aria-label="Close"
-        >
+          aria-label="Close">
           ×
         </button>
 
@@ -1966,35 +1976,48 @@
         <form id="checkoutForm">
 
           <div class="field">
-            <label>Full Name</label>
+
+            <label>
+              Full Name
+            </label>
 
             <input
               id="cName"
               required
-              placeholder="Enter full name"
-            >
+              placeholder="Enter full name">
+
           </div>
 
+
           <div class="field">
-            <label>Phone Number</label>
+
+            <label>
+              Phone Number
+            </label>
 
             <input
               id="cPhone"
               required
-              placeholder="03XXXXXXXXX"
-            >
+              placeholder="03XXXXXXXXX">
+
           </div>
 
+
           <div class="field">
-            <label>Shipping Address</label>
+
+            <label>
+              Shipping Address
+            </label>
 
             <textarea
               id="cAddress"
               rows="3"
               required
-              placeholder="Complete delivery address"
-            ></textarea>
+              placeholder="Complete delivery address">
+            </textarea>
+
           </div>
+
 
           <div class="field">
 
@@ -2016,6 +2039,7 @@
 
           </div>
 
+
           <div class="field">
 
             <label>
@@ -2025,17 +2049,19 @@
             <input
               id="cTotal"
               readonly
-              style="color:var(--primary);font-weight:800"
-            >
+              style="color:var(--primary);font-weight:800">
 
           </div>
 
+
           <button
             class="primary"
-            type="submit"
-          >
+            type="submit">
+
             PLACE ORDER NOW
+
             <i class="fa-solid fa-arrow-right"></i>
+
           </button>
 
         </form>
@@ -2053,8 +2079,7 @@
     class="modal"
     id="changePasswordModal"
     role="dialog"
-    aria-modal="true"
-  >
+    aria-modal="true">
 
     <div class="modalbox">
 
@@ -2067,8 +2092,7 @@
 
         <button
           class="close"
-          onclick="closeModal('changePasswordModal')"
-        >
+          onclick="closeModal('changePasswordModal')">
           ×
         </button>
 
@@ -2078,8 +2102,7 @@
 
         <form
           id="changePasswordForm"
-          onsubmit="changePassword(event)"
-        >
+          onsubmit="changePassword(event)">
 
           <div class="field">
 
@@ -2092,10 +2115,10 @@
               type="password"
               required
               autocomplete="current-password"
-              placeholder="Enter old password"
-            >
+              placeholder="Enter old password">
 
           </div>
+
 
           <div class="field">
 
@@ -2109,10 +2132,10 @@
               required
               minlength="8"
               autocomplete="new-password"
-              placeholder="Enter new password"
-            >
+              placeholder="Enter new password">
 
           </div>
+
 
           <div class="field">
 
@@ -2126,18 +2149,20 @@
               required
               minlength="8"
               autocomplete="new-password"
-              placeholder="Confirm new password"
-            >
+              placeholder="Confirm new password">
 
           </div>
+
 
           <button
             class="primary"
             style="width:100%"
-            type="submit"
-          >
+            type="submit">
+
             UPDATE PASSWORD
+
             <i class="fa-solid fa-check"></i>
+
           </button>
 
         </form>
@@ -2153,8 +2178,7 @@
 
   <div
     class="toast"
-    id="toast"
-  >
+    id="toast">
 
     <b id="toastTitle"></b>
 
@@ -2162,32 +2186,34 @@
 
     <span
       id="toastText"
-      style="font-size:10px;color:var(--muted)"
-    ></span>
+      style="font-size:10px;color:var(--muted)">
+    </span>
 
   </div>
 
 
   <script>
 
-    /* =========================================================
+    /* =====================================================
        HY STORE CONFIGURATION
-       ========================================================= */
+       ===================================================== */
 
     const GOOGLE_SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
 
-    const BANNER_SHEET_CSV = "";
+    const BANNER_SHEET_CSV =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
 
-    const WHATSAPP = "923209306672";
+    const WHATSAPP =
+      "923209306672";
 
     const FALLBACK_IMAGE =
       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80";
 
 
-    /* =========================================================
+    /* =====================================================
        STATE
-       ========================================================= */
+       ===================================================== */
 
     let products = [];
 
@@ -2200,7 +2226,6 @@
     let totalSlidesCount = 1;
 
     let sliderTimer;
-
 
     let cart =
       JSON.parse(
@@ -2218,21 +2243,26 @@
       );
 
 
-    /* =========================================================
+    /* =====================================================
        HELPERS
-       ========================================================= */
+       ===================================================== */
 
-    const $ = id =>
-      document.getElementById(id);
+    const $ =
+      id => document.getElementById(id);
 
 
     function escapeHTML(value){
 
       return String(value ?? "")
+
         .replace(/&/g,"&amp;")
+
         .replace(/</g,"&lt;")
+
         .replace(/>/g,"&gt;")
+
         .replace(/"/g,"&quot;")
+
         .replace(/'/g,"&#039;");
 
     }
@@ -2258,8 +2288,7 @@
 
       window.__toastTimer =
         setTimeout(
-          () =>
-            $("toast").classList.remove("show"),
+          () => $("toast").classList.remove("show"),
           3000
         );
 
@@ -2282,17 +2311,16 @@
           <i class="fa-solid fa-box-open"></i>
 
           <div
-            style="
-              font-size:13px;
-              color:#dbeafe;
-              margin-bottom:5px
-            "
-          >
+            style="font-size:13px;color:#dbeafe;margin-bottom:5px">
+
             Nothing to show
+
           </div>
 
           <div style="font-size:11px">
+
             ${escapeHTML(msg)}
+
           </div>
 
         </div>
@@ -2302,9 +2330,9 @@
     }
 
 
-    /* =========================================================
+    /* =====================================================
        PAGE NAVIGATION
-       ========================================================= */
+       ===================================================== */
 
     function switchPage(pageId){
 
@@ -2352,9 +2380,9 @@
     }
 
 
-    /* =========================================================
-       LOCAL BANNER SLIDER
-       ========================================================= */
+    /* =====================================================
+       HERO SLIDER
+       ===================================================== */
 
     function updateSlider(){
 
@@ -2366,8 +2394,7 @@
           "#heroDots .dot-item"
         );
 
-      if(!slides)
-        return;
+      if(!slides) return;
 
 
       slides.style.transform =
@@ -2444,7 +2471,11 @@
     }
 
 
-    async function fetchSheetBanners(){
+    /* =====================================================
+       LOCAL BANNER SLIDER
+       ===================================================== */
+
+    function fetchSheetBanners(){
 
       const slidesContainer =
         $("heroSlides");
@@ -2452,125 +2483,46 @@
       const dotsContainer =
         $("heroDots");
 
+      if(
+        !slidesContainer ||
+        !dotsContainer
+      )
+        return;
 
-      /*
-        LOCAL BANNERS
-
-        Keep these files in the SAME folder
-        as this HTML file:
-
-        slide1.png
-        slide2.png
-        slide3.png
-        slide4.png
-        slide5.png
-      */
 
       const banners = [
 
-        {
-          img:"slide1.png",
-          tag:"MEGA SALE",
-          title:"Shop Smart. Live Better."
-        },
+        "slide1.png",
 
-        {
-          img:"slide2.png",
-          tag:"HOT DEALS",
-          title:"Premium Products. Great Prices."
-        },
+        "slide2.png",
 
-        {
-          img:"slide3.png",
-          tag:"NEW ARRIVALS",
-          title:"Discover Something New."
-        },
+        "slide3.png",
 
-        {
-          img:"slide4.png",
-          tag:"SPECIAL OFFER",
-          title:"Quality Products At Your Door."
-        },
+        "slide4.png",
 
-        {
-          img:"slide5.png",
-          tag:"HY STORE",
-          title:"Fast Delivery. Easy Shopping."
-        }
+        "slide5.png"
 
       ];
 
 
-      let slidesHTML = "";
-
-      let dotsHTML = "";
-
-
-      banners.forEach(
-        (banner,index) => {
-
-          slidesHTML += `
-
-            <div
-              class="slide"
-              style="
-                background-image:
-                url('${banner.img}')
-              "
-            >
-
-              <div class="slide-overlay"></div>
-
-              <div class="slide-content">
-
-                <span class="tag">
-                  ${escapeHTML(banner.tag)}
-                </span>
-
-                <h1>
-                  ${escapeHTML(banner.title)}
-                </h1>
-
-                <p>
-                  Premium quality items with
-                  fast shipping and Cash on Delivery.
-                </p>
-
-                <button
-                  class="hero-btn"
-                  onclick="switchPage('products')"
-                >
-                  SHOP NOW
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-
-              </div>
-
-            </div>
-
-          `;
-
-
-          dotsHTML += `
-
-            <span
-              class="dot-item ${
-                index === 0 ? "active" : ""
-              }"
-              onclick="setSlide(${index})"
-            ></span>
-
-          `;
-
-        }
-      );
-
-
       slidesContainer.innerHTML =
-        slidesHTML;
+        banners.map(
+          img =>
+            `<div
+              class="slide"
+              style="background-image:url('${img}')">
+            </div>`
+        ).join("");
+
 
       dotsContainer.innerHTML =
-        dotsHTML;
+        banners.map(
+          (_,i) =>
+            `<span
+              class="dot-item ${i === 0 ? "active" : ""}"
+              onclick="setSlide(${i})">
+            </span>`
+        ).join("");
 
 
       totalSlidesCount =
@@ -2585,9 +2537,9 @@
     }
 
 
-    /* =========================================================
+    /* =====================================================
        PRODUCT SYNC
-       ========================================================= */
+       ===================================================== */
 
     async function fetchSheetProducts(){
 
@@ -2598,7 +2550,9 @@
           <i class="fa-solid fa-spinner fa-spin"></i>
 
           <div style="font-size:12px">
+
             Loading live products...
+
           </div>
 
         </div>
@@ -2643,7 +2597,6 @@
                 p.name
             );
 
-
           renderProducts();
 
         }else{
@@ -2666,7 +2619,6 @@
           error
         );
 
-
         showEmptyState(
           "Failed to load products. Check Google Script permissions or connection."
         );
@@ -2688,7 +2640,8 @@
 
       const image =
         escapeHTML(
-          p.img || FALLBACK_IMAGE
+          p.img ||
+          FALLBACK_IMAGE
         );
 
       const name =
@@ -2696,7 +2649,8 @@
 
       const cat =
         escapeHTML(
-          p.cat || "General"
+          p.cat ||
+          "General"
         );
 
       const price =
@@ -2722,11 +2676,7 @@
               src="${image}"
               alt="${name}"
               loading="lazy"
-              onerror="
-                this.onerror=null;
-                this.src='${FALLBACK_IMAGE}'
-              "
-            >
+              onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
 
             <span class="tag">
               ${cat}
@@ -2757,17 +2707,19 @@
               <button
                 class="cartbtn"
                 aria-label="Add to cart"
-                onclick="addCart('${id}')"
-              >
+                onclick="addCart('${id}')">
+
                 <i class="fa-solid fa-cart-plus"></i>
+
               </button>
 
 
               <button
                 class="buy"
-                onclick="buyNow('${id}')"
-              >
+                onclick="buyNow('${id}')">
+
                 Buy Now
+
               </button>
 
             </div>
@@ -2797,22 +2749,35 @@
 
             const categoryOK =
               activeCat === "All" ||
-              String(p.cat || "")
-                .toLowerCase() ===
+              String(
+                p.cat || ""
+              ).toLowerCase()
+              ===
               activeCat.toLowerCase();
 
 
             const searchOK =
               !term ||
-              String(p.name || "")
-                .toLowerCase()
-                .includes(term) ||
-              String(p.cat || "")
-                .toLowerCase()
-                .includes(term);
+
+              String(
+                p.name || ""
+              )
+              .toLowerCase()
+              .includes(term)
+
+              ||
+
+              String(
+                p.cat || ""
+              )
+              .toLowerCase()
+              .includes(term);
 
 
-            return categoryOK && searchOK;
+            return (
+              categoryOK &&
+              searchOK
+            );
 
           }
         );
@@ -2820,11 +2785,15 @@
 
       $("productGrid").innerHTML =
         list.length
+
         ?
+
         list
           .map(productCard)
           .join("")
+
         :
+
         `
 
           <div class="empty">
@@ -2832,7 +2801,9 @@
             <i class="fa-solid fa-magnifying-glass"></i>
 
             <div style="font-size:12px">
+
               No matching products found.
+
             </div>
 
           </div>
@@ -2842,12 +2813,16 @@
 
       $("featuredGrid").innerHTML =
         products.length
+
         ?
+
         products
           .slice(0,8)
           .map(productCard)
           .join("")
+
         :
+
         `<div class="empty">
           No featured products.
         </div>`;
@@ -2855,7 +2830,9 @@
 
       $("resultCount").textContent =
         `${list.length} Item${
-          list.length === 1 ? "" : "s"
+          list.length === 1
+          ? ""
+          : "s"
         }`;
 
     }
@@ -2899,9 +2876,8 @@
 
       searchTerm =
         $("searchInput")
-          .value
-          .trim();
-
+        .value
+        .trim();
 
       switchPage("products");
 
@@ -2910,9 +2886,9 @@
     }
 
 
-    /* =========================================================
+    /* =====================================================
        CART
-       ========================================================= */
+       ===================================================== */
 
     function saveCart(){
 
@@ -2932,7 +2908,9 @@
         cart.reduce(
           (total,item) =>
             total +
-            Number(item.qty || 1),
+            Number(
+              item.qty || 1
+            ),
           0
         );
 
@@ -2944,7 +2922,8 @@
       const product =
         products.find(
           p =>
-            String(p.id) ===
+            String(p.id)
+            ===
             String(id)
         );
 
@@ -2956,7 +2935,8 @@
       const existing =
         cart.find(
           item =>
-            String(item.id) ===
+            String(item.id)
+            ===
             String(id)
         );
 
@@ -2964,7 +2944,9 @@
       if(existing){
 
         existing.qty =
-          Number(existing.qty || 1) + 1;
+          Number(
+            existing.qty || 1
+          ) + 1;
 
       }else{
 
@@ -2977,6 +2959,7 @@
 
 
       saveCart();
+
 
       toast(
         "Cart Updated",
@@ -2998,8 +2981,9 @@
       cart[index].qty =
         Math.max(
           1,
-          Number(cart[index].qty || 1)
-          + amount
+          Number(
+            cart[index].qty || 1
+          ) + amount
         );
 
 
@@ -3012,7 +2996,10 @@
 
     function removeCart(index){
 
-      cart.splice(index,1);
+      cart.splice(
+        index,
+        1
+      );
 
       saveCart();
 
@@ -3026,8 +3013,12 @@
       return cart.reduce(
         (sum,item) =>
           sum +
-          Number(item.price || 0) *
-          Number(item.qty || 1),
+          Number(
+            item.price || 0
+          ) *
+          Number(
+            item.qty || 1
+          ),
         0
       );
 
@@ -3046,23 +3037,23 @@
 
           <div
             class="empty"
-            style="
-              border:0;
-              padding:35px 10px
-            "
-          >
+            style="border:0;padding:35px 10px">
 
             <i class="fa-solid fa-cart-shopping"></i>
 
             <div style="font-size:12px">
+
               Your cart is empty.
+
             </div>
 
           </div>
 
         `;
 
-        showModal("cartModal");
+        showModal(
+          "cartModal"
+        );
 
         return;
 
@@ -3071,74 +3062,71 @@
 
       body.innerHTML =
 
-        cart
-          .map(
-            (p,i) => `
+        cart.map(
+          (p,i) => `
 
-              <div class="cart-row">
+            <div class="cart-row">
 
-                <div class="cart-thumb">
+              <div class="cart-thumb">
 
-                  <img
-                    src="${escapeHTML(
-                      p.img || FALLBACK_IMAGE
-                    )}"
-                    alt=""
-                    onerror="
-                      this.src='${FALLBACK_IMAGE}'
-                    "
-                  >
+                <img
+                  src="${escapeHTML(
+                    p.img ||
+                    FALLBACK_IMAGE
+                  )}"
+                  alt=""
+                  onerror="this.src='${FALLBACK_IMAGE}'">
 
-                </div>
+              </div>
 
 
-                <div class="cart-info">
+              <div class="cart-info">
 
-                  <b>
-                    ${escapeHTML(p.name)}
-                  </b>
+                <b>
+                  ${escapeHTML(p.name)}
+                </b>
 
-                  <div class="cart-price">
-                    Rs. ${money(p.price)}
-                  </div>
+                <div class="cart-price">
+
+                  Rs. ${money(p.price)}
 
                 </div>
 
+              </div>
 
-                <div class="qty">
 
-                  <button
-                    onclick="changeQty(${i},-1)"
-                  >
-                    −
-                  </button>
-
-                  <span>
-                    ${Number(p.qty || 1)}
-                  </span>
-
-                  <button
-                    onclick="changeQty(${i},1)"
-                  >
-                    +
-                  </button>
-
-                </div>
-
+              <div class="qty">
 
                 <button
-                  class="remove"
-                  onclick="removeCart(${i})"
-                  aria-label="Remove"
-                >
-                  <i class="fa-solid fa-trash"></i>
+                  onclick="changeQty(${i},-1)">
+                  −
+                </button>
+
+                <span>
+                  ${Number(p.qty || 1)}
+                </span>
+
+                <button
+                  onclick="changeQty(${i},1)">
+                  +
                 </button>
 
               </div>
 
-            `
-          )
-          .join("")
+
+              <button
+                class="remove"
+                onclick="removeCart(${i})"
+                aria-label="Remove">
+
+                <i class="fa-solid fa-trash"></i>
+
+              </button>
+
+            </div>
+
+          `
+        ).join("")
 
         +
 
@@ -3153,14 +3141,14 @@
               </span>
 
               <b>
-                ${
-                  cart.reduce(
-                    (s,p) =>
-                      s +
-                      Number(p.qty || 1),
-                    0
-                  )
-                }
+                ${cart.reduce(
+                  (s,p) =>
+                    s +
+                    Number(
+                      p.qty || 1
+                    ),
+                  0
+                )}
               </b>
 
             </div>
@@ -3173,7 +3161,11 @@
               </span>
 
               <span class="summary-total">
-                Rs. ${money(cartTotal())}
+
+                Rs. ${money(
+                  cartTotal()
+                )}
+
               </span>
 
             </div>
@@ -3181,10 +3173,12 @@
 
             <button
               class="primary"
-              onclick="openCheckout()"
-            >
+              onclick="openCheckout()">
+
               PROCEED TO CHECKOUT
+
               <i class="fa-solid fa-arrow-right"></i>
+
             </button>
 
           </div>
@@ -3192,34 +3186,20 @@
         `;
 
 
-      showModal("cartModal");
+      showModal(
+        "cartModal"
+      );
 
     }
 
 
     function buyNow(id){
 
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
-
-        openAuthModal("login");
-
-        toast(
-          "Login Required",
-          "Please login before ordering."
-        );
-
-        return;
-
-      }
-
-
       const product =
         products.find(
           p =>
-            String(p.id) ===
+            String(p.id)
+            ===
             String(id)
         );
 
@@ -3243,9 +3223,9 @@
     }
 
 
-    /* =========================================================
+    /* =====================================================
        MODALS
-       ========================================================= */
+       ===================================================== */
 
     function showModal(id){
 
@@ -3272,7 +3252,8 @@
         )
       ){
 
-        document.body.style.overflow = "";
+        document.body.style.overflow =
+          "";
 
       }
 
@@ -3305,9 +3286,9 @@
       );
 
 
-    /* =========================================================
+    /* =====================================================
        CHECKOUT
-       ========================================================= */
+       ===================================================== */
 
     function openCheckout(){
 
@@ -3316,7 +3297,9 @@
         !currentUser.email
       ){
 
-        openAuthModal("login");
+        openAuthModal(
+          "login"
+        );
 
         toast(
           "Login Required",
@@ -3340,24 +3323,30 @@
       }
 
 
-      closeModal("cartModal");
+      closeModal(
+        "cartModal"
+      );
 
 
       $("cTotal").value =
         "Rs. " +
-        money(cartTotal());
+        money(
+          cartTotal()
+        );
 
 
-      $("cName").value =
-        currentUser.name || "";
+      if(currentUser){
 
+        $("cName").value =
+          currentUser.name || "";
 
-      $("cPhone").value =
-        currentUser.phone || "";
+        $("cPhone").value =
+          currentUser.phone || "";
 
+        $("cAddress").value =
+          currentUser.address || "";
 
-      $("cAddress").value =
-        currentUser.address || "";
+      }
 
 
       showModal(
@@ -3367,9 +3356,9 @@
     }
 
 
-    /* =========================================================
+    /* =====================================================
        CHECKOUT / ORDER
-       ========================================================= */
+       ===================================================== */
 
     $("checkoutForm")
       .addEventListener(
@@ -3425,8 +3414,11 @@
 
 
           submitButton.innerHTML = `
+
             <i class="fa-solid fa-spinner fa-spin"></i>
+
             SUBMITTING...
+
           `;
 
 
@@ -3434,7 +3426,8 @@
             "HY" +
             Math.floor(
               1000 +
-              Math.random() * 9000
+              Math.random() *
+              9000
             );
 
 
@@ -3444,18 +3437,18 @@
 
             name:
               $("cName")
-                .value
-                .trim(),
+              .value
+              .trim(),
 
             phone:
               $("cPhone")
-                .value
-                .trim(),
+              .value
+              .trim(),
 
             address:
               $("cAddress")
-                .value
-                .trim(),
+              .value
+              .trim(),
 
             product:
               cart
@@ -3469,10 +3462,7 @@
               cartTotal(),
 
             payment:
-              $("cPayment").value,
-
-            email:
-              currentUser.email
+              $("cPayment").value
 
           };
 
@@ -3489,7 +3479,9 @@
                     "text/plain;charset=utf-8"
                 },
                 body:
-                  JSON.stringify(payload)
+                  JSON.stringify(
+                    payload
+                  )
               }
             );
 
@@ -3498,10 +3490,13 @@
 
               {
                 id:orderId,
-                email:currentUser.email
+                email:
+                  currentUser.email
               },
 
-              ...userOrders.filter(
+              ...
+
+              userOrders.filter(
                 item =>
                   (
                     typeof item === "object"
@@ -3509,7 +3504,9 @@
                     item.id
                     :
                     item
-                  ) !== orderId
+                  )
+                  !==
+                  orderId
               )
 
             ];
@@ -3524,11 +3521,15 @@
 
 
             const msg =
+
               `HY STORE New Order Request\n` +
+
               `Order ID: ${orderId}\n` +
+
               `Name: ${payload.name}\n` +
+
               `Phone: ${payload.phone}\n` +
-              `Email: ${payload.email}\n` +
+
               `Total Price: Rs. ${payload.price}`;
 
 
@@ -3553,12 +3554,16 @@
 
 
             window.open(
+
               "https://wa.me/" +
               WHATSAPP +
               "?text=" +
               encodeURIComponent(msg),
+
               "_blank",
+
               "noopener,noreferrer"
+
             );
 
 
@@ -3575,15 +3580,18 @@
               "Please check your internet and try again."
             );
 
-
           }finally{
 
             submitButton.disabled =
               false;
 
+
             submitButton.innerHTML = `
+
               PLACE ORDER NOW
+
               <i class="fa-solid fa-arrow-right"></i>
+
             `;
 
           }
@@ -3592,9 +3600,9 @@
       );
 
 
-    /* =========================================================
+    /* =====================================================
        ORDERS
-       ========================================================= */
+       ===================================================== */
 
     async function renderOrdersPage(){
 
@@ -3611,11 +3619,7 @@
 
           <div
             class="order-card"
-            style="
-              text-align:center;
-              padding:35px
-            "
-          >
+            style="text-align:center;padding:35px">
 
             <i
               class="fa-solid fa-lock"
@@ -3623,18 +3627,21 @@
                 font-size:30px;
                 color:var(--primary);
                 margin-bottom:12px
-              "
-            ></i>
+              ">
+            </i>
+
 
             <b
               style="
                 display:block;
                 font-size:15px;
                 margin-bottom:6px
-              "
-            >
+              ">
+
               Login Required
+
             </b>
+
 
             <p
               style="
@@ -3642,19 +3649,22 @@
                 font-size:10px;
                 line-height:1.7;
                 margin-bottom:16px
-              "
-            >
-              Please login to your HY STORE
-              account to view your orders
-              and tracking history.
+              ">
+
+              Please login to your HY STORE account
+              to view your orders and tracking history.
+
             </p>
+
 
             <button
               class="primary"
-              onclick="openAuthModal('login')"
-            >
+              onclick="openAuthModal('login')">
+
               LOGIN TO ACCOUNT
+
               <i class="fa-solid fa-arrow-right"></i>
+
             </button>
 
           </div>
@@ -3670,12 +3680,17 @@
         userOrders.map(
           item =>
             typeof item === "string"
+
             ?
+
             {
               id:item,
-              email:currentUser.email
+              email:
+                currentUser.email
             }
+
             :
+
             item
         );
 
@@ -3707,8 +3722,7 @@
               text-align:center;
               color:var(--muted);
               padding:35px
-            "
-          >
+            ">
 
             <i
               class="fa-solid fa-box-open"
@@ -3716,14 +3730,16 @@
                 font-size:26px;
                 color:var(--primary);
                 margin-bottom:10px
-              "
-            ></i>
+              ">
+            </i>
 
             <div style="font-size:12px">
+
               No orders found for
               ${escapeHTML(
                 currentUser.email
               )}.
+
             </div>
 
           </div>
@@ -3743,10 +3759,12 @@
             padding:22px;
             color:var(--primary);
             font-size:11px
-          "
-        >
+          ">
+
           <i class="fa-solid fa-spinner fa-spin"></i>
+
           Fetching order status...
+
         </div>
 
       `;
@@ -3784,9 +3802,15 @@
 
           cards +=
             data.result === "success"
+
             ?
-            buildOrderCard(data)
+
+            buildOrderCard(
+              data
+            )
+
             :
+
             buildOrderCard({
               orderId:id,
               status:"SUBMITTED"
@@ -3835,9 +3859,9 @@
 
       const query =
         $("trackInput")
-          .value
-          .trim()
-          .toUpperCase();
+        .value
+        .trim()
+        .toUpperCase();
 
 
       if(!query){
@@ -3856,10 +3880,13 @@
 
         {
           id:query,
-          email:currentUser.email
+          email:
+            currentUser.email
         },
 
-        ...userOrders.filter(
+        ...
+
+        userOrders.filter(
           item =>
             (
               typeof item === "object"
@@ -3867,7 +3894,9 @@
               item.id
               :
               item
-            ) !== query
+            )
+            !==
+            query
         )
 
       ];
@@ -3911,8 +3940,11 @@
               )}
             </b>
 
-            <span class="status pending">
+            <span
+              class="status pending">
+
               ${status}
+
             </span>
 
           </div>
@@ -3929,7 +3961,6 @@
               <b>
                 ${escapeHTML(
                   d.name ||
-                  currentUser?.name ||
                   "N/A"
                 )}
               </b>
@@ -3954,10 +3985,7 @@
 
 
             <div
-              style="
-                grid-column:span 2
-              "
-            >
+              style="grid-column:span 2">
 
               <span>
                 Products
@@ -3974,22 +4002,18 @@
 
 
             <div
-              style="
-                grid-column:span 2
-              "
-            >
+              style="grid-column:span 2">
 
               <span>
                 Total Amount
               </span>
 
               <b
-                style="
-                  color:var(--primary)
-                "
-              >
+                style="color:var(--primary)">
+
                 Rs.
                 ${money(d.price)}
+
               </b>
 
             </div>
@@ -4003,16 +4027,12 @@
     }
 
 
-    /* =========================================================
-       AUTHENTICATION
-       ========================================================= */
+    /* =====================================================
+       PROFESSIONAL ACCOUNT SYSTEM
+       ===================================================== */
 
     let authMode =
       "choice";
-
-
-    let pendingAuthAction =
-      null;
 
 
     function getAccounts(){
@@ -4046,7 +4066,7 @@
 
       const data =
         new TextEncoder()
-          .encode(password);
+        .encode(password);
 
 
       const hash =
@@ -4071,59 +4091,60 @@
     }
 
 
-    function validEmail(
-      email
+    function passwordScore(
+      password
     ){
 
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
+      let score = 0;
 
-    }
-
-
-    function validPhone(
-      phone
-    ){
-
-      return phone
-        .replace(/\D/g,"")
-        .length >= 10;
-
-    }
-
-
-    function getInitial(
-      name
-    ){
-
-      return String(
-        name || "U"
+      if(
+        password.length >= 8
       )
-      .trim()
-      .charAt(0)
-      .toUpperCase();
+        score++;
+
+      if(
+        /[A-Z]/.test(password)
+      )
+        score++;
+
+      if(
+        /[0-9]/.test(password)
+      )
+        score++;
+
+      if(
+        /[^A-Za-z0-9]/.test(password)
+      )
+        score++;
+
+
+      return score;
 
     }
 
 
-    function saveCurrentUser(){
+    function updatePasswordStrength(
+      inputId,
+      barId
+    ){
 
-      if(currentUser){
-
-        localStorage.setItem(
-          "hy_user_session",
-          JSON.stringify(
-            currentUser
-          )
+      const n =
+        passwordScore(
+          $(inputId).value
         );
 
-      }else{
 
-        localStorage.removeItem(
-          "hy_user_session"
-        );
+      const w = [
+        "0%",
+        "25%",
+        "50%",
+        "75%",
+        "100%"
+      ][n];
 
-      }
+
+      $(barId).style.width =
+        w;
 
     }
 
@@ -4135,7 +4156,7 @@
       authMode =
         mode;
 
-      renderAuthModal();
+      renderAuth();
 
       showModal(
         "authModal"
@@ -4144,79 +4165,77 @@
     }
 
 
-    function renderAuthModal(){
+    function renderAuth(){
 
       const body =
         $("authBody");
 
 
-      if(authMode === "choice"){
+      if(
+        authMode ===
+        "choice"
+      ){
 
         body.innerHTML = `
 
-          <div class="auth-panel">
+          <div class="auth-brand">
 
-            <div class="auth-brand">
+            <img
+              src="logo.png"
+              alt="HY STORE"
+              onerror="this.style.display='none'">
 
-              <img
-                src="logo.png"
-                alt="HY STORE"
-                onerror="
-                  this.style.display='none'
-                "
-              >
+            <h3>
+              Welcome to HY STORE
+            </h3>
 
-              <h3>
-                Welcome to HY STORE
-              </h3>
+            <p>
+              Login to order products
+              and manage your account.
+            </p>
 
-              <p>
-                Login to continue shopping
-              </p>
-
-            </div>
+          </div>
 
 
-            <div class="auth-choice">
+          <div class="auth-choice">
 
-              <button
-                class="auth-choice-btn"
-                onclick="openAuthModal('login')"
-              >
+            <button
+              class="auth-choice-btn"
+              onclick="authMode='login';renderAuth()">
 
-                <i class="fa-solid fa-right-to-bracket"></i>
+              <i
+                class="fa-solid fa-right-to-bracket">
+              </i>
 
-                <b>
-                  Login Account
-                </b>
+              <b>
+                LOGIN ACCOUNT
+              </b>
 
-                <small>
-                  Already have a HY STORE account?
-                  Login here.
-                </small>
+              <small>
+                Already have an HY STORE account?
+              </small>
 
-              </button>
+            </button>
 
 
-              <button
-                class="auth-choice-btn"
-                onclick="openAuthModal('register')"
-              >
+            <button
+              class="auth-choice-btn"
+              onclick="authMode='register';renderAuth()">
 
-                <i class="fa-solid fa-user-plus"></i>
+              <i
+                class="fa-solid fa-user-plus">
+              </i>
 
-                <b>
-                  Register Account
-                </b>
+              <b>
+                CREATE ACCOUNT
+              </b>
 
-                <small>
-                  Create your account and
-                  start shopping.
-                </small>
+              <small>
+                Register with your email
+                and mobile number.
+              </small>
 
-              </button>
-
-            </div>
+            </button>
 
           </div>
 
@@ -4227,491 +4246,408 @@
       }
 
 
-      if(authMode === "login"){
+      if(
+        authMode ===
+        "login"
+      ){
 
-        const saved =
+        body.innerHTML = `
+
+          <div class="auth-brand">
+
+            <img
+              src="logo.png"
+              alt="HY STORE"
+              onerror="this.style.display='none'">
+
+            <h3>
+              Login to Your Account
+            </h3>
+
+            <p>
+              Use your registered email
+              and password.
+            </p>
+
+          </div>
+
+
+          <form
+            onsubmit="loginAccount(event)">
+
+            <div class="field">
+
+              <label>
+                Email Address
+              </label>
+
+              <input
+                id="loginEmail"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="name@example.com">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Password
+              </label>
+
+              <input
+                id="loginPassword"
+                type="password"
+                required
+                autocomplete="current-password"
+                placeholder="Enter password">
+
+            </div>
+
+
+            <div class="auth-row">
+
+              <button
+                type="button"
+                class="auth-link"
+                onclick="authMode='forgot';renderAuth()">
+
+                Forgot Password?
+
+              </button>
+
+
+              <button
+                type="button"
+                class="auth-link"
+                onclick="authMode='register';renderAuth()">
+
+                Create Account
+
+              </button>
+
+            </div>
+
+
+            <button
+              class="primary"
+              style="width:100%;margin-top:14px"
+              type="submit">
+
+              LOGIN NOW
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="auth-link"
+              style="display:block;margin:12px auto 0"
+              onclick="authMode='choice';renderAuth()">
+
+              ← Back
+
+            </button>
+
+          </form>
+
+        `;
+
+
+        const remembered =
           JSON.parse(
             localStorage.getItem(
-              "hy_store_saved_login"
+              "hy_saved_login"
             ) || "null"
           );
 
 
-        body.innerHTML = `
+        if(
+          remembered &&
+          $("loginEmail")
+        ){
 
-          <div class="auth-panel">
+          $("loginEmail").value =
+            remembered.email || "";
 
-            <div class="auth-brand">
-
-              <img
-                src="logo.png"
-                alt="HY STORE"
-                onerror="
-                  this.style.display='none'
-                "
-              >
-
-              <h3>
-                Login Account
-              </h3>
-
-              <p>
-                Access your HY STORE account
-              </p>
-
-            </div>
-
-
-            <div class="auth-tabs">
-
-              <button
-                class="auth-tab active"
-              >
-                LOGIN
-              </button>
-
-              <button
-                class="auth-tab"
-                onclick="openAuthModal('register')"
-              >
-                REGISTER
-              </button>
-
-            </div>
-
-
-            <form
-              onsubmit="loginAccount(event)"
-            >
-
-              <div class="field">
-
-                <label>
-                  Email Address
-                </label>
-
-                <input
-                  id="loginEmail"
-                  type="email"
-                  required
-                  autocomplete="email"
-                  value="${
-                    saved
-                    ?
-                    escapeHTML(
-                      saved.email
-                    )
-                    :
-                    ""
-                  }"
-                  placeholder="Enter your email"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Password
-                </label>
-
-                <input
-                  id="loginPassword"
-                  type="password"
-                  required
-                  autocomplete="current-password"
-                  value="${
-                    saved
-                    ?
-                    escapeHTML(
-                      saved.password
-                    )
-                    :
-                    ""
-                  }"
-                  placeholder="Enter your password"
-                >
-
-              </div>
-
-
-              <button
-                class="primary"
-                type="submit"
-              >
-                LOGIN ACCOUNT
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-
-
-              <div class="auth-row">
-
-                <button
-                  type="button"
-                  class="auth-link"
-                  onclick="openAuthModal('forgot')"
-                >
-                  Forgot Password?
-                </button>
-
-
-                <button
-                  type="button"
-                  class="auth-link"
-                  onclick="openAuthModal('register')"
-                >
-                  Create Account
-                </button>
-
-              </div>
-
-            </form>
-
-          </div>
-
-        `;
-
-        return;
+        }
 
       }
 
 
-      if(authMode === "register"){
+      else if(
+        authMode ===
+        "register"
+      ){
 
         body.innerHTML = `
 
-          <div class="auth-panel">
+          <div class="auth-brand">
 
-            <div class="auth-brand">
+            <img
+              src="logo.png"
+              alt="HY STORE"
+              onerror="this.style.display='none'">
 
-              <img
-                src="logo.png"
-                alt="HY STORE"
-                onerror="
-                  this.style.display='none'
-                "
-              >
+            <h3>
+              Register New Account
+            </h3>
 
-              <h3>
-                Create Account
-              </h3>
-
-              <p>
-                Register your HY STORE account
-              </p>
-
-            </div>
-
-
-            <div class="auth-tabs">
-
-              <button
-                class="auth-tab"
-                onclick="openAuthModal('login')"
-              >
-                LOGIN
-              </button>
-
-              <button
-                class="auth-tab active"
-              >
-                REGISTER
-              </button>
-
-            </div>
-
-
-            <form
-              onsubmit="registerAccount(event)"
-            >
-
-              <div class="field">
-
-                <label>
-                  Full Name
-                </label>
-
-                <input
-                  id="regName"
-                  required
-                  autocomplete="name"
-                  placeholder="Enter your full name"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Email Address
-                </label>
-
-                <input
-                  id="regEmail"
-                  type="email"
-                  required
-                  autocomplete="email"
-                  placeholder="Enter your email"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Mobile Number
-                </label>
-
-                <input
-                  id="regPhone"
-                  required
-                  autocomplete="tel"
-                  placeholder="03XXXXXXXXX"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Delivery Address
-                </label>
-
-                <textarea
-                  id="regAddress"
-                  rows="2"
-                  required
-                  placeholder="Enter your complete address"
-                ></textarea>
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Password
-                </label>
-
-                <input
-                  id="regPassword"
-                  type="password"
-                  required
-                  minlength="8"
-                  autocomplete="new-password"
-                  oninput="updatePasswordStrength(this)"
-                  placeholder="Minimum 8 characters"
-                >
-
-                <div class="password-strength">
-                  <span
-                    id="passwordStrengthBar"
-                  ></span>
-                </div>
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Confirm Password
-                </label>
-
-                <input
-                  id="regConfirmPassword"
-                  type="password"
-                  required
-                  minlength="8"
-                  autocomplete="new-password"
-                  placeholder="Confirm your password"
-                >
-
-              </div>
-
-
-              <button
-                class="primary"
-                type="submit"
-              >
-                CREATE ACCOUNT
-                <i class="fa-solid fa-user-plus"></i>
-              </button>
-
-
-              <div
-                class="auth-row"
-                style="justify-content:center"
-              >
-
-                <span
-                  style="
-                    color:var(--muted);
-                    font-size:10px
-                  "
-                >
-                  Already registered?
-                </span>
-
-                <button
-                  type="button"
-                  class="auth-link"
-                  onclick="openAuthModal('login')"
-                >
-                  Login Now
-                </button>
-
-              </div>
-
-            </form>
+            <p>
+              Create your account once
+              and stay signed in until logout.
+            </p>
 
           </div>
 
-        `;
 
-        return;
+          <form
+            onsubmit="registerAccount(event)">
+
+            <div class="field">
+
+              <label>
+                Full Name
+              </label>
+
+              <input
+                id="regName"
+                required
+                autocomplete="name"
+                placeholder="Enter your full name">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Email Address
+              </label>
+
+              <input
+                id="regEmail"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="name@example.com">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Mobile Number
+              </label>
+
+              <input
+                id="regPhone"
+                required
+                autocomplete="tel"
+                placeholder="03XXXXXXXXX">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Password
+              </label>
+
+              <input
+                id="regPassword"
+                type="password"
+                required
+                minlength="8"
+                autocomplete="new-password"
+                oninput="updatePasswordStrength('regPassword','regStrength')"
+                placeholder="Minimum 8 characters">
+
+              <div class="password-strength">
+
+                <span id="regStrength"></span>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Confirm Password
+              </label>
+
+              <input
+                id="regConfirm"
+                type="password"
+                required
+                minlength="8"
+                autocomplete="new-password"
+                placeholder="Confirm password">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Delivery Address
+              </label>
+
+              <textarea
+                id="regAddress"
+                rows="3"
+                required
+                placeholder="Complete delivery address">
+              </textarea>
+
+            </div>
+
+
+            <button
+              class="primary"
+              style="width:100%"
+              type="submit">
+
+              CREATE ACCOUNT
+
+              <i class="fa-solid fa-user-check"></i>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="auth-link"
+              style="display:block;margin:12px auto 0"
+              onclick="authMode='login';renderAuth()">
+
+              Already have an account?
+              Login
+
+            </button>
+
+          </form>
+
+        `;
 
       }
 
 
-      if(authMode === "forgot"){
+      else{
 
         body.innerHTML = `
 
-          <div class="auth-panel">
+          <div class="auth-brand">
 
-            <div class="auth-brand">
+            <div
+              class="save-icon"
+              style="
+                width:58px;
+                height:58px;
+                margin:0 auto 10px;
+                border-radius:50%;
+                display:grid;
+                place-items:center;
+                color:var(--primary);
+                background:rgba(24,169,255,.1);
+                font-size:22px
+              ">
 
-              <i
-                class="fa-solid fa-key"
-                style="
-                  font-size:35px;
-                  color:var(--primary);
-                  margin-bottom:10px
-                "
-              ></i>
-
-              <h3>
-                Forgot Password
-              </h3>
-
-              <p>
-                Recover your account
-              </p>
+              <i class="fa-solid fa-key"></i>
 
             </div>
 
+            <h3>
+              Reset Password
+            </h3>
 
-            <div class="auth-note">
-
-              Enter the email and mobile number
-              registered with this account.
-              You can then create a new password
-              on this device.
-
-            </div>
-
-
-            <form
-              onsubmit="resetPassword(event)"
-            >
-
-              <div class="field">
-
-                <label>
-                  Email Address
-                </label>
-
-                <input
-                  id="forgotEmail"
-                  type="email"
-                  required
-                  placeholder="Your registered email"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Mobile Number
-                </label>
-
-                <input
-                  id="forgotPhone"
-                  required
-                  placeholder="Your registered mobile"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  New Password
-                </label>
-
-                <input
-                  id="forgotPassword"
-                  type="password"
-                  required
-                  minlength="8"
-                  placeholder="New password"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label>
-                  Confirm New Password
-                </label>
-
-                <input
-                  id="forgotConfirmPassword"
-                  type="password"
-                  required
-                  minlength="8"
-                  placeholder="Confirm new password"
-                >
-
-              </div>
-
-
-              <button
-                class="primary"
-                type="submit"
-              >
-                RESET PASSWORD
-                <i class="fa-solid fa-check"></i>
-              </button>
-
-
-              <div
-                class="auth-row"
-                style="justify-content:center"
-              >
-
-                <button
-                  type="button"
-                  class="auth-link"
-                  onclick="openAuthModal('login')"
-                >
-                  Back to Login
-                </button>
-
-              </div>
-
-            </form>
+            <p>
+              Enter your registered email
+              and choose a new password.
+            </p>
 
           </div>
+
+
+          <form
+            onsubmit="resetPassword(event)">
+
+            <div class="field">
+
+              <label>
+                Registered Email
+              </label>
+
+              <input
+                id="forgotEmail"
+                type="email"
+                required
+                placeholder="name@example.com">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                New Password
+              </label>
+
+              <input
+                id="forgotPassword"
+                type="password"
+                required
+                minlength="8"
+                placeholder="New password">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>
+                Confirm New Password
+              </label>
+
+              <input
+                id="forgotConfirm"
+                type="password"
+                required
+                minlength="8"
+                placeholder="Confirm new password">
+
+            </div>
+
+
+            <button
+              class="primary"
+              style="width:100%"
+              type="submit">
+
+              RESET PASSWORD
+
+            </button>
+
+
+            <button
+              type="button"
+              class="auth-link"
+              style="display:block;margin:12px auto 0"
+              onclick="authMode='login';renderAuth()">
+
+              ← Back to Login
+
+            </button>
+
+          </form>
 
         `;
 
@@ -4720,70 +4656,68 @@
     }
 
 
-    function updatePasswordStrength(
-      input
-    ){
+    async function registerAccount(e){
 
-      const bar =
-        $("passwordStrengthBar");
-
-      if(!bar)
-        return;
+      e.preventDefault();
 
 
-      const value =
-        input.value;
-
-
-      let score = 0;
-
-
-      if(value.length >= 8)
-        score++;
-
-
-      if(/[A-Z]/.test(value))
-        score++;
-
-
-      if(/[0-9]/.test(value))
-        score++;
-
-
-      if(/[^A-Za-z0-9]/.test(value))
-        score++;
-
-
-      bar.style.width =
-        `${score * 25}%`;
-
-    }
-
-
-    async function loginAccount(
-      event
-    ){
-
-      event.preventDefault();
+      const name =
+        $("regName")
+        .value
+        .trim();
 
 
       const email =
-        $("loginEmail")
-          .value
-          .trim()
-          .toLowerCase();
+        $("regEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+      const phone =
+        $("regPhone")
+        .value
+        .trim();
 
 
       const password =
-        $("loginPassword")
-          .value;
+        $("regPassword")
+        .value;
 
 
-      if(!validEmail(email)){
+      const confirm =
+        $("regConfirm")
+        .value;
+
+
+      const address =
+        $("regAddress")
+        .value
+        .trim();
+
+
+      if(
+        password !==
+        confirm
+      ){
 
         toast(
-          "Invalid Email",
-          "Please enter a valid email address."
+          "Password Error",
+          "Passwords do not match."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        password.length < 8
+      ){
+
+        toast(
+          "Weak Password",
+          "Use at least 8 characters."
         );
 
         return;
@@ -4795,13 +4729,124 @@
         getAccounts();
 
 
+      if(
+        accounts.some(
+          a =>
+            a.email === email
+        )
+      ){
+
+        toast(
+          "Account Exists",
+          "This email is already registered. Please login."
+        );
+
+        authMode =
+          "login";
+
+        renderAuth();
+
+        return;
+
+      }
+
+
+      accounts.push({
+
+        name,
+
+        email,
+
+        phone,
+
+        address,
+
+        passwordHash:
+          await hashPassword(
+            password
+          ),
+
+        createdAt:
+          Date.now()
+
+      });
+
+
+      saveAccounts(
+        accounts
+      );
+
+
+      currentUser = {
+
+        name,
+
+        email,
+
+        phone,
+
+        address
+
+      };
+
+
+      localStorage.setItem(
+        "hy_user_session",
+        JSON.stringify(
+          currentUser
+        )
+      );
+
+
+      closeModal(
+        "authModal"
+      );
+
+
+      toast(
+        "Account Created",
+        "Welcome to HY STORE, " +
+        name +
+        "."
+      );
+
+
+      renderProfilePage();
+
+
+      setTimeout(
+        () =>
+          showModal(
+            "savePasswordModal"
+          ),
+        250
+      );
+
+    }
+
+
+    async function loginAccount(e){
+
+      e.preventDefault();
+
+
+      const email =
+        $("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+      const password =
+        $("loginPassword")
+        .value;
+
+
       const account =
-        accounts.find(
-          item =>
-            String(
-              item.email
-            ).toLowerCase()
-            ===
+        getAccounts()
+        .find(
+          a =>
+            a.email ===
             email
         );
 
@@ -4810,7 +4855,7 @@
 
         toast(
           "Account Not Found",
-          "Please check your email or register a new account."
+          "Please register an account first."
         );
 
         return;
@@ -4818,20 +4863,17 @@
       }
 
 
-      const hash =
+      if(
+        account.passwordHash
+        !==
         await hashPassword(
           password
-        );
-
-
-      if(
-        hash !==
-        account.password
+        )
       ){
 
         toast(
-          "Wrong Password",
-          "The password you entered is incorrect."
+          "Login Failed",
+          "Incorrect email or password."
         );
 
         return;
@@ -4856,7 +4898,38 @@
       };
 
 
-      saveCurrentUser();
+      localStorage.setItem(
+        "hy_user_session",
+        JSON.stringify(
+          currentUser
+        )
+      );
+
+
+      userOrders =
+        userOrders.map(
+          item =>
+            typeof item === "string"
+
+            ?
+
+            {
+              id:item,
+              email:email
+            }
+
+            :
+
+            item
+        );
+
+
+      localStorage.setItem(
+        "hy_user_orders",
+        JSON.stringify(
+          userOrders
+        )
+      );
 
 
       closeModal(
@@ -4866,235 +4939,9 @@
 
       toast(
         "Login Successful",
-        `Welcome back, ${account.name}.`
-      );
-
-
-      renderProfilePage();
-
-
-      if(
-        pendingAuthAction
-      ){
-
-        const action =
-          pendingAuthAction;
-
-        pendingAuthAction =
-          null;
-
-        setTimeout(
-          action,
-          250
-        );
-
-      }else{
-
-        showModal(
-          "savePasswordModal"
-        );
-
-      }
-
-    }
-
-
-    async function registerAccount(
-      event
-    ){
-
-      event.preventDefault();
-
-
-      const name =
-        $("regName")
-          .value
-          .trim();
-
-
-      const email =
-        $("regEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const phone =
-        $("regPhone")
-          .value
-          .trim();
-
-
-      const address =
-        $("regAddress")
-          .value
-          .trim();
-
-
-      const password =
-        $("regPassword")
-          .value;
-
-
-      const confirmPassword =
-        $("regConfirmPassword")
-          .value;
-
-
-      if(name.length < 2){
-
-        toast(
-          "Invalid Name",
-          "Please enter your full name."
-        );
-
-        return;
-
-      }
-
-
-      if(!validEmail(email)){
-
-        toast(
-          "Invalid Email",
-          "Please enter a valid email address."
-        );
-
-        return;
-
-      }
-
-
-      if(!validPhone(phone)){
-
-        toast(
-          "Invalid Mobile",
-          "Please enter a valid mobile number."
-        );
-
-        return;
-
-      }
-
-
-      if(password.length < 8){
-
-        toast(
-          "Weak Password",
-          "Password must contain at least 8 characters."
-        );
-
-        return;
-
-      }
-
-
-      if(password !== confirmPassword){
-
-        toast(
-          "Password Mismatch",
-          "Both passwords must match."
-        );
-
-        return;
-
-      }
-
-
-      const accounts =
-        getAccounts();
-
-
-      const exists =
-        accounts.some(
-          item =>
-            String(
-              item.email
-            ).toLowerCase()
-            ===
-            email
-        );
-
-
-      if(exists){
-
-        toast(
-          "Account Exists",
-          "An account with this email already exists."
-        );
-
-        openAuthModal(
-          "login"
-        );
-
-        return;
-
-      }
-
-
-      const passwordHash =
-        await hashPassword(
-          password
-        );
-
-
-      const account = {
-
-        id:
-          "USR" +
-          Date.now(),
-
-        name,
-
-        email,
-
-        phone,
-
-        address,
-
-        password:
-          passwordHash,
-
-        createdAt:
-          new Date().toISOString()
-
-      };
-
-
-      accounts.push(
-        account
-      );
-
-
-      saveAccounts(
-        accounts
-      );
-
-
-      currentUser = {
-
-        name,
-
-        email,
-
-        phone,
-
-        address
-
-      };
-
-
-      saveCurrentUser();
-
-
-      closeModal(
-        "authModal"
-      );
-
-
-      toast(
-        "Account Created",
-        "Your HY STORE account has been created successfully."
+        "Welcome back, " +
+        account.name +
+        "."
       );
 
 
@@ -5106,188 +4953,33 @@
           showModal(
             "savePasswordModal"
           ),
-        350
-      );
-
-    }
-
-
-    async function resetPassword(
-      event
-    ){
-
-      event.preventDefault();
-
-
-      const email =
-        $("forgotEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const phone =
-        $("forgotPhone")
-          .value
-          .trim();
-
-
-      const password =
-        $("forgotPassword")
-          .value;
-
-
-      const confirmPassword =
-        $("forgotConfirmPassword")
-          .value;
-
-
-      if(
-        password.length < 8
-      ){
-
-        toast(
-          "Weak Password",
-          "New password must contain at least 8 characters."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        password !==
-        confirmPassword
-      ){
-
-        toast(
-          "Password Mismatch",
-          "Both new passwords must match."
-        );
-
-        return;
-
-      }
-
-
-      const accounts =
-        getAccounts();
-
-
-      const index =
-        accounts.findIndex(
-          item =>
-            String(
-              item.email
-            ).toLowerCase()
-            === email &&
-            item.phone
-              .replace(/\D/g,"")
-              ===
-            phone.replace(/\D/g,"")
-        );
-
-
-      if(index === -1){
-
-        toast(
-          "Verification Failed",
-          "Email and mobile number do not match an account."
-        );
-
-        return;
-
-      }
-
-
-      accounts[index].password =
-        await hashPassword(
-          password
-        );
-
-
-      saveAccounts(
-        accounts
-      );
-
-
-      localStorage.removeItem(
-        "hy_store_saved_login"
-      );
-
-
-      toast(
-        "Password Updated",
-        "Your password has been reset successfully."
-      );
-
-
-      openAuthModal(
-        "login"
+        250
       );
 
     }
 
 
     function rememberLogin(
-      shouldSave
+      save
     ){
 
       if(
-        !currentUser ||
-        !currentUser.email
+        save &&
+        currentUser
       ){
 
-        closeModal(
-          "savePasswordModal"
-        );
-
-        return;
-
-      }
-
-
-      if(shouldSave){
-
-        const accounts =
-          getAccounts();
-
-
-        const account =
-          accounts.find(
-            item =>
-              item.email ===
+        localStorage.setItem(
+          "hy_saved_login",
+          JSON.stringify({
+            email:
               currentUser.email
-          );
-
-
-        if(account){
-
-          /*
-            The saved-login feature is only
-            for this browser/device.
-          */
-
-          localStorage.setItem(
-            "hy_store_saved_login",
-            JSON.stringify({
-
-              email:
-                account.email,
-
-              password:
-                ""
-
-            })
-          );
-
-        }
+          })
+        );
 
       }else{
 
         localStorage.removeItem(
-          "hy_store_saved_login"
+          "hy_saved_login"
         );
 
       }
@@ -5300,16 +4992,110 @@
     }
 
 
-    /* =========================================================
-       CHANGE PASSWORD
-       ========================================================= */
+    async function resetPassword(e){
+
+      e.preventDefault();
+
+
+      const email =
+        $("forgotEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+      const pass =
+        $("forgotPassword")
+        .value;
+
+
+      const confirm =
+        $("forgotConfirm")
+        .value;
+
+
+      if(
+        pass !==
+        confirm
+      ){
+
+        toast(
+          "Password Error",
+          "Passwords do not match."
+        );
+
+        return;
+
+      }
+
+
+      const accounts =
+        getAccounts();
+
+
+      const i =
+        accounts.findIndex(
+          a =>
+            a.email ===
+            email
+        );
+
+
+      if(i < 0){
+
+        toast(
+          "Email Not Found",
+          "No account is registered with this email."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        pass.length < 8
+      ){
+
+        toast(
+          "Weak Password",
+          "Use at least 8 characters."
+        );
+
+        return;
+
+      }
+
+
+      accounts[i].passwordHash =
+        await hashPassword(
+          pass
+        );
+
+
+      saveAccounts(
+        accounts
+      );
+
+
+      toast(
+        "Password Changed",
+        "You can now login with your new password."
+      );
+
+
+      authMode =
+        "login";
+
+
+      renderAuth();
+
+    }
+
 
     function openChangePassword(){
 
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
+      if(!currentUser){
 
         openAuthModal(
           "login"
@@ -5318,13 +5104,6 @@
         return;
 
       }
-
-
-      $("oldPassword").value = "";
-
-      $("newPassword").value = "";
-
-      $("confirmNewPassword").value = "";
 
 
       showModal(
@@ -5334,64 +5113,33 @@
     }
 
 
-    async function changePassword(
-      event
-    ){
+    async function changePassword(e){
 
-      event.preventDefault();
+      e.preventDefault();
 
 
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
-
-        closeModal(
-          "changePasswordModal"
-        );
-
-        openAuthModal(
-          "login"
-        );
-
-        return;
-
-      }
+      const oldPass =
+        $("oldPassword")
+        .value;
 
 
-      const oldPassword =
-        $("oldPassword").value;
+      const newPass =
+        $("newPassword")
+        .value;
 
 
-      const newPassword =
-        $("newPassword").value;
-
-
-      const confirmPassword =
-        $("confirmNewPassword").value;
+      const confirm =
+        $("confirmNewPassword")
+        .value;
 
 
       if(
-        newPassword.length < 8
+        newPass !==
+        confirm
       ){
 
         toast(
-          "Weak Password",
-          "New password must contain at least 8 characters."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        newPassword !==
-        confirmPassword
-      ){
-
-        toast(
-          "Password Mismatch",
+          "Password Error",
           "New passwords do not match."
         );
 
@@ -5404,19 +5152,19 @@
         getAccounts();
 
 
-      const index =
+      const i =
         accounts.findIndex(
-          item =>
-            item.email ===
+          a =>
+            a.email ===
             currentUser.email
         );
 
 
-      if(index === -1){
+      if(i < 0){
 
         toast(
           "Account Error",
-          "Your account could not be found."
+          "Account record not found."
         );
 
         return;
@@ -5424,19 +5172,16 @@
       }
 
 
-      const oldHash =
-        await hashPassword(
-          oldPassword
-        );
-
-
       if(
-        accounts[index].password !==
-        oldHash
+        accounts[i].passwordHash
+        !==
+        await hashPassword(
+          oldPass
+        )
       ){
 
         toast(
-          "Wrong Password",
+          "Password Error",
           "Old password is incorrect."
         );
 
@@ -5445,9 +5190,23 @@
       }
 
 
-      accounts[index].password =
+      if(
+        newPass.length < 8
+      ){
+
+        toast(
+          "Weak Password",
+          "Use at least 8 characters."
+        );
+
+        return;
+
+      }
+
+
+      accounts[i].passwordHash =
         await hashPassword(
-          newPassword
+          newPass
         );
 
 
@@ -5456,14 +5215,13 @@
       );
 
 
-      localStorage.removeItem(
-        "hy_store_saved_login"
-      );
-
-
       closeModal(
         "changePasswordModal"
       );
+
+
+      $("changePasswordForm")
+        .reset();
 
 
       toast(
@@ -5474,89 +5232,54 @@
     }
 
 
-    /* =========================================================
-       LOGOUT
-       ========================================================= */
+    function logoutUser(){
 
-    function logoutAccount(){
+      localStorage.removeItem(
+        "hy_user_session"
+      );
+
 
       currentUser =
         null;
 
 
-      saveCurrentUser();
-
-
-      closeModal(
-        "savePasswordModal"
-      );
-
-      closeModal(
-        "authModal"
-      );
-
-      closeModal(
-        "changePasswordModal"
-      );
-
-
-      localStorage.removeItem(
-        "hy_store_saved_login"
-      );
-
-
       toast(
         "Logged Out",
-        "You have been logged out of your HY STORE account."
+        "You have been logged out successfully."
       );
 
 
       renderProfilePage();
 
-      renderOrdersPage();
-
     }
 
 
-    /* =========================================================
-       PROFILE PAGE
-       ========================================================= */
-
     function renderProfilePage(){
 
-      const box =
+      const container =
         $("profileContainer");
 
 
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
+      if(!currentUser){
 
-        box.innerHTML = `
+        container.innerHTML = `
 
-          <div class="account-card">
+          <div class="auth-panel">
 
-            <div
-              class="auth-brand"
-              style="margin-bottom:20px"
-            >
+            <div class="auth-brand">
 
               <img
                 src="logo.png"
                 alt="HY STORE"
-                onerror="
-                  this.style.display='none'
-                "
-              >
+                onerror="this.style.display='none'">
 
               <h3>
                 Welcome to HY STORE
               </h3>
 
               <p>
-                Login or create an account
-                to manage your shopping.
+                Login or create your account
+                to place and track orders.
               </p>
 
             </div>
@@ -5566,18 +5289,19 @@
 
               <button
                 class="auth-choice-btn"
-                onclick="openAuthModal('login')"
-              >
+                onclick="openAuthModal('login')">
 
-                <i class="fa-solid fa-right-to-bracket"></i>
+                <i
+                  class="fa-solid fa-right-to-bracket">
+                </i>
 
                 <b>
-                  Login Account
+                  LOGIN ACCOUNT
                 </b>
 
                 <small>
-                  Access your orders,
-                  profile and checkout.
+                  Sign in with your email
+                  and password.
                 </small>
 
               </button>
@@ -5585,17 +5309,19 @@
 
               <button
                 class="auth-choice-btn"
-                onclick="openAuthModal('register')"
-              >
+                onclick="openAuthModal('register')">
 
-                <i class="fa-solid fa-user-plus"></i>
+                <i
+                  class="fa-solid fa-user-plus">
+                </i>
 
                 <b>
-                  Register Account
+                  CREATE ACCOUNT
                 </b>
 
                 <small>
-                  Create a new HY STORE account.
+                  Register your name,
+                  email and mobile.
                 </small>
 
               </button>
@@ -5611,40 +5337,53 @@
       }
 
 
-      box.innerHTML = `
+      const initial =
+        escapeHTML(
+          currentUser.name
+          ?
+          currentUser.name
+            .charAt(0)
+            .toUpperCase()
+          :
+          "U"
+        );
+
+
+      container.innerHTML = `
 
         <div class="account-card">
 
           <div class="account">
 
             <div class="avatar">
-              ${getInitial(
-                currentUser.name
-              )}
+
+              ${initial}
+
             </div>
 
 
             <div>
 
               <h3
-                style="
-                  font-size:17px;
-                  margin-bottom:3px
-                "
-              >
+                style="font-size:16px">
+
                 ${escapeHTML(
                   currentUser.name
                 )}
+
               </h3>
 
-              <p
+              <span
                 style="
-                  color:var(--muted);
-                  font-size:10px
-                "
-              >
-                HY STORE Customer
-              </p>
+                  font-size:11px;
+                  color:var(--muted)
+                ">
+
+                ${escapeHTML(
+                  currentUser.email
+                )}
+
+              </span>
 
             </div>
 
@@ -5655,26 +5394,19 @@
 
             <div class="acc-info-row">
 
-              <i class="fa-solid fa-user"></i>
+              <i
+                class="fa-solid fa-envelope">
+              </i>
 
               <div>
 
-                <span
-                  style="
-                    color:var(--muted);
-                    display:block;
-                    font-size:9px;
-                    margin-bottom:2px
-                  "
-                >
-                  Full Name
-                </span>
-
                 <b>
-                  ${escapeHTML(
-                    currentUser.name
-                  )}
+                  Email:
                 </b>
+
+                ${escapeHTML(
+                  currentUser.email
+                )}
 
               </div>
 
@@ -5683,26 +5415,20 @@
 
             <div class="acc-info-row">
 
-              <i class="fa-solid fa-envelope"></i>
+              <i
+                class="fa-solid fa-phone">
+              </i>
 
               <div>
 
-                <span
-                  style="
-                    color:var(--muted);
-                    display:block;
-                    font-size:9px;
-                    margin-bottom:2px
-                  "
-                >
-                  Email
-                </span>
-
                 <b>
-                  ${escapeHTML(
-                    currentUser.email
-                  )}
+                  Phone:
                 </b>
+
+                ${escapeHTML(
+                  currentUser.phone ||
+                  "N/A"
+                )}
 
               </div>
 
@@ -5711,54 +5437,20 @@
 
             <div class="acc-info-row">
 
-              <i class="fa-solid fa-phone"></i>
+              <i
+                class="fa-solid fa-location-dot">
+              </i>
 
               <div>
 
-                <span
-                  style="
-                    color:var(--muted);
-                    display:block;
-                    font-size:9px;
-                    margin-bottom:2px
-                  "
-                >
-                  Mobile
-                </span>
-
                 <b>
-                  ${escapeHTML(
-                    currentUser.phone
-                  )}
+                  Address:
                 </b>
 
-              </div>
-
-            </div>
-
-
-            <div class="acc-info-row">
-
-              <i class="fa-solid fa-location-dot"></i>
-
-              <div>
-
-                <span
-                  style="
-                    color:var(--muted);
-                    display:block;
-                    font-size:9px;
-                    margin-bottom:2px
-                  "
-                >
-                  Delivery Address
-                </span>
-
-                <b>
-                  ${escapeHTML(
-                    currentUser.address
-                  )}
-                </b>
+                ${escapeHTML(
+                  currentUser.address ||
+                  "N/A"
+                )}
 
               </div>
 
@@ -5770,18 +5462,26 @@
           <div class="account-menu">
 
             <button
-              onclick="switchPage('orders')"
-            >
-              <i class="fa-solid fa-box"></i>
-              My Orders
+              onclick="switchPage('orders')">
+
+              <i
+                class="fa-solid fa-box">
+              </i>
+
+              MY ORDERS
+
             </button>
 
 
             <button
-              onclick="openChangePassword()"
-            >
-              <i class="fa-solid fa-key"></i>
-              Change Password
+              onclick="openChangePassword()">
+
+              <i
+                class="fa-solid fa-key">
+              </i>
+
+              CHANGE PASSWORD
+
             </button>
 
           </div>
@@ -5789,11 +5489,15 @@
 
           <button
             class="btn-logout"
-            style="margin-top:10px"
-            onclick="logoutAccount()"
-          >
-            <i class="fa-solid fa-right-from-bracket"></i>
+            style="margin-top:12px"
+            onclick="logoutUser()">
+
+            <i
+              class="fa-solid fa-right-from-bracket">
+            </i>
+
             LOGOUT ACCOUNT
+
           </button>
 
         </div>
@@ -5803,26 +5507,51 @@
     }
 
 
-    /* =========================================================
-       STARTUP
-       ========================================================= */
-
-    function init(){
-
-      updateCartCount();
-
-      renderProfilePage();
-
-      fetchSheetBanners();
-
-      fetchSheetProducts();
-
-    }
-
+    /* =====================================================
+       INITIALIZE
+       ===================================================== */
 
     window.addEventListener(
-      "load",
-      init
+      "DOMContentLoaded",
+      () => {
+
+        updateCartCount();
+
+        renderProfilePage();
+
+        fetchSheetBanners();
+
+        fetchSheetProducts();
+
+        restartSlider();
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      e => {
+
+        if(
+          e.key ===
+          "Escape"
+        ){
+
+          document
+            .querySelectorAll(
+              ".modal.show"
+            )
+            .forEach(
+              modal =>
+                closeModal(
+                  modal.id
+                )
+            );
+
+        }
+
+      }
     );
 
   </script>
