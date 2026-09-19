@@ -165,21 +165,39 @@
     .products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
     .product{
       min-width:0;overflow:hidden;background:linear-gradient(150deg,#0d1728,#09101d);
-      border:1px solid var(--border);border-radius:16px;transition:.25s
+      border:1px solid var(--border);border-radius:16px;transition:.25s;cursor:pointer
     }
-    .product:hover{transform:translateY(-3px);border-color:rgba(24,169,255,.25);box-shadow:0 15px 35px rgba(0,0,0,.25)}
-    .pimg{position:relative;height:190px;background:#111a2b;overflow:hidden}
-    .pimg img{width:100%;height:100%;object-fit:cover;transition:.35s}
-    .product:hover .pimg img{transform:scale(1.04)}
-    .pimg .tag{position:absolute;left:9px;top:9px;padding:4px 8px;color:#dbeafe;background:rgba(2,7,15,.78);border-color:rgba(255,255,255,.1)}
+    .product:hover{transform:translateY(-3px);border-color:rgba(24,169,255,.35);box-shadow:0 15px 35px rgba(0,0,0,.25)}
+    .pimg{position:relative;width:100%;height:220px;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .pimg img{width:100%;height:100%;object-fit:contain;object-position:center;transition:.35s}
+    .product:hover .pimg img{transform:scale(1.02)}
     .pbody{padding:13px}
     .pbody h3{height:38px;overflow:hidden;margin-bottom:7px;font-size:13px;line-height:1.45}
     .price{color:var(--primary);font-size:16px;font-weight:800}
     .old{margin-left:6px;color:var(--muted);font-size:10px;text-decoration:line-through}
-    .pactions{display:flex;gap:7px;margin-top:11px}
-    .pactions button{padding:9px;border-radius:9px;font-size:11px;font-weight:800}
-    .buy{flex:1;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2))}
-    .cartbtn{flex:0 0 40px!important;color:#fff;background:var(--surface-3);border:1px solid var(--border)}
+
+    /* Product detail / 3-image gallery */
+    .product-detail-modal{width:min(980px,100%);max-height:92vh;overflow-y:auto}
+    .product-detail{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+    .gallery{min-width:0}
+    .gallery-main{position:relative;width:100%;height:430px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+    .gallery-main img{width:100%;height:100%;object-fit:contain;object-position:center}
+    .gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(5,8,18,.78);color:#fff;border:1px solid rgba(255,255,255,.15);z-index:2}
+    .gallery-arrow.prev{left:12px}.gallery-arrow.next{right:12px}
+    .gallery-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
+    .gallery-thumb{height:82px;border-radius:10px;overflow:hidden;background:#fff;border:2px solid transparent;padding:0}
+    .gallery-thumb.active{border-color:var(--primary)}
+    .gallery-thumb img{width:100%;height:100%;object-fit:contain}
+    .detail-info{padding:4px 2px}.detail-cat{display:inline-flex;padding:5px 9px;border-radius:7px;color:#cfe9ff;background:rgba(24,169,255,.1);border:1px solid rgba(24,169,255,.25);font-size:9px;font-weight:800;margin-bottom:10px}
+    .detail-info h2{font-size:23px;line-height:1.3;margin-bottom:10px}.detail-price{font-size:22px;color:var(--primary);font-weight:800}.detail-old{margin-left:8px;color:var(--muted);font-size:11px;text-decoration:line-through}.detail-desc{margin:15px 0;color:#b7c2d2;font-size:11px;line-height:1.8;white-space:pre-line}.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.detail-actions button{padding:12px;border-radius:10px;font-size:11px;font-weight:800}.detail-buy{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2))}.detail-cart{color:#dbeafe;background:var(--surface-3);border:1px solid var(--border)}
+
+    @media(max-width:680px){
+      .pimg{height:175px}
+      .product-detail{grid-template-columns:1fr;gap:15px}
+      .gallery-main{height:310px}
+      .gallery-thumb{height:68px}
+      .detail-info h2{font-size:19px}
+    }
 
     .empty{
       grid-column:1/-1;text-align:center;padding:55px 20px;color:var(--muted);
@@ -316,7 +334,7 @@
       .trust{grid-template-columns:1fr}
       .trust-card{padding:12px}
       .products{grid-template-columns:repeat(2,1fr);gap:10px}
-      .pimg{height:155px}
+      .pimg{height:175px}
       .pbody{padding:10px}
       .pbody h3{font-size:11px;height:34px}
       .price{font-size:14px}
@@ -571,14 +589,6 @@
     <section id="view-products" class="app-view">
       <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
 
-      <div class="categories">
-        <button class="cat active" onclick="filterCategory('All',this)">All Items</button>
-        <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
-        <button class="cat" onclick="filterCategory('Audio',this)">Audio & Sound</button>
-        <button class="cat" onclick="filterCategory('Watches',this)">Smart Watches</button>
-        <button class="cat" onclick="filterCategory('Gaming',this)">Gaming Gear</button>
-      </div>
-
       <div class="section-head">
         <h2 id="catHeading">All Products</h2>
         <span style="color:var(--muted);font-size:11px" id="resultCount">Loading items...</span>
@@ -652,6 +662,16 @@
     <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
     <button class="nav-btn" id="nav-payment" onclick="switchPage('payment')"><i class="fa-solid fa-money-bill-transfer"></i><span>PAYMENT</span></button>
   </nav>
+
+  <div class="modal" id="productModal" role="dialog" aria-modal="true">
+    <div class="modalbox product-detail-modal">
+      <div class="modalhead">
+        <b><i class="fa-solid fa-bag-shopping"></i> Product Details</b>
+        <button class="close" onclick="closeModal('productModal')" aria-label="Close">×</button>
+      </div>
+      <div class="modalbody" id="productDetailBody"></div>
+    </div>
+  </div>
 
   <div class="modal" id="cartModal" role="dialog" aria-modal="true">
     <div class="modalbox">
@@ -730,7 +750,7 @@
     /* =========================
        HY STORE CONFIGURATION
        ========================= */
-    const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbwKHD0_S3R6jeErbLDQkKxJ_ojoVzQFMwbnlKPlnpbFSJJU8k5j2Ayfg_ZjEVSJnssR/exec";
+    const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbw7LyRAR6o-WKlQe6EZc-ZiRoo88k5eekGQ-eCquFWsvM3rK6oExqnNxEKrzzUHbDqC/exec";
     const ADMIN_BANNER_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
     const WHATSAPP = "923209306672";
     const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80";
@@ -901,66 +921,140 @@
       }
     }
 
+    function productImages(p) {
+      const list = [p.img1, p.img, p.img2, p.img3]
+        .map(x => String(x || '').trim())
+        .filter(Boolean);
+      const unique = [];
+      list.forEach(x => { if (!unique.includes(x)) unique.push(x); });
+      if (!unique.length) unique.push(FALLBACK_IMAGE);
+      return unique.slice(0,3);
+    }
+
     function productCard(p) {
       const id = escapeHTML(p.id);
-      const image = escapeHTML(p.img || FALLBACK_IMAGE);
+      const image = escapeHTML(productImages(p)[0]);
       const name = escapeHTML(p.name);
-      const cat = escapeHTML(p.cat || "General");
       const price = money(p.price);
       const oldPrice = p.old ? `<span class="old">Rs. ${money(p.old)}</span>` : "";
 
       return `
-        <article class="product">
+        <article class="product" onclick="openProduct('${id}')" tabindex="0" onkeydown="if(event.key==='Enter')openProduct('${id}')">
           <div class="pimg">
             <img src="${image}" alt="${name}" loading="lazy"
                  onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
-            <span class="tag">${cat}</span>
           </div>
           <div class="pbody">
             <h3>${name}</h3>
             <div><span class="price">Rs. ${price}</span>${oldPrice}</div>
-            <div class="pactions">
-              <button class="cartbtn" aria-label="Add to cart" onclick="addCart('${id}')">
-                <i class="fa-solid fa-cart-plus"></i>
-              </button>
-              <button class="buy" onclick="buyNow('${id}')">Buy Now</button>
-            </div>
           </div>
         </article>`;
+    }
+
+    let activeGalleryIndex = 0;
+    let activeGalleryProduct = null;
+
+    function openProduct(id) {
+      const product = products.find(p => String(p.id) === String(id));
+      if (!product) return;
+      activeGalleryProduct = product;
+      activeGalleryIndex = 0;
+      renderProductDetail();
+      showModal('productModal');
+    }
+
+    function renderProductDetail() {
+      const p = activeGalleryProduct;
+      if (!p) return;
+      const images = productImages(p);
+      const main = images[activeGalleryIndex] || images[0];
+      const oldPrice = p.old ? `<span class="detail-old">Rs. ${money(p.old)}</span>` : '';
+      const thumbs = images.map((img,i)=>`
+        <button class="gallery-thumb ${i===activeGalleryIndex?'active':''}" onclick="setProductImage(${i})" aria-label="Product image ${i+1}">
+          <img src="${escapeHTML(img)}" alt="${escapeHTML(p.name)} ${i+1}" onerror="this.src='${FALLBACK_IMAGE}'">
+        </button>`).join('');
+
+      $('productDetailBody').innerHTML = `
+        <div class="product-detail">
+          <div class="gallery">
+            <div class="gallery-main">
+              ${images.length > 1 ? `<button class="gallery-arrow prev" onclick="prevProductImage()" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>` : ''}
+              <img src="${escapeHTML(main)}" alt="${escapeHTML(p.name)}" onerror="this.src='${FALLBACK_IMAGE}'">
+              ${images.length > 1 ? `<button class="gallery-arrow next" onclick="nextProductImage()" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>` : ''}
+            </div>
+            <div class="gallery-thumbs">${thumbs}</div>
+          </div>
+          <div class="detail-info">
+            <span class="detail-cat">${escapeHTML(p.cat || 'Product')}</span>
+            <h2>${escapeHTML(p.name)}</h2>
+            <div><span class="detail-price">Rs. ${money(p.price)}</span>${oldPrice}</div>
+            <div class="detail-desc">${escapeHTML(p.desc || 'Quality product available at HY STORE.')}</div>
+            <div class="detail-actions">
+              <button class="detail-cart" onclick="addCartFromDetail()"><i class="fa-solid fa-cart-plus"></i> ADD TO CART</button>
+              <button class="detail-buy" onclick="buyFromDetail()"><i class="fa-solid fa-bag-shopping"></i> BUY NOW</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function setProductImage(index) {
+      const images = productImages(activeGalleryProduct);
+      activeGalleryIndex = Math.max(0, Math.min(index, images.length - 1));
+      renderProductDetail();
+    }
+
+    function nextProductImage() {
+      const images = productImages(activeGalleryProduct);
+      if (images.length < 2) return;
+      activeGalleryIndex = (activeGalleryIndex + 1) % images.length;
+      renderProductDetail();
+    }
+
+    function prevProductImage() {
+      const images = productImages(activeGalleryProduct);
+      if (images.length < 2) return;
+      activeGalleryIndex = (activeGalleryIndex - 1 + images.length) % images.length;
+      renderProductDetail();
+    }
+
+    function addCartFromDetail() {
+      if (!activeGalleryProduct) return;
+      addCart(activeGalleryProduct.id);
+      closeModal('productModal');
+    }
+
+    function buyFromDetail() {
+      if (!activeGalleryProduct) return;
+      const id = activeGalleryProduct.id;
+      closeModal('productModal');
+      buyNow(id);
     }
 
     function renderProducts() {
       if (!products.length) return;
 
       const term = searchTerm.toLowerCase();
-
       const list = products.filter(p => {
-        const categoryOK = activeCat === "All" ||
-          String(p.cat || "").toLowerCase() === activeCat.toLowerCase();
-
-        const searchOK = !term ||
-          String(p.name || "").toLowerCase().includes(term) ||
-          String(p.cat || "").toLowerCase().includes(term);
-
-        return categoryOK && searchOK;
+        return !term ||
+          String(p.name || '').toLowerCase().includes(term) ||
+          String(p.cat || '').toLowerCase().includes(term) ||
+          String(p.desc || '').toLowerCase().includes(term);
       });
 
-      $("productGrid").innerHTML = list.length
-        ? list.map(productCard).join("")
+      $('productGrid').innerHTML = list.length
+        ? list.map(productCard).join('')
         : `<div class="empty"><i class="fa-solid fa-magnifying-glass"></i><div style="font-size:12px">No matching products found.</div></div>`;
 
-      $("featuredGrid").innerHTML = products.length
-        ? products.slice(0, 8).map(productCard).join("")
+      $('featuredGrid').innerHTML = products.length
+        ? products.slice(0, 8).map(productCard).join('')
         : `<div class="empty">No featured products.</div>`;
 
-      $("resultCount").textContent = `${list.length} Item${list.length === 1 ? "" : "s"}`;
+      $('resultCount').textContent = `${list.length} Item${list.length === 1 ? '' : 's'}`;
     }
 
     function filterCategory(category, element) {
-      activeCat = category;
-      document.querySelectorAll(".cat").forEach(btn => btn.classList.remove("active"));
-      if (element) element.classList.add("active");
-      $("catHeading").textContent = category === "All" ? "All Products" : category + " Products";
+      // Category buttons are removed from the customer UI. Kept for compatibility.
+      activeCat = category || 'All';
       renderProducts();
     }
 
