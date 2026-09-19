@@ -334,6 +334,145 @@
       .pactions{gap:4px}
       .cartbtn{flex-basis:35px!important}
     }
+
+
+/* =========================
+   PROFESSIONAL 4-STEP ORDER TRACKING
+   ========================= */
+.order-timeline{
+  margin-top:18px;
+  padding:20px 18px 22px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:linear-gradient(180deg,#0b1424,#08111e);
+}
+.timeline-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+  font-size:11px;
+  color:#fff;
+}
+.timeline-title b{font-size:13px;display:flex;align-items:center;gap:7px}
+.timeline-title b i{color:var(--primary)}
+.timeline-title span{
+  font-size:9px;
+  color:var(--muted);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:5px 9px;
+  text-transform:uppercase;
+  font-weight:800;
+}
+.timeline{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-items:start;
+  min-height:105px;
+  padding:0 5px;
+}
+.timeline-line{
+  position:absolute;
+  left:12.5%;
+  right:12.5%;
+  top:27px;
+  height:4px;
+  border-radius:99px;
+  background:#263449;
+  z-index:0;
+}
+.timeline-progress{
+  position:absolute;
+  left:12.5%;
+  top:27px;
+  height:4px;
+  border-radius:99px;
+  background:linear-gradient(90deg,#27a9ff,#7c5cff,#f6b73c,#35d07f);
+  z-index:1;
+  transition:width .35s ease;
+}
+.timeline-step{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  min-width:0;
+}
+.timeline-dot{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#111c2e;
+  border:3px solid #34445b;
+  color:#718096;
+  font-size:18px;
+  box-shadow:0 0 0 7px #08111e;
+  transition:.25s ease;
+}
+.timeline-step b{
+  margin-top:10px;
+  color:#cbd5e1;
+  font-size:10px;
+  line-height:1.25;
+}
+.timeline-step small{
+  margin-top:4px;
+  color:#65758d;
+  font-size:8px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+/* Step-specific colors */
+.timeline-step:nth-child(4) .timeline-dot{border-color:#27a9ff;color:#27a9ff}
+.timeline-step:nth-child(5) .timeline-dot{border-color:#8b6cff;color:#8b6cff}
+.timeline-step:nth-child(6) .timeline-dot{border-color:#f6b73c;color:#f6b73c}
+.timeline-step:nth-child(7) .timeline-dot{border-color:#35d07f;color:#35d07f}
+.timeline-step.done:nth-child(4) .timeline-dot{background:#27a9ff;color:#fff;box-shadow:0 0 0 7px #08111e,0 0 18px rgba(39,169,255,.28)}
+.timeline-step.done:nth-child(5) .timeline-dot{background:#8b6cff;color:#fff;box-shadow:0 0 0 7px #08111e,0 0 18px rgba(139,108,255,.28)}
+.timeline-step.done:nth-child(6) .timeline-dot{background:#f6b73c;color:#101010;box-shadow:0 0 0 7px #08111e,0 0 18px rgba(246,183,60,.28)}
+.timeline-step.active:nth-child(4) .timeline-dot{background:#27a9ff;color:#fff;box-shadow:0 0 0 7px #08111e,0 0 24px rgba(39,169,255,.4)}
+.timeline-step.active:nth-child(5) .timeline-dot{background:#8b6cff;color:#fff;box-shadow:0 0 0 7px #08111e,0 0 24px rgba(139,108,255,.4)}
+.timeline-step.active:nth-child(6) .timeline-dot{background:#f6b73c;color:#101010;box-shadow:0 0 0 7px #08111e,0 0 24px rgba(246,183,60,.4)}
+.timeline-step.active:nth-child(7) .timeline-dot{background:#35d07f;color:#fff;box-shadow:0 0 0 7px #08111e,0 0 24px rgba(53,208,127,.4)}
+.timeline-step.done b,.timeline-step.active b{color:#fff}
+.timeline-step.done small{color:#7ed6ff}
+.timeline-step.active small{color:#fff}
+.timeline-rejected{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:16px;
+  border-radius:12px;
+  color:#ff8b9d;
+  background:rgba(255,84,112,.08);
+  border:1px solid rgba(255,84,112,.2);
+  font-size:10px;
+}
+.timeline-rejected i{font-size:20px}
+.status.status-ordered{color:#27a9ff;background:rgba(39,169,255,.1);border-color:rgba(39,169,255,.25)}
+.status.status-shipped{color:#a78bfa;background:rgba(139,108,255,.1);border-color:rgba(139,108,255,.25)}
+.status.status-transit{color:#f6b73c;background:rgba(246,183,60,.1);border-color:rgba(246,183,60,.25)}
+.status.status-delivered{color:#35d07f;background:rgba(53,208,127,.1);border-color:rgba(53,208,127,.25)}
+.status.status-rejected{color:#ff6b81;background:rgba(255,84,112,.1);border-color:rgba(255,84,112,.25)}
+@media(max-width:680px){
+  .order-timeline{padding:16px 8px 18px}
+  .timeline-title{align-items:flex-start}
+  .timeline{min-height:96px;padding:0}
+  .timeline-dot{width:43px;height:43px;font-size:15px;box-shadow:0 0 0 5px #08111e}
+  .timeline-line{top:21px;height:3px;left:12%;right:12%}
+  .timeline-progress{top:21px;left:12%;height:3px}
+  .timeline-step b{font-size:8px;margin-top:8px}
+  .timeline-step small{font-size:6px}
+}
+
   </style>
 </head>
 
@@ -1027,40 +1166,80 @@
     }
 
     function buildOrderCard(d) {
-      const rawStatus = String(d.status || "PENDING").trim().toUpperCase();
-      const status = escapeHTML(rawStatus);
+      const rawStatus = String(d.status || "ORDERED").trim().toUpperCase();
       const orderId = escapeHTML(d.orderId || "N/A");
-
       const rejected = rawStatus.includes("REJECT");
+
+      // Google Sheet status controls the active step.
+      // ORDERED/PENDING/CONFIRMED/READY = 0
+      // SHIPPED = 1
+      // IN TRANSIT / OUT FOR DELIVERY = 2
+      // DELIVERED = 3
       let stage = 0;
-      if (rawStatus.includes("DELIVERED")) stage = 4;
-      else if (rawStatus.includes("OUT FOR DELIVERY") || rawStatus.includes("OUT_FOR_DELIVERY")) stage = 3;
-      else if (rawStatus.includes("SHIPPED")) stage = 2;
-      else if (rawStatus.includes("READY") || rawStatus.includes("PROCESS") || rawStatus.includes("CONFIRM")) stage = 1;
-      else stage = 0;
+      let statusLabel = "ORDERED";
+      let statusClass = "status-ordered";
+
+      if (rawStatus.includes("DELIVERED")) {
+        stage = 3;
+        statusLabel = "DELIVERED";
+        statusClass = "status-delivered";
+      } else if (rawStatus.includes("IN TRANSIT") || rawStatus.includes("IN_TRANSIT") || rawStatus.includes("OUT FOR DELIVERY") || rawStatus.includes("OUT_FOR_DELIVERY")) {
+        stage = 2;
+        statusLabel = "IN TRANSIT";
+        statusClass = "status-transit";
+      } else if (rawStatus.includes("SHIPPED")) {
+        stage = 1;
+        statusLabel = "SHIPPED";
+        statusClass = "status-shipped";
+      } else {
+        stage = 0;
+        statusLabel = "ORDERED";
+        statusClass = "status-ordered";
+      }
+
+      if (rejected) {
+        statusLabel = "REJECTED";
+        statusClass = "status-rejected";
+      }
 
       const steps = [
         {label:"Ordered", icon:"fa-cart-shopping"},
-        {label:"Order Ready", icon:"fa-box"},
-        {label:"Shipped", icon:"fa-truck-fast"},
-        {label:"Out for Delivery", icon:"fa-truck"},
-        {label:"Delivered", icon:"fa-house-circle-check"}
+        {label:"Shipped", icon:"fa-box"},
+        {label:"In Transit", icon:"fa-truck-fast"},
+        {label:"Delivered", icon:"fa-circle-check"}
       ];
 
-      const progress = rejected ? 0 : (stage / 4) * 86;
+      // Four-step horizontal progress: 0%, 33.33%, 66.66%, 100%.
+      const progress = rejected ? 0 : (stage / 3) * 75;
+
       const timeline = rejected ? `
         <div class="order-timeline">
-          <div class="timeline-title"><b><i class="fa-solid fa-location-dot"></i> Shipment Tracking</b><span>Order #${orderId}</span></div>
-          <div class="timeline-rejected"><i class="fa-solid fa-circle-xmark"></i><span>This order has been marked <b>Rejected</b>.</span></div>
+          <div class="timeline-title">
+            <b><i class="fa-solid fa-route"></i> Shipment Tracking</b>
+            <span>Order #${orderId}</span>
+          </div>
+          <div class="timeline-rejected">
+            <i class="fa-solid fa-circle-xmark"></i>
+            <span>This order has been marked <b>Rejected</b> in Google Sheets.</span>
+          </div>
         </div>` : `
         <div class="order-timeline">
-          <div class="timeline-title"><b><i class="fa-solid fa-route"></i> Shipment Tracking</b><span>${status}</span></div>
+          <div class="timeline-title">
+            <b><i class="fa-solid fa-route"></i> Shipment Tracking</b>
+            <span>${statusLabel}</span>
+          </div>
           <div class="timeline">
             <div class="timeline-line"></div>
             <div class="timeline-progress" style="width:${progress}%"></div>
             ${steps.map((step,i)=>{
               const cls = i < stage ? "done" : (i === stage ? "active" : "");
-              return `<div class="timeline-step ${cls}"><div class="timeline-dot"><i class="fa-solid ${step.icon}"></i></div><b>${step.label}</b><small>${i < stage ? "Completed" : (i === stage ? "Current" : "Pending")}</small></div>`;
+              const state = i < stage ? "Completed" : (i === stage ? "Current" : "Pending");
+              return `
+                <div class="timeline-step ${cls}">
+                  <div class="timeline-dot"><i class="fa-solid ${step.icon}"></i></div>
+                  <b>${step.label}</b>
+                  <small>${state}</small>
+                </div>`;
             }).join("")}
           </div>
         </div>`;
@@ -1069,7 +1248,7 @@
         <div class="order-card">
           <div class="order-header">
             <b>Order #${orderId}</b>
-            <span class="status pending">${status}</span>
+            <span class="status ${statusClass}">${statusLabel}</span>
           </div>
           <div class="order-grid-info">
             <div><span>Customer</span><b>${escapeHTML(d.name || "N/A")}</b></div>
