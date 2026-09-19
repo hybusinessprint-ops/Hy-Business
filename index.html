@@ -33,9 +33,7 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-
     html{scroll-behavior:smooth}
-
     body{
       min-height:100vh;
       overflow-x:hidden;
@@ -47,5514 +45,1145 @@
         radial-gradient(circle at 95% 18%,rgba(53,213,255,.07),transparent 24%),
         var(--bg);
     }
-
     button,input,textarea,select{font:inherit}
-
-    button{
-      cursor:pointer;
-      border:0;
-      outline:0
-    }
-
-    img{
-      display:block;
-      max-width:100%
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit
-    }
+    button{cursor:pointer;border:0;outline:0}
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
 
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:7px 5%;
-      font-size:11px;
-      color:var(--muted);
-      background:#03050a;
-      border-bottom:1px solid var(--border)
+      display:flex;align-items:center;justify-content:space-between;
+      padding:7px 5%;font-size:11px;color:var(--muted);
+      background:#03050a;border-bottom:1px solid var(--border)
     }
-
-    .topbar-group{
-      display:flex;
-      gap:20px
-    }
-
-    .topbar i{
-      color:var(--primary);
-      margin-right:5px
-    }
+    .topbar-group{display:flex;gap:20px}
+    .topbar i{color:var(--primary);margin-right:5px}
 
     header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:13px 4%;
+      position:sticky;top:0;z-index:50;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:20px;padding:13px 4%;
       background:var(--header);
       backdrop-filter:blur(18px);
       border-bottom:1px solid var(--border)
     }
-
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:21px;
-      font-weight:800;
-      letter-spacing:.5px;
-      cursor:pointer;
-      line-height:1
-    }
-
-    .logo img{
-      width:42px;
-      height:42px;
-      object-fit:contain;
-      border-radius:9px
-    }
-
-    .logo-text{
-      display:flex;
-      flex-direction:column
-    }
-
-    .logo b{
-      color:var(--primary)
-    }
-
-    .logo small{
-      display:block;
-      margin-top:5px;
-      font-size:7px;
-      letter-spacing:2.2px;
-      color:var(--muted);
-      font-weight:500
-    }
-
-    .head-actions{
-      display:flex;
-      gap:8px
-    }
-
+    .logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:.5px;cursor:pointer;line-height:1}.logo img{width:42px;height:42px;object-fit:contain;border-radius:9px}.logo-text{display:flex;flex-direction:column}
+    .logo b{color:var(--primary)}
+    .logo small{display:block;margin-top:5px;font-size:7px;letter-spacing:2.2px;color:var(--muted);font-weight:500}
+    .head-actions{display:flex;gap:8px}
     .iconbtn{
-      position:relative;
-      width:40px;
-      height:40px;
-      border-radius:11px;
-      color:#fff;
-      background:var(--surface-3);
-      border:1px solid var(--border);
+      position:relative;width:40px;height:40px;border-radius:11px;
+      color:#fff;background:var(--surface-3);border:1px solid var(--border);
       transition:.2s
     }
-
-    .iconbtn:hover{
-      border-color:rgba(24,169,255,.45);
-      transform:translateY(-1px)
-    }
-
+    .iconbtn:hover{border-color:rgba(24,169,255,.45);transform:translateY(-1px)}
     .badge{
-      position:absolute;
-      right:-5px;
-      top:-6px;
-      min-width:19px;
-      height:19px;
-      display:grid;
-      place-items:center;
-      padding:0 5px;
-      border-radius:20px;
-      background:var(--danger);
-      color:#fff;
-      font-size:9px;
-      font-weight:800
+      position:absolute;right:-5px;top:-6px;min-width:19px;height:19px;
+      display:grid;place-items:center;padding:0 5px;border-radius:20px;
+      background:var(--danger);color:#fff;font-size:9px;font-weight:800
     }
 
-    .search-wrapper{
-      padding:12px 4% 0;
-      max-width:1240px;
-      margin:auto
-    }
-
+    .search-wrapper{padding:12px 4% 0;max-width:1240px;margin:auto}
     .search{
-      display:flex;
-      width:100%;
-      overflow:hidden;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(9,16,31,.92);
-      box-shadow:0 7px 25px rgba(0,0,0,.18)
+      display:flex;width:100%;overflow:hidden;border:1px solid var(--border);
+      border-radius:14px;background:rgba(9,16,31,.92);box-shadow:0 7px 25px rgba(0,0,0,.18)
     }
+    .search:focus-within{border-color:rgba(24,169,255,.55);box-shadow:0 0 0 3px rgba(24,169,255,.07)}
+    .search input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#fff;padding:13px 15px;font-size:13px}
+    .search button{padding:0 20px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;font-size:14px}
 
-    .search:focus-within{
-      border-color:rgba(24,169,255,.55);
-      box-shadow:0 0 0 3px rgba(24,169,255,.07)
-    }
+    .container{width:min(1240px,92%);margin:auto;padding-top:16px}
+    .app-view{display:none;animation:fadeIn .25s ease}
+    .app-view.active-view{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 
-    .search input{
-      flex:1;
-      min-width:0;
-      background:transparent;
-      border:0;
-      outline:0;
-      color:#fff;
-      padding:13px 15px;
-      font-size:13px
-    }
-
-    .search button{
-      padding:0 20px;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      color:#fff;
-      font-size:14px
-    }
-
-    .container{
-      width:min(1240px,92%);
-      margin:auto;
-      padding-top:16px
-    }
-
-    .app-view{
-      display:none;
-      animation:fadeIn .25s ease
-    }
-
-    .app-view.active-view{
-      display:block
-    }
-
-    @keyframes fadeIn{
-      from{
-        opacity:0;
-        transform:translateY(5px)
-      }
-      to{
-        opacity:1;
-        transform:none
-      }
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:1fr 290px;
-      gap:18px;
-      margin:10px 0 26px
-    }
-
+    .hero{display:grid;grid-template-columns:1fr 290px;gap:18px;margin:10px 0 26px}
     .hero-slider{
-      position:relative;
-      min-height:320px;
-      overflow:hidden;
-      border-radius:22px;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-      background:#0b1424
+      position:relative;width:100%;overflow:hidden;border-radius:22px;
+      border:1px solid var(--border);box-shadow:var(--shadow);background:#0b1424
     }
-
-    .slides{
-      display:flex;
-      width:100%;
-      height:100%;
-      min-height:320px;
-      transition:transform .55s cubic-bezier(.22,.61,.36,1)
-    }
-
+    .slides{display:flex;width:100%;height:auto;transition:transform .55s cubic-bezier(.22,.61,.36,1);align-items:flex-start}
     .slide{
-      min-width:100%;
-      height:100%;
-      min-height:320px;
-      position:relative;
-      background-position:center;
-      background-size:cover;
-      background-repeat:no-repeat;
-      filter:saturate(1.18) contrast(1.08) brightness(1.04)
+      min-width:100%;width:100%;height:auto;min-height:0;position:relative;
+      overflow:hidden;background:#0b1424;
     }
-
-    .slide-overlay,
-    .slide-content{
-      display:none!important
+    .slide img{
+      display:block;width:100%;height:auto;max-width:100%;
+      object-fit:contain;object-position:center center;
+      filter:saturate(1.18) contrast(1.08) brightness(1.04);
     }
-
+    .slide-overlay,.slide-content{display:none!important}
     .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      padding:5px 10px;
-      border-radius:7px;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.3px;
-      color:var(--primary);
-      background:rgba(24,169,255,.12);
-      border:1px solid rgba(24,169,255,.4)
+      display:inline-flex;align-items:center;gap:5px;padding:5px 10px;
+      border-radius:7px;font-size:10px;font-weight:800;letter-spacing:.3px;
+      color:var(--primary);background:rgba(24,169,255,.12);border:1px solid rgba(24,169,255,.4)
     }
-
-    .slide-content h1{
-      margin:12px 0 9px;
-      font-size:clamp(28px,4vw,44px);
-      line-height:1.1;
-      letter-spacing:-1px
-    }
-
-    .slide-content h1 span{
-      color:var(--primary)
-    }
-
-    .slide-content p{
-      max-width:500px;
-      color:#b7c2d2;
-      font-size:12px;
-      line-height:1.8;
-      margin-bottom:18px
-    }
-
-    .hero-btn,
-    .primary{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:11px 18px;
-      border-radius:10px;
-      color:#fff;
-      font-weight:800;
-      font-size:12px;
+    .slide-content h1{margin:12px 0 9px;font-size:clamp(28px,4vw,44px);line-height:1.1;letter-spacing:-1px}
+    .slide-content h1 span{color:var(--primary)}
+    .slide-content p{max-width:500px;color:#b7c2d2;font-size:12px;line-height:1.8;margin-bottom:18px}
+    .hero-btn,.primary{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:11px 18px;border-radius:10px;color:#fff;font-weight:800;font-size:12px;
       background:linear-gradient(135deg,var(--primary),var(--primary-2));
       box-shadow:0 8px 24px rgba(24,169,255,.2)
     }
-
-    .slider-controls{
-      position:absolute;
-      right:15px;
-      bottom:15px;
-      z-index:10;
-      display:flex;
-      gap:7px
-    }
-
+    .slider-controls{position:absolute;right:15px;bottom:15px;z-index:10;display:flex;gap:7px}
     .slider-btn{
-      width:34px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      background:rgba(12,22,39,.82);
-      color:#fff;
-      border:1px solid var(--border)
+      width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
+      background:rgba(12,22,39,.82);color:#fff;border:1px solid var(--border)
     }
+    .dots{position:absolute;left:25px;bottom:21px;z-index:10;display:flex;gap:6px}
+    .dot-item{width:7px;height:7px;border-radius:20px;background:rgba(255,255,255,.3);cursor:pointer;transition:.25s}
+    .dot-item.active{width:23px;background:var(--primary)}
 
-    .dots{
-      position:absolute;
-      left:25px;
-      bottom:21px;
-      z-index:10;
-      display:flex;
-      gap:6px
-    }
-
-    .dot-item{
-      width:7px;
-      height:7px;
-      border-radius:20px;
-      background:rgba(255,255,255,.3);
-      cursor:pointer;
-      transition:.25s
-    }
-
-    .dot-item.active{
-      width:23px;
-      background:var(--primary)
-    }
-
-    .trust{
-      display:grid;
-      gap:10px
-    }
-
+    .trust{display:grid;gap:10px}
     .trust-card{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      padding:15px;
-      border:1px solid var(--border);
-      border-radius:16px;
-      background:linear-gradient(145deg,#0e1729,#0a1120)
+      display:flex;align-items:center;gap:13px;padding:15px;
+      border:1px solid var(--border);border-radius:16px;background:linear-gradient(145deg,#0e1729,#0a1120)
     }
-
-    .trust-card i{
-      width:34px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:10px;
-      color:var(--primary);
-      background:rgba(24,169,255,.1)
-    }
-
-    .trust-card b{
-      display:block;
-      font-size:12px
-    }
-
-    .trust-card small{
-      color:var(--muted);
-      font-size:9px
-    }
+    .trust-card i{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;color:var(--primary);background:rgba(24,169,255,.1)}
+    .trust-card b{display:block;font-size:12px}
+    .trust-card small{color:var(--muted);font-size:9px}
 
     .page-title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding-bottom:12px;
-      margin-bottom:17px;
-      border-bottom:1px solid var(--border);
-      font-size:20px;
-      font-weight:700
+      display:flex;align-items:center;gap:10px;padding-bottom:12px;margin-bottom:17px;
+      border-bottom:1px solid var(--border);font-size:20px;font-weight:700
     }
+    .page-title i{color:var(--primary)}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0}
+    .section-head h2{font-size:18px}
+    .view-all{background:transparent;color:var(--primary);font-size:12px;font-weight:700}
 
-    .page-title i{
-      color:var(--primary)
-    }
-
-    .section-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin:16px 0
-    }
-
-    .section-head h2{
-      font-size:18px
-    }
-
-    .view-all{
-      background:transparent;
-      color:var(--primary);
-      font-size:12px;
-      font-weight:700
-    }
-
-    .categories{
-      display:flex;
-      gap:8px;
-      overflow-x:auto;
-      padding:3px 0 14px;
-      scrollbar-width:none
-    }
-
-    .categories::-webkit-scrollbar{
-      display:none
-    }
-
+    .categories{display:flex;gap:8px;overflow-x:auto;padding:3px 0 14px;scrollbar-width:none}
+    .categories::-webkit-scrollbar{display:none}
     .cat{
-      white-space:nowrap;
-      padding:9px 14px;
-      border-radius:20px;
-      color:#cdd9e8;
-      background:var(--surface-3);
-      border:1px solid var(--border);
-      font-size:11px;
-      transition:.2s
+      white-space:nowrap;padding:9px 14px;border-radius:20px;color:#cdd9e8;
+      background:var(--surface-3);border:1px solid var(--border);font-size:11px;transition:.2s
     }
+    .cat:hover{border-color:rgba(24,169,255,.35)}
+    .cat.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:transparent;font-weight:800}
 
-    .cat:hover{
-      border-color:rgba(24,169,255,.35)
-    }
-
-    .cat.active{
-      color:#fff;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      border-color:transparent;
-      font-weight:800
-    }
-
-    .products{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:15px
-    }
-
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
     .product{
-      min-width:0;
-      overflow:hidden;
-      background:linear-gradient(150deg,#0d1728,#09101d);
-      border:1px solid var(--border);
-      border-radius:16px;
-      transition:.25s
+      min-width:0;overflow:hidden;background:linear-gradient(150deg,#0d1728,#09101d);
+      border:1px solid var(--border);border-radius:16px;transition:.25s
     }
-
-    .product:hover{
-      transform:translateY(-3px);
-      border-color:rgba(24,169,255,.25);
-      box-shadow:0 15px 35px rgba(0,0,0,.25)
-    }
-
-    .pimg{
-      position:relative;
-      height:190px;
-      background:#111a2b;
-      overflow:hidden
-    }
-
-    .pimg img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:.35s
-    }
-
-    .product:hover .pimg img{
-      transform:scale(1.04)
-    }
-
-    .pimg .tag{
-      position:absolute;
-      left:9px;
-      top:9px;
-      padding:4px 8px;
-      color:#dbeafe;
-      background:rgba(2,7,15,.78);
-      border-color:rgba(255,255,255,.1)
-    }
-
-    .pbody{
-      padding:13px
-    }
-
-    .pbody h3{
-      height:38px;
-      overflow:hidden;
-      margin-bottom:7px;
-      font-size:13px;
-      line-height:1.45
-    }
-
-    .price{
-      color:var(--primary);
-      font-size:16px;
-      font-weight:800
-    }
-
-    .old{
-      margin-left:6px;
-      color:var(--muted);
-      font-size:10px;
-      text-decoration:line-through
-    }
-
-    .pactions{
-      display:flex;
-      gap:7px;
-      margin-top:11px
-    }
-
-    .pactions button{
-      padding:9px;
-      border-radius:9px;
-      font-size:11px;
-      font-weight:800
-    }
-
-    .buy{
-      flex:1;
-      color:#fff;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2))
-    }
-
-    .cartbtn{
-      flex:0 0 40px!important;
-      color:#fff;
-      background:var(--surface-3);
-      border:1px solid var(--border)
-    }
+    .product:hover{transform:translateY(-3px);border-color:rgba(24,169,255,.25);box-shadow:0 15px 35px rgba(0,0,0,.25)}
+    .pimg{position:relative;height:190px;background:#111a2b;overflow:hidden}
+    .pimg img{width:100%;height:100%;object-fit:cover;transition:.35s}
+    .product:hover .pimg img{transform:scale(1.04)}
+    .pimg .tag{position:absolute;left:9px;top:9px;padding:4px 8px;color:#dbeafe;background:rgba(2,7,15,.78);border-color:rgba(255,255,255,.1)}
+    .pbody{padding:13px}
+    .pbody h3{height:38px;overflow:hidden;margin-bottom:7px;font-size:13px;line-height:1.45}
+    .price{color:var(--primary);font-size:16px;font-weight:800}
+    .old{margin-left:6px;color:var(--muted);font-size:10px;text-decoration:line-through}
+    .pactions{display:flex;gap:7px;margin-top:11px}
+    .pactions button{padding:9px;border-radius:9px;font-size:11px;font-weight:800}
+    .buy{flex:1;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2))}
+    .cartbtn{flex:0 0 40px!important;color:#fff;background:var(--surface-3);border:1px solid var(--border)}
 
     .empty{
-      grid-column:1/-1;
-      text-align:center;
-      padding:55px 20px;
-      color:var(--muted);
-      border:1px dashed var(--border);
-      border-radius:16px;
-      background:rgba(10,17,31,.55)
+      grid-column:1/-1;text-align:center;padding:55px 20px;color:var(--muted);
+      border:1px dashed var(--border);border-radius:16px;background:rgba(10,17,31,.55)
     }
-
-    .empty i{
-      font-size:27px;
-      color:var(--primary);
-      margin-bottom:12px
-    }
+    .empty i{font-size:27px;color:var(--primary);margin-bottom:12px}
 
     .track{
-      margin:10px 0 24px;
-      padding:20px;
-      border-radius:18px;
-      background:linear-gradient(145deg,#0d182a,#09111f);
-      border:1px solid var(--border)
+      margin:10px 0 24px;padding:20px;border-radius:18px;
+      background:linear-gradient(145deg,#0d182a,#09111f);border:1px solid var(--border)
     }
-
-    .track-title{
-      font-size:14px;
-      font-weight:700
+    .track-title{font-size:14px;font-weight:700}
+    .track-form{display:flex;gap:8px;margin-top:12px}
+    .track-form input,.field input,.field textarea,.field select{
+      width:100%;padding:11px 12px;border-radius:10px;background:#060c17;color:#fff;
+      border:1px solid var(--border);outline:0;font-size:12px
     }
-
-    .track-form{
-      display:flex;
-      gap:8px;
-      margin-top:12px
-    }
-
-    .track-form input,
-    .field input,
-    .field textarea,
-    .field select{
-      width:100%;
-      padding:11px 12px;
-      border-radius:10px;
-      background:#060c17;
-      color:#fff;
-      border:1px solid var(--border);
-      outline:0;
-      font-size:12px
-    }
-
-    .track-form input:focus,
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus{
-      border-color:rgba(24,169,255,.5)
-    }
-
-    .track-form button{
-      padding:0 16px;
-      border-radius:10px;
-      white-space:nowrap;
-      color:#fff;
-      background:var(--surface-3);
-      border:1px solid var(--border);
-      font-size:11px;
-      font-weight:800
-    }
+    .track-form input:focus,.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(24,169,255,.5)}
+    .track-form button{padding:0 16px;border-radius:10px;white-space:nowrap;color:#fff;background:var(--surface-3);border:1px solid var(--border);font-size:11px;font-weight:800}
 
     .order-card{
-      padding:18px;
-      margin-bottom:14px;
-      border-radius:17px;
-      background:#080f1c;
-      border:1px solid var(--border)
+      padding:18px;margin-bottom:14px;border-radius:17px;background:#080f1c;border:1px solid var(--border)
     }
-
-    .order-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding-bottom:12px;
-      margin-bottom:13px;
-      border-bottom:1px solid var(--border)
-    }
-
-    .order-header b{
-      color:var(--primary);
-      font-size:15px
-    }
-
-    .status{
-      padding:5px 10px;
-      border-radius:20px;
-      font-size:9px;
-      font-weight:800
-    }
-
-    .status.pending{
-      color:var(--warning);
-      background:rgba(255,212,90,.1);
-      border:1px solid rgba(255,212,90,.25)
-    }
-
-    .order-grid-info{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      padding:12px;
-      border-radius:11px;
-      background:#0d1626;
-      font-size:11px
-    }
-
-    .order-grid-info div span{
-      display:block;
-      color:var(--muted);
-      font-size:9px;
-      margin-bottom:2px
-    }
+    .order-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:12px;margin-bottom:13px;border-bottom:1px solid var(--border)}
+    .order-header b{color:var(--primary);font-size:15px}
+    .status{padding:5px 10px;border-radius:20px;font-size:9px;font-weight:800}
+    .status.pending{color:var(--warning);background:rgba(255,212,90,.1);border:1px solid rgba(255,212,90,.25)}
+    .order-grid-info{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:12px;border-radius:11px;background:#0d1626;font-size:11px}
+    .order-grid-info div span{display:block;color:var(--muted);font-size:9px;margin-bottom:2px}
 
     .account-card{
-      width:min(620px,100%);
-      margin:0 auto;
-      padding:22px;
-      border-radius:20px;
-      background:linear-gradient(145deg,#0d1728,#080f1b);
-      border:1px solid var(--border);
-      box-shadow:var(--shadow)
+      width:min(620px,100%);margin:0 auto;padding:22px;border-radius:20px;
+      background:linear-gradient(145deg,#0d1728,#080f1b);border:1px solid var(--border);box-shadow:var(--shadow)
     }
-
-    .account{
-      display:flex;
-      align-items:center;
-      gap:14px
-    }
-
+    .account{display:flex;align-items:center;gap:14px}
     .avatar{
-      width:62px;
-      height:62px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      color:#fff;
-      font-size:24px;
-      font-weight:800;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2))
+      width:62px;height:62px;display:grid;place-items:center;border-radius:50%;
+      color:#fff;font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--primary-2))
     }
+    .account-details{margin:17px 0;padding:13px;border-radius:13px;background:#060c17;border:1px solid var(--border)}
+    .acc-info-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:11px;word-break:break-word}
+    .acc-info-row:last-child{border-bottom:0}
+    .acc-info-row i{width:17px;color:var(--primary);margin-top:2px}
+    .btn-logout{width:100%;padding:12px;border-radius:10px;color:var(--danger);background:rgba(255,84,112,.09);border:1px solid rgba(255,84,112,.22);font-size:11px;font-weight:800}
 
-    .account-details{
-      margin:17px 0;
-      padding:13px;
-      border-radius:13px;
-      background:#060c17;
-      border:1px solid var(--border)
-    }
-
-    .acc-info-row{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      padding:9px 0;
-      border-bottom:1px solid rgba(255,255,255,.05);
-      font-size:11px;
-      word-break:break-word
-    }
-
-    .acc-info-row:last-child{
-      border-bottom:0
-    }
-
-    .acc-info-row i{
-      width:17px;
-      color:var(--primary);
-      margin-top:2px
-    }
-
-    .btn-logout{
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      color:var(--danger);
-      background:rgba(255,84,112,.09);
-      border:1px solid rgba(255,84,112,.22);
-      font-size:11px;
-      font-weight:800
-    }
-
-    .field{
-      margin-bottom:12px
-    }
-
-    .field label{
-      display:block;
-      margin-bottom:5px;
-      color:var(--muted);
-      font-size:10px
-    }
-
-    .primary{
-      width:100%;
-      border:0
-    }
-
+    .field{margin-bottom:12px}
+    .field label{display:block;margin-bottom:5px;color:var(--muted);font-size:10px}
+    .primary{width:100%;border:0}
     .modal{
-      position:fixed;
-      inset:0;
-      z-index:100;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:15px;
-      background:rgba(0,0,0,.76);
-      backdrop-filter:blur(9px)
+      position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+      padding:15px;background:rgba(0,0,0,.76);backdrop-filter:blur(9px)
     }
-
-    .modal.show{
-      display:flex
-    }
-
+    .modal.show{display:flex}
     .modalbox{
-      width:min(510px,100%);
-      max-height:88vh;
-      overflow-y:auto;
-      border-radius:19px;
-      background:#0a1220;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow)
+      width:min(510px,100%);max-height:88vh;overflow-y:auto;border-radius:19px;
+      background:#0a1220;border:1px solid var(--border);box-shadow:var(--shadow)
     }
+    .modalhead{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--border)}
+    .modalhead b{font-size:13px}
+    .modalhead i{color:var(--primary);margin-right:6px}
+    .close{width:31px;height:31px;border-radius:8px;color:#fff;background:var(--surface-3);font-size:18px}
+    .modalbody{padding:18px}
 
-    .modalhead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:15px 18px;
-      border-bottom:1px solid var(--border)
-    }
+    .cart-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border)}
+    .cart-thumb{width:55px;height:55px;flex:0 0 55px;border-radius:9px;overflow:hidden;background:#111a2b}
+    .cart-thumb img{width:100%;height:100%;object-fit:cover}
+    .cart-info{flex:1;min-width:0}
+    .cart-info b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+    .cart-price{color:var(--primary);font-size:12px;font-weight:800;margin-top:2px}
+    .qty{display:flex;align-items:center;gap:6px}
+    .qty button{width:26px;height:26px;border-radius:7px;color:#fff;background:var(--surface-3);border:1px solid var(--border)}
+    .qty span{min-width:18px;text-align:center;font-size:11px;font-weight:700}
+    .remove{width:28px;height:28px;border-radius:7px;color:var(--danger);background:rgba(255,84,112,.08)}
 
-    .modalhead b{
-      font-size:13px
-    }
-
-    .modalhead i{
-      color:var(--primary);
-      margin-right:6px
-    }
-
-    .close{
-      width:31px;
-      height:31px;
-      border-radius:8px;
-      color:#fff;
-      background:var(--surface-3);
-      font-size:18px
-    }
-
-    .modalbody{
-      padding:18px
-    }
-
-    .cart-row{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:11px 0;
-      border-bottom:1px solid var(--border)
-    }
-
-    .cart-thumb{
-      width:55px;
-      height:55px;
-      flex:0 0 55px;
-      border-radius:9px;
-      overflow:hidden;
-      background:#111a2b
-    }
-
-    .cart-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover
-    }
-
-    .cart-info{
-      flex:1;
-      min-width:0
-    }
-
-    .cart-info b{
-      display:block;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-      font-size:11px
-    }
-
-    .cart-price{
-      color:var(--primary);
-      font-size:12px;
-      font-weight:800;
-      margin-top:2px
-    }
-
-    .qty{
-      display:flex;
-      align-items:center;
-      gap:6px
-    }
-
-    .qty button{
-      width:26px;
-      height:26px;
-      border-radius:7px;
-      color:#fff;
-      background:var(--surface-3);
-      border:1px solid var(--border)
-    }
-
-    .qty span{
-      min-width:18px;
-      text-align:center;
-      font-size:11px;
-      font-weight:700
-    }
-
-    .remove{
-      width:28px;
-      height:28px;
-      border-radius:7px;
-      color:var(--danger);
-      background:rgba(255,84,112,.08)
-    }
-
-    .cart-summary{
-      padding-top:15px
-    }
-
-    .summary-line{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:10px;
-      font-size:12px
-    }
-
-    .summary-total{
-      font-size:15px;
-      font-weight:800;
-      color:var(--primary)
-    }
+    .cart-summary{padding-top:15px}
+    .summary-line{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:12px}
+    .summary-total{font-size:15px;font-weight:800;color:var(--primary)}
 
     .toast{
-      position:fixed;
-      top:75px;
-      right:15px;
-      z-index:200;
-      display:none;
-      max-width:320px;
-      padding:12px 15px;
-      border-radius:11px;
-      background:#0d1727;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow)
+      position:fixed;top:75px;right:15px;z-index:200;display:none;max-width:320px;
+      padding:12px 15px;border-radius:11px;background:#0d1727;border:1px solid var(--border);box-shadow:var(--shadow)
     }
-
-    .toast.show{
-      display:block;
-      animation:toastIn .25s ease
-    }
-
-    @keyframes toastIn{
-      from{
-        opacity:0;
-        transform:translateX(12px)
-      }
-      to{
-        opacity:1;
-        transform:none
-      }
-    }
+    .toast.show{display:block;animation:toastIn .25s ease}
+    @keyframes toastIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
 
     .bottomnav{
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      z-index:70;
-      display:flex;
-      align-items:center;
-      justify-content:space-around;
-      padding:8px 0;
-      background:rgba(7,12,22,.96);
-      backdrop-filter:blur(15px);
-      border-top:1px solid var(--border)
+      position:fixed;left:0;right:0;bottom:0;z-index:70;
+      display:flex;align-items:center;justify-content:space-around;padding:8px 0;
+      background:rgba(7,12,22,.96);backdrop-filter:blur(15px);border-top:1px solid var(--border)
     }
-
     .nav-btn{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:3px;
-      color:var(--muted);
-      background:transparent;
-      font-size:8px;
-      font-weight:700
+      flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+      color:var(--muted);background:transparent;font-size:8px;font-weight:700
     }
+    .nav-btn i{font-size:16px}
+    .nav-btn.active-nav{color:var(--primary)}
 
-    .nav-btn i{
-      font-size:16px
-    }
-
-    .nav-btn.active-nav{
-      color:var(--primary)
-    }
 
     /* =========================
        PROFESSIONAL ACCOUNT UI
        ========================= */
-
-    .auth-choice{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:6px
-    }
-
-    .auth-choice-btn{
-      padding:16px 12px;
-      border-radius:14px;
-      background:linear-gradient(145deg,#0e1729,#08101d);
-      border:1px solid var(--border);
-      color:#fff;
-      text-align:left;
-      transition:.2s
-    }
-
-    .auth-choice-btn:hover{
-      transform:translateY(-2px);
-      border-color:rgba(24,169,255,.45);
-      box-shadow:0 12px 30px rgba(0,0,0,.25)
-    }
-
-    .auth-choice-btn i{
-      font-size:20px;
-      color:var(--primary);
-      margin-bottom:10px
-    }
-
-    .auth-choice-btn b{
-      display:block;
-      font-size:13px;
-      margin-bottom:3px
-    }
-
-    .auth-choice-btn small{
-      color:var(--muted);
-      font-size:9px;
-      line-height:1.5
-    }
-
-    .auth-panel{
-      width:min(480px,100%);
-      margin:0 auto;
-      padding:22px;
-      border-radius:20px;
-      background:linear-gradient(145deg,#0d1728,#080f1b);
-      border:1px solid var(--border);
-      box-shadow:var(--shadow)
-    }
-
-    .auth-brand{
-      text-align:center;
-      margin-bottom:18px
-    }
-
-    .auth-brand img{
-      width:58px;
-      height:58px;
-      object-fit:contain;
-      margin:0 auto 10px;
-      border-radius:14px
-    }
-
-    .auth-brand h3{
-      font-size:18px;
-      margin-bottom:4px
-    }
-
-    .auth-brand p{
-      font-size:10px;
-      color:var(--muted)
-    }
-
-    .auth-tabs{
-      display:flex;
-      gap:6px;
-      padding:5px;
-      background:#060c17;
-      border:1px solid var(--border);
-      border-radius:12px;
-      margin-bottom:16px
-    }
-
-    .auth-tab{
-      flex:1;
-      padding:9px;
-      border-radius:8px;
-      background:transparent;
-      color:var(--muted);
-      font-size:11px;
-      font-weight:800
-    }
-
-    .auth-tab.active{
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      color:#fff
-    }
-
-    .auth-link{
-      background:none;
-      color:var(--primary);
-      font-size:10px;
-      font-weight:700;
-      padding:0
-    }
-
-    .auth-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-top:10px
-    }
-
-    .auth-note{
-      padding:10px;
-      border-radius:10px;
-      background:rgba(24,169,255,.07);
-      border:1px solid rgba(24,169,255,.16);
-      color:#b8dfff;
-      font-size:9px;
-      line-height:1.6;
-      margin-bottom:12px
-    }
-
-    .account-menu{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:8px;
-      margin-top:15px
-    }
-
-    .account-menu button{
-      padding:10px;
-      border-radius:10px;
-      color:#dbeafe;
-      background:var(--surface-3);
-      border:1px solid var(--border);
-      font-size:10px;
-      font-weight:700
-    }
-
-    .account-menu button:hover{
-      border-color:rgba(24,169,255,.35)
-    }
-
-    .password-strength{
-      height:4px;
-      border-radius:10px;
-      background:#172238;
-      overflow:hidden;
-      margin-top:6px
-    }
-
-    .password-strength span{
-      display:block;
-      height:100%;
-      width:0;
-      background:var(--primary);
-      transition:.2s
-    }
-
-    .save-password-box{
-      text-align:center;
-      padding:6px
-    }
-
-    .save-password-box .save-icon{
-      width:58px;
-      height:58px;
-      margin:0 auto 12px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      color:var(--primary);
-      background:rgba(24,169,255,.1);
-      font-size:22px
-    }
-
-    .save-password-box h3{
-      font-size:16px;
-      margin-bottom:6px
-    }
-
-    .save-password-box p{
-      font-size:10px;
-      color:var(--muted);
-      line-height:1.6;
-      margin-bottom:16px
-    }
-
-    .save-actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:8px
-    }
-
-    .save-actions button{
-      padding:11px;
-      border-radius:10px;
-      font-size:11px;
-      font-weight:800
-    }
-
-    .save-ok{
-      color:#fff;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2))
-    }
-
-    .save-no{
-      color:#dbeafe;
-      background:var(--surface-3);
-      border:1px solid var(--border)
-    }
-
-    @media(max-width:680px){
-      .auth-choice{
-        grid-template-columns:1fr
-      }
-
-      .account-menu{
-        grid-template-columns:1fr 1fr
-      }
-
-      .logo img{
-        width:36px;
-        height:36px
-      }
-
-      .logo{
-        gap:8px
-      }
-
-      .logo small{
-        font-size:6px
-      }
-    }
+    .auth-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+    .auth-choice-btn{padding:16px 12px;border-radius:14px;background:linear-gradient(145deg,#0e1729,#08101d);border:1px solid var(--border);color:#fff;text-align:left;transition:.2s}
+    .auth-choice-btn:hover{transform:translateY(-2px);border-color:rgba(24,169,255,.45);box-shadow:0 12px 30px rgba(0,0,0,.25)}
+    .auth-choice-btn i{font-size:20px;color:var(--primary);margin-bottom:10px}
+    .auth-choice-btn b{display:block;font-size:13px;margin-bottom:3px}
+    .auth-choice-btn small{color:var(--muted);font-size:9px;line-height:1.5}
+    .auth-panel{width:min(480px,100%);margin:0 auto;padding:22px;border-radius:20px;background:linear-gradient(145deg,#0d1728,#080f1b);border:1px solid var(--border);box-shadow:var(--shadow)}
+    .auth-brand{text-align:center;margin-bottom:18px}
+    .auth-brand img{width:58px;height:58px;object-fit:contain;margin:0 auto 10px;border-radius:14px}
+    .auth-brand h3{font-size:18px;margin-bottom:4px}.auth-brand p{font-size:10px;color:var(--muted)}
+    .auth-tabs{display:flex;gap:6px;padding:5px;background:#060c17;border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+    .auth-tab{flex:1;padding:9px;border-radius:8px;background:transparent;color:var(--muted);font-size:11px;font-weight:800}.auth-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff}
+    .auth-link{background:none;color:var(--primary);font-size:10px;font-weight:700;padding:0}.auth-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .auth-note{padding:10px;border-radius:10px;background:rgba(24,169,255,.07);border:1px solid rgba(24,169,255,.16);color:#b8dfff;font-size:9px;line-height:1.6;margin-bottom:12px}
+    .account-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:15px}.account-menu button{padding:10px;border-radius:10px;color:#dbeafe;background:var(--surface-3);border:1px solid var(--border);font-size:10px;font-weight:700}.account-menu button:hover{border-color:rgba(24,169,255,.35)}
+    .password-strength{height:4px;border-radius:10px;background:#172238;overflow:hidden;margin-top:6px}.password-strength span{display:block;height:100%;width:0;background:var(--primary);transition:.2s}
+    .save-password-box{text-align:center;padding:6px}.save-password-box .save-icon{width:58px;height:58px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;color:var(--primary);background:rgba(24,169,255,.1);font-size:22px}.save-password-box h3{font-size:16px;margin-bottom:6px}.save-password-box p{font-size:10px;color:var(--muted);line-height:1.6;margin-bottom:16px}.save-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.save-actions button{padding:11px;border-radius:10px;font-size:11px;font-weight:800}.save-ok{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2))}.save-no{color:#dbeafe;background:var(--surface-3);border:1px solid var(--border)}
+    @media(max-width:680px){.auth-choice{grid-template-columns:1fr}.account-menu{grid-template-columns:1fr 1fr}.logo img{width:36px;height:36px}.logo{gap:8px}.logo small{font-size:6px}}
 
     @media(max-width:950px){
-      .products{
-        grid-template-columns:repeat(3,1fr)
-      }
-
-      .hero{
-        grid-template-columns:1fr
-      }
-
-      .trust{
-        grid-template-columns:repeat(3,1fr)
-      }
+      .products{grid-template-columns:repeat(3,1fr)}
+      .hero{grid-template-columns:1fr}
+      .trust{grid-template-columns:repeat(3,1fr)}
     }
-
     @media(max-width:680px){
-      .topbar{
-        display:none
-      }
-
-      header{
-        padding:11px 4%
-      }
-
-      .logo{
-        font-size:19px
-      }
-
-      .iconbtn{
-        width:37px;
-        height:37px
-      }
-
-      .hero-slider,
-      .slides{
-        min-height:285px
-      }
-
-      .slide{
-        padding:25px
-      }
-
-      .slide-content h1{
-        font-size:29px
-      }
-
-      .trust{
-        grid-template-columns:1fr
-      }
-
-      .trust-card{
-        padding:12px
-      }
-
-      .products{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px
-      }
-
-      .pimg{
-        height:155px
-      }
-
-      .pbody{
-        padding:10px
-      }
-
-      .pbody h3{
-        font-size:11px;
-        height:34px
-      }
-
-      .price{
-        font-size:14px
-      }
-
-      .pactions button{
-        padding:8px;
-        font-size:10px
-      }
-
-      .track-form{
-        flex-direction:column
-      }
-
-      .track-form button{
-        height:40px
-      }
-
-      .order-grid-info{
-        grid-template-columns:1fr
-      }
-
-      .order-grid-info div[style]{
-        grid-column:auto!important
-      }
+      .topbar{display:none}
+      header{padding:11px 4%}
+      .logo{font-size:19px}
+      .iconbtn{width:37px;height:37px}
+      .hero-slider{min-height:0}.slides{min-height:0}.slide{min-height:0}
+      .slide{padding:25px}
+      .slide-content h1{font-size:29px}
+      .trust{grid-template-columns:1fr}
+      .trust-card{padding:12px}
+      .products{grid-template-columns:repeat(2,1fr);gap:10px}
+      .pimg{height:155px}
+      .pbody{padding:10px}
+      .pbody h3{font-size:11px;height:34px}
+      .price{font-size:14px}
+      .pactions button{padding:8px;font-size:10px}
+      .track-form{flex-direction:column}
+      .track-form button{height:40px}
+      .order-grid-info{grid-template-columns:1fr}
+      .order-grid-info div[style]{grid-column:auto!important}
     }
-
     @media(max-width:400px){
-      .head-actions{
-        gap:5px
-      }
-
-      .iconbtn{
-        width:34px;
-        height:34px
-      }
-
-      .products{
-        gap:8px
-      }
-
-      .pimg{
-        height:140px
-      }
-
-      .pactions{
-        gap:4px
-      }
-
-      .cartbtn{
-        flex-basis:35px!important
-      }
+      .head-actions{gap:5px}
+      .iconbtn{width:34px;height:34px}
+      .products{gap:8px}
+      .pimg{height:140px}
+      .pactions{gap:4px}
+      .cartbtn{flex-basis:35px!important}
     }
   </style>
 </head>
 
 <body>
-
   <div class="topbar">
     <div class="topbar-group">
-      <span>
-        <i class="fa-solid fa-mobile-screen"></i>
-        OFFICIAL STORE APP
-      </span>
-
-      <span>
-        <i class="fa-solid fa-store"></i>
-        HY BUSINESS STORE
-      </span>
+      <span><i class="fa-solid fa-mobile-screen"></i> OFFICIAL STORE APP</span>
+      <span><i class="fa-solid fa-store"></i> HY BUSINESS STORE</span>
     </div>
-
     <span onclick="switchPage('orders')" style="cursor:pointer">
-      <i class="fa-solid fa-box"></i>
-      MY ORDERS
+      <i class="fa-solid fa-box"></i> MY ORDERS
     </span>
   </div>
 
   <header>
-
     <div class="logo" onclick="switchPage('home')">
-
-      <img
-        src="logo.png"
-        alt="HY Store Logo"
-        onerror="this.style.display='none'">
-
-      <div class="logo-text">
-        HY <b>STORE</b>
-        <small>OFFICIAL ONLINE STORE</small>
-      </div>
-
+      <img src="logo.png" alt="HY Store Logo" onerror="this.style.display='none'">
+      <div class="logo-text">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
     </div>
-
     <div class="head-actions">
-
-      <button
-        class="iconbtn"
-        aria-label="Orders"
-        onclick="switchPage('orders')">
-        <i class="fa-solid fa-box"></i>
+      <button class="iconbtn" aria-label="Orders" onclick="switchPage('orders')"><i class="fa-solid fa-box"></i></button>
+      <button class="iconbtn" aria-label="Profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i></button>
+      <button class="iconbtn" aria-label="Cart" onclick="openCart()">
+        <i class="fa-solid fa-cart-shopping"></i><span class="badge" id="cartCount">0</span>
       </button>
-
-      <button
-        class="iconbtn"
-        aria-label="Profile"
-        onclick="switchPage('profile')">
-        <i class="fa-solid fa-user"></i>
-      </button>
-
-      <button
-        class="iconbtn"
-        aria-label="Cart"
-        onclick="openCart()">
-
-        <i class="fa-solid fa-cart-shopping"></i>
-
-        <span
-          class="badge"
-          id="cartCount">
-          0
-        </span>
-
-      </button>
-
     </div>
-
   </header>
 
   <div class="search-wrapper">
-
     <div class="search">
-
-      <input
-        id="searchInput"
-        autocomplete="off"
-        placeholder="Search products..."
-        onkeydown="if(event.key==='Enter') searchProducts()">
-
-      <button
-        aria-label="Search"
-        onclick="searchProducts()">
-
-        <i class="fa-solid fa-search"></i>
-
-      </button>
-
+      <input id="searchInput" autocomplete="off" placeholder="Search products..." onkeydown="if(event.key==='Enter') searchProducts()">
+      <button aria-label="Search" onclick="searchProducts()"><i class="fa-solid fa-search"></i></button>
     </div>
-
   </div>
-
 
   <main class="container">
-
-    <!-- HOME -->
-
-    <section
-      id="view-home"
-      class="app-view active-view">
-
+    <section id="view-home" class="app-view active-view">
       <div class="hero">
-
         <div class="hero-slider">
-
-          <div
-            class="slides"
-            id="heroSlides">
-
-            <div
-              class="slide"
-              style="background-image:url('slide1.png')">
-            </div>
-
-            <div
-              class="slide"
-              style="background-image:url('slide2.png')">
-            </div>
-
-            <div
-              class="slide"
-              style="background-image:url('slide3.png')">
-            </div>
-
-            <div
-              class="slide"
-              style="background-image:url('slide4.png')">
-            </div>
-
-            <div
-              class="slide"
-              style="background-image:url('slide5.png')">
-            </div>
-
+          <div class="slides" id="heroSlides">
+            <div class="slide"><img src="slide1.png" alt="HY STORE Banner 1"></div>
+            <div class="slide"><img src="slide2.png" alt="HY STORE Banner 2"></div>
+            <div class="slide"><img src="slide3.png" alt="HY STORE Banner 3"></div>
+            <div class="slide"><img src="slide4.png" alt="HY STORE Banner 4"></div>
+            <div class="slide"><img src="slide5.png" alt="HY STORE Banner 5"></div>
           </div>
-
-          <div
-            class="dots"
-            id="heroDots">
-
-            <span
-              class="dot-item active"
-              onclick="setSlide(0)">
-            </span>
-
-            <span
-              class="dot-item"
-              onclick="setSlide(1)">
-            </span>
-
-            <span
-              class="dot-item"
-              onclick="setSlide(2)">
-            </span>
-
-            <span
-              class="dot-item"
-              onclick="setSlide(3)">
-            </span>
-
-            <span
-              class="dot-item"
-              onclick="setSlide(4)">
-            </span>
-
+          <div class="dots" id="heroDots">
+            <span class="dot-item active" onclick="setSlide(0)"></span>
+            <span class="dot-item" onclick="setSlide(1)"></span>
+            <span class="dot-item" onclick="setSlide(2)"></span>
+            <span class="dot-item" onclick="setSlide(3)"></span>
+            <span class="dot-item" onclick="setSlide(4)"></span>
           </div>
-
           <div class="slider-controls">
-
-            <button
-              class="slider-btn"
-              aria-label="Previous banner"
-              onclick="prevSlide()">
-
-              <i class="fa-solid fa-chevron-left"></i>
-
-            </button>
-
-            <button
-              class="slider-btn"
-              aria-label="Next banner"
-              onclick="nextSlide()">
-
-              <i class="fa-solid fa-chevron-right"></i>
-
-            </button>
-
+            <button class="slider-btn" aria-label="Previous banner" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn" aria-label="Next banner" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
-
         </div>
-
 
         <div class="trust">
-
-          <div class="trust-card">
-
-            <i class="fa-solid fa-circle-check"></i>
-
-            <div>
-              <b>100% Authentic</b>
-              <small>Verified Goods</small>
-            </div>
-
-          </div>
-
-
-          <div class="trust-card">
-
-            <i class="fa-solid fa-truck-fast"></i>
-
-            <div>
-              <b>Cash on Delivery</b>
-              <small>Pay Upon Receipt</small>
-            </div>
-
-          </div>
-
-
-          <div class="trust-card">
-
-            <i class="fa-brands fa-whatsapp"></i>
-
-            <div>
-              <b>Live Support</b>
-              <small>Customer Care</small>
-            </div>
-
-          </div>
-
+          <div class="trust-card"><i class="fa-solid fa-circle-check"></i><div><b>100% Authentic</b><small>Verified Goods</small></div></div>
+          <div class="trust-card"><i class="fa-solid fa-truck-fast"></i><div><b>Cash on Delivery</b><small>Pay Upon Receipt</small></div></div>
+          <div class="trust-card"><i class="fa-brands fa-whatsapp"></i><div><b>Live Support</b><small>Customer Care</small></div></div>
         </div>
-
       </div>
-
 
       <div class="section-head">
-
         <h2>Featured Products</h2>
-
-        <button
-          class="view-all"
-          onclick="switchPage('products')">
-
-          View All
-          <i class="fa-solid fa-arrow-right"></i>
-
-        </button>
-
+        <button class="view-all" onclick="switchPage('products')">View All <i class="fa-solid fa-arrow-right"></i></button>
       </div>
-
-      <div
-        class="products"
-        id="featuredGrid">
-      </div>
-
+      <div class="products" id="featuredGrid"></div>
     </section>
 
-
-    <!-- PRODUCTS -->
-
-    <section
-      id="view-products"
-      class="app-view">
-
-      <div class="page-title">
-
-        <i class="fa-solid fa-bag-shopping"></i>
-
-        Product Catalog
-
-      </div>
-
+    <section id="view-products" class="app-view">
+      <div class="page-title"><i class="fa-solid fa-bag-shopping"></i> Product Catalog</div>
 
       <div class="categories">
-
-        <button
-          class="cat active"
-          onclick="filterCategory('All',this)">
-          All Items
-        </button>
-
-        <button
-          class="cat"
-          onclick="filterCategory('Accessories',this)">
-          Accessories
-        </button>
-
-        <button
-          class="cat"
-          onclick="filterCategory('Audio',this)">
-          Audio & Sound
-        </button>
-
-        <button
-          class="cat"
-          onclick="filterCategory('Watches',this)">
-          Smart Watches
-        </button>
-
-        <button
-          class="cat"
-          onclick="filterCategory('Gaming',this)">
-          Gaming Gear
-        </button>
-
+        <button class="cat active" onclick="filterCategory('All',this)">All Items</button>
+        <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
+        <button class="cat" onclick="filterCategory('Audio',this)">Audio & Sound</button>
+        <button class="cat" onclick="filterCategory('Watches',this)">Smart Watches</button>
+        <button class="cat" onclick="filterCategory('Gaming',this)">Gaming Gear</button>
       </div>
-
 
       <div class="section-head">
-
-        <h2 id="catHeading">
-          All Products
-        </h2>
-
-        <span
-          style="color:var(--muted);font-size:11px"
-          id="resultCount">
-          Loading items...
-        </span>
-
+        <h2 id="catHeading">All Products</h2>
+        <span style="color:var(--muted);font-size:11px" id="resultCount">Loading items...</span>
       </div>
-
-
-      <div
-        class="products"
-        id="productGrid">
-      </div>
-
+      <div class="products" id="productGrid"></div>
     </section>
 
-
-    <!-- ORDERS -->
-
-    <section
-      id="view-orders"
-      class="app-view">
-
-      <div class="page-title">
-
-        <i class="fa-solid fa-box-open"></i>
-
-        Order Tracking & History
-
-      </div>
-
-
+    <section id="view-orders" class="app-view">
+      <div class="page-title"><i class="fa-solid fa-box-open"></i> Order Tracking & History</div>
       <div class="track">
-
-        <div class="track-title">
-          Search Order Status
-        </div>
-
+        <div class="track-title">Search Order Status</div>
         <div class="track-form">
-
-          <input
-            id="trackInput"
-            placeholder="Enter Order ID (e.g. HY1001)">
-
-          <button onclick="trackOrder()">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            Track Status
-
-          </button>
-
+          <input id="trackInput" placeholder="Enter Order ID (e.g. HY1001)">
+          <button onclick="trackOrder()"><i class="fa-solid fa-magnifying-glass"></i> Track Status</button>
         </div>
-
       </div>
-
-
       <div id="ordersListContainer"></div>
-
     </section>
 
-
-    <!-- PROFILE -->
-
-    <section
-      id="view-profile"
-      class="app-view">
-
-      <div class="page-title">
-
-        <i class="fa-solid fa-user-gear"></i>
-
-        Account Profile
-
-      </div>
-
+    <section id="view-profile" class="app-view">
+      <div class="page-title"><i class="fa-solid fa-user-gear"></i> Account Profile</div>
       <div id="profileContainer"></div>
-
     </section>
-
   </main>
 
-
-  <!-- BOTTOM NAV -->
-
   <nav class="bottomnav">
-
-    <button
-      class="nav-btn active-nav"
-      id="nav-home"
-      onclick="switchPage('home')">
-
-      <i class="fa-solid fa-house"></i>
-      <span>HOME</span>
-
-    </button>
-
-
-    <button
-      class="nav-btn"
-      id="nav-products"
-      onclick="switchPage('products')">
-
-      <i class="fa-solid fa-bag-shopping"></i>
-      <span>PRODUCTS</span>
-
-    </button>
-
-
-    <button
-      class="nav-btn"
-      id="nav-orders"
-      onclick="switchPage('orders')">
-
-      <i class="fa-solid fa-box-open"></i>
-      <span>ORDERS</span>
-
-    </button>
-
-
-    <button
-      class="nav-btn"
-      id="nav-profile"
-      onclick="switchPage('profile')">
-
-      <i class="fa-solid fa-user"></i>
-      <span>PROFILE</span>
-
-    </button>
-
+    <button class="nav-btn active-nav" id="nav-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>HOME</span></button>
+    <button class="nav-btn" id="nav-products" onclick="switchPage('products')"><i class="fa-solid fa-bag-shopping"></i><span>PRODUCTS</span></button>
+    <button class="nav-btn" id="nav-orders" onclick="switchPage('orders')"><i class="fa-solid fa-box-open"></i><span>ORDERS</span></button>
+    <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
   </nav>
 
-
-  <!-- CART MODAL -->
-
-  <div
-    class="modal"
-    id="cartModal"
-    role="dialog"
-    aria-modal="true">
-
+  <div class="modal" id="cartModal" role="dialog" aria-modal="true">
     <div class="modalbox">
-
       <div class="modalhead">
-
-        <b>
-          <i class="fa-solid fa-cart-shopping"></i>
-          Shopping Cart
-        </b>
-
-        <button
-          class="close"
-          onclick="closeModal('cartModal')"
-          aria-label="Close">
-          ×
-        </button>
-
+        <b><i class="fa-solid fa-cart-shopping"></i> Shopping Cart</b>
+        <button class="close" onclick="closeModal('cartModal')" aria-label="Close">×</button>
       </div>
-
-      <div
-        class="modalbody"
-        id="cartBody">
-      </div>
-
+      <div class="modalbody" id="cartBody"></div>
     </div>
-
   </div>
 
 
-  <!-- AUTH MODAL -->
-
-  <div
-    class="modal"
-    id="authModal"
-    role="dialog"
-    aria-modal="true">
-
+  <div class="modal" id="authModal" role="dialog" aria-modal="true">
     <div class="modalbox">
-
-      <div class="modalhead">
-
-        <b>
-          <i class="fa-solid fa-user-shield"></i>
-          HY STORE ACCOUNT
-        </b>
-
-        <button
-          class="close"
-          onclick="closeModal('authModal')">
-          ×
-        </button>
-
-      </div>
-
-      <div
-        class="modalbody"
-        id="authBody">
-      </div>
-
+      <div class="modalhead"><b><i class="fa-solid fa-user-shield"></i> HY STORE ACCOUNT</b><button class="close" onclick="closeModal('authModal')">×</button></div>
+      <div class="modalbody" id="authBody"></div>
     </div>
-
   </div>
 
-
-  <!-- SAVE PASSWORD -->
-
-  <div
-    class="modal"
-    id="savePasswordModal"
-    role="dialog"
-    aria-modal="true">
-
+  <div class="modal" id="savePasswordModal" role="dialog" aria-modal="true">
     <div class="modalbox">
-
-      <div class="modalhead">
-
-        <b>
-          <i class="fa-solid fa-key"></i>
-          Password Saved
-        </b>
-
-        <button
-          class="close"
-          onclick="closeModal('savePasswordModal')">
-          ×
-        </button>
-
-      </div>
-
+      <div class="modalhead"><b><i class="fa-solid fa-key"></i> Password Saved</b><button class="close" onclick="closeModal('savePasswordModal')">×</button></div>
       <div class="modalbody">
-
         <div class="save-password-box">
-
-          <div class="save-icon">
-
-            <i class="fa-solid fa-shield-halved"></i>
-
-          </div>
-
-          <h3>
-            Save your account for next time?
-          </h3>
-
-          <p>
-            Your account session will stay active on this device until you log out.
-            You won't need to enter your password again while you're logged in.
-          </p>
-
-          <div class="save-actions">
-
-            <button
-              class="save-ok"
-              onclick="rememberLogin(true)">
-              OK, SAVE
-            </button>
-
-            <button
-              class="save-no"
-              onclick="rememberLogin(false)">
-              NOT NOW
-            </button>
-
-          </div>
-
+          <div class="save-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Save your account for next time?</h3>
+          <p>Your account session will stay active on this device until you log out. You won't need to enter your password again while you're logged in.</p>
+          <div class="save-actions"><button class="save-ok" onclick="rememberLogin(true)">OK, SAVE</button><button class="save-no" onclick="rememberLogin(false)">NOT NOW</button></div>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
-
-  <!-- CHECKOUT -->
-
-  <div
-    class="modal"
-    id="checkoutModal"
-    role="dialog"
-    aria-modal="true">
-
+  <div class="modal" id="checkoutModal" role="dialog" aria-modal="true">
     <div class="modalbox">
-
       <div class="modalhead">
-
-        <b>
-          <i class="fa-solid fa-credit-card"></i>
-          Checkout Order
-        </b>
-
-        <button
-          class="close"
-          onclick="closeModal('checkoutModal')"
-          aria-label="Close">
-          ×
-        </button>
-
+        <b><i class="fa-solid fa-credit-card"></i> Checkout Order</b>
+        <button class="close" onclick="closeModal('checkoutModal')" aria-label="Close">×</button>
       </div>
-
       <div class="modalbody">
-
         <form id="checkoutForm">
-
+          <div class="field"><label>Full Name</label><input id="cName" required placeholder="Enter full name"></div>
+          <div class="field"><label>Phone Number</label><input id="cPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
           <div class="field">
-
-            <label>
-              Full Name
-            </label>
-
-            <input
-              id="cName"
-              required
-              placeholder="Enter full name">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Phone Number
-            </label>
-
-            <input
-              id="cPhone"
-              required
-              placeholder="03XXXXXXXXX">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Shipping Address
-            </label>
-
-            <textarea
-              id="cAddress"
-              rows="3"
-              required
-              placeholder="Complete delivery address">
-            </textarea>
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Payment Option
-            </label>
-
+            <label>Payment Option</label>
             <select id="cPayment">
-
-              <option>
-                Cash on Delivery (COD)
-              </option>
-
-              <option>
-                JazzCash / EasyPaisa
-              </option>
-
+              <option>Cash on Delivery (COD)</option>
+              <option>JazzCash / EasyPaisa</option>
             </select>
-
           </div>
-
-
-          <div class="field">
-
-            <label>
-              Total Amount
-            </label>
-
-            <input
-              id="cTotal"
-              readonly
-              style="color:var(--primary);font-weight:800">
-
-          </div>
-
-
-          <button
-            class="primary"
-            type="submit">
-
-            PLACE ORDER NOW
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-          </button>
-
+          <div class="field"><label>Total Amount</label><input id="cTotal" readonly style="color:var(--primary);font-weight:800"></div>
+          <button class="primary" type="submit">PLACE ORDER NOW <i class="fa-solid fa-arrow-right"></i></button>
         </form>
-
       </div>
-
     </div>
-
   </div>
 
-
-  <!-- CHANGE PASSWORD -->
-
-  <div
-    class="modal"
-    id="changePasswordModal"
-    role="dialog"
-    aria-modal="true">
-
-    <div class="modalbox">
-
-      <div class="modalhead">
-
-        <b>
-          <i class="fa-solid fa-key"></i>
-          Change Password
-        </b>
-
-        <button
-          class="close"
-          onclick="closeModal('changePasswordModal')">
-          ×
-        </button>
-
-      </div>
-
-      <div class="modalbody">
-
-        <form
-          id="changePasswordForm"
-          onsubmit="changePassword(event)">
-
-          <div class="field">
-
-            <label>
-              Old Password
-            </label>
-
-            <input
-              id="oldPassword"
-              type="password"
-              required
-              autocomplete="current-password"
-              placeholder="Enter old password">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              New Password
-            </label>
-
-            <input
-              id="newPassword"
-              type="password"
-              required
-              minlength="8"
-              autocomplete="new-password"
-              placeholder="Enter new password">
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Confirm New Password
-            </label>
-
-            <input
-              id="confirmNewPassword"
-              type="password"
-              required
-              minlength="8"
-              autocomplete="new-password"
-              placeholder="Confirm new password">
-
-          </div>
-
-
-          <button
-            class="primary"
-            style="width:100%"
-            type="submit">
-
-            UPDATE PASSWORD
-
-            <i class="fa-solid fa-check"></i>
-
-          </button>
-
-        </form>
-
-      </div>
-
+  <div class="modal" id="changePasswordModal" role="dialog" aria-modal="true">
+    <div class="modalbox"><div class="modalhead"><b><i class="fa-solid fa-key"></i> Change Password</b><button class="close" onclick="closeModal('changePasswordModal')">×</button></div>
+      <div class="modalbody"><form id="changePasswordForm" onsubmit="changePassword(event)">
+        <div class="field"><label>Old Password</label><input id="oldPassword" type="password" required autocomplete="current-password" placeholder="Enter old password"></div>
+        <div class="field"><label>New Password</label><input id="newPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="Enter new password"></div>
+        <div class="field"><label>Confirm New Password</label><input id="confirmNewPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm new password"></div>
+        <button class="primary" style="width:100%" type="submit">UPDATE PASSWORD <i class="fa-solid fa-check"></i></button>
+      </form></div>
     </div>
-
   </div>
 
-
-  <!-- TOAST -->
-
-  <div
-    class="toast"
-    id="toast">
-
-    <b id="toastTitle"></b>
-
-    <br>
-
-    <span
-      id="toastText"
-      style="font-size:10px;color:var(--muted)">
-    </span>
-
+  <div class="toast" id="toast">
+    <b id="toastTitle"></b><br>
+    <span id="toastText" style="font-size:10px;color:var(--muted)"></span>
   </div>
-
 
   <script>
-
-    /* =====================================================
+    /* =========================
        HY STORE CONFIGURATION
-       ===================================================== */
+       ========================= */
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
+    const BANNER_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
+    const WHATSAPP = "923209306672";
+    const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80";
 
-    const GOOGLE_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
-
-    const BANNER_SHEET_CSV =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
-
-    const WHATSAPP =
-      "923209306672";
-
-    const FALLBACK_IMAGE =
-      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80";
-
-
-    /* =====================================================
+    /* =========================
        STATE
-       ===================================================== */
-
+       ========================= */
     let products = [];
-
     let activeCat = "All";
-
     let searchTerm = "";
-
     let currentSlide = 0;
-
     let totalSlidesCount = 1;
-
     let sliderTimer;
 
-    let cart =
-      JSON.parse(
-        localStorage.getItem("hy_user_cart") || "[]"
-      );
+    let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
+    let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
+    let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
-    let userOrders =
-      JSON.parse(
-        localStorage.getItem("hy_user_orders") || "[]"
-      );
-
-    let currentUser =
-      JSON.parse(
-        localStorage.getItem("hy_user_session") || "null"
-      );
-
-
-    /* =====================================================
+    /* =========================
        HELPERS
-       ===================================================== */
+       ========================= */
+    const $ = id => document.getElementById(id);
 
-    const $ =
-      id => document.getElementById(id);
-
-
-    function escapeHTML(value){
-
+    function escapeHTML(value) {
       return String(value ?? "")
-
-        .replace(/&/g,"&amp;")
-
-        .replace(/</g,"&lt;")
-
-        .replace(/>/g,"&gt;")
-
-        .replace(/"/g,"&quot;")
-
-        .replace(/'/g,"&#039;");
-
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
-
-    function money(value){
-
-      return Number(value || 0)
-        .toLocaleString("en-PK");
-
+    function money(value) {
+      return Number(value || 0).toLocaleString("en-PK");
     }
 
-
-    function toast(title,text){
-
+    function toast(title, text) {
       $("toastTitle").textContent = title;
-
       $("toastText").textContent = text;
-
       $("toast").classList.add("show");
-
       clearTimeout(window.__toastTimer);
-
-      window.__toastTimer =
-        setTimeout(
-          () => $("toast").classList.remove("show"),
-          3000
-        );
-
+      window.__toastTimer = setTimeout(() => $("toast").classList.remove("show"), 3000);
     }
 
-
-    function showEmptyState(
-      msg,
-      targetId="productGrid"
-    ){
-
+    function showEmptyState(msg, targetId = "productGrid") {
       const target = $(targetId);
-
-      if(!target) return;
-
+      if (!target) return;
       target.innerHTML = `
-
         <div class="empty">
-
           <i class="fa-solid fa-box-open"></i>
-
-          <div
-            style="font-size:13px;color:#dbeafe;margin-bottom:5px">
-
-            Nothing to show
-
-          </div>
-
-          <div style="font-size:11px">
-
-            ${escapeHTML(msg)}
-
-          </div>
-
-        </div>
-
-      `;
-
+          <div style="font-size:13px;color:#dbeafe;margin-bottom:5px">Nothing to show</div>
+          <div style="font-size:11px">${escapeHTML(msg)}</div>
+        </div>`;
     }
 
-
-    /* =====================================================
+    /* =========================
        PAGE NAVIGATION
-       ===================================================== */
+       ========================= */
+    function switchPage(pageId) {
+      document.querySelectorAll(".app-view").forEach(view => view.classList.remove("active-view"));
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active-nav"));
 
-    function switchPage(pageId){
+      const target = $("view-" + pageId);
+      const nav = $("nav-" + pageId);
 
-      document
-        .querySelectorAll(".app-view")
-        .forEach(
-          view =>
-            view.classList.remove("active-view")
-        );
+      if (target) target.classList.add("active-view");
+      if (nav) nav.classList.add("active-nav");
 
-      document
-        .querySelectorAll(".nav-btn")
-        .forEach(
-          btn =>
-            btn.classList.remove("active-nav")
-        );
+      window.scrollTo({top:0, behavior:"smooth"});
 
-
-      const target =
-        $("view-" + pageId);
-
-      const nav =
-        $("nav-" + pageId);
-
-
-      if(target)
-        target.classList.add("active-view");
-
-      if(nav)
-        nav.classList.add("active-nav");
-
-
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
-
-
-      if(pageId === "orders")
-        renderOrdersPage();
-
-      if(pageId === "profile")
-        renderProfilePage();
-
+      if (pageId === "orders") renderOrdersPage();
+      if (pageId === "profile") renderProfilePage();
     }
 
-
-    /* =====================================================
+    /* =========================
        HERO SLIDER
-       ===================================================== */
+       ========================= */
+    function updateSlider() {
+      const slides = $("heroSlides");
+      const dots = document.querySelectorAll("#heroDots .dot-item");
+      if (!slides) return;
 
-    function updateSlider(){
-
-      const slides =
-        $("heroSlides");
-
-      const dots =
-        document.querySelectorAll(
-          "#heroDots .dot-item"
-        );
-
-      if(!slides) return;
-
-
-      slides.style.transform =
-        `translateX(-${currentSlide * 100}%)`;
-
-
-      dots.forEach(
-        (dot,i) =>
-          dot.classList.toggle(
-            "active",
-            i === currentSlide
-          )
-      );
-
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
     }
 
-
-    function nextSlide(){
-
-      if(totalSlidesCount < 2)
-        return;
-
-      currentSlide =
-        (currentSlide + 1)
-        % totalSlidesCount;
-
+    function nextSlide() {
+      if (totalSlidesCount < 2) return;
+      currentSlide = (currentSlide + 1) % totalSlidesCount;
       updateSlider();
-
     }
 
-
-    function prevSlide(){
-
-      if(totalSlidesCount < 2)
-        return;
-
-      currentSlide =
-        (currentSlide - 1 + totalSlidesCount)
-        % totalSlidesCount;
-
+    function prevSlide() {
+      if (totalSlidesCount < 2) return;
+      currentSlide = (currentSlide - 1 + totalSlidesCount) % totalSlidesCount;
       updateSlider();
-
     }
 
-
-    function setSlide(index){
-
-      currentSlide =
-        Math.max(
-          0,
-          Math.min(
-            index,
-            totalSlidesCount - 1
-          )
-        );
-
+    function setSlide(index) {
+      currentSlide = Math.max(0, Math.min(index, totalSlidesCount - 1));
       updateSlider();
-
       restartSlider();
-
     }
 
-
-    function restartSlider(){
-
+    function restartSlider() {
       clearInterval(sliderTimer);
-
-      sliderTimer =
-        setInterval(
-          nextSlide,
-          5000
-        );
-
+      sliderTimer = setInterval(nextSlide, 5000);
     }
 
-
-    /* =====================================================
+    /* =========================
        LOCAL BANNER SLIDER
-       ===================================================== */
-
-    function fetchSheetBanners(){
-
-      const slidesContainer =
-        $("heroSlides");
-
-      const dotsContainer =
-        $("heroDots");
-
-      if(
-        !slidesContainer ||
-        !dotsContainer
-      )
-        return;
-
+       ========================= */
+    function fetchSheetBanners() {
+      const slidesContainer = $("heroSlides");
+      const dotsContainer = $("heroDots");
+      if (!slidesContainer || !dotsContainer) return;
 
       const banners = [
-
         "slide1.png",
-
         "slide2.png",
-
         "slide3.png",
-
         "slide4.png",
-
         "slide5.png"
-
       ];
 
+      slidesContainer.innerHTML = banners.map((img, i) =>
+        `<div class="slide"><img src="${img}" alt="HY STORE Banner ${i + 1}"></div>`
+      ).join("");
 
-      slidesContainer.innerHTML =
-        banners.map(
-          img =>
-            `<div
-              class="slide"
-              style="background-image:url('${img}')">
-            </div>`
-        ).join("");
+      dotsContainer.innerHTML = banners.map((_, i) =>
+        `<span class="dot-item ${i === 0 ? "active" : ""}" onclick="setSlide(${i})"></span>`
+      ).join("");
 
-
-      dotsContainer.innerHTML =
-        banners.map(
-          (_,i) =>
-            `<span
-              class="dot-item ${i === 0 ? "active" : ""}"
-              onclick="setSlide(${i})">
-            </span>`
-        ).join("");
-
-
-      totalSlidesCount =
-        banners.length;
-
+      totalSlidesCount = banners.length;
       currentSlide = 0;
-
       updateSlider();
-
       restartSlider();
-
     }
 
-
-    /* =====================================================
+    /* =========================
        PRODUCT SYNC
-       ===================================================== */
-
-    async function fetchSheetProducts(){
-
+       ========================= */
+    async function fetchSheetProducts() {
       $("productGrid").innerHTML = `
-
         <div class="empty">
-
           <i class="fa-solid fa-spinner fa-spin"></i>
-
-          <div style="font-size:12px">
-
-            Loading live products...
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      try{
-
-        const response =
-          await fetch(
-            GOOGLE_SCRIPT_URL +
-            "?action=getProducts&t=" +
-            Date.now(),
-            {
-              cache:"no-store"
-            }
-          );
-
-
-        if(!response.ok)
-          throw new Error(
-            "Product request failed"
-          );
-
-
-        const data =
-          await response.json();
-
-
-        if(
-          data.result === "success" &&
-          Array.isArray(data.products) &&
-          data.products.length
-        ){
-
-          products =
-            data.products.filter(
-              p =>
-                p &&
-                p.id != null &&
-                p.name
-            );
-
-          renderProducts();
-
-        }else{
-
-          showEmptyState(
-            "No products found in Google Sheet."
-          );
-
-          showEmptyState(
-            "No featured products available.",
-            "featuredGrid"
-          );
-
-        }
-
-      }catch(error){
-
-        console.error(
-          "Product sync error:",
-          error
-        );
-
-        showEmptyState(
-          "Failed to load products. Check Google Script permissions or connection."
-        );
-
-        showEmptyState(
-          "Products could not be loaded.",
-          "featuredGrid"
-        );
-
-      }
-
-    }
-
-
-    function productCard(p){
-
-      const id =
-        escapeHTML(p.id);
-
-      const image =
-        escapeHTML(
-          p.img ||
-          FALLBACK_IMAGE
-        );
-
-      const name =
-        escapeHTML(p.name);
-
-      const cat =
-        escapeHTML(
-          p.cat ||
-          "General"
-        );
-
-      const price =
-        money(p.price);
-
-      const oldPrice =
-        p.old
-        ?
-        `<span class="old">
-          Rs. ${money(p.old)}
-        </span>`
-        :
-        "";
-
-
-      return `
-
-        <article class="product">
-
-          <div class="pimg">
-
-            <img
-              src="${image}"
-              alt="${name}"
-              loading="lazy"
-              onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
-
-            <span class="tag">
-              ${cat}
-            </span>
-
-          </div>
-
-
-          <div class="pbody">
-
-            <h3>
-              ${name}
-            </h3>
-
-            <div>
-
-              <span class="price">
-                Rs. ${price}
-              </span>
-
-              ${oldPrice}
-
-            </div>
-
-
-            <div class="pactions">
-
-              <button
-                class="cartbtn"
-                aria-label="Add to cart"
-                onclick="addCart('${id}')">
-
-                <i class="fa-solid fa-cart-plus"></i>
-
-              </button>
-
-
-              <button
-                class="buy"
-                onclick="buyNow('${id}')">
-
-                Buy Now
-
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      `;
-
-    }
-
-
-    function renderProducts(){
-
-      if(!products.length)
-        return;
-
-
-      const term =
-        searchTerm.toLowerCase();
-
-
-      const list =
-        products.filter(
-          p => {
-
-            const categoryOK =
-              activeCat === "All" ||
-              String(
-                p.cat || ""
-              ).toLowerCase()
-              ===
-              activeCat.toLowerCase();
-
-
-            const searchOK =
-              !term ||
-
-              String(
-                p.name || ""
-              )
-              .toLowerCase()
-              .includes(term)
-
-              ||
-
-              String(
-                p.cat || ""
-              )
-              .toLowerCase()
-              .includes(term);
-
-
-            return (
-              categoryOK &&
-              searchOK
-            );
-
-          }
-        );
-
-
-      $("productGrid").innerHTML =
-        list.length
-
-        ?
-
-        list
-          .map(productCard)
-          .join("")
-
-        :
-
-        `
-
-          <div class="empty">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <div style="font-size:12px">
-
-              No matching products found.
-
-            </div>
-
-          </div>
-
-        `;
-
-
-      $("featuredGrid").innerHTML =
-        products.length
-
-        ?
-
-        products
-          .slice(0,8)
-          .map(productCard)
-          .join("")
-
-        :
-
-        `<div class="empty">
-          No featured products.
+          <div style="font-size:12px">Loading live products...</div>
         </div>`;
 
-
-      $("resultCount").textContent =
-        `${list.length} Item${
-          list.length === 1
-          ? ""
-          : "s"
-        }`;
-
-    }
-
-
-    function filterCategory(
-      category,
-      element
-    ){
-
-      activeCat =
-        category;
-
-
-      document
-        .querySelectorAll(".cat")
-        .forEach(
-          btn =>
-            btn.classList.remove("active")
-        );
-
-
-      if(element)
-        element.classList.add("active");
-
-
-      $("catHeading").textContent =
-        category === "All"
-        ?
-        "All Products"
-        :
-        category + " Products";
-
-
-      renderProducts();
-
-    }
-
-
-    function searchProducts(){
-
-      searchTerm =
-        $("searchInput")
-        .value
-        .trim();
-
-      switchPage("products");
-
-      renderProducts();
-
-    }
-
-
-    /* =====================================================
-       CART
-       ===================================================== */
-
-    function saveCart(){
-
-      localStorage.setItem(
-        "hy_user_cart",
-        JSON.stringify(cart)
-      );
-
-      updateCartCount();
-
-    }
-
-
-    function updateCartCount(){
-
-      $("cartCount").textContent =
-        cart.reduce(
-          (total,item) =>
-            total +
-            Number(
-              item.qty || 1
-            ),
-          0
-        );
-
-    }
-
-
-    function addCart(id){
-
-      const product =
-        products.find(
-          p =>
-            String(p.id)
-            ===
-            String(id)
-        );
-
-
-      if(!product)
-        return;
-
-
-      const existing =
-        cart.find(
-          item =>
-            String(item.id)
-            ===
-            String(id)
-        );
-
-
-      if(existing){
-
-        existing.qty =
-          Number(
-            existing.qty || 1
-          ) + 1;
-
-      }else{
-
-        cart.push({
-          ...product,
-          qty:1
-        });
-
-      }
-
-
-      saveCart();
-
-
-      toast(
-        "Cart Updated",
-        `${product.name} added to your cart.`
-      );
-
-    }
-
-
-    function changeQty(
-      index,
-      amount
-    ){
-
-      if(!cart[index])
-        return;
-
-
-      cart[index].qty =
-        Math.max(
-          1,
-          Number(
-            cart[index].qty || 1
-          ) + amount
-        );
-
-
-      saveCart();
-
-      openCart();
-
-    }
-
-
-    function removeCart(index){
-
-      cart.splice(
-        index,
-        1
-      );
-
-      saveCart();
-
-      openCart();
-
-    }
-
-
-    function cartTotal(){
-
-      return cart.reduce(
-        (sum,item) =>
-          sum +
-          Number(
-            item.price || 0
-          ) *
-          Number(
-            item.qty || 1
-          ),
-        0
-      );
-
-    }
-
-
-    function openCart(){
-
-      const body =
-        $("cartBody");
-
-
-      if(!cart.length){
-
-        body.innerHTML = `
-
-          <div
-            class="empty"
-            style="border:0;padding:35px 10px">
-
-            <i class="fa-solid fa-cart-shopping"></i>
-
-            <div style="font-size:12px">
-
-              Your cart is empty.
-
-            </div>
-
-          </div>
-
-        `;
-
-        showModal(
-          "cartModal"
-        );
-
-        return;
-
-      }
-
-
-      body.innerHTML =
-
-        cart.map(
-          (p,i) => `
-
-            <div class="cart-row">
-
-              <div class="cart-thumb">
-
-                <img
-                  src="${escapeHTML(
-                    p.img ||
-                    FALLBACK_IMAGE
-                  )}"
-                  alt=""
-                  onerror="this.src='${FALLBACK_IMAGE}'">
-
-              </div>
-
-
-              <div class="cart-info">
-
-                <b>
-                  ${escapeHTML(p.name)}
-                </b>
-
-                <div class="cart-price">
-
-                  Rs. ${money(p.price)}
-
-                </div>
-
-              </div>
-
-
-              <div class="qty">
-
-                <button
-                  onclick="changeQty(${i},-1)">
-                  −
-                </button>
-
-                <span>
-                  ${Number(p.qty || 1)}
-                </span>
-
-                <button
-                  onclick="changeQty(${i},1)">
-                  +
-                </button>
-
-              </div>
-
-
-              <button
-                class="remove"
-                onclick="removeCart(${i})"
-                aria-label="Remove">
-
-                <i class="fa-solid fa-trash"></i>
-
-              </button>
-
-            </div>
-
-          `
-        ).join("")
-
-        +
-
-        `
-
-          <div class="cart-summary">
-
-            <div class="summary-line">
-
-              <span>
-                Total Items
-              </span>
-
-              <b>
-                ${cart.reduce(
-                  (s,p) =>
-                    s +
-                    Number(
-                      p.qty || 1
-                    ),
-                  0
-                )}
-              </b>
-
-            </div>
-
-
-            <div class="summary-line">
-
-              <span>
-                Total Amount
-              </span>
-
-              <span class="summary-total">
-
-                Rs. ${money(
-                  cartTotal()
-                )}
-
-              </span>
-
-            </div>
-
-
-            <button
-              class="primary"
-              onclick="openCheckout()">
-
-              PROCEED TO CHECKOUT
-
-              <i class="fa-solid fa-arrow-right"></i>
-
-            </button>
-
-          </div>
-
-        `;
-
-
-      showModal(
-        "cartModal"
-      );
-
-    }
-
-
-    function buyNow(id){
-
-      const product =
-        products.find(
-          p =>
-            String(p.id)
-            ===
-            String(id)
-        );
-
-
-      if(!product)
-        return;
-
-
-      cart = [
-        {
-          ...product,
-          qty:1
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts&t=" + Date.now(), {cache:"no-store"});
+        if (!response.ok) throw new Error("Product request failed");
+
+        const data = await response.json();
+
+        if (data.result === "success" && Array.isArray(data.products) && data.products.length) {
+          products = data.products.filter(p => p && p.id != null && p.name);
+          renderProducts();
+        } else {
+          showEmptyState("No products found in Google Sheet.");
+          showEmptyState("No featured products available.", "featuredGrid");
         }
-      ];
-
-
-      saveCart();
-
-      openCheckout();
-
+      } catch (error) {
+        console.error("Product sync error:", error);
+        showEmptyState("Failed to load products. Check Google Script permissions or connection.");
+        showEmptyState("Products could not be loaded.", "featuredGrid");
+      }
     }
 
-
-    /* =====================================================
-       MODALS
-       ===================================================== */
-
-    function showModal(id){
-
-      $(id)
-        .classList
-        .add("show");
-
-      document.body.style.overflow =
-        "hidden";
-
-    }
-
-
-    function closeModal(id){
-
-      $(id)
-        .classList
-        .remove("show");
-
-
-      if(
-        !document.querySelector(
-          ".modal.show"
-        )
-      ){
-
-        document.body.style.overflow =
-          "";
-
-      }
-
-    }
-
-
-    document
-      .querySelectorAll(".modal")
-      .forEach(
-        modal => {
-
-          modal.addEventListener(
-            "click",
-            e => {
-
-              if(
-                e.target === modal
-              ){
-
-                closeModal(
-                  modal.id
-                );
-
-              }
-
-            }
-          );
-
-        }
-      );
-
-
-    /* =====================================================
-       CHECKOUT
-       ===================================================== */
-
-    function openCheckout(){
-
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
-
-        openAuthModal(
-          "login"
-        );
-
-        toast(
-          "Login Required",
-          "Please login or create an account before ordering."
-        );
-
-        return;
-
-      }
-
-
-      if(!cart.length){
-
-        toast(
-          "Cart Empty",
-          "Add a product before checkout."
-        );
-
-        return;
-
-      }
-
-
-      closeModal(
-        "cartModal"
-      );
-
-
-      $("cTotal").value =
-        "Rs. " +
-        money(
-          cartTotal()
-        );
-
-
-      if(currentUser){
-
-        $("cName").value =
-          currentUser.name || "";
-
-        $("cPhone").value =
-          currentUser.phone || "";
-
-        $("cAddress").value =
-          currentUser.address || "";
-
-      }
-
-
-      showModal(
-        "checkoutModal"
-      );
-
-    }
-
-
-    /* =====================================================
-       CHECKOUT / ORDER
-       ===================================================== */
-
-    $("checkoutForm")
-      .addEventListener(
-        "submit",
-        async function(e){
-
-          e.preventDefault();
-
-
-          if(
-            !currentUser ||
-            !currentUser.email
-          ){
-
-            closeModal(
-              "checkoutModal"
-            );
-
-            openAuthModal(
-              "login"
-            );
-
-            toast(
-              "Login Required",
-              "Please login before placing an order."
-            );
-
-            return;
-
-          }
-
-
-          if(!cart.length){
-
-            toast(
-              "Cart Empty",
-              "Please add a product first."
-            );
-
-            return;
-
-          }
-
-
-          const submitButton =
-            this.querySelector(
-              "button[type=submit]"
-            );
-
-
-          submitButton.disabled =
-            true;
-
-
-          submitButton.innerHTML = `
-
-            <i class="fa-solid fa-spinner fa-spin"></i>
-
-            SUBMITTING...
-
-          `;
-
-
-          const orderId =
-            "HY" +
-            Math.floor(
-              1000 +
-              Math.random() *
-              9000
-            );
-
-
-          const payload = {
-
-            orderId,
-
-            name:
-              $("cName")
-              .value
-              .trim(),
-
-            phone:
-              $("cPhone")
-              .value
-              .trim(),
-
-            address:
-              $("cAddress")
-              .value
-              .trim(),
-
-            product:
-              cart
-                .map(
-                  x =>
-                    `${x.name} x${x.qty || 1}`
-                )
-                .join(", "),
-
-            price:
-              cartTotal(),
-
-            payment:
-              $("cPayment").value
-
-          };
-
-
-          try{
-
-            await fetch(
-              GOOGLE_SCRIPT_URL,
-              {
-                method:"POST",
-                mode:"no-cors",
-                headers:{
-                  "Content-Type":
-                    "text/plain;charset=utf-8"
-                },
-                body:
-                  JSON.stringify(
-                    payload
-                  )
-              }
-            );
-
-
-            userOrders = [
-
-              {
-                id:orderId,
-                email:
-                  currentUser.email
-              },
-
-              ...
-
-              userOrders.filter(
-                item =>
-                  (
-                    typeof item === "object"
-                    ?
-                    item.id
-                    :
-                    item
-                  )
-                  !==
-                  orderId
-              )
-
-            ];
-
-
-            localStorage.setItem(
-              "hy_user_orders",
-              JSON.stringify(
-                userOrders
-              )
-            );
-
-
-            const msg =
-
-              `HY STORE New Order Request\n` +
-
-              `Order ID: ${orderId}\n` +
-
-              `Name: ${payload.name}\n` +
-
-              `Phone: ${payload.phone}\n` +
-
-              `Total Price: Rs. ${payload.price}`;
-
-
-            cart = [];
-
-            saveCart();
-
-            closeModal(
-              "checkoutModal"
-            );
-
-
-            toast(
-              "Order Submitted",
-              `Order #${orderId} has been generated.`
-            );
-
-
-            switchPage(
-              "orders"
-            );
-
-
-            window.open(
-
-              "https://wa.me/" +
-              WHATSAPP +
-              "?text=" +
-              encodeURIComponent(msg),
-
-              "_blank",
-
-              "noopener,noreferrer"
-
-            );
-
-
-          }catch(error){
-
-            console.error(
-              "Order submission error:",
-              error
-            );
-
-
-            toast(
-              "Connection Issue",
-              "Please check your internet and try again."
-            );
-
-          }finally{
-
-            submitButton.disabled =
-              false;
-
-
-            submitButton.innerHTML = `
-
-              PLACE ORDER NOW
-
-              <i class="fa-solid fa-arrow-right"></i>
-
-            `;
-
-          }
-
-        }
-      );
-
-
-    /* =====================================================
-       ORDERS
-       ===================================================== */
-
-    async function renderOrdersPage(){
-
-      const box =
-        $("ordersListContainer");
-
-
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
-
-        box.innerHTML = `
-
-          <div
-            class="order-card"
-            style="text-align:center;padding:35px">
-
-            <i
-              class="fa-solid fa-lock"
-              style="
-                font-size:30px;
-                color:var(--primary);
-                margin-bottom:12px
-              ">
-            </i>
-
-
-            <b
-              style="
-                display:block;
-                font-size:15px;
-                margin-bottom:6px
-              ">
-
-              Login Required
-
-            </b>
-
-
-            <p
-              style="
-                color:var(--muted);
-                font-size:10px;
-                line-height:1.7;
-                margin-bottom:16px
-              ">
-
-              Please login to your HY STORE account
-              to view your orders and tracking history.
-
-            </p>
-
-
-            <button
-              class="primary"
-              onclick="openAuthModal('login')">
-
-              LOGIN TO ACCOUNT
-
-              <i class="fa-solid fa-arrow-right"></i>
-
-            </button>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      userOrders =
-        userOrders.map(
-          item =>
-            typeof item === "string"
-
-            ?
-
-            {
-              id:item,
-              email:
-                currentUser.email
-            }
-
-            :
-
-            item
-        );
-
-
-      localStorage.setItem(
-        "hy_user_orders",
-        JSON.stringify(
-          userOrders
-        )
-      );
-
-
-      const myOrders =
-        userOrders.filter(
-          item =>
-            item &&
-            item.email ===
-            currentUser.email
-        );
-
-
-      if(!myOrders.length){
-
-        box.innerHTML = `
-
-          <div
-            class="order-card"
-            style="
-              text-align:center;
-              color:var(--muted);
-              padding:35px
-            ">
-
-            <i
-              class="fa-solid fa-box-open"
-              style="
-                font-size:26px;
-                color:var(--primary);
-                margin-bottom:10px
-              ">
-            </i>
-
-            <div style="font-size:12px">
-
-              No orders found for
-              ${escapeHTML(
-                currentUser.email
-              )}.
-
-            </div>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      box.innerHTML = `
-
-        <div
-          style="
-            text-align:center;
-            padding:22px;
-            color:var(--primary);
-            font-size:11px
-          ">
-
-          <i class="fa-solid fa-spinner fa-spin"></i>
-
-          Fetching order status...
-
-        </div>
-
-      `;
-
-
-      let cards = "";
-
-
-      for(
-        const item of myOrders
-      ){
-
-        const id =
-          item.id;
-
-
-        try{
-
-          const response =
-            await fetch(
-              GOOGLE_SCRIPT_URL +
-              "?orderId=" +
-              encodeURIComponent(id) +
-              "&t=" +
-              Date.now(),
-              {
-                cache:"no-store"
-              }
-            );
-
-
-          const data =
-            await response.json();
-
-
-          cards +=
-            data.result === "success"
-
-            ?
-
-            buildOrderCard(
-              data
-            )
-
-            :
-
-            buildOrderCard({
-              orderId:id,
-              status:"SUBMITTED"
-            });
-
-
-        }catch(error){
-
-          cards +=
-            buildOrderCard({
-              orderId:id,
-              status:"PENDING"
-            });
-
-        }
-
-      }
-
-
-      box.innerHTML =
-        cards;
-
-    }
-
-
-    function trackOrder(){
-
-      if(
-        !currentUser ||
-        !currentUser.email
-      ){
-
-        openAuthModal(
-          "login"
-        );
-
-        toast(
-          "Login Required",
-          "Please login before tracking an order."
-        );
-
-        return;
-
-      }
-
-
-      const query =
-        $("trackInput")
-        .value
-        .trim()
-        .toUpperCase();
-
-
-      if(!query){
-
-        toast(
-          "Enter Order ID",
-          "Example: HY1001"
-        );
-
-        return;
-
-      }
-
-
-      userOrders = [
-
-        {
-          id:query,
-          email:
-            currentUser.email
-        },
-
-        ...
-
-        userOrders.filter(
-          item =>
-            (
-              typeof item === "object"
-              ?
-              item.id
-              :
-              item
-            )
-            !==
-            query
-        )
-
-      ];
-
-
-      localStorage.setItem(
-        "hy_user_orders",
-        JSON.stringify(
-          userOrders
-        )
-      );
-
-
-      renderOrdersPage();
-
-    }
-
-
-    function buildOrderCard(d){
-
-      const status =
-        escapeHTML(
-          String(
-            d.status ||
-            "PENDING"
-          ).toUpperCase()
-        );
-
+    function productCard(p) {
+      const id = escapeHTML(p.id);
+      const image = escapeHTML(p.img || FALLBACK_IMAGE);
+      const name = escapeHTML(p.name);
+      const cat = escapeHTML(p.cat || "General");
+      const price = money(p.price);
+      const oldPrice = p.old ? `<span class="old">Rs. ${money(p.old)}</span>` : "";
 
       return `
-
-        <div class="order-card">
-
-          <div class="order-header">
-
-            <b>
-              Order #
-              ${escapeHTML(
-                d.orderId ||
-                "N/A"
-              )}
-            </b>
-
-            <span
-              class="status pending">
-
-              ${status}
-
-            </span>
-
+        <article class="product">
+          <div class="pimg">
+            <img src="${image}" alt="${name}" loading="lazy"
+                 onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
+            <span class="tag">${cat}</span>
           </div>
-
-
-          <div class="order-grid-info">
-
-            <div>
-
-              <span>
-                Customer
-              </span>
-
-              <b>
-                ${escapeHTML(
-                  d.name ||
-                  "N/A"
-                )}
-              </b>
-
-            </div>
-
-
-            <div>
-
-              <span>
-                Payment Method
-              </span>
-
-              <b>
-                ${escapeHTML(
-                  d.payment ||
-                  "COD"
-                )}
-              </b>
-
-            </div>
-
-
-            <div
-              style="grid-column:span 2">
-
-              <span>
-                Products
-              </span>
-
-              <b>
-                ${escapeHTML(
-                  d.product ||
-                  "N/A"
-                )}
-              </b>
-
-            </div>
-
-
-            <div
-              style="grid-column:span 2">
-
-              <span>
-                Total Amount
-              </span>
-
-              <b
-                style="color:var(--primary)">
-
-                Rs.
-                ${money(d.price)}
-
-              </b>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* =====================================================
-       PROFESSIONAL ACCOUNT SYSTEM
-       ===================================================== */
-
-    let authMode =
-      "choice";
-
-
-    function getAccounts(){
-
-      return JSON.parse(
-        localStorage.getItem(
-          "hy_store_accounts"
-        ) || "[]"
-      );
-
-    }
-
-
-    function saveAccounts(
-      accounts
-    ){
-
-      localStorage.setItem(
-        "hy_store_accounts",
-        JSON.stringify(
-          accounts
-        )
-      );
-
-    }
-
-
-    async function hashPassword(
-      password
-    ){
-
-      const data =
-        new TextEncoder()
-        .encode(password);
-
-
-      const hash =
-        await crypto.subtle.digest(
-          "SHA-256",
-          data
-        );
-
-
-      return Array
-        .from(
-          new Uint8Array(hash)
-        )
-        .map(
-          b =>
-            b
-              .toString(16)
-              .padStart(2,"0")
-        )
-        .join("");
-
-    }
-
-
-    function passwordScore(
-      password
-    ){
-
-      let score = 0;
-
-      if(
-        password.length >= 8
-      )
-        score++;
-
-      if(
-        /[A-Z]/.test(password)
-      )
-        score++;
-
-      if(
-        /[0-9]/.test(password)
-      )
-        score++;
-
-      if(
-        /[^A-Za-z0-9]/.test(password)
-      )
-        score++;
-
-
-      return score;
-
-    }
-
-
-    function updatePasswordStrength(
-      inputId,
-      barId
-    ){
-
-      const n =
-        passwordScore(
-          $(inputId).value
-        );
-
-
-      const w = [
-        "0%",
-        "25%",
-        "50%",
-        "75%",
-        "100%"
-      ][n];
-
-
-      $(barId).style.width =
-        w;
-
-    }
-
-
-    function openAuthModal(
-      mode="choice"
-    ){
-
-      authMode =
-        mode;
-
-      renderAuth();
-
-      showModal(
-        "authModal"
-      );
-
-    }
-
-
-    function renderAuth(){
-
-      const body =
-        $("authBody");
-
-
-      if(
-        authMode ===
-        "choice"
-      ){
-
-        body.innerHTML = `
-
-          <div class="auth-brand">
-
-            <img
-              src="logo.png"
-              alt="HY STORE"
-              onerror="this.style.display='none'">
-
-            <h3>
-              Welcome to HY STORE
-            </h3>
-
-            <p>
-              Login to order products
-              and manage your account.
-            </p>
-
-          </div>
-
-
-          <div class="auth-choice">
-
-            <button
-              class="auth-choice-btn"
-              onclick="authMode='login';renderAuth()">
-
-              <i
-                class="fa-solid fa-right-to-bracket">
-              </i>
-
-              <b>
-                LOGIN ACCOUNT
-              </b>
-
-              <small>
-                Already have an HY STORE account?
-              </small>
-
-            </button>
-
-
-            <button
-              class="auth-choice-btn"
-              onclick="authMode='register';renderAuth()">
-
-              <i
-                class="fa-solid fa-user-plus">
-              </i>
-
-              <b>
-                CREATE ACCOUNT
-              </b>
-
-              <small>
-                Register with your email
-                and mobile number.
-              </small>
-
-            </button>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      if(
-        authMode ===
-        "login"
-      ){
-
-        body.innerHTML = `
-
-          <div class="auth-brand">
-
-            <img
-              src="logo.png"
-              alt="HY STORE"
-              onerror="this.style.display='none'">
-
-            <h3>
-              Login to Your Account
-            </h3>
-
-            <p>
-              Use your registered email
-              and password.
-            </p>
-
-          </div>
-
-
-          <form
-            onsubmit="loginAccount(event)">
-
-            <div class="field">
-
-              <label>
-                Email Address
-              </label>
-
-              <input
-                id="loginEmail"
-                type="email"
-                required
-                autocomplete="email"
-                placeholder="name@example.com">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Password
-              </label>
-
-              <input
-                id="loginPassword"
-                type="password"
-                required
-                autocomplete="current-password"
-                placeholder="Enter password">
-
-            </div>
-
-
-            <div class="auth-row">
-
-              <button
-                type="button"
-                class="auth-link"
-                onclick="authMode='forgot';renderAuth()">
-
-                Forgot Password?
-
+          <div class="pbody">
+            <h3>${name}</h3>
+            <div><span class="price">Rs. ${price}</span>${oldPrice}</div>
+            <div class="pactions">
+              <button class="cartbtn" aria-label="Add to cart" onclick="addCart('${id}')">
+                <i class="fa-solid fa-cart-plus"></i>
               </button>
-
-
-              <button
-                type="button"
-                class="auth-link"
-                onclick="authMode='register';renderAuth()">
-
-                Create Account
-
-              </button>
-
+              <button class="buy" onclick="buyNow('${id}')">Buy Now</button>
             </div>
-
-
-            <button
-              class="primary"
-              style="width:100%;margin-top:14px"
-              type="submit">
-
-              LOGIN NOW
-
-              <i class="fa-solid fa-arrow-right"></i>
-
-            </button>
-
-
-            <button
-              type="button"
-              class="auth-link"
-              style="display:block;margin:12px auto 0"
-              onclick="authMode='choice';renderAuth()">
-
-              ← Back
-
-            </button>
-
-          </form>
-
-        `;
-
-
-        const remembered =
-          JSON.parse(
-            localStorage.getItem(
-              "hy_saved_login"
-            ) || "null"
-          );
-
-
-        if(
-          remembered &&
-          $("loginEmail")
-        ){
-
-          $("loginEmail").value =
-            remembered.email || "";
-
-        }
-
-      }
-
-
-      else if(
-        authMode ===
-        "register"
-      ){
-
-        body.innerHTML = `
-
-          <div class="auth-brand">
-
-            <img
-              src="logo.png"
-              alt="HY STORE"
-              onerror="this.style.display='none'">
-
-            <h3>
-              Register New Account
-            </h3>
-
-            <p>
-              Create your account once
-              and stay signed in until logout.
-            </p>
-
           </div>
-
-
-          <form
-            onsubmit="registerAccount(event)">
-
-            <div class="field">
-
-              <label>
-                Full Name
-              </label>
-
-              <input
-                id="regName"
-                required
-                autocomplete="name"
-                placeholder="Enter your full name">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Email Address
-              </label>
-
-              <input
-                id="regEmail"
-                type="email"
-                required
-                autocomplete="email"
-                placeholder="name@example.com">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Mobile Number
-              </label>
-
-              <input
-                id="regPhone"
-                required
-                autocomplete="tel"
-                placeholder="03XXXXXXXXX">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Password
-              </label>
-
-              <input
-                id="regPassword"
-                type="password"
-                required
-                minlength="8"
-                autocomplete="new-password"
-                oninput="updatePasswordStrength('regPassword','regStrength')"
-                placeholder="Minimum 8 characters">
-
-              <div class="password-strength">
-
-                <span id="regStrength"></span>
-
-              </div>
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Confirm Password
-              </label>
-
-              <input
-                id="regConfirm"
-                type="password"
-                required
-                minlength="8"
-                autocomplete="new-password"
-                placeholder="Confirm password">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Delivery Address
-              </label>
-
-              <textarea
-                id="regAddress"
-                rows="3"
-                required
-                placeholder="Complete delivery address">
-              </textarea>
-
-            </div>
-
-
-            <button
-              class="primary"
-              style="width:100%"
-              type="submit">
-
-              CREATE ACCOUNT
-
-              <i class="fa-solid fa-user-check"></i>
-
-            </button>
-
-
-            <button
-              type="button"
-              class="auth-link"
-              style="display:block;margin:12px auto 0"
-              onclick="authMode='login';renderAuth()">
-
-              Already have an account?
-              Login
-
-            </button>
-
-          </form>
-
-        `;
-
-      }
-
-
-      else{
-
-        body.innerHTML = `
-
-          <div class="auth-brand">
-
-            <div
-              class="save-icon"
-              style="
-                width:58px;
-                height:58px;
-                margin:0 auto 10px;
-                border-radius:50%;
-                display:grid;
-                place-items:center;
-                color:var(--primary);
-                background:rgba(24,169,255,.1);
-                font-size:22px
-              ">
-
-              <i class="fa-solid fa-key"></i>
-
-            </div>
-
-            <h3>
-              Reset Password
-            </h3>
-
-            <p>
-              Enter your registered email
-              and choose a new password.
-            </p>
-
-          </div>
-
-
-          <form
-            onsubmit="resetPassword(event)">
-
-            <div class="field">
-
-              <label>
-                Registered Email
-              </label>
-
-              <input
-                id="forgotEmail"
-                type="email"
-                required
-                placeholder="name@example.com">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                New Password
-              </label>
-
-              <input
-                id="forgotPassword"
-                type="password"
-                required
-                minlength="8"
-                placeholder="New password">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>
-                Confirm New Password
-              </label>
-
-              <input
-                id="forgotConfirm"
-                type="password"
-                required
-                minlength="8"
-                placeholder="Confirm new password">
-
-            </div>
-
-
-            <button
-              class="primary"
-              style="width:100%"
-              type="submit">
-
-              RESET PASSWORD
-
-            </button>
-
-
-            <button
-              type="button"
-              class="auth-link"
-              style="display:block;margin:12px auto 0"
-              onclick="authMode='login';renderAuth()">
-
-              ← Back to Login
-
-            </button>
-
-          </form>
-
-        `;
-
-      }
-
+        </article>`;
     }
 
+    function renderProducts() {
+      if (!products.length) return;
 
-    async function registerAccount(e){
+      const term = searchTerm.toLowerCase();
 
-      e.preventDefault();
+      const list = products.filter(p => {
+        const categoryOK = activeCat === "All" ||
+          String(p.cat || "").toLowerCase() === activeCat.toLowerCase();
 
+        const searchOK = !term ||
+          String(p.name || "").toLowerCase().includes(term) ||
+          String(p.cat || "").toLowerCase().includes(term);
 
-      const name =
-        $("regName")
-        .value
-        .trim();
-
-
-      const email =
-        $("regEmail")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-      const phone =
-        $("regPhone")
-        .value
-        .trim();
-
-
-      const password =
-        $("regPassword")
-        .value;
-
-
-      const confirm =
-        $("regConfirm")
-        .value;
-
-
-      const address =
-        $("regAddress")
-        .value
-        .trim();
-
-
-      if(
-        password !==
-        confirm
-      ){
-
-        toast(
-          "Password Error",
-          "Passwords do not match."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        password.length < 8
-      ){
-
-        toast(
-          "Weak Password",
-          "Use at least 8 characters."
-        );
-
-        return;
-
-      }
-
-
-      const accounts =
-        getAccounts();
-
-
-      if(
-        accounts.some(
-          a =>
-            a.email === email
-        )
-      ){
-
-        toast(
-          "Account Exists",
-          "This email is already registered. Please login."
-        );
-
-        authMode =
-          "login";
-
-        renderAuth();
-
-        return;
-
-      }
-
-
-      accounts.push({
-
-        name,
-
-        email,
-
-        phone,
-
-        address,
-
-        passwordHash:
-          await hashPassword(
-            password
-          ),
-
-        createdAt:
-          Date.now()
-
+        return categoryOK && searchOK;
       });
 
+      $("productGrid").innerHTML = list.length
+        ? list.map(productCard).join("")
+        : `<div class="empty"><i class="fa-solid fa-magnifying-glass"></i><div style="font-size:12px">No matching products found.</div></div>`;
 
-      saveAccounts(
-        accounts
-      );
+      $("featuredGrid").innerHTML = products.length
+        ? products.slice(0, 8).map(productCard).join("")
+        : `<div class="empty">No featured products.</div>`;
 
-
-      currentUser = {
-
-        name,
-
-        email,
-
-        phone,
-
-        address
-
-      };
-
-
-      localStorage.setItem(
-        "hy_user_session",
-        JSON.stringify(
-          currentUser
-        )
-      );
-
-
-      closeModal(
-        "authModal"
-      );
-
-
-      toast(
-        "Account Created",
-        "Welcome to HY STORE, " +
-        name +
-        "."
-      );
-
-
-      renderProfilePage();
-
-
-      setTimeout(
-        () =>
-          showModal(
-            "savePasswordModal"
-          ),
-        250
-      );
-
+      $("resultCount").textContent = `${list.length} Item${list.length === 1 ? "" : "s"}`;
     }
 
-
-    async function loginAccount(e){
-
-      e.preventDefault();
-
-
-      const email =
-        $("loginEmail")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-      const password =
-        $("loginPassword")
-        .value;
-
-
-      const account =
-        getAccounts()
-        .find(
-          a =>
-            a.email ===
-            email
-        );
-
-
-      if(!account){
-
-        toast(
-          "Account Not Found",
-          "Please register an account first."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        account.passwordHash
-        !==
-        await hashPassword(
-          password
-        )
-      ){
-
-        toast(
-          "Login Failed",
-          "Incorrect email or password."
-        );
-
-        return;
-
-      }
-
-
-      currentUser = {
-
-        name:
-          account.name,
-
-        email:
-          account.email,
-
-        phone:
-          account.phone,
-
-        address:
-          account.address
-
-      };
-
-
-      localStorage.setItem(
-        "hy_user_session",
-        JSON.stringify(
-          currentUser
-        )
-      );
-
-
-      userOrders =
-        userOrders.map(
-          item =>
-            typeof item === "string"
-
-            ?
-
-            {
-              id:item,
-              email:email
-            }
-
-            :
-
-            item
-        );
-
-
-      localStorage.setItem(
-        "hy_user_orders",
-        JSON.stringify(
-          userOrders
-        )
-      );
-
-
-      closeModal(
-        "authModal"
-      );
-
-
-      toast(
-        "Login Successful",
-        "Welcome back, " +
-        account.name +
-        "."
-      );
-
-
-      renderProfilePage();
-
-
-      setTimeout(
-        () =>
-          showModal(
-            "savePasswordModal"
-          ),
-        250
-      );
-
+    function filterCategory(category, element) {
+      activeCat = category;
+      document.querySelectorAll(".cat").forEach(btn => btn.classList.remove("active"));
+      if (element) element.classList.add("active");
+      $("catHeading").textContent = category === "All" ? "All Products" : category + " Products";
+      renderProducts();
     }
 
-
-    function rememberLogin(
-      save
-    ){
-
-      if(
-        save &&
-        currentUser
-      ){
-
-        localStorage.setItem(
-          "hy_saved_login",
-          JSON.stringify({
-            email:
-              currentUser.email
-          })
-        );
-
-      }else{
-
-        localStorage.removeItem(
-          "hy_saved_login"
-        );
-
-      }
-
-
-      closeModal(
-        "savePasswordModal"
-      );
-
+    function searchProducts() {
+      searchTerm = $("searchInput").value.trim();
+      switchPage("products");
+      renderProducts();
     }
 
-
-    async function resetPassword(e){
-
-      e.preventDefault();
-
-
-      const email =
-        $("forgotEmail")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-      const pass =
-        $("forgotPassword")
-        .value;
-
-
-      const confirm =
-        $("forgotConfirm")
-        .value;
-
-
-      if(
-        pass !==
-        confirm
-      ){
-
-        toast(
-          "Password Error",
-          "Passwords do not match."
-        );
-
-        return;
-
-      }
-
-
-      const accounts =
-        getAccounts();
-
-
-      const i =
-        accounts.findIndex(
-          a =>
-            a.email ===
-            email
-        );
-
-
-      if(i < 0){
-
-        toast(
-          "Email Not Found",
-          "No account is registered with this email."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        pass.length < 8
-      ){
-
-        toast(
-          "Weak Password",
-          "Use at least 8 characters."
-        );
-
-        return;
-
-      }
-
-
-      accounts[i].passwordHash =
-        await hashPassword(
-          pass
-        );
-
-
-      saveAccounts(
-        accounts
-      );
-
-
-      toast(
-        "Password Changed",
-        "You can now login with your new password."
-      );
-
-
-      authMode =
-        "login";
-
-
-      renderAuth();
-
+    /* =========================
+       CART
+       ========================= */
+    function saveCart() {
+      localStorage.setItem("hy_user_cart", JSON.stringify(cart));
+      updateCartCount();
     }
 
-
-    function openChangePassword(){
-
-      if(!currentUser){
-
-        openAuthModal(
-          "login"
-        );
-
-        return;
-
-      }
-
-
-      showModal(
-        "changePasswordModal"
-      );
-
+    function updateCartCount() {
+      $("cartCount").textContent = cart.reduce((total, item) => total + Number(item.qty || 1), 0);
     }
 
+    function addCart(id) {
+      const product = products.find(p => String(p.id) === String(id));
+      if (!product) return;
 
-    async function changePassword(e){
+      const existing = cart.find(item => String(item.id) === String(id));
 
-      e.preventDefault();
+      if (existing) existing.qty = Number(existing.qty || 1) + 1;
+      else cart.push({...product, qty:1});
 
-
-      const oldPass =
-        $("oldPassword")
-        .value;
-
-
-      const newPass =
-        $("newPassword")
-        .value;
-
-
-      const confirm =
-        $("confirmNewPassword")
-        .value;
-
-
-      if(
-        newPass !==
-        confirm
-      ){
-
-        toast(
-          "Password Error",
-          "New passwords do not match."
-        );
-
-        return;
-
-      }
-
-
-      const accounts =
-        getAccounts();
-
-
-      const i =
-        accounts.findIndex(
-          a =>
-            a.email ===
-            currentUser.email
-        );
-
-
-      if(i < 0){
-
-        toast(
-          "Account Error",
-          "Account record not found."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        accounts[i].passwordHash
-        !==
-        await hashPassword(
-          oldPass
-        )
-      ){
-
-        toast(
-          "Password Error",
-          "Old password is incorrect."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        newPass.length < 8
-      ){
-
-        toast(
-          "Weak Password",
-          "Use at least 8 characters."
-        );
-
-        return;
-
-      }
-
-
-      accounts[i].passwordHash =
-        await hashPassword(
-          newPass
-        );
-
-
-      saveAccounts(
-        accounts
-      );
-
-
-      closeModal(
-        "changePasswordModal"
-      );
-
-
-      $("changePasswordForm")
-        .reset();
-
-
-      toast(
-        "Password Changed",
-        "Your password has been updated successfully."
-      );
-
+      saveCart();
+      toast("Cart Updated", `${product.name} added to your cart.`);
     }
 
-
-    function logoutUser(){
-
-      localStorage.removeItem(
-        "hy_user_session"
-      );
-
-
-      currentUser =
-        null;
-
-
-      toast(
-        "Logged Out",
-        "You have been logged out successfully."
-      );
-
-
-      renderProfilePage();
-
+    function changeQty(index, amount) {
+      if (!cart[index]) return;
+      cart[index].qty = Math.max(1, Number(cart[index].qty || 1) + amount);
+      saveCart();
+      openCart();
     }
 
+    function removeCart(index) {
+      cart.splice(index, 1);
+      saveCart();
+      openCart();
+    }
 
-    function renderProfilePage(){
+    function cartTotal() {
+      return cart.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.qty || 1), 0);
+    }
 
-      const container =
-        $("profileContainer");
+    function openCart() {
+      const body = $("cartBody");
 
+      if (!cart.length) {
+        body.innerHTML = `
+          <div class="empty" style="border:0;padding:35px 10px">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div style="font-size:12px">Your cart is empty.</div>
+          </div>`;
+        showModal("cartModal");
+        return;
+      }
 
-      if(!currentUser){
-
-        container.innerHTML = `
-
-          <div class="auth-panel">
-
-            <div class="auth-brand">
-
-              <img
-                src="logo.png"
-                alt="HY STORE"
-                onerror="this.style.display='none'">
-
-              <h3>
-                Welcome to HY STORE
-              </h3>
-
-              <p>
-                Login or create your account
-                to place and track orders.
-              </p>
-
-            </div>
-
-
-            <div class="auth-choice">
-
-              <button
-                class="auth-choice-btn"
-                onclick="openAuthModal('login')">
-
-                <i
-                  class="fa-solid fa-right-to-bracket">
-                </i>
-
-                <b>
-                  LOGIN ACCOUNT
-                </b>
-
-                <small>
-                  Sign in with your email
-                  and password.
-                </small>
-
-              </button>
-
-
-              <button
-                class="auth-choice-btn"
-                onclick="openAuthModal('register')">
-
-                <i
-                  class="fa-solid fa-user-plus">
-                </i>
-
-                <b>
-                  CREATE ACCOUNT
-                </b>
-
-                <small>
-                  Register your name,
-                  email and mobile.
-                </small>
-
-              </button>
-
-            </div>
-
+      body.innerHTML = cart.map((p, i) => `
+        <div class="cart-row">
+          <div class="cart-thumb">
+            <img src="${escapeHTML(p.img || FALLBACK_IMAGE)}" alt="" onerror="this.src='${FALLBACK_IMAGE}'">
           </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      const initial =
-        escapeHTML(
-          currentUser.name
-          ?
-          currentUser.name
-            .charAt(0)
-            .toUpperCase()
-          :
-          "U"
-        );
-
-
-      container.innerHTML = `
-
-        <div class="account-card">
-
-          <div class="account">
-
-            <div class="avatar">
-
-              ${initial}
-
-            </div>
-
-
-            <div>
-
-              <h3
-                style="font-size:16px">
-
-                ${escapeHTML(
-                  currentUser.name
-                )}
-
-              </h3>
-
-              <span
-                style="
-                  font-size:11px;
-                  color:var(--muted)
-                ">
-
-                ${escapeHTML(
-                  currentUser.email
-                )}
-
-              </span>
-
-            </div>
-
+          <div class="cart-info">
+            <b>${escapeHTML(p.name)}</b>
+            <div class="cart-price">Rs. ${money(p.price)}</div>
           </div>
-
-
-          <div class="account-details">
-
-            <div class="acc-info-row">
-
-              <i
-                class="fa-solid fa-envelope">
-              </i>
-
-              <div>
-
-                <b>
-                  Email:
-                </b>
-
-                ${escapeHTML(
-                  currentUser.email
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="acc-info-row">
-
-              <i
-                class="fa-solid fa-phone">
-              </i>
-
-              <div>
-
-                <b>
-                  Phone:
-                </b>
-
-                ${escapeHTML(
-                  currentUser.phone ||
-                  "N/A"
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="acc-info-row">
-
-              <i
-                class="fa-solid fa-location-dot">
-              </i>
-
-              <div>
-
-                <b>
-                  Address:
-                </b>
-
-                ${escapeHTML(
-                  currentUser.address ||
-                  "N/A"
-                )}
-
-              </div>
-
-            </div>
-
+          <div class="qty">
+            <button onclick="changeQty(${i},-1)">−</button>
+            <span>${Number(p.qty || 1)}</span>
+            <button onclick="changeQty(${i},1)">+</button>
           </div>
-
-
-          <div class="account-menu">
-
-            <button
-              onclick="switchPage('orders')">
-
-              <i
-                class="fa-solid fa-box">
-              </i>
-
-              MY ORDERS
-
-            </button>
-
-
-            <button
-              onclick="openChangePassword()">
-
-              <i
-                class="fa-solid fa-key">
-              </i>
-
-              CHANGE PASSWORD
-
-            </button>
-
-          </div>
-
-
-          <button
-            class="btn-logout"
-            style="margin-top:12px"
-            onclick="logoutUser()">
-
-            <i
-              class="fa-solid fa-right-from-bracket">
-            </i>
-
-            LOGOUT ACCOUNT
-
+          <button class="remove" onclick="removeCart(${i})" aria-label="Remove">
+            <i class="fa-solid fa-trash"></i>
           </button>
+        </div>`).join("") + `
+        <div class="cart-summary">
+          <div class="summary-line">
+            <span>Total Items</span>
+            <b>${cart.reduce((s,p)=>s+Number(p.qty||1),0)}</b>
+          </div>
+          <div class="summary-line">
+            <span>Total Amount</span>
+            <span class="summary-total">Rs. ${money(cartTotal())}</span>
+          </div>
+          <button class="primary" onclick="openCheckout()">PROCEED TO CHECKOUT <i class="fa-solid fa-arrow-right"></i></button>
+        </div>`;
 
-        </div>
-
-      `;
-
+      showModal("cartModal");
     }
 
+    function buyNow(id) {
+      const product = products.find(p => String(p.id) === String(id));
+      if (!product) return;
 
-    /* =====================================================
-       INITIALIZE
-       ===================================================== */
+      cart = [{...product, qty:1}];
+      saveCart();
+      openCheckout();
+    }
 
-    window.addEventListener(
-      "DOMContentLoaded",
-      () => {
+    /* =========================
+       MODALS
+       ========================= */
+    function showModal(id) {
+      $(id).classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
 
-        updateCartCount();
+    function closeModal(id) {
+      $(id).classList.remove("show");
+      if (!document.querySelector(".modal.show")) document.body.style.overflow = "";
+    }
 
-        renderProfilePage();
+    document.querySelectorAll(".modal").forEach(modal => {
+      modal.addEventListener("click", e => {
+        if (e.target === modal) closeModal(modal.id);
+      });
+    });
 
-        fetchSheetBanners();
-
-        fetchSheetProducts();
-
-        restartSlider();
-
+    function openCheckout() {
+      if (!currentUser || !currentUser.email) {
+        openAuthModal('login');
+        toast("Login Required", "Please login or create an account before ordering.");
+        return;
       }
-    );
+      if (!cart.length) {
+        toast("Cart Empty", "Add a product before checkout.");
+        return;
+      }
 
+      closeModal("cartModal");
+      $("cTotal").value = "Rs. " + money(cartTotal());
 
-    document.addEventListener(
-      "keydown",
-      e => {
+      if (currentUser) {
+        $("cName").value = currentUser.name || "";
+        $("cPhone").value = currentUser.phone || "";
+        $("cAddress").value = currentUser.address || "";
+      }
 
-        if(
-          e.key ===
-          "Escape"
-        ){
+      showModal("checkoutModal");
+    }
 
-          document
-            .querySelectorAll(
-              ".modal.show"
-            )
-            .forEach(
-              modal =>
-                closeModal(
-                  modal.id
-                )
-            );
+    /* =========================
+       CHECKOUT / ORDER
+       ========================= */
+    $("checkoutForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (!currentUser || !currentUser.email) { closeModal("checkoutModal"); openAuthModal("login"); toast("Login Required", "Please login before placing an order."); return; }
 
+      if (!cart.length) {
+        toast("Cart Empty", "Please add a product first.");
+        return;
+      }
+
+      const submitButton = this.querySelector("button[type=submit]");
+      submitButton.disabled = true;
+      submitButton.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
+
+      const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
+
+      const payload = {
+        orderId,
+        name: $("cName").value.trim(),
+        phone: $("cPhone").value.trim(),
+        address: $("cAddress").value.trim(),
+        product: cart.map(x => `${x.name} x${x.qty || 1}`).join(", "),
+        price: cartTotal(),
+        payment: $("cPayment").value
+      };
+
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method:"POST",
+          mode:"no-cors",
+          headers:{"Content-Type":"text/plain;charset=utf-8"},
+          body:JSON.stringify(payload)
+        });
+
+        userOrders = [{id:orderId,email:currentUser.email}, ...userOrders.filter(item => (typeof item === 'object' ? item.id : item) !== orderId)];
+        localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+
+        const msg =
+          `HY STORE New Order Request\n` +
+          `Order ID: ${orderId}\n` +
+          `Name: ${payload.name}\n` +
+          `Phone: ${payload.phone}\n` +
+          `Total Price: Rs. ${payload.price}`;
+
+        cart = [];
+        saveCart();
+        closeModal("checkoutModal");
+
+        toast("Order Submitted", `Order #${orderId} has been generated.`);
+        switchPage("orders");
+
+        window.open(
+          "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg),
+          "_blank",
+          "noopener,noreferrer"
+        );
+      } catch (error) {
+        console.error("Order submission error:", error);
+        toast("Connection Issue", "Please check your internet and try again.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = `PLACE ORDER NOW <i class="fa-solid fa-arrow-right"></i>`;
+      }
+    });
+
+    /* =========================
+       ORDERS
+       ========================= */
+    async function renderOrdersPage() {
+      const box = $("ordersListContainer");
+      if (!currentUser || !currentUser.email) {
+        box.innerHTML = `
+          <div class="order-card" style="text-align:center;padding:35px">
+            <i class="fa-solid fa-lock" style="font-size:30px;color:var(--primary);margin-bottom:12px"></i>
+            <b style="display:block;font-size:15px;margin-bottom:6px">Login Required</b>
+            <p style="color:var(--muted);font-size:10px;line-height:1.7;margin-bottom:16px">Please login to your HY STORE account to view your orders and tracking history.</p>
+            <button class="primary" onclick="openAuthModal('login')">LOGIN TO ACCOUNT <i class="fa-solid fa-arrow-right"></i></button>
+          </div>`;
+        return;
+      }
+
+      // Keep compatibility with older local order IDs.
+      userOrders = userOrders.map(item => typeof item === 'string' ? {id:item,email:currentUser.email} : item);
+      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+      const myOrders = userOrders.filter(item => item && item.email === currentUser.email);
+
+      if (!myOrders.length) {
+        box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted);padding:35px"><i class="fa-solid fa-box-open" style="font-size:26px;color:var(--primary);margin-bottom:10px"></i><div style="font-size:12px">No orders found for ${escapeHTML(currentUser.email)}.</div></div>`;
+        return;
+      }
+
+      box.innerHTML = `<div style="text-align:center;padding:22px;color:var(--primary);font-size:11px"><i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...</div>`;
+      let cards = "";
+      for (const item of myOrders) {
+        const id = item.id;
+        try {
+          const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(), {cache:"no-store"});
+          const data = await response.json();
+          cards += data.result === "success" ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
+        } catch (error) {
+          cards += buildOrderCard({orderId:id,status:"PENDING"});
         }
-
       }
-    );
+      box.innerHTML = cards;
+    }
 
+    function trackOrder() {
+      if (!currentUser || !currentUser.email) {
+        openAuthModal('login');
+        toast("Login Required", "Please login before tracking an order.");
+        return;
+      }
+      const query = $("trackInput").value.trim().toUpperCase();
+      if (!query) { toast("Enter Order ID", "Example: HY1001"); return; }
+      userOrders = [{id:query,email:currentUser.email}, ...userOrders.filter(item => (typeof item === 'object' ? item.id : item) !== query)];
+      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+      renderOrdersPage();
+    }
+
+    function buildOrderCard(d) {
+      const status = escapeHTML(String(d.status || "PENDING").toUpperCase());
+
+      return `
+        <div class="order-card">
+          <div class="order-header">
+            <b>Order #${escapeHTML(d.orderId || "N/A")}</b>
+            <span class="status pending">${status}</span>
+          </div>
+          <div class="order-grid-info">
+            <div><span>Customer</span><b>${escapeHTML(d.name || "N/A")}</b></div>
+            <div><span>Payment Method</span><b>${escapeHTML(d.payment || "COD")}</b></div>
+            <div style="grid-column:span 2"><span>Products</span><b>${escapeHTML(d.product || "N/A")}</b></div>
+            <div style="grid-column:span 2"><span>Total Amount</span><b style="color:var(--primary)">Rs. ${money(d.price)}</b></div>
+          </div>
+        </div>`;
+    }
+
+    /* =========================
+       PROFILE
+       ========================= */
+    /* =========================
+       PROFESSIONAL ACCOUNT SYSTEM
+       ========================= */
+    let authMode = "choice";
+
+    function getAccounts() {
+      return JSON.parse(localStorage.getItem("hy_store_accounts") || "[]");
+    }
+    function saveAccounts(accounts) {
+      localStorage.setItem("hy_store_accounts", JSON.stringify(accounts));
+    }
+    async function hashPassword(password) {
+      const data = new TextEncoder().encode(password);
+      const hash = await crypto.subtle.digest("SHA-256", data);
+      return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+    function passwordScore(password) {
+      let score=0;
+      if(password.length>=8) score++; if(/[A-Z]/.test(password)) score++; if(/[0-9]/.test(password)) score++; if(/[^A-Za-z0-9]/.test(password)) score++;
+      return score;
+    }
+    function updatePasswordStrength(inputId, barId) {
+      const n=passwordScore($(inputId).value); const w=["0%","25%","50%","75%","100%"][n]; $(barId).style.width=w;
+    }
+    function openAuthModal(mode="choice") {
+      authMode=mode; renderAuth(); showModal("authModal");
+    }
+    function renderAuth() {
+      const body=$("authBody");
+      if(authMode==="choice") {
+        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Welcome to HY STORE</h3><p>Login to order products and manage your account.</p></div>
+          <div class="auth-choice"><button class="auth-choice-btn" onclick="authMode='login';renderAuth()"><i class="fa-solid fa-right-to-bracket"></i><b>LOGIN ACCOUNT</b><small>Already have an HY STORE account?</small></button>
+          <button class="auth-choice-btn" onclick="authMode='register';renderAuth()"><i class="fa-solid fa-user-plus"></i><b>CREATE ACCOUNT</b><small>Register with your email and mobile number.</small></button></div>`;
+        return;
+      }
+      if(authMode==="login") {
+        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Login to Your Account</h3><p>Use your registered email and password.</p></div>
+          <form onsubmit="loginAccount(event)">
+            <div class="field"><label>Email Address</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
+            <div class="field"><label>Password</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password"></div>
+            <div class="auth-row"><button type="button" class="auth-link" onclick="authMode='forgot';renderAuth()">Forgot Password?</button><button type="button" class="auth-link" onclick="authMode='register';renderAuth()">Create Account</button></div>
+            <button class="primary" style="width:100%;margin-top:14px" type="submit">LOGIN NOW <i class="fa-solid fa-arrow-right"></i></button>
+            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='choice';renderAuth()">← Back</button>
+          </form>`;
+        const remembered=JSON.parse(localStorage.getItem("hy_saved_login")||"null"); if(remembered && $("loginEmail")) $("loginEmail").value=remembered.email||"";
+      } else if(authMode==="register") {
+        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Register New Account</h3><p>Create your account once and stay signed in until logout.</p></div>
+          <form onsubmit="registerAccount(event)">
+            <div class="field"><label>Full Name</label><input id="regName" required autocomplete="name" placeholder="Enter your full name"></div>
+            <div class="field"><label>Email Address</label><input id="regEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
+            <div class="field"><label>Mobile Number</label><input id="regPhone" required autocomplete="tel" placeholder="03XXXXXXXXX"></div>
+            <div class="field"><label>Password</label><input id="regPassword" type="password" required minlength="8" autocomplete="new-password" oninput="updatePasswordStrength('regPassword','regStrength')" placeholder="Minimum 8 characters"><div class="password-strength"><span id="regStrength"></span></div></div>
+            <div class="field"><label>Confirm Password</label><input id="regConfirm" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm password"></div>
+            <div class="field"><label>Delivery Address</label><textarea id="regAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+            <button class="primary" style="width:100%" type="submit">CREATE ACCOUNT <i class="fa-solid fa-user-check"></i></button>
+            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='login';renderAuth()">Already have an account? Login</button>
+          </form>`;
+      } else {
+        body.innerHTML=`<div class="auth-brand"><div class="save-icon" style="width:58px;height:58px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;color:var(--primary);background:rgba(24,169,255,.1);font-size:22px"><i class="fa-solid fa-key"></i></div><h3>Reset Password</h3><p>Enter your registered email and choose a new password.</p></div>
+          <form onsubmit="resetPassword(event)">
+            <div class="field"><label>Registered Email</label><input id="forgotEmail" type="email" required placeholder="name@example.com"></div>
+            <div class="field"><label>New Password</label><input id="forgotPassword" type="password" required minlength="8" placeholder="New password"></div>
+            <div class="field"><label>Confirm New Password</label><input id="forgotConfirm" type="password" required minlength="8" placeholder="Confirm new password"></div>
+            <button class="primary" style="width:100%" type="submit">RESET PASSWORD</button>
+            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='login';renderAuth()">← Back to Login</button>
+          </form>`;
+      }
+    }
+    async function registerAccount(e) {
+      e.preventDefault();
+      const name=$("regName").value.trim(), email=$("regEmail").value.trim().toLowerCase(), phone=$("regPhone").value.trim(), password=$("regPassword").value, confirm=$("regConfirm").value, address=$("regAddress").value.trim();
+      if(password!==confirm){toast("Password Error","Passwords do not match.");return;}
+      if(password.length<8){toast("Weak Password","Use at least 8 characters.");return;}
+      const accounts=getAccounts(); if(accounts.some(a=>a.email===email)){toast("Account Exists","This email is already registered. Please login.");authMode="login";renderAuth();return;}
+      accounts.push({name,email,phone,address,passwordHash:await hashPassword(password),createdAt:Date.now()}); saveAccounts(accounts);
+      currentUser={name,email,phone,address}; localStorage.setItem("hy_user_session",JSON.stringify(currentUser));
+      closeModal("authModal"); toast("Account Created","Welcome to HY STORE, "+name+"."); renderProfilePage();
+      setTimeout(()=>showModal("savePasswordModal"),250);
+    }
+    async function loginAccount(e) {
+      e.preventDefault(); const email=$("loginEmail").value.trim().toLowerCase(), password=$("loginPassword").value; const account=getAccounts().find(a=>a.email===email);
+      if(!account){toast("Account Not Found","Please register an account first.");return;}
+      if(account.passwordHash!==await hashPassword(password)){toast("Login Failed","Incorrect email or password.");return;}
+      currentUser={name:account.name,email:account.email,phone:account.phone,address:account.address}; localStorage.setItem("hy_user_session",JSON.stringify(currentUser));
+      userOrders=userOrders.map(item=>typeof item==='string'?{id:item,email:email}:item); localStorage.setItem("hy_user_orders",JSON.stringify(userOrders));
+      closeModal("authModal"); toast("Login Successful","Welcome back, "+account.name+"."); renderProfilePage(); setTimeout(()=>showModal("savePasswordModal"),250);
+    }
+    function rememberLogin(save) {
+      if(save && currentUser) localStorage.setItem("hy_saved_login",JSON.stringify({email:currentUser.email})); else localStorage.removeItem("hy_saved_login");
+      closeModal("savePasswordModal");
+    }
+    async function resetPassword(e) {
+      e.preventDefault(); const email=$("forgotEmail").value.trim().toLowerCase(), pass=$("forgotPassword").value, confirm=$("forgotConfirm").value; if(pass!==confirm){toast("Password Error","Passwords do not match.");return;}
+      const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===email); if(i<0){toast("Email Not Found","No account is registered with this email.");return;} if(pass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
+      accounts[i].passwordHash=await hashPassword(pass); saveAccounts(accounts); toast("Password Changed","You can now login with your new password."); authMode="login"; renderAuth();
+    }
+    function openChangePassword() {
+      if(!currentUser){openAuthModal('login');return;}
+      showModal("changePasswordModal");
+    }
+    async function changePassword(e) {
+      e.preventDefault(); const oldPass=$("oldPassword").value,newPass=$("newPassword").value,confirm=$("confirmNewPassword").value; if(newPass!==confirm){toast("Password Error","New passwords do not match.");return;}
+      const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===currentUser.email); if(i<0){toast("Account Error","Account record not found.");return;} if(accounts[i].passwordHash!==await hashPassword(oldPass)){toast("Password Error","Old password is incorrect.");return;} if(newPass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
+      accounts[i].passwordHash=await hashPassword(newPass); saveAccounts(accounts); closeModal("changePasswordModal"); $("changePasswordForm").reset(); toast("Password Changed","Your password has been updated successfully.");
+    }
+    function logoutUser() {
+      localStorage.removeItem("hy_user_session");
+      currentUser=null;
+      toast("Logged Out","You have been logged out successfully.");
+      renderProfilePage();
+    }
+    function renderProfilePage() {
+      const container=$("profileContainer");
+      if(!currentUser){
+        container.innerHTML=`<div class="auth-panel"><div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Welcome to HY STORE</h3><p>Login or create your account to place and track orders.</p></div><div class="auth-choice"><button class="auth-choice-btn" onclick="openAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i><b>LOGIN ACCOUNT</b><small>Sign in with your email and password.</small></button><button class="auth-choice-btn" onclick="openAuthModal('register')"><i class="fa-solid fa-user-plus"></i><b>CREATE ACCOUNT</b><small>Register your name, email and mobile.</small></button></div></div>`;
+        return;
+      }
+      const initial=escapeHTML(currentUser.name?currentUser.name.charAt(0).toUpperCase():"U");
+      container.innerHTML=`<div class="account-card"><div class="account"><div class="avatar">${initial}</div><div><h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3><span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span></div></div><div class="account-details"><div class="acc-info-row"><i class="fa-solid fa-envelope"></i><div><b>Email:</b> ${escapeHTML(currentUser.email)}</div></div><div class="acc-info-row"><i class="fa-solid fa-phone"></i><div><b>Phone:</b> ${escapeHTML(currentUser.phone||"N/A")}</div></div><div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><div><b>Address:</b> ${escapeHTML(currentUser.address||"N/A")}</div></div></div><div class="account-menu"><button onclick="switchPage('orders')"><i class="fa-solid fa-box"></i> MY ORDERS</button><button onclick="openChangePassword()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button></div><button class="btn-logout" style="margin-top:12px" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button></div>`;
+    }
+
+    /* =========================
+       INITIALIZE
+       ========================= */
+    window.addEventListener("DOMContentLoaded", () => {
+      updateCartCount();
+      renderProfilePage();
+      fetchSheetBanners();
+      fetchSheetProducts();
+      restartSlider();
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".modal.show").forEach(modal => closeModal(modal.id));
+      }
+    });
   </script>
-
 </body>
 </html>
