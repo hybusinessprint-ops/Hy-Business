@@ -66,22 +66,18 @@ header {
   justify-content: space-between;
 }
 
-.logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; letter-spacing: .5px; cursor: pointer; }
-.logo img { height: 40px; width: auto; object-fit: contain; }
-.logo-icon { width: 40px; height: 40px; background: rgba(0,150,255,0.15); border: 1px solid var(--green); border-radius: 10px; display: grid; place-items: center; color: var(--green); font-size: 20px; }
+.logo { font-size: 20px; font-weight: 800; letter-spacing: .5px; cursor: pointer; }
 .logo b { color: var(--green); }
 .logo small { display: block; font-size: 8px; letter-spacing: 2px; color: var(--muted); font-weight: 500; }
 
 .head-actions { display: flex; gap: 8px; }
-.iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); transition: all 0.2s ease; }
-.iconbtn:hover { background: #1a2942; border-color: var(--green); }
+.iconbtn { width: 38px; height: 38px; border-radius: 10px; background: #101a2d; color: white; position: relative; font-size: 14px; border: 1px solid var(--border); }
 .badge { position: absolute; right: -4px; top: -5px; background: var(--red); color: white; font-size: 10px; padding: 2px 6px; border-radius: 20px; font-weight: 700; }
 
 .search-wrapper { padding: 10px 4% 0; max-width: 1200px; margin: 0 auto; }
 .search { display: flex; background: #0b1220; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 .search input { flex: 1; background: none; border: 0; outline: 0; color: white; padding: 12px 14px; font-size: 13px; width: 100%; }
-.search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; transition: background 0.2s; }
-.search button:hover { background: #33aaff; }
+.search button { background: var(--green); color: #00140a; padding: 0 18px; font-size: 14px; font-weight: 600; }
 
 .container { width: min(1200px, 92%); margin: auto; padding-top: 15px; }
 .app-view { display: none; animation: fadeIn 0.3s ease-in-out; }
@@ -125,19 +121,19 @@ header {
 
 .categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 15px; }
 .categories::-webkit-scrollbar { display: none; }
-.cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; cursor: pointer; }
+.cat { white-space: nowrap; padding: 8px 14px; background: #101a2d; border: 1px solid var(--border); border-radius: 18px; color: #dbeafe; font-size: 12px; }
 .cat.active { background: var(--green); color: #00140a; font-weight: 700; }
 
 .section-head { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
 .section-head h2 { font-size: 18px; }
 
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-.pimg { height: 180px; background: #111827; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.product { background: #0e1726; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.pimg { height: 180px; background: #111827; position: relative; }
 .pimg img { width: 100%; height: 100%; object-fit: cover; }
-.pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; z-index: 2; }
+.pimg .tag { position: absolute; left: 8px; top: 8px; background: rgba(0,0,0,.75); padding: 4px 8px; border-radius: 6px; font-size: 10px; }
 
-.pbody { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+.pbody { padding: 12px; }
 .pbody h3 { font-size: 13px; margin-bottom: 6px; height: 36px; overflow: hidden; line-height: 1.3; }
 .price { font-weight: 800; color: var(--green); font-size: 16px; }
 .old { font-size: 11px; color: var(--muted); text-decoration: line-through; margin-left: 5px; }
@@ -145,20 +141,19 @@ header {
 .pactions { display: flex; gap: 6px; margin-top: 10px; }
 .pactions button { flex: 1; padding: 8px; border-radius: 8px; font-weight: 600; font-size: 12px; }
 .buy { background: var(--green); color: #00140a; }
-.buy:hover { background: #33aaff; }
 .cartbtn { background: #1a263c; color: white; flex: 0 0 38px !important; }
-.cartbtn:hover { background: #263859; }
 
+/* Professional Timeline Order Card */
 .order-card { background: #080f1b; border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 16px; position: relative; }
 .order-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 14px; }
 .order-header b { font-size: 16px; color: var(--green); }
 
 .status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 .pending { background: rgba(255,213,74,.15); color: var(--yellow); border: 1px solid rgba(255,213,74,.3); }
-.rejected, .cancelled, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
+.cancelled, .rejected, .status-red { background: rgba(255,77,103,.15); color: var(--red); border: 1px solid rgba(255,77,103,.3); }
 .confirmed, .shipped, .delivered { background: rgba(0,150,255,.15); color: var(--green); border: 1px solid rgba(0,150,255,.3); }
 
-/* TRACKER TIMELINE STYLES */
+/* Tracker Line UI */
 .tracker-container {
   display: flex;
   align-items: center;
@@ -203,8 +198,11 @@ header {
   box-shadow: 0 0 12px rgba(0, 150, 255, 0.6);
 }
 
-.tracker-step.active span { color: #ffffff; }
+.tracker-step.active span {
+  color: #ffffff;
+}
 
+/* Red / Rejected Status UI */
 .tracker-step.rejected-step .circle {
   background-color: var(--red) !important;
   border-color: var(--red) !important;
@@ -212,7 +210,9 @@ header {
   box-shadow: 0 0 12px rgba(255, 77, 103, 0.6) !important;
 }
 
-.tracker-step.rejected-step span { color: var(--red) !important; }
+.tracker-step.rejected-step span {
+  color: var(--red) !important;
+}
 
 .tracker-line {
   flex-grow: 1;
@@ -267,11 +267,6 @@ header {
 .field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
 .field input, .field textarea, .field select { width: 100%; padding: 10px; border-radius: 8px; background: #070d18; color: white; border: 1px solid var(--border); outline: 0; font-size: 12px; }
 .primary { width: 100%; padding: 12px; border-radius: 10px; background: var(--green); font-weight: 700; color: #00140a; font-size: 13px; }
-.secondary-btn { width: 100%; padding: 10px; border-radius: 10px; background: transparent; color: var(--muted); border: 1px solid var(--border); font-weight: 600; font-size: 12px; margin-top: 8px; }
-
-.auth-tabs { display: flex; margin-bottom: 15px; border-bottom: 1px solid var(--border); }
-.auth-tab { flex: 1; padding: 10px; text-align: center; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
-.auth-tab.active { color: var(--green); border-bottom: 2px solid var(--green); }
 
 .toast { position: fixed; top: 20px; right: 20px; z-index: 300; background: #0d1727; border: 1px solid var(--green); padding: 12px 18px; border-radius: 12px; box-shadow: var(--shadow); display: none; animation: slideIn 0.3s ease; }
 .toast.show { display: block; }
@@ -297,13 +292,7 @@ header {
 </div>
 
 <header>
-  <div class="logo" onclick="switchPage('home')">
-    <img src="logo.png" alt="HY Store Logo" id="logoImg" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='grid';">
-    <div class="logo-icon" id="logoFallback" style="display:none;"><i class="fa-solid fa-bag-shopping"></i></div>
-    <div>
-      HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small>
-    </div>
-  </div>
+  <div class="logo" onclick="switchPage('home')">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
   <div class="head-actions">
     <button class="iconbtn" onclick="switchPage('orders')"><i class="fa-solid fa-box"></i></button>
     <button class="iconbtn" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i></button>
@@ -367,10 +356,10 @@ header {
     </div>
     <div class="categories">
       <button class="cat active" onclick="filterCategory('All',this)">All Items</button>
-      <button class="cat" onclick="filterCategory('Perfumes',this)">Perfumes</button>
+      <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
       <button class="cat" onclick="filterCategory('Audio',this)">Audio & Sound</button>
       <button class="cat" onclick="filterCategory('Watches',this)">Smart Watches</button>
-      <button class="cat" onclick="filterCategory('Accessories',this)">Accessories</button>
+      <button class="cat" onclick="filterCategory('Gaming',this)">Gaming Gear</button>
     </div>
     <div class="section-head">
       <h2 id="catHeading">All Products</h2>
@@ -403,81 +392,7 @@ header {
   <button class="nav-btn" id="nav-profile" onclick="switchPage('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></button>
 </nav>
 
-<!-- Auth Modal (Login / Register) -->
-<div class="modal" id="authModal">
-  <div class="modalbox">
-    <div class="modalhead">
-      <b id="authModalTitle"><i class="fa-solid fa-user-lock"></i> Account Access</b>
-      <button class="close" onclick="closeModal('authModal')">×</button>
-    </div>
-    <div class="modalbody">
-      <div class="auth-tabs">
-        <div class="auth-tab active" id="tab-login" onclick="toggleAuthTab('login')">LOGIN</div>
-        <div class="auth-tab" id="tab-register" onclick="toggleAuthTab('register')">REGISTER ACCOUNT</div>
-      </div>
-
-      <!-- LOGIN FORM -->
-      <form id="loginForm">
-        <div class="field"><label>Email Address</label><input type="email" id="lEmail" required placeholder="Enter your email"></div>
-        <div class="field"><label>Password</label><input type="password" id="lPassword" required placeholder="Enter password"></div>
-        <button class="primary" type="submit">LOGIN NOW</button>
-        <button type="button" class="secondary-btn" onclick="openForgetModal()">Forgot Password?</button>
-      </form>
-
-      <!-- REGISTER FORM -->
-      <form id="registerForm" style="display:none;">
-        <div class="field"><label>Full Name</label><input id="rName" required placeholder="Enter full name"></div>
-        <div class="field"><label>Email Address</label><input type="email" id="rEmail" required placeholder="example@mail.com"></div>
-        <div class="field"><label>Mobile Number</label><input id="rPhone" required placeholder="03XXXXXXXXX"></div>
-        <div class="field"><label>Shipping Address</label><textarea id="rAddress" rows="2" required placeholder="Complete delivery address"></textarea></div>
-        <div class="field"><label>Password</label><input type="password" id="rPassword" required placeholder="Create password"></div>
-        <div class="field"><label>Confirm Password</label><input type="password" id="rConfirmPassword" required placeholder="Confirm password"></div>
-        <button class="primary" type="submit">REGISTER ACCOUNT</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Save Password Modal -->
-<div class="modal" id="savePasswordModal">
-  <div class="modalbox" style="text-align: center;">
-    <div class="modalhead">
-      <b><i class="fa-solid fa-key" style="color:var(--green)"></i> Save Credentials</b>
-    </div>
-    <div class="modalbody">
-      <p style="font-size:13px; margin-bottom:15px; color:var(--text)">Would you like to save your account password for faster login on this browser?</p>
-      <div style="display:flex; gap:10px;">
-        <button class="primary" style="flex:1" onclick="confirmSavePassword(true)">OK</button>
-        <button class="secondary-btn" style="flex:1; margin-top:0" onclick="confirmSavePassword(false)">NOT NOW</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Password Change Modal -->
-<div class="modal" id="passwordModal">
-  <div class="modalbox">
-    <div class="modalhead">
-      <b id="passModalTitle"><i class="fa-solid fa-key"></i> Security Settings</b>
-      <button class="close" onclick="closeModal('passwordModal')">×</button>
-    </div>
-    <div class="modalbody">
-      <form id="changePasswordForm" style="display:none;">
-        <div class="field"><label>Current Old Password</label><input type="password" id="oldPass" required placeholder="Enter current password"></div>
-        <div class="field"><label>New Password</label><input type="password" id="newPass" required placeholder="Enter new password"></div>
-        <button class="primary" type="submit">UPDATE PASSWORD</button>
-      </form>
-
-      <form id="forgetPasswordForm" style="display:none;">
-        <div class="field"><label>Registered Email Address</label><input type="email" id="fEmail" required placeholder="Enter registered email"></div>
-        <div class="field"><label>New Password</label><input type="password" id="fNewPass" required placeholder="Set new password"></div>
-        <button class="primary" type="submit">RESET PASSWORD</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Cart & Checkout Modals -->
+<!-- Modals -->
 <div class="modal" id="cartModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -496,10 +411,10 @@ header {
     </div>
     <div class="modalbody">
       <form id="checkoutForm">
-        <div class="field"><label>Full Name</label><input id="cName" required readonly style="opacity:0.8"></div>
-        <div class="field"><label>Email Address</label><input type="email" id="cEmail" required readonly style="opacity:0.8"></div>
-        <div class="field"><label>Phone Number</label><input id="cPhone" required readonly style="opacity:0.8"></div>
-        <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required></textarea></div>
+        <div class="field"><label>Full Name</label><input id="cName" required placeholder="Enter full name"></div>
+        <div class="field"><label>Email Address</label><input type="email" id="cEmail" required placeholder="example@mail.com"></div>
+        <div class="field"><label>Phone Number</label><input id="cPhone" required placeholder="03XXXXXXXXX"></div>
+        <div class="field"><label>Shipping Address</label><textarea id="cAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
         <div class="field">
           <label>Payment Option</label>
           <select id="cPayment">
@@ -535,16 +450,7 @@ header {
 
 <script>
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
-
-let registeredUsers = JSON.parse(localStorage.getItem("hy_registered_users") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
-
-let products = [
-  { title: "Azure Luxury Perfume (MTJ)", price: 3499, oldPrice: 4500, category: "Perfumes", image: "pictuer.png" },
-  { title: "Wireless Bluetooth Earbuds", price: 2199, oldPrice: 2999, category: "Audio", image: "pictuer.png" },
-  { title: "Smart Watch Ultra Series", price: 4299, oldPrice: 5500, category: "Watches", image: "pictuer.png" },
-  { title: "Gaming RGB Headset", price: 2899, oldPrice: 3800, category: "Audio", image: "pictuer.png" }
-];
+const WHATSAPP = "923209306672";
 
 function switchPage(pageId) {
   document.querySelectorAll('.app-view').forEach(view => view.classList.remove('active-view'));
@@ -591,9 +497,11 @@ function setSlide(i) { currentSlide = i; updateSlider(); }
 
 setInterval(nextSlide, 10000);
 
+let products = [];
 let activeCat = "All", searchTerm = "";
 let cart = JSON.parse(localStorage.getItem("hy_user_cart") || "[]");
 let userOrders = JSON.parse(localStorage.getItem("hy_user_orders") || "[]");
+let currentUser = JSON.parse(localStorage.getItem("hy_user_session") || "null");
 
 function toast(title, text) {
   const t = document.getElementById("toast");
@@ -603,548 +511,393 @@ function toast(title, text) {
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 
+async function fetchSheetProducts() {
+  const grid = document.getElementById("productGrid");
+  
+  if(grid) grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--green);"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Loading live products...</div>`;
+
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts");
+    const data = await res.json();
+    if(data.result === "success" && data.products && data.products.length > 0) {
+      products = data.products;
+      renderProducts();
+    } else {
+      showEmptyState("No products found in Google Sheet.");
+    }
+  } catch(e) {
+    showEmptyState("Failed to load products. Check connection.");
+  }
+}
+
+function showEmptyState(msg) {
+  const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
+  const html = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--muted);">${msg}</div>`;
+  if(grid) grid.innerHTML = html;
+  if(featGrid) featGrid.innerHTML = html;
+}
+
+function renderProducts(){
+  const grid = document.getElementById("productGrid");
+  const featGrid = document.getElementById("featuredGrid");
+  
+  if(products.length === 0) return;
+
+  let list = products.filter(p => (activeCat==="All" || String(p.cat).toLowerCase()===activeCat.toLowerCase()) && String(p.name).toLowerCase().includes(searchTerm.toLowerCase()));
+
+  const productHTML = (p) => `
+    <article class="product">
+      <div class="pimg">
+        <img src="${p.img}" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500'">
+        <span class="tag">${p.cat || 'General'}</span>
+      </div>
+      <div class="pbody">
+        <h3>${p.name}</h3>
+        <div><span class="price">Rs. ${Number(p.price || 0).toLocaleString()}</span>${p.old ? `<span class="old">Rs. ${Number(p.old).toLocaleString()}</span>` : ''}</div>
+        <div class="pactions">
+          <button class="cartbtn" onclick="addCart('${p.id}')"><i class="fa-solid fa-cart-plus"></i></button>
+          <button class="buy" onclick="buyNow('${p.id}')">Buy Now</button>
+        </div>
+      </div>
+    </article>`;
+
+  if(grid) grid.innerHTML = list.map(productHTML).join("");
+  if(featGrid) featGrid.innerHTML = products.slice(0, 8).map(productHTML).join("");
+  
+  const countLabel = document.getElementById("resultCount");
+  if(countLabel) countLabel.textContent = `${list.length} Items`;
+}
+
+function filterCategory(cat,el){
+  activeCat=cat;
+  document.querySelectorAll(".cat").forEach(x => x.classList.remove("active"));
+  if(el) el.classList.add("active");
+  document.getElementById("catHeading").textContent = cat + " Products";
+  renderProducts();
+}
+
+function searchProducts(){
+  searchTerm = document.getElementById("searchInput").value.trim();
+  switchPage('products');
+  renderProducts();
+}
+
+function addCart(id){
+  const p = products.find(x => x.id == id);
+  if(p) {
+    cart.push(p); saveCart();
+    toast("Cart Updated", `${p.name} added to cart.`);
+  }
+}
+
+function saveCart(){
+  localStorage.setItem("hy_user_cart", JSON.stringify(cart));
+  document.getElementById("cartCount").textContent = cart.length;
+}
+
+function cartTotal(){ return cart.reduce((s,p)=>s+Number(p.price || 0),0); }
 function showModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
 
-/* AUTH SYSTEM */
-function openAuthModal(tab) {
-  toggleAuthTab(tab || 'login');
-  showModal("authModal");
-}
-
-function toggleAuthTab(tab) {
-  const loginForm = document.getElementById("loginForm");
-  const regForm = document.getElementById("registerForm");
-  const tabL = document.getElementById("tab-login");
-  const tabR = document.getElementById("tab-register");
-
-  if(tab === 'login') {
-    loginForm.style.display = "block";
-    regForm.style.display = "none";
-    tabL.classList.add("active");
-    tabR.classList.remove("active");
-  } else {
-    loginForm.style.display = "none";
-    regForm.style.display = "block";
-    tabR.classList.add("active");
-    tabL.classList.remove("active");
-  }
-}
-
-document.getElementById("registerForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const email = document.getElementById("rEmail").value.trim().toLowerCase();
-  const pass = document.getElementById("rPassword").value;
-  const cPass = document.getElementById("rConfirmPassword").value;
-
-  if (pass !== cPass) return toast("Error", "Passwords do not match!");
-
-  if (registeredUsers.some(u => u.email === email)) {
-    return toast("Account Exists", "This email is already registered. Please Login.");
-  }
-
-  const newUser = {
-    name: document.getElementById("rName").value.trim(),
-    email: email,
-    phone: document.getElementById("rPhone").value.trim(),
-    address: document.getElementById("rAddress").value.trim(),
-    password: pass
-  };
-
-  registeredUsers.push(newUser);
-  localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
-
-  currentUser = newUser;
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  closeModal("authModal");
-
-  showModal("savePasswordModal");
-});
-
-document.getElementById("loginForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const email = document.getElementById("lEmail").value.trim().toLowerCase();
-  const pass = document.getElementById("lPassword").value;
-
-  const user = registeredUsers.find(u => u.email === email && u.password === pass);
-
-  if (!user) return toast("Access Denied", "Invalid Email or Password.");
-
-  currentUser = user;
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  closeModal("authModal");
-
-  showModal("savePasswordModal");
-});
-
-function confirmSavePassword(shouldSave) {
-  closeModal("savePasswordModal");
-  if(shouldSave) toast("Saved", "Login credentials saved securely.");
-  renderProfilePage();
-  renderOrdersPage();
-}
-
-function openChangePasswordModal() {
-  document.getElementById("passModalTitle").innerHTML = `<i class="fa-solid fa-key"></i> Change Password`;
-  document.getElementById("changePasswordForm").style.display = "block";
-  document.getElementById("forgetPasswordForm").style.display = "none";
-  showModal("passwordModal");
-}
-
-function openForgetModal() {
-  closeModal("authModal");
-  document.getElementById("passModalTitle").innerHTML = `<i class="fa-solid fa-unlock"></i> Reset Password`;
-  document.getElementById("changePasswordForm").style.display = "none";
-  document.getElementById("forgetPasswordForm").style.display = "block";
-  showModal("passwordModal");
-}
-
-document.getElementById("changePasswordForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const oldPass = document.getElementById("oldPass").value;
-  const newPass = document.getElementById("newPass").value;
-
-  if(!currentUser) return;
-
-  if(currentUser.password !== oldPass) return toast("Error", "Incorrect old password!");
-
-  currentUser.password = newPass;
-  const idx = registeredUsers.findIndex(u => u.email === currentUser.email);
-  if(idx !== -1) registeredUsers[idx].password = newPass;
-
-  localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
-  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-
-  closeModal("passwordModal");
-  toast("Success", "Password updated successfully.");
-});
-
-document.getElementById("forgetPasswordForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const email = document.getElementById("fEmail").value.trim().toLowerCase();
-  const newPass = document.getElementById("fNewPass").value;
-
-  const idx = registeredUsers.findIndex(u => u.email === email);
-  if(idx === -1) return toast("Error", "Email address not registered.");
-
-  registeredUsers[idx].password = newPass;
-  localStorage.setItem("hy_registered_users", JSON.stringify(registeredUsers));
-
-  if(currentUser && currentUser.email === email) {
-    currentUser.password = newPass;
-    localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
-  }
-
-  closeModal("passwordModal");
-  toast("Success", "Password reset successfully! Please login.");
-});
-
-function logoutUser() {
-  currentUser = null;
-  localStorage.removeItem("hy_user_session");
-  renderProfilePage();
-  renderOrdersPage();
-  toast("Logged Out", "You have been logged out.");
-}
-
-/* FETCH DATA & LIVE SYNC WITH GOOGLE SHEET */
-async function fetchSheetData() {
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL);
-    const data = await res.json();
-    
-    if(data.products && Array.isArray(data.products) && data.products.length > 0) {
-      products = data.products;
-      renderProducts();
-    }
-
-    if(data.orders && Array.isArray(data.orders)) {
-      data.orders.forEach(remoteOrder => {
-        const localIdx = userOrders.findIndex(o => 
-          (o.id && o.id.toString().trim() === remoteOrder.id.toString().trim()) || 
-          (o.orderId && o.orderId.toString().trim() === remoteOrder.id.toString().trim())
-        );
-
-        if(localIdx !== -1) {
-          userOrders[localIdx].status = remoteOrder.status || "Confirmed";
-        } else if(currentUser) {
-          // If order exists in Sheet but not local, sync it automatically
-          if(remoteOrder.customer && remoteOrder.customer.toLowerCase() === currentUser.name.toLowerCase()) {
-            userOrders.push(remoteOrder);
-          }
-        }
-      });
-      
-      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-      if(document.getElementById('view-orders').classList.contains('active-view')) {
-        renderOrdersPage();
-      }
-    }
-  } catch(e) {
-    console.log("Sheet Sync Status:", e);
-  }
-}
-
-function renderProducts() {
-  const grid = document.getElementById("productGrid");
-  const featured = document.getElementById("featuredGrid");
-  if(!grid) return;
-
-  grid.innerHTML = "";
-  if(featured) featured.innerHTML = "";
-
-  let filtered = products.filter(p => {
-    const matchCat = activeCat === "All" || p.category === activeCat;
-    const matchSearch = p.title.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchCat && matchSearch;
-  });
-
-  const resCount = document.getElementById("resultCount");
-  if(resCount) resCount.textContent = `${filtered.length} Items Available`;
-
-  filtered.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "product";
-    
-    const imgHtml = p.image ? 
-      `<img src="${p.image}" alt="${p.title}" onerror="this.onerror=null; this.src='pictuer.png';">` : 
-      `<i class="fa-solid fa-box-open" style="font-size:40px;color:var(--muted)"></i>`;
-
-    card.innerHTML = `
-      <div class="pimg">
-        <span class="tag">${p.category || 'General'}</span>
-        ${imgHtml}
-      </div>
-      <div class="pbody">
-        <h3>${p.title}</h3>
-        <div>
-          <span class="price">Rs. ${p.price}</span>
-          ${p.oldPrice ? `<span class="old">Rs. ${p.oldPrice}</span>` : ''}
-        </div>
-        <div class="pactions">
-          <button class="buy" onclick="quickBuy('${p.title}', ${p.price})">Buy Now</button>
-          <button class="cartbtn" onclick="addToCart('${p.title}', ${p.price})"><i class="fa-solid fa-cart-plus"></i></button>
-        </div>
-      </div>
-    `;
-    grid.appendChild(card);
-
-    if(featured && featured.children.length < 8) {
-      featured.appendChild(card.cloneNode(true));
-    }
-  });
-}
-
-function filterCategory(cat, el) {
-  activeCat = cat;
-  document.querySelectorAll(".cat").forEach(c => c.classList.remove("active"));
-  if(el) el.classList.add("active");
-  document.getElementById("catHeading").textContent = cat === "All" ? "All Products" : cat;
-  renderProducts();
-}
-
-function searchProducts() {
-  searchTerm = document.getElementById("searchInput").value.trim();
-  switchPage("products");
-  renderProducts();
-}
-
-/* CART SYSTEM */
-function addToCart(title, price) {
-  const existing = cart.find(i => i.title === title);
-  if(existing) {
-    existing.qty++;
-  } else {
-    cart.push({ title, price, qty: 1 });
-  }
-  updateCart();
-  toast("Added to Cart", `${title} added.`);
-}
-
-function updateCart() {
-  localStorage.setItem("hy_user_cart", JSON.stringify(cart));
-  const count = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById("cartCount").textContent = count;
-}
-
-function openCart() {
+function openCart(){
   const body = document.getElementById("cartBody");
-  if(cart.length === 0) {
-    body.innerHTML = `<p style="text-align:center; color:var(--muted); padding:20px;">Your cart is empty.</p>`;
-  } else {
-    let total = 0;
-    let html = `<div style="display:flex; flex-direction:column; gap:10px;">`;
-    cart.forEach((item, idx) => {
-      total += item.price * item.qty;
-      html += `
-        <div style="display:flex; justify-content:space-between; align-items:center; background:#070d18; padding:10px; border-radius:8px; border:1px solid var(--border)">
-          <div style="flex:1;">
-            <b style="font-size:12px; display:block;">${item.title}</b>
-            <span style="font-size:11px; color:var(--green)">Rs. ${item.price} x ${item.qty}</span>
-          </div>
-          <div style="display:flex; gap:6px; align-items:center;">
-            <button onclick="changeQty(${idx}, -1)" style="padding:2px 8px; background:#101a2d; color:white; border-radius:4px;">-</button>
-            <span style="font-size:12px;">${item.qty}</span>
-            <button onclick="changeQty(${idx}, 1)" style="padding:2px 8px; background:#101a2d; color:white; border-radius:4px;">+</button>
-          </div>
-        </div>
-      `;
-    });
-    html += `</div>
-      <div style="margin-top:15px; border-top:1px solid var(--border); padding-top:10px; display:flex; justify-content:space-between; font-weight:700;">
-        <span>Total:</span>
-        <span style="color:var(--green)">Rs. ${total}</span>
+  if(!cart.length){ body.innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted)">Your cart is empty.</div>`; showModal("cartModal"); return; }
+  
+  body.innerHTML = cart.map((p,i)=>`
+    <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);align-items:center">
+      <div style="flex:1">
+        <b style="font-size:12px">${p.name}</b>
+        <div class="price" style="font-size:13px">Rs. ${Number(p.price || 0).toLocaleString()}</div>
       </div>
-      <button class="primary" style="margin-top:15px;" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
-    `;
-    body.innerHTML = html;
-  }
+      <button class="close" onclick="removeCart(${i})">×</button>
+    </div>
+  `).join("") + `
+    <div style="padding-top:15px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <b>Total Amount:</b>
+        <b style="color:var(--green)">Rs. ${cartTotal().toLocaleString()}</b>
+      </div>
+      <button class="primary" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
+    </div>`;
   showModal("cartModal");
 }
 
-function changeQty(idx, delta) {
-  cart[idx].qty += delta;
-  if(cart[idx].qty <= 0) cart.splice(idx, 1);
-  updateCart();
-  openCart();
+function removeCart(i){ cart.splice(i,1); saveCart(); openCart(); }
+function buyNow(id){ 
+  const p = products.find(x => x.id == id);
+  if(p){ cart=[p]; saveCart(); openCheckout(); }
 }
 
-function quickBuy(title, price) {
-  cart = [{ title, price, qty: 1 }];
-  updateCart();
-  openCheckout();
-}
-
-function openCheckout() {
-  if(!currentUser) {
-    closeModal("cartModal");
-    return openAuthModal('login');
-  }
+function openCheckout(){
   closeModal("cartModal");
-
-  document.getElementById("cName").value = currentUser.name;
-  document.getElementById("cEmail").value = currentUser.email;
-  document.getElementById("cPhone").value = currentUser.phone;
-  document.getElementById("cAddress").value = currentUser.address;
-
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  document.getElementById("cTotal").value = `Rs. ${total}`;
-
+  document.getElementById("cTotal").value = "Rs. " + cartTotal().toLocaleString();
+  if(currentUser){
+    document.getElementById("cName").value = currentUser.name || "";
+    document.getElementById("cEmail").value = currentUser.email || "";
+    document.getElementById("cPhone").value = currentUser.phone || "";
+    document.getElementById("cAddress").value = currentUser.address || "";
+  }
   showModal("checkoutModal");
 }
 
 document.getElementById("checkoutForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  const prodNames = cart.map(i => `${i.title} (${i.qty})`).join(", ");
+  const emailVal = document.getElementById("cEmail").value.trim().toLowerCase();
+  const phoneVal = document.getElementById("cPhone").value.trim();
+  
+  currentUser = {
+    name: document.getElementById("cName").value.trim(),
+    email: emailVal,
+    phone: phoneVal,
+    address: document.getElementById("cAddress").value.trim()
+  };
+  localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
 
-  const orderData = {
-    id: orderId,
+  const orderId = "HY" + Math.floor(1000 + Math.random() * 9000);
+  const payload = {
     orderId: orderId,
-    customer: currentUser.name,
+    name: currentUser.name,
     email: currentUser.email,
     phone: currentUser.phone,
-    address: document.getElementById("cAddress").value,
-    product: prodNames,
-    price: total,
-    total: total,
-    payment: document.getElementById("cPayment").value,
-    status: "Confirmed",
-    date: new Date().toLocaleString()
+    address: currentUser.address,
+    product: cart.map(x=>x.name).join(", "),
+    price: cartTotal(),
+    payment: document.getElementById("cPayment").value
   };
 
-  userOrders.unshift(orderData);
+  userOrders.unshift({ id: orderId, email: currentUser.email, cancelled: false });
   localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
 
-  cart = [];
-  updateCart();
-  closeModal("checkoutModal");
-
-  toast("Order Placed!", `Order ID: ${orderId}`);
-  switchPage("orders");
-
   try {
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(orderData)
-    });
+    await fetch(GOOGLE_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) });
+    const msg = `HY STORE New Order Request\nOrder ID: ${orderId}\nName: ${payload.name}\nEmail: ${payload.email}\nTotal Price: Rs. ${payload.price}`;
+    cart=[]; saveCart(); closeModal("checkoutModal");
+    toast("Order Placed Successfully", `Order ID #${orderId} generated & saved.`);
+    switchPage('orders');
+    window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
   } catch(err) {
-    console.log("Sheet Post Error:", err);
+    toast("Order Saved Local", "Order details processed.");
   }
 });
 
-/* LIVE ORDER TRACKER & HISTORIES */
-function renderOrdersPage() {
-  const container = document.getElementById("ordersListContainer");
-  if(!container) return;
+function openTrackModal() { showModal("trackModal"); }
 
-  if(!currentUser) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:40px 10px; background:#080f1b; border-radius:16px; border:1px solid var(--border)">
-        <i class="fa-solid fa-user-lock" style="font-size:40px; color:var(--muted); margin-bottom:10px;"></i>
-        <h3 style="margin-bottom:8px;">Login Required</h3>
-        <p style="color:var(--muted); font-size:12px; margin-bottom:15px;">Please login to view your active orders and track shipment status.</p>
-        <button class="primary" style="max-width:200px;" onclick="openAuthModal('login')">LOGIN NOW</button>
-      </div>
-    `;
-    return;
+function buildOrderCard(data, isLocalCancelled) {
+  const statusStr = (data.status || "CONFIRMED").toUpperCase();
+  const isRejected = isLocalCancelled || statusStr === "REJECT" || statusStr === "REJECTED" || statusStr === "CANCELLED";
+
+  let statusClass = "confirmed";
+  if (isRejected) {
+    statusClass = "rejected";
+  } else if (statusStr === "PENDING") {
+    statusClass = "pending";
   }
 
-  const myOrders = userOrders.filter(o => o.email === currentUser.email || (o.customer && o.customer.toLowerCase() === currentUser.name.toLowerCase()));
+  // Determine Timeline Active States
+  let confClass = "", shipClass = "", delClass = "";
+  let line1Class = "", line2Class = "";
+  let confIcon = "fa-check", shipIcon = "fa-truck", delIcon = "fa-house";
 
-  if(myOrders.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:40px 10px; background:#080f1b; border-radius:16px; border:1px solid var(--border)">
-        <i class="fa-solid fa-box-open" style="font-size:40px; color:var(--muted); margin-bottom:10px;"></i>
-        <h3>No Orders Found</h3>
-        <p style="color:var(--muted); font-size:12px;">You have not placed any orders yet.</p>
-      </div>
-    `;
-    return;
-  }
-
-  let html = "";
-  myOrders.forEach((o, index) => {
-    const rawStatus = (o.status || "Confirmed").trim();
-    const st = rawStatus.toLowerCase();
-    
-    let isRejected = st.includes("reject") || st.includes("cancel");
-    let isShipped = st.includes("shipped") || st.includes("delivered");
-    let isDelivered = st.includes("delivered");
-
-    html += `
-      <div class="order-card">
-        <div class="order-header">
-          <b>Order #${o.id || o.orderId}</b>
-          <span class="status ${isRejected ? 'rejected' : st}">${rawStatus}</span>
-        </div>
-
-        <div class="tracker-container">
-          <div class="tracker-step ${isRejected ? 'rejected-step' : 'active'}">
-            <div class="circle"><i class="fa-solid ${isRejected ? 'fa-xmark' : 'fa-check'}"></i></div>
-            <span>${isRejected ? 'Rejected' : 'Confirmed'}</span>
-          </div>
-
-          <div class="tracker-line ${isRejected ? 'rejected-line' : (isShipped ? 'active' : '')}"></div>
-
-          <div class="tracker-step ${isRejected ? '' : (isShipped ? 'active' : '')}">
-            <div class="circle"><i class="fa-solid fa-truck-fast"></i></div>
-            <span>Shipped</span>
-          </div>
-
-          <div class="tracker-line ${isRejected ? 'rejected-line' : (isDelivered ? 'active' : '')}"></div>
-
-          <div class="tracker-step ${isRejected ? '' : (isDelivered ? 'active' : '')}">
-            <div class="circle"><i class="fa-solid fa-house"></i></div>
-            <span>Delivered</span>
-          </div>
-        </div>
-
-        <div class="order-grid-info">
-          <div><span>Customer:</span><b>${o.customer}</b></div>
-          <div><span>Payment:</span><b>${o.payment || 'COD'}</b></div>
-          <div><span>Product:</span><b>${o.product || 'N/A'}</b></div>
-          <div><span>Total:</span><b style="color:var(--green)">Rs. ${o.price || o.total || 0}</b></div>
-        </div>
-
-        <div class="order-card-actions">
-          ${(!isRejected && !isDelivered) ? `<button class="btn-cancel-small" onclick="cancelOrder('${o.id}')">Cancel Order</button>` : ''}
-          <button class="btn-delete-small" onclick="removeOrderRecord(${index})">Remove</button>
-        </div>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-}
-
-function cancelOrder(id) {
-  const idx = userOrders.findIndex(o => o.id === id);
-  if(idx !== -1) {
-    userOrders[idx].status = "Cancelled";
-    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-    renderOrdersPage();
-    toast("Order Cancelled", "Your order status was updated.");
-  }
-}
-
-function removeOrderRecord(idx) {
-  userOrders.splice(idx, 1);
-  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-  renderOrdersPage();
-  toast("Removed", "Order history removed.");
-}
-
-function openTrackModal() {
-  showModal("trackModal");
-}
-
-function trackOrder() {
-  const query = document.getElementById("trackInput").value.trim().toLowerCase();
-  if(!query) return toast("Error", "Enter an Order ID");
-
-  const found = userOrders.find(o => (o.id && o.id.toString().toLowerCase() === query) || (o.orderId && o.orderId.toString().toLowerCase() === query));
-  closeModal("trackModal");
-
-  if(found) {
-    switchPage("orders");
-    toast("Order Found", `Status: ${found.status || 'Confirmed'}`);
+  if (isRejected) {
+    confClass = "rejected-step";
+    shipClass = "rejected-step";
+    delClass = "rejected-step";
+    line1Class = "rejected-line";
+    line2Class = "rejected-line";
+    confIcon = "fa-xmark";
+    shipIcon = "fa-xmark";
+    delIcon = "fa-xmark";
   } else {
-    toast("Not Found", "No order matching this ID.");
+    if (statusStr === "CONFIRMED" || statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+      confClass = "active";
+    }
+    if (statusStr === "SHIPPED" || statusStr === "DELIVERED") {
+      shipClass = "active";
+      line1Class = "active";
+    }
+    if (statusStr === "DELIVERED") {
+      delClass = "active";
+      line2Class = "active";
+    }
   }
-}
 
-/* PROFILE PAGE */
-function renderProfilePage() {
-  const container = document.getElementById("profileContainer");
-  if(!container) return;
-
-  if(!currentUser) {
-    container.innerHTML = `
-      <div class="account-card" style="text-align:center;">
-        <i class="fa-solid fa-user-gear" style="font-size:45px; color:var(--muted); margin-bottom:12px;"></i>
-        <h3 style="margin-bottom:8px;">Guest User</h3>
-        <p style="color:var(--muted); font-size:12px; margin-bottom:20px;">Sign in to access your profile settings and order history.</p>
-        <button class="primary" onclick="openAuthModal('login')">LOGIN / REGISTER</button>
+  return `
+    <div class="order-card">
+      <div class="order-header">
+        <b>Order #${data.orderId || 'HY1001'}</b>
+        <span class="status ${statusClass}">${isRejected ? 'REJECTED' : statusStr}</span>
       </div>
-    `;
-    return;
-  }
 
-  container.innerHTML = `
-    <div class="account-card">
-      <div class="account">
-        <div class="avatar">${currentUser.name.charAt(0).toUpperCase()}</div>
-        <div>
-          <b style="font-size:16px;">${currentUser.name}</b>
-          <span style="display:block; font-size:11px; color:var(--muted);">${currentUser.email}</span>
+      <div class="tracker-container">
+        <div class="tracker-step ${confClass}">
+          <div class="circle"><i class="fa-solid ${confIcon}"></i></div>
+          <span>Confirmed</span>
+        </div>
+        <div class="tracker-line ${line1Class}"></div>
+        <div class="tracker-step ${shipClass}">
+          <div class="circle"><i class="fa-solid ${shipIcon}"></i></div>
+          <span>Shipped</span>
+        </div>
+        <div class="tracker-line ${line2Class}"></div>
+        <div class="tracker-step ${delClass}">
+          <div class="circle"><i class="fa-solid ${delIcon}"></i></div>
+          <span>Delivered</span>
         </div>
       </div>
 
-      <div class="account-details">
-        <div class="acc-info-row"><i class="fa-solid fa-phone"></i> <span>${currentUser.phone}</span></div>
-        <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i> <span>${currentUser.address}</span></div>
+      <div class="order-grid-info">
+        <div><span>Customer:</span><b>${data.name || currentUser.name || 'Hy Business'}</b></div>
+        <div><span>Payment:</span><b>${data.payment || 'Cash on Delivery (COD)'}</b></div>
+        <div style="grid-column:1/-1"><span>Products:</span><b>${data.product || 'Wireless Bluetooth Headphones'}</b></div>
+        <div><span>Total Amount:</span><b style="color:var(--green)">Rs. ${data.price ? Number(data.price).toLocaleString() : '2500'}</b></div>
       </div>
 
-      <button class="secondary-btn" onclick="openChangePasswordModal()"><i class="fa-solid fa-key"></i> Change Password</button>
-      <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT ACCOUNT</button>
+      <div class="order-card-actions">
+        ${!isRejected ? `<button class="btn-cancel-small" onclick="cancelOrder('${data.orderId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>` : ''}
+        <button class="btn-delete-small" onclick="deleteOrder('${data.orderId}')"><i class="fa-solid fa-trash"></i> Delete</button>
+      </div>
     </div>
   `;
 }
 
-// Initial System Setup
-renderProducts();
-updateCart();
-fetchSheetData();
+async function renderOrdersPage(){
+  const box = document.getElementById("ordersListContainer");
 
-// Auto-Sync Order Status with Google Sheet every 4 Seconds
-setInterval(() => {
-  fetchSheetData();
-}, 4000);
+  if (!currentUser || !currentUser.email) {
+    box.innerHTML = `
+      <div class="order-card" style="text-align:center;padding:30px;">
+        <i class="fa-solid fa-lock fa-2x" style="color:var(--yellow);margin-bottom:10px;"></i>
+        <b style="display:block;font-size:15px;margin-bottom:5px;">Login / Account Required</b>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:15px;">Please set your Profile Email and details to view account orders.</p>
+        <button class="primary" style="max-width:200px;margin:auto;" onclick="switchPage('profile')">Go to Profile</button>
+      </div>`;
+    return;
+  }
+
+  let myOrders = userOrders.filter(o => typeof o === 'object' && o.email === currentUser.email);
+
+  if(!myOrders.length){ box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted)">No active orders found for ${currentUser.email}</div>`; return; }
+  
+  box.innerHTML = `<div style="text-align:center;padding:20px;color:var(--green)"><i class="fa-solid fa-spinner fa-spin"></i> Loading tracking details...</div>`;
+  let cardsHtml = "";
+  
+  for(let item of myOrders){
+    let id = item.id;
+    let isCancelled = item.cancelled;
+
+    if (isCancelled) {
+      cardsHtml += buildOrderCard({ orderId: id, status: "REJECTED" }, true);
+      continue;
+    }
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id));
+      const data = await response.json();
+      if(data.result === "success") {
+        cardsHtml += buildOrderCard(data, false);
+      } else {
+        cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
+      }
+    } catch(e) {
+      cardsHtml += buildOrderCard({ orderId: id, status: "CONFIRMED" }, false);
+    }
+  }
+  box.innerHTML = cardsHtml;
+}
+
+function cancelOrder(orderId) {
+  userOrders = userOrders.map(item => {
+    if (item.id === orderId) {
+      return { ...item, cancelled: true };
+    }
+    return item;
+  });
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  toast("Order Cancelled", `Order #${orderId} was marked as rejected.`);
+  renderOrdersPage();
+}
+
+function deleteOrder(orderId) {
+  userOrders = userOrders.filter(item => item.id !== orderId);
+  localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  toast("Order Deleted", `Order #${orderId} removed permanently.`);
+  renderOrdersPage();
+}
+
+function trackOrder(){
+  closeModal("trackModal");
+  if (!currentUser || !currentUser.email) {
+    toast("Login Required", "Please set Profile info first.");
+    return;
+  }
+  const query = document.getElementById("trackInput").value.trim();
+  if(!query) return;
+  
+  let exists = userOrders.find(item => item.id === query);
+  if (!exists) {
+    userOrders.unshift({ id: query, email: currentUser.email, cancelled: false });
+    localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+  }
+  switchPage('orders');
+}
+
+function renderProfilePage() {
+  const box = document.getElementById("profileContainer");
+  if (!currentUser) {
+    box.innerHTML = `
+      <div class="account-card">
+        <h3 style="margin-bottom:15px;font-size:16px;">Set Account Profile</h3>
+        <form id="profileForm">
+          <div class="field"><label>Full Name</label><input id="pName" required placeholder="John Doe"></div>
+          <div class="field"><label>Email Address</label><input type="email" id="pEmail" required placeholder="name@email.com"></div>
+          <div class="field"><label>Phone Number</label><input id="pPhone" required placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Default Address</label><textarea id="pAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+          <button class="primary" type="submit">SAVE PROFILE</button>
+        </form>
+      </div>`;
+    document.getElementById("profileForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      currentUser = {
+        name: document.getElementById("pName").value.trim(),
+        email: document.getElementById("pEmail").value.trim().toLowerCase(),
+        phone: document.getElementById("pPhone").value.trim(),
+        address: document.getElementById("pAddress").value.trim()
+      };
+      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+      toast("Profile Saved", "Your information has been updated.");
+      renderProfilePage();
+    });
+  } else {
+    box.innerHTML = `
+      <div class="account-card">
+        <div class="account">
+          <div class="avatar">${currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}</div>
+          <div>
+            <b style="font-size:16px;">${currentUser.name || 'User'}</b>
+            <small style="display:block;color:var(--muted);">${currentUser.email}</small>
+          </div>
+        </div>
+        <div class="account-details">
+          <div class="acc-info-row"><i class="fa-solid fa-phone"></i><span>${currentUser.phone || 'N/A'}</span></div>
+          <div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><span>${currentUser.address || 'N/A'}</span></div>
+        </div>
+        <button class="btn-logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> Clear Profile Data</button>
+      </div>`;
+  }
+}
+
+function logoutUser() {
+  localStorage.removeItem("hy_user_session");
+  currentUser = null;
+  toast("Logged Out", "Session cleared successfully.");
+  renderProfilePage();
+}
+
+window.onload = function() {
+  fetchSheetProducts();
+  saveCart();
+};
 </script>
-
 </body>
 </html>
