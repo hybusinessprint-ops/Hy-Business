@@ -66,7 +66,7 @@
       backdrop-filter:blur(18px);
       border-bottom:1px solid var(--border)
     }
-    .logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:.5px;cursor:pointer;line-height:1}.logo img{width:42px;height:42px;object-fit:contain;border-radius:9px}.logo-text{display:flex;flex-direction:column}
+    .logo{font-size:21px;font-weight:800;letter-spacing:.5px;cursor:pointer;line-height:1}
     .logo b{color:var(--primary)}
     .logo small{display:block;margin-top:5px;font-size:7px;letter-spacing:2.2px;color:var(--muted);font-weight:500}
     .head-actions{display:flex;gap:8px}
@@ -273,29 +273,6 @@
     .nav-btn i{font-size:16px}
     .nav-btn.active-nav{color:var(--primary)}
 
-
-    /* =========================
-       PROFESSIONAL ACCOUNT UI
-       ========================= */
-    .auth-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
-    .auth-choice-btn{padding:16px 12px;border-radius:14px;background:linear-gradient(145deg,#0e1729,#08101d);border:1px solid var(--border);color:#fff;text-align:left;transition:.2s}
-    .auth-choice-btn:hover{transform:translateY(-2px);border-color:rgba(24,169,255,.45);box-shadow:0 12px 30px rgba(0,0,0,.25)}
-    .auth-choice-btn i{font-size:20px;color:var(--primary);margin-bottom:10px}
-    .auth-choice-btn b{display:block;font-size:13px;margin-bottom:3px}
-    .auth-choice-btn small{color:var(--muted);font-size:9px;line-height:1.5}
-    .auth-panel{width:min(480px,100%);margin:0 auto;padding:22px;border-radius:20px;background:linear-gradient(145deg,#0d1728,#080f1b);border:1px solid var(--border);box-shadow:var(--shadow)}
-    .auth-brand{text-align:center;margin-bottom:18px}
-    .auth-brand img{width:58px;height:58px;object-fit:contain;margin:0 auto 10px;border-radius:14px}
-    .auth-brand h3{font-size:18px;margin-bottom:4px}.auth-brand p{font-size:10px;color:var(--muted)}
-    .auth-tabs{display:flex;gap:6px;padding:5px;background:#060c17;border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
-    .auth-tab{flex:1;padding:9px;border-radius:8px;background:transparent;color:var(--muted);font-size:11px;font-weight:800}.auth-tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff}
-    .auth-link{background:none;color:var(--primary);font-size:10px;font-weight:700;padding:0}.auth-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-    .auth-note{padding:10px;border-radius:10px;background:rgba(24,169,255,.07);border:1px solid rgba(24,169,255,.16);color:#b8dfff;font-size:9px;line-height:1.6;margin-bottom:12px}
-    .account-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:15px}.account-menu button{padding:10px;border-radius:10px;color:#dbeafe;background:var(--surface-3);border:1px solid var(--border);font-size:10px;font-weight:700}.account-menu button:hover{border-color:rgba(24,169,255,.35)}
-    .password-strength{height:4px;border-radius:10px;background:#172238;overflow:hidden;margin-top:6px}.password-strength span{display:block;height:100%;width:0;background:var(--primary);transition:.2s}
-    .save-password-box{text-align:center;padding:6px}.save-password-box .save-icon{width:58px;height:58px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;color:var(--primary);background:rgba(24,169,255,.1);font-size:22px}.save-password-box h3{font-size:16px;margin-bottom:6px}.save-password-box p{font-size:10px;color:var(--muted);line-height:1.6;margin-bottom:16px}.save-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.save-actions button{padding:11px;border-radius:10px;font-size:11px;font-weight:800}.save-ok{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2))}.save-no{color:#dbeafe;background:var(--surface-3);border:1px solid var(--border)}
-    @media(max-width:680px){.auth-choice{grid-template-columns:1fr}.account-menu{grid-template-columns:1fr 1fr}.logo img{width:36px;height:36px}.logo{gap:8px}.logo small{font-size:6px}}
-
     @media(max-width:950px){
       .products{grid-template-columns:repeat(3,1fr)}
       .hero{grid-template-columns:1fr}
@@ -346,8 +323,8 @@
 
   <header>
     <div class="logo" onclick="switchPage('home')">
-      <img src="logo.png" alt="HY Store Logo" onerror="this.style.display='none'">
-      <div class="logo-text">HY <b>STORE</b><small>OFFICIAL ONLINE STORE</small></div>
+      HY <b>STORE</b>
+      <small>OFFICIAL ONLINE STORE</small>
     </div>
     <div class="head-actions">
       <button class="iconbtn" aria-label="Orders" onclick="switchPage('orders')"><i class="fa-solid fa-box"></i></button>
@@ -454,28 +431,6 @@
     </div>
   </div>
 
-
-  <div class="modal" id="authModal" role="dialog" aria-modal="true">
-    <div class="modalbox">
-      <div class="modalhead"><b><i class="fa-solid fa-user-shield"></i> HY STORE ACCOUNT</b><button class="close" onclick="closeModal('authModal')">×</button></div>
-      <div class="modalbody" id="authBody"></div>
-    </div>
-  </div>
-
-  <div class="modal" id="savePasswordModal" role="dialog" aria-modal="true">
-    <div class="modalbox">
-      <div class="modalhead"><b><i class="fa-solid fa-key"></i> Password Saved</b><button class="close" onclick="closeModal('savePasswordModal')">×</button></div>
-      <div class="modalbody">
-        <div class="save-password-box">
-          <div class="save-icon"><i class="fa-solid fa-shield-halved"></i></div>
-          <h3>Save your account for next time?</h3>
-          <p>Your account session will stay active on this device until you log out. You won't need to enter your password again while you're logged in.</p>
-          <div class="save-actions"><button class="save-ok" onclick="rememberLogin(true)">OK, SAVE</button><button class="save-no" onclick="rememberLogin(false)">NOT NOW</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="modal" id="checkoutModal" role="dialog" aria-modal="true">
     <div class="modalbox">
       <div class="modalhead">
@@ -498,17 +453,6 @@
           <button class="primary" type="submit">PLACE ORDER NOW <i class="fa-solid fa-arrow-right"></i></button>
         </form>
       </div>
-    </div>
-  </div>
-
-  <div class="modal" id="changePasswordModal" role="dialog" aria-modal="true">
-    <div class="modalbox"><div class="modalhead"><b><i class="fa-solid fa-key"></i> Change Password</b><button class="close" onclick="closeModal('changePasswordModal')">×</button></div>
-      <div class="modalbody"><form id="changePasswordForm" onsubmit="changePassword(event)">
-        <div class="field"><label>Old Password</label><input id="oldPassword" type="password" required autocomplete="current-password" placeholder="Enter old password"></div>
-        <div class="field"><label>New Password</label><input id="newPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="Enter new password"></div>
-        <div class="field"><label>Confirm New Password</label><input id="confirmNewPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm new password"></div>
-        <button class="primary" style="width:100%" type="submit">UPDATE PASSWORD <i class="fa-solid fa-check"></i></button>
-      </form></div>
     </div>
   </div>
 
@@ -916,11 +860,6 @@
     });
 
     function openCheckout() {
-      if (!currentUser || !currentUser.email) {
-        openAuthModal('login');
-        toast("Login Required", "Please login or create an account before ordering.");
-        return;
-      }
       if (!cart.length) {
         toast("Cart Empty", "Add a product before checkout.");
         return;
@@ -943,7 +882,6 @@
        ========================= */
     $("checkoutForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      if (!currentUser || !currentUser.email) { closeModal("checkoutModal"); openAuthModal("login"); toast("Login Required", "Please login before placing an order."); return; }
 
       if (!cart.length) {
         toast("Cart Empty", "Please add a product first.");
@@ -974,7 +912,7 @@
           body:JSON.stringify(payload)
         });
 
-        userOrders = [{id:orderId,email:currentUser.email}, ...userOrders.filter(item => (typeof item === 'object' ? item.id : item) !== orderId)];
+        userOrders = [orderId, ...userOrders.filter(id => id !== orderId)];
         localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
 
         const msg =
@@ -1010,51 +948,50 @@
        ========================= */
     async function renderOrdersPage() {
       const box = $("ordersListContainer");
-      if (!currentUser || !currentUser.email) {
+
+      if (!userOrders.length) {
         box.innerHTML = `
-          <div class="order-card" style="text-align:center;padding:35px">
-            <i class="fa-solid fa-lock" style="font-size:30px;color:var(--primary);margin-bottom:12px"></i>
-            <b style="display:block;font-size:15px;margin-bottom:6px">Login Required</b>
-            <p style="color:var(--muted);font-size:10px;line-height:1.7;margin-bottom:16px">Please login to your HY STORE account to view your orders and tracking history.</p>
-            <button class="primary" onclick="openAuthModal('login')">LOGIN TO ACCOUNT <i class="fa-solid fa-arrow-right"></i></button>
+          <div class="order-card" style="text-align:center;color:var(--muted);padding:35px">
+            <i class="fa-solid fa-box-open" style="font-size:26px;color:var(--primary);margin-bottom:10px"></i>
+            <div style="font-size:12px">No orders found in history.</div>
           </div>`;
         return;
       }
 
-      // Keep compatibility with older local order IDs.
-      userOrders = userOrders.map(item => typeof item === 'string' ? {id:item,email:currentUser.email} : item);
-      localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
-      const myOrders = userOrders.filter(item => item && item.email === currentUser.email);
+      box.innerHTML = `
+        <div style="text-align:center;padding:22px;color:var(--primary);font-size:11px">
+          <i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...
+        </div>`;
 
-      if (!myOrders.length) {
-        box.innerHTML = `<div class="order-card" style="text-align:center;color:var(--muted);padding:35px"><i class="fa-solid fa-box-open" style="font-size:26px;color:var(--primary);margin-bottom:10px"></i><div style="font-size:12px">No orders found for ${escapeHTML(currentUser.email)}.</div></div>`;
-        return;
-      }
-
-      box.innerHTML = `<div style="text-align:center;padding:22px;color:var(--primary);font-size:11px"><i class="fa-solid fa-spinner fa-spin"></i> Fetching order status...</div>`;
       let cards = "";
-      for (const item of myOrders) {
-        const id = item.id;
+
+      for (const id of userOrders) {
         try {
-          const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(), {cache:"no-store"});
+          const response = await fetch(
+            GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(),
+            {cache:"no-store"}
+          );
           const data = await response.json();
-          cards += data.result === "success" ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
+
+          cards += data.result === "success"
+            ? buildOrderCard(data)
+            : buildOrderCard({orderId:id,status:"SUBMITTED"});
         } catch (error) {
           cards += buildOrderCard({orderId:id,status:"PENDING"});
         }
       }
+
       box.innerHTML = cards;
     }
 
     function trackOrder() {
-      if (!currentUser || !currentUser.email) {
-        openAuthModal('login');
-        toast("Login Required", "Please login before tracking an order.");
+      const query = $("trackInput").value.trim().toUpperCase();
+      if (!query) {
+        toast("Enter Order ID", "Example: HY1001");
         return;
       }
-      const query = $("trackInput").value.trim().toUpperCase();
-      if (!query) { toast("Enter Order ID", "Example: HY1001"); return; }
-      userOrders = [{id:query,email:currentUser.email}, ...userOrders.filter(item => (typeof item === 'object' ? item.id : item) !== query)];
+
+      userOrders = [query, ...userOrders.filter(id => id !== query)];
       localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
       renderOrdersPage();
     }
@@ -1080,125 +1017,73 @@
     /* =========================
        PROFILE
        ========================= */
-    /* =========================
-       PROFESSIONAL ACCOUNT SYSTEM
-       ========================= */
-    let authMode = "choice";
+    function saveUserProfile(event) {
+      event.preventDefault();
 
-    function getAccounts() {
-      return JSON.parse(localStorage.getItem("hy_store_accounts") || "[]");
-    }
-    function saveAccounts(accounts) {
-      localStorage.setItem("hy_store_accounts", JSON.stringify(accounts));
-    }
-    async function hashPassword(password) {
-      const data = new TextEncoder().encode(password);
-      const hash = await crypto.subtle.digest("SHA-256", data);
-      return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
-    }
-    function passwordScore(password) {
-      let score=0;
-      if(password.length>=8) score++; if(/[A-Z]/.test(password)) score++; if(/[0-9]/.test(password)) score++; if(/[^A-Za-z0-9]/.test(password)) score++;
-      return score;
-    }
-    function updatePasswordStrength(inputId, barId) {
-      const n=passwordScore($(inputId).value); const w=["0%","25%","50%","75%","100%"][n]; $(barId).style.width=w;
-    }
-    function openAuthModal(mode="choice") {
-      authMode=mode; renderAuth(); showModal("authModal");
-    }
-    function renderAuth() {
-      const body=$("authBody");
-      if(authMode==="choice") {
-        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Welcome to HY STORE</h3><p>Login to order products and manage your account.</p></div>
-          <div class="auth-choice"><button class="auth-choice-btn" onclick="authMode='login';renderAuth()"><i class="fa-solid fa-right-to-bracket"></i><b>LOGIN ACCOUNT</b><small>Already have an HY STORE account?</small></button>
-          <button class="auth-choice-btn" onclick="authMode='register';renderAuth()"><i class="fa-solid fa-user-plus"></i><b>CREATE ACCOUNT</b><small>Register with your email and mobile number.</small></button></div>`;
-        return;
-      }
-      if(authMode==="login") {
-        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Login to Your Account</h3><p>Use your registered email and password.</p></div>
-          <form onsubmit="loginAccount(event)">
-            <div class="field"><label>Email Address</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
-            <div class="field"><label>Password</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password"></div>
-            <div class="auth-row"><button type="button" class="auth-link" onclick="authMode='forgot';renderAuth()">Forgot Password?</button><button type="button" class="auth-link" onclick="authMode='register';renderAuth()">Create Account</button></div>
-            <button class="primary" style="width:100%;margin-top:14px" type="submit">LOGIN NOW <i class="fa-solid fa-arrow-right"></i></button>
-            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='choice';renderAuth()">← Back</button>
-          </form>`;
-        const remembered=JSON.parse(localStorage.getItem("hy_saved_login")||"null"); if(remembered && $("loginEmail")) $("loginEmail").value=remembered.email||"";
-      } else if(authMode==="register") {
-        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Register New Account</h3><p>Create your account once and stay signed in until logout.</p></div>
-          <form onsubmit="registerAccount(event)">
-            <div class="field"><label>Full Name</label><input id="regName" required autocomplete="name" placeholder="Enter your full name"></div>
-            <div class="field"><label>Email Address</label><input id="regEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
-            <div class="field"><label>Mobile Number</label><input id="regPhone" required autocomplete="tel" placeholder="03XXXXXXXXX"></div>
-            <div class="field"><label>Password</label><input id="regPassword" type="password" required minlength="8" autocomplete="new-password" oninput="updatePasswordStrength('regPassword','regStrength')" placeholder="Minimum 8 characters"><div class="password-strength"><span id="regStrength"></span></div></div>
-            <div class="field"><label>Confirm Password</label><input id="regConfirm" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm password"></div>
-            <div class="field"><label>Delivery Address</label><textarea id="regAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
-            <button class="primary" style="width:100%" type="submit">CREATE ACCOUNT <i class="fa-solid fa-user-check"></i></button>
-            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='login';renderAuth()">Already have an account? Login</button>
-          </form>`;
-      } else {
-        body.innerHTML=`<div class="auth-brand"><div class="save-icon" style="width:58px;height:58px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;color:var(--primary);background:rgba(24,169,255,.1);font-size:22px"><i class="fa-solid fa-key"></i></div><h3>Reset Password</h3><p>Enter your registered email and choose a new password.</p></div>
-          <form onsubmit="resetPassword(event)">
-            <div class="field"><label>Registered Email</label><input id="forgotEmail" type="email" required placeholder="name@example.com"></div>
-            <div class="field"><label>New Password</label><input id="forgotPassword" type="password" required minlength="8" placeholder="New password"></div>
-            <div class="field"><label>Confirm New Password</label><input id="forgotConfirm" type="password" required minlength="8" placeholder="Confirm new password"></div>
-            <button class="primary" style="width:100%" type="submit">RESET PASSWORD</button>
-            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='login';renderAuth()">← Back to Login</button>
-          </form>`;
-      }
-    }
-    async function registerAccount(e) {
-      e.preventDefault();
-      const name=$("regName").value.trim(), email=$("regEmail").value.trim().toLowerCase(), phone=$("regPhone").value.trim(), password=$("regPassword").value, confirm=$("regConfirm").value, address=$("regAddress").value.trim();
-      if(password!==confirm){toast("Password Error","Passwords do not match.");return;}
-      if(password.length<8){toast("Weak Password","Use at least 8 characters.");return;}
-      const accounts=getAccounts(); if(accounts.some(a=>a.email===email)){toast("Account Exists","This email is already registered. Please login.");authMode="login";renderAuth();return;}
-      accounts.push({name,email,phone,address,passwordHash:await hashPassword(password),createdAt:Date.now()}); saveAccounts(accounts);
-      currentUser={name,email,phone,address}; localStorage.setItem("hy_user_session",JSON.stringify(currentUser));
-      closeModal("authModal"); toast("Account Created","Welcome to HY STORE, "+name+"."); renderProfilePage();
-      setTimeout(()=>showModal("savePasswordModal"),250);
-    }
-    async function loginAccount(e) {
-      e.preventDefault(); const email=$("loginEmail").value.trim().toLowerCase(), password=$("loginPassword").value; const account=getAccounts().find(a=>a.email===email);
-      if(!account){toast("Account Not Found","Please register an account first.");return;}
-      if(account.passwordHash!==await hashPassword(password)){toast("Login Failed","Incorrect email or password.");return;}
-      currentUser={name:account.name,email:account.email,phone:account.phone,address:account.address}; localStorage.setItem("hy_user_session",JSON.stringify(currentUser));
-      userOrders=userOrders.map(item=>typeof item==='string'?{id:item,email:email}:item); localStorage.setItem("hy_user_orders",JSON.stringify(userOrders));
-      closeModal("authModal"); toast("Login Successful","Welcome back, "+account.name+"."); renderProfilePage(); setTimeout(()=>showModal("savePasswordModal"),250);
-    }
-    function rememberLogin(save) {
-      if(save && currentUser) localStorage.setItem("hy_saved_login",JSON.stringify({email:currentUser.email})); else localStorage.removeItem("hy_saved_login");
-      closeModal("savePasswordModal");
-    }
-    async function resetPassword(e) {
-      e.preventDefault(); const email=$("forgotEmail").value.trim().toLowerCase(), pass=$("forgotPassword").value, confirm=$("forgotConfirm").value; if(pass!==confirm){toast("Password Error","Passwords do not match.");return;}
-      const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===email); if(i<0){toast("Email Not Found","No account is registered with this email.");return;} if(pass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
-      accounts[i].passwordHash=await hashPassword(pass); saveAccounts(accounts); toast("Password Changed","You can now login with your new password."); authMode="login"; renderAuth();
-    }
-    function openChangePassword() {
-      if(!currentUser){openAuthModal('login');return;}
-      showModal("changePasswordModal");
-    }
-    async function changePassword(e) {
-      e.preventDefault(); const oldPass=$("oldPassword").value,newPass=$("newPassword").value,confirm=$("confirmNewPassword").value; if(newPass!==confirm){toast("Password Error","New passwords do not match.");return;}
-      const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===currentUser.email); if(i<0){toast("Account Error","Account record not found.");return;} if(accounts[i].passwordHash!==await hashPassword(oldPass)){toast("Password Error","Old password is incorrect.");return;} if(newPass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
-      accounts[i].passwordHash=await hashPassword(newPass); saveAccounts(accounts); closeModal("changePasswordModal"); $("changePasswordForm").reset(); toast("Password Changed","Your password has been updated successfully.");
-    }
-    function logoutUser() {
-      localStorage.removeItem("hy_user_session");
-      currentUser=null;
-      toast("Logged Out","You have been logged out successfully.");
+      currentUser = {
+        name:$("lName").value.trim(),
+        phone:$("lPhone").value.trim(),
+        email:$("lEmail").value.trim(),
+        address:$("lAddress").value.trim()
+      };
+
+      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+      toast("Profile Saved", "Account information has been updated.");
       renderProfilePage();
     }
+
+    function logoutUser() {
+      localStorage.removeItem("hy_user_session");
+      currentUser = null;
+      toast("Logged Out", "Your local account session was cleared.");
+      renderProfilePage();
+    }
+
     function renderProfilePage() {
-      const container=$("profileContainer");
-      if(!currentUser){
-        container.innerHTML=`<div class="auth-panel"><div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Welcome to HY STORE</h3><p>Login or create your account to place and track orders.</p></div><div class="auth-choice"><button class="auth-choice-btn" onclick="openAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i><b>LOGIN ACCOUNT</b><small>Sign in with your email and password.</small></button><button class="auth-choice-btn" onclick="openAuthModal('register')"><i class="fa-solid fa-user-plus"></i><b>CREATE ACCOUNT</b><small>Register your name, email and mobile.</small></button></div></div>`;
+      const container = $("profileContainer");
+
+      if (!currentUser) {
+        container.innerHTML = `
+          <div class="account-card">
+            <h3 style="margin-bottom:15px;font-size:16px">Save Account Details</h3>
+            <form onsubmit="saveUserProfile(event)">
+              <div class="field"><label>Full Name</label><input id="lName" required placeholder="Enter full name"></div>
+              <div class="field"><label>Phone Number</label><input id="lPhone" required placeholder="03XXXXXXXXX"></div>
+              <div class="field"><label>Email Address</label><input id="lEmail" type="email" required placeholder="name@example.com"></div>
+              <div class="field"><label>Shipping Address</label><textarea id="lAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+              <button class="primary" type="submit">SAVE PROFILE <i class="fa-solid fa-check"></i></button>
+            </form>
+          </div>`;
         return;
       }
-      const initial=escapeHTML(currentUser.name?currentUser.name.charAt(0).toUpperCase():"U");
-      container.innerHTML=`<div class="account-card"><div class="account"><div class="avatar">${initial}</div><div><h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3><span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span></div></div><div class="account-details"><div class="acc-info-row"><i class="fa-solid fa-envelope"></i><div><b>Email:</b> ${escapeHTML(currentUser.email)}</div></div><div class="acc-info-row"><i class="fa-solid fa-phone"></i><div><b>Phone:</b> ${escapeHTML(currentUser.phone||"N/A")}</div></div><div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><div><b>Address:</b> ${escapeHTML(currentUser.address||"N/A")}</div></div></div><div class="account-menu"><button onclick="switchPage('orders')"><i class="fa-solid fa-box"></i> MY ORDERS</button><button onclick="openChangePassword()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button></div><button class="btn-logout" style="margin-top:12px" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button></div>`;
+
+      const initial = escapeHTML(currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U");
+
+      container.innerHTML = `
+        <div class="account-card">
+          <div class="account">
+            <div class="avatar">${initial}</div>
+            <div>
+              <h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3>
+              <span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span>
+            </div>
+          </div>
+
+          <div class="account-details">
+            <div class="acc-info-row">
+              <i class="fa-solid fa-phone"></i>
+              <div><b>Phone:</b> ${escapeHTML(currentUser.phone)}</div>
+            </div>
+            <div class="acc-info-row">
+              <i class="fa-solid fa-location-dot"></i>
+              <div><b>Address:</b> ${escapeHTML(currentUser.address)}</div>
+            </div>
+          </div>
+
+          <button class="btn-logout" onclick="logoutUser()">
+            <i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT
+          </button>
+        </div>`;
     }
 
     /* =========================
