@@ -666,8 +666,8 @@
     /* =========================
        HY STORE CONFIGURATION
        ========================= */
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
-    const BANNER_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
+    const ADMIN_API_URL = "https://script.google.com/macros/s/AKfycbwq760WbEHaADFTh4kHZNDo7N_AsZAyfOI45A8cU9SaLunzLQm0Q6wu2BR0mWGFuF43/exec";
+    const ADMIN_BANNER_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkm1VO6O3kEasPafEiX73zyqOdC5Fl23D-rsOMxmX5zs0Opva3ewzLyeyw-wjC1ElxKy6nCdPUZUwq/pub?gid=1586227627&single=true&output=csv";
     const WHATSAPP = "923209306672";
     const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80";
 
@@ -817,7 +817,7 @@
         </div>`;
 
       try {
-        const response = await fetch(GOOGLE_SCRIPT_URL + "?action=getProducts&t=" + Date.now(), {cache:"no-store"});
+        const response = await fetch(ADMIN_API_URL + "?action=getProducts&t=" + Date.now(), {cache:"no-store"});
         if (!response.ok) throw new Error("Product request failed");
 
         const data = await response.json();
@@ -826,12 +826,12 @@
           products = data.products.filter(p => p && p.id != null && p.name);
           renderProducts();
         } else {
-          showEmptyState("No products found in Google Sheet.");
+          showEmptyState("No products found in Admin.");
           showEmptyState("No featured products available.", "featuredGrid");
         }
       } catch (error) {
         console.error("Product sync error:", error);
-        showEmptyState("Failed to load products. Check Google Script permissions or connection.");
+        showEmptyState("Failed to load products. Please check Admin connection.");
         showEmptyState("Products could not be loaded.", "featuredGrid");
       }
     }
@@ -1073,7 +1073,7 @@
       };
 
       try {
-        await fetch(GOOGLE_SCRIPT_URL, {
+        await fetch(ADMIN_API_URL, {
           method:"POST",
           mode:"no-cors",
           headers:{"Content-Type":"text/plain;charset=utf-8"},
@@ -1142,7 +1142,7 @@
       for (const item of myOrders) {
         const id = item.id;
         try {
-          const response = await fetch(GOOGLE_SCRIPT_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(), {cache:"no-store"});
+          const response = await fetch(ADMIN_API_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(), {cache:"no-store"});
           const data = await response.json();
           cards += data.result === "success" ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
         } catch (error) {
@@ -1170,7 +1170,7 @@
       const orderId = escapeHTML(d.orderId || "N/A");
       const rejected = rawStatus.includes("REJECT");
 
-      // Google Sheet status controls the active step.
+      // Admin status controls the active step.
       // ORDERED/PENDING/CONFIRMED/READY = 0
       // SHIPPED = 1
       // IN TRANSIT / OUT FOR DELIVERY = 2
@@ -1220,7 +1220,7 @@
           </div>
           <div class="timeline-rejected">
             <i class="fa-solid fa-circle-xmark"></i>
-            <span>This order has been marked <b>Rejected</b> in Google Sheets.</span>
+            <span>This order has been marked <b>Rejected</b> by Admin.</span>
           </div>
         </div>` : `
         <div class="order-timeline">
