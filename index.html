@@ -1276,11 +1276,44 @@
       } catch (e) { console.warn("Order voice unavailable", e); }
     }
 
+    let pendingWhatsAppOrderId = null;
+    let whatsappReturnArmed = false;
+    let whatsappReturnTimer = null;
+
     function markOrderWhatsAppSent(orderId) {
       localStorage.setItem("hy_whatsapp_sent_" + orderId, "1");
       playOrderVoice();
       speakOrderConfirmation(orderId);
+      setTimeout(() => renderOrdersPage(), 200);
     }
+
+    function armWhatsAppReturn(orderId) {
+      pendingWhatsAppOrderId = orderId;
+      whatsappReturnArmed = true;
+      clearTimeout(whatsappReturnTimer);
+      whatsappReturnTimer = setTimeout(() => {
+        whatsappReturnArmed = false;
+      }, 30 * 60 * 1000);
+    }
+
+    function confirmWhatsAppAfterReturn() {
+      if (!whatsappReturnArmed || !pendingWhatsAppOrderId) return;
+      const orderId = pendingWhatsAppOrderId;
+      whatsappReturnArmed = false;
+      pendingWhatsAppOrderId = null;
+      clearTimeout(whatsappReturnTimer);
+      markOrderWhatsAppSent(orderId);
+    }
+
+    window.addEventListener("focus", () => {
+      if (whatsappReturnArmed) setTimeout(confirmWhatsAppAfterReturn, 350);
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && whatsappReturnArmed) {
+        setTimeout(confirmWhatsAppAfterReturn, 350);
+      }
+    });
 
     function isWhatsAppSent(orderId) {
       return localStorage.getItem("hy_whatsapp_sent_" + orderId) === "1";
@@ -1344,10 +1377,11 @@
           "_blank",
           "noopener,noreferrer"
         );
-        // Browser cannot verify WhatsApp delivery itself; this marks the web-side handoff.
+        // WhatsApp opens with the message as a draft. The customer sends it manually.
+        // When the customer returns to this website, the confirmation animation/sound is shown.
         if (whatsappWindow) {
-          markOrderWhatsAppSent(orderId);
-          setTimeout(() => renderOrdersPage(), 350);
+          armWhatsAppReturn(orderId);
+          toast("WhatsApp Ready", "Send the drafted message in WhatsApp, then return to this website.");
         } else {
           toast("WhatsApp Blocked", "Allow pop-ups to open the WhatsApp order message.");
         }
