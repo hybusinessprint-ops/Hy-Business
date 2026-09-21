@@ -743,6 +743,20 @@ header{background:#fff!important;color:#111!important;border-bottom:1px solid #d
 section,.app-view,main{color:#111}
 .payment-account .account-detail{background:#fff!important;color:#111!important;border-color:#ddd!important}
 .payment-account .account-detail span{color:#777!important}.payment-account .account-detail b{color:#111!important}
+
+/* FINAL BANNER + PAYMENT LOGO POLISH */
+.hero{margin-top:6px!important;margin-bottom:22px!important}
+.hero-slider{background:#fff!important;border:1px solid #e5e5e5!important;border-radius:18px!important;box-shadow:0 10px 28px rgba(0,0,0,.06)!important;height:250px!important}
+.slides{height:100%!important;align-items:stretch!important}
+.slide{height:100%!important;min-height:0!important;background:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.slide img{width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;object-position:center!important;background:#fff!important;filter:none!important}
+.slider-controls{bottom:10px!important}
+.dots{bottom:14px!important}
+.payment-method{display:flex!important;align-items:center!important;gap:12px!important;min-height:82px!important}
+.payment-method .payment-logo{width:42px!important;height:42px!important;object-fit:contain!important;flex:0 0 42px!important;background:#fff!important;border-radius:10px!important;padding:4px!important;border:1px solid #eee!important}
+.payment-method .payment-logo-fallback{width:42px!important;height:42px!important;display:grid!important;place-items:center!important;flex:0 0 42px!important;border-radius:10px!important;background:#111!important;color:#d4af37!important;font-weight:900!important;font-size:11px!important}
+.payment-method .method-copy{min-width:0}
+@media(max-width:720px){.hero-slider{height:185px!important}.hero{margin-top:4px!important;margin-bottom:18px!important}.slider-controls{bottom:8px!important}.dots{bottom:11px!important}}
 </style>
 
 </head>
@@ -866,8 +880,16 @@ section,.app-view,main{color:#111}
             <h3>Available Methods</h3>
             <div class="sub">Use either payment method.</div>
             <div class="payment-methods">
-              <div class="payment-method"><i class="fa-solid fa-mobile-screen-button"></i><b>JazzCash</b><span>0347830672</span></div>
-              <div class="payment-method"><i class="fa-solid fa-wallet"></i><b>EasyPaisa</b><span>0347830672</span></div>
+              <div class="payment-method">
+                <img class="payment-logo" src="jazzcash.png" alt="JazzCash logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+                <div class="payment-logo-fallback" style="display:none">JC</div>
+                <div class="method-copy"><b>JazzCash</b><span>0347830672</span></div>
+              </div>
+              <div class="payment-method">
+                <img class="payment-logo" src="easypaisa.png" alt="EasyPaisa logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+                <div class="payment-logo-fallback" style="display:none">EP</div>
+                <div class="method-copy"><b>EasyPaisa</b><span>0347830672</span></div>
+              </div>
             </div>
           </div>
         </div>
