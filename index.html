@@ -1427,7 +1427,13 @@
         try {
           const response = await fetch(ADMIN_API_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(), {cache:"no-store"});
           const data = await response.json();
-          cards += data.result === "success" ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
+          // Only render records that actually look like an Order.
+          // Payment-proof rows must never appear on the Orders page.
+          const isActualOrder = data && data.result === "success" &&
+            String(data.orderId || "").trim() &&
+            String(data.product || "").trim() &&
+            data.price !== undefined && data.price !== null && String(data.price).trim() !== "";
+          cards += isActualOrder ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
         } catch (error) {
           cards += buildOrderCard({orderId:id,status:"PENDING"});
         }
@@ -1450,7 +1456,12 @@
       try {
         const response = await fetch(ADMIN_API_URL + "?orderId=" + encodeURIComponent(query) + "&t=" + Date.now(), {cache:"no-store"});
         const data = await response.json();
-        box.innerHTML = data.result === "success"
+        // A payment-proof record can have the same Order ID, so reject it here.
+        const isActualOrder = data && data.result === "success" &&
+          String(data.orderId || "").trim() &&
+          String(data.product || "").trim() &&
+          data.price !== undefined && data.price !== null && String(data.price).trim() !== "";
+        box.innerHTML = isActualOrder
           ? buildOrderCard(data, {trackedOnly:true})
           : buildOrderCard({orderId:query,status:"NOT FOUND"}, {trackedOnly:true});
       } catch (error) {
@@ -1746,6 +1757,7 @@
 
       const payload = {
         action: "submitPaymentProof",
+        recordType: "PAYMENT",
         orderId,
         name,
         transactionId,
