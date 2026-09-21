@@ -1756,7 +1756,9 @@
       btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
 
       const payload = {
-        action: "submitPaymentProof",
+        // IMPORTANT: the Apps Script backend uses action=savePayment
+        // to route this record into the Payments sheet instead of Orders.
+        action: "savePayment",
         recordType: "PAYMENT",
         orderId,
         name,
