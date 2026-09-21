@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#070b14">
+  <meta name="theme-color" content="#c9a227">
   <meta name="description" content="HY STORE - Official Online Store">
   <title>HY STORE | Official Online Store</title>
 
@@ -510,6 +510,63 @@
 .payment-status-box{margin-top:16px;padding:12px;border-radius:12px;background:#08121f;border:1px solid var(--border);font-size:10px;color:var(--muted)}
 @media(max-width:720px){.payment-account{grid-template-columns:1fr}.payment-form-grid{grid-template-columns:1fr}.payment-form-grid .full{grid-column:auto}.payment-methods{grid-template-columns:1fr 1fr}}
 
+
+    /* HY STORE - White / Golden / Black Theme */
+    :root{
+      --bg:#ffffff;
+      --surface:#ffffff;
+      --surface-2:#f8f8f8;
+      --surface-3:#111111;
+      --header:rgba(255,255,255,.97);
+      --text:#111111;
+      --muted:#666666;
+      --primary:#c9a227;
+      --primary-2:#9f7c0b;
+      --accent:#d4af37;
+      --border:rgba(0,0,0,.10);
+      --shadow:0 18px 55px rgba(0,0,0,.12);
+    }
+    body{color:#111;background:#fff}
+    .topbar{background:#111;color:#ddd;border-bottom:1px solid #c9a227}
+    .topbar i{color:#d4af37}
+    header{background:#fff;border-bottom:1px solid rgba(0,0,0,.1)}
+    .logo span,.nav-link.active,.nav-link:hover{color:#c9a227}
+    .iconbtn{color:#111;background:#fff;border-color:rgba(0,0,0,.12)}
+    .iconbtn:hover{border-color:#c9a227}
+    .search{background:#fff;border-color:rgba(0,0,0,.15)}
+    .search input{color:#111}
+    .search button,.btn-primary,.detail-buy,.auth-tab.active,.cat.active{background:linear-gradient(135deg,#d4af37,#9f7c0b);color:#fff}
+    .search button{border:0}
+    .hero,.products-hero,.trust-card,.product,.order-card,.account-card,.auth-panel,.modal-box,.cart-panel,.track-box,.empty-box{background:#fff;color:#111;border-color:rgba(0,0,0,.1)}
+    .slide-content h1,.products-hero h1,.detail-info h2,.section-title,.account-card h2{color:#111}
+    .slide-content p,.products-hero p,.detail-desc,.gallery-hint,.detail-views,.product-toolbar-right,.product-toolbar small{color:#666}
+    .product{box-shadow:0 8px 25px rgba(0,0,0,.07)}
+    .product:hover{border-color:rgba(201,162,39,.55);box-shadow:0 18px 42px rgba(0,0,0,.12)}
+    .product-name,.product-meta span:first-child{color:#111}
+    .product-meta{border-top-color:rgba(0,0,0,.08)}
+    .product-meta i,.detail-price,.detail-feature i,.products-stat b{color:#c9a227}
+    .products-hero{background:linear-gradient(145deg,#fff,#f5f5f5)}
+    .product-toolbar,.products-stat,.detail-feature,.account-details,.order-grid-info,.track-form,.auth-tabs,.auth-choice-btn{background:#f7f7f7;border-color:rgba(0,0,0,.1)}
+    .track-form input,.field input,.field textarea,.field select{background:#fff;color:#111;border-color:rgba(0,0,0,.15)}
+    .track-form button,.detail-cart,.account-menu button,.close,.qty button{background:#111;color:#fff;border-color:#111}
+    .status.pending{color:#9f7c0b;background:rgba(201,162,39,.12);border-color:rgba(201,162,39,.3)}
+    .order-card{box-shadow:0 12px 35px rgba(0,0,0,.08)}
+    .order-whatsapp-ok{color:#9f7c0b}
+    .order-delete-btn{background:#111;color:#fff}
+    .btn-logout{background:#f7f7f7}
+    .bottom-nav{background:rgba(255,255,255,.98);border-top:1px solid rgba(0,0,0,.1)}
+    .bottom-nav button{color:#666}.bottom-nav button.active{color:#c9a227}
+    footer{background:#111;color:#fff}
+    .modal-overlay{background:rgba(0,0,0,.72)}
+    .toast{background:#111;color:#fff;border:1px solid #c9a227}
+    .badge,.discount-badge{background:#111;color:#d4af37}
+    .gallery-label,.detail-cat{color:#9f7c0b;background:rgba(201,162,39,.1);border-color:rgba(201,162,39,.3)}
+    .gallery-arrow:hover{background:#c9a227}
+    .gallery-thumb.active{border-color:#c9a227;box-shadow:0 0 0 2px rgba(201,162,39,.15)}
+    .live-dot{background:#c9a227;box-shadow:0 0 0 4px rgba(201,162,39,.1)}
+    .auth-note{background:rgba(201,162,39,.08);border-color:rgba(201,162,39,.2);color:#6f5600}
+    .password-strength span{background:#c9a227}
+    .save-password-box .save-icon{color:#c9a227;background:rgba(201,162,39,.1)}
   </style>
 </head>
 
@@ -1427,13 +1484,7 @@
         try {
           const response = await fetch(ADMIN_API_URL + "?orderId=" + encodeURIComponent(id) + "&t=" + Date.now(), {cache:"no-store"});
           const data = await response.json();
-          // Only render records that actually look like an Order.
-          // Payment-proof rows must never appear on the Orders page.
-          const isActualOrder = data && data.result === "success" &&
-            String(data.orderId || "").trim() &&
-            String(data.product || "").trim() &&
-            data.price !== undefined && data.price !== null && String(data.price).trim() !== "";
-          cards += isActualOrder ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
+          cards += data.result === "success" ? buildOrderCard(data) : buildOrderCard({orderId:id,status:"SUBMITTED"});
         } catch (error) {
           cards += buildOrderCard({orderId:id,status:"PENDING"});
         }
@@ -1456,12 +1507,7 @@
       try {
         const response = await fetch(ADMIN_API_URL + "?orderId=" + encodeURIComponent(query) + "&t=" + Date.now(), {cache:"no-store"});
         const data = await response.json();
-        // A payment-proof record can have the same Order ID, so reject it here.
-        const isActualOrder = data && data.result === "success" &&
-          String(data.orderId || "").trim() &&
-          String(data.product || "").trim() &&
-          data.price !== undefined && data.price !== null && String(data.price).trim() !== "";
-        box.innerHTML = isActualOrder
+        box.innerHTML = data.result === "success"
           ? buildOrderCard(data, {trackedOnly:true})
           : buildOrderCard({orderId:query,status:"NOT FOUND"}, {trackedOnly:true});
       } catch (error) {
@@ -1756,10 +1802,7 @@
       btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
 
       const payload = {
-        // IMPORTANT: the Apps Script backend uses action=savePayment
-        // to route this record into the Payments sheet instead of Orders.
-        action: "savePayment",
-        recordType: "PAYMENT",
+        action: "submitPaymentProof",
         orderId,
         name,
         transactionId,
