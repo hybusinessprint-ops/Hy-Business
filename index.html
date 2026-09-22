@@ -902,6 +902,21 @@ footer,.bottom-nav{background:#002561 !important;color:#fff !important;border-co
 .product-detail-modal{color:#002561!important}
 /* Remove rounded corners from product cards only */
 .products .product{border-radius:0!important}
+
+<style id="hy-white-text-on-blue-final">
+/* FINAL: black/dark text appearing on HY STORE navy-blue areas -> white */
+.page-title,
+.page-title h1,
+.page-title h2,
+.page-title h3,
+header .logo,
+header .logo-text,
+.topbar,
+main,
+.app-view {
+  color:#fff !important;
+}
+</style>
 </style>
 </head>
 
@@ -1133,6 +1148,18 @@ footer,.bottom-nav{background:#002561 !important;color:#fff !important;border-co
           <button class="primary" type="submit">PLACE ORDER NOW <i class="fa-solid fa-arrow-right"></i></button>
         </form>
       </div>
+    </div>
+  </div>
+
+  <div class="modal" id="editProfileModal" role="dialog" aria-modal="true">
+    <div class="modalbox"><div class="modalhead"><b><i class="fa-solid fa-user-pen"></i> Edit Profile</b><button class="close" onclick="closeModal('editProfileModal')">×</button></div>
+      <div class="modalbody"><form id="editProfileForm" onsubmit="saveEditProfile(event)">
+        <div class="field"><label>Full Name</label><input id="editProfileName" required autocomplete="name" placeholder="Enter your full name"></div>
+        <div class="field"><label>Email Address</label><input id="editProfileEmail" type="email" readonly></div>
+        <div class="field"><label>Phone Number</label><input id="editProfilePhone" required autocomplete="tel" placeholder="03XXXXXXXXX"></div>
+        <div class="field"><label>Delivery Address</label><textarea id="editProfileAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+        <button class="primary" style="width:100%" type="submit">SAVE PROFILE <i class="fa-solid fa-check"></i></button>
+      </form></div>
     </div>
   </div>
 
@@ -2102,6 +2129,48 @@ footer,.bottom-nav{background:#002561 !important;color:#fff !important;border-co
       const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===email); if(i<0){toast("Email Not Found","No account is registered with this email.");return;} if(pass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
       accounts[i].passwordHash=await hashPassword(pass); saveAccounts(accounts); toast("Password Changed","You can now login with your new password."); authMode="login"; renderAuth();
     }
+    function openEditProfile() {
+      if(!currentUser){openAuthModal('login');return;}
+      $("editProfileName").value = currentUser.name || "";
+      $("editProfileEmail").value = currentUser.email || "";
+      $("editProfilePhone").value = currentUser.phone || "";
+      $("editProfileAddress").value = currentUser.address || "";
+      showModal("editProfileModal");
+    }
+
+    function saveEditProfile(e) {
+      e.preventDefault();
+      if(!currentUser){openAuthModal('login');return;}
+
+      const name = $("editProfileName").value.trim();
+      const phone = $("editProfilePhone").value.trim();
+      const address = $("editProfileAddress").value.trim();
+
+      if(!name || !phone || !address){
+        toast("Missing Details","Please complete all profile details.");
+        return;
+      }
+
+      const accounts = getAccounts();
+      const i = accounts.findIndex(a => a.email === currentUser.email);
+      if(i < 0){
+        toast("Account Error","Account record not found.");
+        return;
+      }
+
+      accounts[i].name = name;
+      accounts[i].phone = phone;
+      accounts[i].address = address;
+      saveAccounts(accounts);
+
+      currentUser = { ...currentUser, name, phone, address };
+      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+
+      closeModal("editProfileModal");
+      renderProfilePage();
+      toast("Profile Updated","Your profile has been updated successfully.");
+    }
+
     function openChangePassword() {
       if(!currentUser){openAuthModal('login');return;}
       showModal("changePasswordModal");
@@ -2124,7 +2193,7 @@ footer,.bottom-nav{background:#002561 !important;color:#fff !important;border-co
         return;
       }
       const initial=escapeHTML(currentUser.name?currentUser.name.charAt(0).toUpperCase():"U");
-      container.innerHTML=`<div class="account-card"><div class="account"><div class="avatar">${initial}</div><div><h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3><span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span></div></div><div class="account-details"><div class="acc-info-row"><i class="fa-solid fa-envelope"></i><div><b>Email:</b> ${escapeHTML(currentUser.email)}</div></div><div class="acc-info-row"><i class="fa-solid fa-phone"></i><div><b>Phone:</b> ${escapeHTML(currentUser.phone||"N/A")}</div></div><div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><div><b>Address:</b> ${escapeHTML(currentUser.address||"N/A")}</div></div></div><div class="account-menu"><button onclick="switchPage('orders')"><i class="fa-solid fa-box"></i> MY ORDERS</button><button onclick="switchPage('payment')"><i class="fa-solid fa-money-bill-transfer"></i> ACCOUNT PAYMENT</button><button onclick="openChangePassword()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button></div><button class="btn-logout" style="margin-top:12px" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button></div>`;
+      container.innerHTML=`<div class="account-card"><div class="account"><div class="avatar">${initial}</div><div><h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3><span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span></div></div><div class="account-details"><div class="acc-info-row"><i class="fa-solid fa-envelope"></i><div><b>Email:</b> ${escapeHTML(currentUser.email)}</div></div><div class="acc-info-row"><i class="fa-solid fa-phone"></i><div><b>Phone:</b> ${escapeHTML(currentUser.phone||"N/A")}</div></div><div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><div><b>Address:</b> ${escapeHTML(currentUser.address||"N/A")}</div></div></div><div class="account-menu"><button onclick="switchPage('orders')"><i class="fa-solid fa-box"></i> MY ORDERS</button><button onclick="switchPage('payment')"><i class="fa-solid fa-money-bill-transfer"></i> ACCOUNT PAYMENT</button><button onclick="openChangePassword()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button><button onclick="openEditProfile()"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</button></div><button class="btn-logout" style="margin-top:12px" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button></div>`;
     }
 
 
