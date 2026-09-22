@@ -839,6 +839,70 @@ footer,.bottom-nav{background:#002561 !important;color:#fff !important;border-co
 .payment-method .payment-logo,.payment-logo-img{background:#fff !important;}
 </style>
 
+
+<style id="hy-remove-black-and-banner-strip">
+/* FINAL REQUEST: no black surfaces + remove white strip under banners */
+.iconbtn,.close,.detail-cart,.products-stat,.account-menu button,.qty button,.gallery-arrow,.gallery-count,.thumb-number,.pimg:after,.toast{
+  background:#fff !important;
+  color:#002561 !important;
+  border-color:rgba(0,37,97,.25) !important;
+}
+.iconbtn:hover,.detail-qty-btn:hover,.qty button:hover,.gallery-arrow:hover{
+  background:#FF6D00 !important;
+  color:#fff !important;
+  border-color:#FF6D00 !important;
+}
+.products-stat b,.toast i{color:#FF6D00 !important;}
+/* remove any white separator/border directly around the hero banner */
+.hero-slider{
+  border:0 !important;
+  box-shadow:none !important;
+  background:#002561 !important;
+}
+.slide{background:#002561 !important;line-height:0 !important;}
+.slide img{
+  border:0 !important;
+  clip-path:inset(0 0 9px 0) !important;
+}
+/* any old black theme surfaces that remain */
+.search-wrapper .search,
+.track-form,
+.auth-tabs{
+  background:#fff !important;
+  color:#002561 !important;
+}
+.search input,.track-form input,.field input,.field textarea,.field select{
+  color:#002561 !important;
+}
+</style>
+
+
+<style id="hy-final-white-black-cleanup">
+/* FINAL PRODUCT CATALOG CLEANUP: no rounded product cards, no black surfaces */
+.product{border-radius:0!important;background:#002561!important;color:#fff!important}
+.product .pimg{border-radius:0!important;background:#fff!important}
+.product .pimg img{border-radius:0!important}
+.product .product-info,.product .product-name,.product .product-title{color:#fff!important}
+.product .product-price,.product .price{color:#FF6D00!important}
+.product .product-old,.product .old-price{color:#fff!important;opacity:.65}
+.product-meta{color:#fff!important;border-top-color:rgba(255,255,255,.35)!important}
+.product-meta span:first-child{color:#fff!important}
+.product-meta i{color:#FF6D00!important}
+.pimg:after{background:#fff!important;color:#002561!important}
+.products-hero,.product-toolbar{background:#fff!important;color:#002561!important}
+.products-hero h1,.products-hero p,.products-hero-copy,.products-hero-copy .eyebrow,.product-toolbar strong,.product-toolbar-right{color:#002561!important}
+.products-hero-copy .eyebrow i,.products-hero-copy .eyebrow{color:#FF6D00!important}
+.product-toolbar{border-color:rgba(0,37,97,.18)!important}
+/* Replace common black/dark surfaces with white */
+.detail-feature,.account-details,.order-grid-info,.track-form input,.auth-tabs,.auth-panel,.auth-choice-btn,.cart-thumb,.qty button,.save-no{background:#fff!important;color:#002561!important}
+.detail-qty-btn{background:#fff!important;color:#002561!important}
+.product-detail-modal .close{background:#fff!important;color:#002561!important;border-color:rgba(0,37,97,.2)!important}
+.product-detail-modal .modalhead{background:#fff!important;color:#002561!important}
+.product-detail-modal .modalbody{background:#fff!important;color:#002561!important}
+.product-detail-modal{color:#002561!important}
+/* Remove rounded corners from product cards only */
+.products .product{border-radius:0!important}
+</style>
 </head>
 
 <body>
