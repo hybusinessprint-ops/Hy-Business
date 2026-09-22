@@ -873,7 +873,11 @@ section,.app-view,main{color:#111}
             <h3>Payment Account</h3>
             <div class="sub">Send your payment to the account below, then submit your transaction details.</div>
             <div class="account-detail"><span>Account Title</span><b>Muhammad Ibrahim</b></div>
-            <div class="account-detail"><span>Account Number</span><b id="paymentAccountNumber">0347830672</b></div>
+            <div class="account-detail"><span>Account Number</span><b id="paymentAccountNumber">03478306672</b></div>
+            <div class="account-detail">
+              <span>IBAN Number</span>
+              <b id="paymentIbanNumber">PK10JCMA0310923478306672</b>
+            </div>
             <button class="copy-account" type="button" onclick="copyPaymentNumber()"><i class="fa-solid fa-copy"></i> COPY ACCOUNT NUMBER</button>
           </div>
           <div class="payment-card">
@@ -881,12 +885,12 @@ section,.app-view,main{color:#111}
             <div class="sub">Use either payment method.</div>
             <div class="payment-methods">
               <div class="payment-method">
-                <img class="payment-logo payment-logo-img" src="./jazzcash.png" alt="JazzCash logo">
-                <div class="method-copy"><b>JazzCash</b><span>0347830672</span></div>
+                <img class="payment-logo payment-logo-img" src="./jazzcash.svg" alt="JazzCash logo">
+                <div class="method-copy"><b>JazzCash</b><span>03478306672</span></div>
               </div>
               <div class="payment-method">
-                <img class="payment-logo payment-logo-img" src="./easypaisa.png" alt="EasyPaisa logo">
-                <div class="method-copy"><b>EasyPaisa</b><span>0347830672</span></div>
+                <img class="payment-logo payment-logo-img" src="./easypaisa.svg" alt="EasyPaisa logo">
+                <div class="method-copy"><b>EasyPaisa</b><span>03478306672</span></div>
               </div>
             </div>
           </div>
@@ -1988,7 +1992,7 @@ section,.app-view,main{color:#111}
     }
 
     function copyPaymentNumber(){
-      const number = "0347830672";
+      const number = "03478306672";
       if(navigator.clipboard){
         navigator.clipboard.writeText(number).then(()=>toast("Copied","Account number copied."));
       } else {
