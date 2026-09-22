@@ -930,6 +930,33 @@ header *, .topbar *, main *, .app-view *, .hero *, .product *, .order-card *, .a
 .search input,.track-form input,.field input,.field textarea,.field select{color:#fff!important}
 .search input::placeholder,.track-form input::placeholder,.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.72)!important}
 </style>
+
+<style id="hy-final-requested-fixes">
+/* Requested fixes: product names + payment account labels/values + profile text visibility */
+.product .pbody h3,
+.product h3,
+.product-name{color:#fff!important;}
+
+.payment-card .account-detail span,
+.payment-card .account-detail b,
+#paymentAccountNumber,
+#paymentIbanNumber{color:#fff!important;}
+
+/* Make Account Profile information readable on the navy card */
+.account-card .account-details{background:#002561!important;color:#fff!important;border-color:rgba(255,255,255,.22)!important;}
+.account-card .account-details .acc-info-row,
+.account-card .account-details .acc-info-row div,
+.account-card .account-details .acc-info-row b{color:#fff!important;}
+.account-card .account-details .acc-info-row i{color:#FF6D00!important;}
+
+/* Keep Edit Profile form text visible */
+.account-card input,
+.account-card textarea,
+.account-card select,
+#editProfileModal input,
+#editProfileModal textarea,
+#editProfileModal select{color:#fff!important;}
+</style>
 </head>
 
 <body>
