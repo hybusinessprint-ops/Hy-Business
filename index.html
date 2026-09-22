@@ -1055,6 +1055,66 @@ header *, .topbar *, main *, .app-view *, .hero *, .product *, .order-card *, .a
 }
 </style>
 
+
+<style id="hy-home-top-buttons-always-visible">
+/* HOME HEADER: always show the 3 top-right buttons */
+header .head-actions{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:8px!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+header .head-actions .iconbtn{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  visibility:visible!important;
+  opacity:1!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  background:#002561!important;
+  color:#fff!important;
+  border:1px solid rgba(0,37,97,.35)!important;
+  border-radius:11px!important;
+  position:relative!important;
+  z-index:10!important;
+}
+header .head-actions .iconbtn i{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  color:#fff!important;
+  font-size:15px!important;
+}
+header .head-actions .iconbtn:hover{
+  background:#FF6D00!important;
+  color:#fff!important;
+  border-color:#FF6D00!important;
+}
+header .head-actions .iconbtn:hover i{
+  color:#fff!important;
+}
+header .head-actions .badge{
+  display:grid!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+@media(max-width:680px){
+  header .head-actions{
+    display:flex!important;
+    gap:5px!important;
+  }
+  header .head-actions .iconbtn{
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
