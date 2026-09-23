@@ -1774,8 +1774,12 @@ header .head-actions .badge{
       quantity = Math.max(1, Number(quantity) || 1);
       const existing = cart.find(item => String(item.id) === String(id));
 
-      if (existing) existing.qty = Number(existing.qty || 1) + quantity;
-      else cart.push({...product, qty:quantity});
+      if (existing) {
+        existing.qty = Number(existing.qty || 1) + quantity;
+        existing.img = productImages(product)[0] || existing.img || FALLBACK_IMAGE;
+      } else {
+        cart.push({...product, img:productImages(product)[0] || FALLBACK_IMAGE, qty:quantity});
+      }
 
       saveCart();
       toast("Cart Updated", `${product.name} × ${quantity} added to your cart.`);
@@ -1811,10 +1815,15 @@ header .head-actions .badge{
         return;
       }
 
-      body.innerHTML = cart.map((p, i) => `
+      body.innerHTML = cart.map((p, i) => {
+        // Use the exact same primary image source used on the product cards.
+        // Older cart items may only have img1/img2/img3, so p.img alone is not enough.
+        const cartImage = productImages(p)[0] || FALLBACK_IMAGE;
+
+        return `
         <div class="cart-row">
           <div class="cart-thumb">
-            <img src="${escapeHTML(p.img || FALLBACK_IMAGE)}" alt="" onerror="this.src='${FALLBACK_IMAGE}'">
+            <img src="${escapeHTML(cartImage)}" alt="${escapeHTML(p.name || 'Product')}" onerror="this.onerror=null;this.src='${FALLBACK_IMAGE}'">
           </div>
           <div class="cart-info">
             <b>${escapeHTML(p.name)}</b>
@@ -1828,7 +1837,8 @@ header .head-actions .badge{
           <button class="remove" onclick="removeCart(${i})" aria-label="Remove">
             <i class="fa-solid fa-trash"></i>
           </button>
-        </div>`).join("") + `
+        </div>`;
+      }).join("") + `
         <div class="cart-summary">
           <div class="summary-line">
             <span>Total Items</span>
@@ -1849,7 +1859,7 @@ header .head-actions .badge{
       if (!product) return;
 
       quantity = Math.max(1, Number(quantity) || 1);
-      cart = [{...product, qty:quantity}];
+      cart = [{...product, img:productImages(product)[0] || FALLBACK_IMAGE, qty:quantity}];
       saveCart();
       openCheckout();
     }
