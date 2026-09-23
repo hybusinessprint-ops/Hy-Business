@@ -1126,6 +1126,52 @@ header .head-actions .badge{
 }
 .hero-slider{overflow:hidden!important;}
 </style>
+
+<style id="hy-payment-mobile-fix">
+/* FINAL PAYMENT PAGE MOBILE FIX — keeps the payment page inside the phone screen */
+.payment-wrap{width:100%!important;max-width:900px!important;min-width:0!important;overflow:hidden!important;}
+.payment-account,.payment-form-card,.payment-card,.payment-methods,.payment-method,.payment-form-grid,.payment-wrap .field{min-width:0!important;}
+.payment-account .account-detail{min-width:0!important;}
+.payment-account .account-detail b{
+  min-width:0!important;
+  max-width:100%!important;
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+  text-align:right!important;
+}
+.payment-method .method-copy{min-width:0!important;overflow:hidden!important;}
+.payment-method .method-copy b,.payment-method .method-copy span{
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+}
+.payment-form-grid .field,.payment-form-grid .full{min-width:0!important;}
+.payment-form-grid input,.payment-form-grid select,.payment-form-grid textarea{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+@media(max-width:720px){
+  .payment-wrap{width:100%!important;padding:0!important;overflow:hidden!important;}
+  .payment-account{grid-template-columns:1fr!important;width:100%!important;}
+  .payment-methods{grid-template-columns:1fr!important;width:100%!important;}
+  .payment-method{width:100%!important;}
+  .payment-form-grid{grid-template-columns:1fr!important;width:100%!important;}
+  .payment-form-grid .full{grid-column:1!important;}
+  .payment-card,.payment-form-card{width:100%!important;padding:16px!important;}
+  .payment-account .account-detail{display:flex!important;align-items:flex-start!important;gap:10px!important;}
+  .payment-account .account-detail span{flex:0 0 105px!important;}
+  .payment-account .account-detail b{flex:1 1 auto!important;}
+}
+@media(max-width:400px){
+  .payment-card,.payment-form-card{padding:14px!important;}
+  .payment-account .account-detail{gap:7px!important;}
+  .payment-account .account-detail span{flex:0 0 88px!important;font-size:9px!important;}
+  .payment-account .account-detail b{font-size:10px!important;}
+  .payment-method{padding:10px!important;}
+  .payment-method .payment-logo-img{width:64px!important;height:44px!important;flex:0 0 64px!important;}
+}
+</style>
+
 </head>
 
 <body>
