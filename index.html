@@ -1172,6 +1172,126 @@ header .head-actions .badge{
 }
 </style>
 
+
+<style id="hy-payment-mobile-final-fix">
+/* PAYMENT PAGE — FINAL MOBILE OVERFLOW FIX */
+.payment-wrap{
+  width:100% !important;
+  max-width:900px !important;
+  min-width:0 !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  overflow:visible !important;
+}
+.payment-account{
+  width:100% !important;
+  min-width:0 !important;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) !important;
+}
+.payment-card,.payment-form-card{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+.payment-account .account-detail{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:10px !important;
+}
+.payment-account .account-detail span{
+  flex:0 0 105px !important;
+  min-width:0 !important;
+}
+.payment-account .account-detail b{
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-all !important;
+  white-space:normal !important;
+  text-align:right !important;
+}
+.copy-account{max-width:100% !important;white-space:normal !important;overflow:hidden !important;}
+.payment-methods{
+  width:100% !important;
+  min-width:0 !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+}
+.payment-method{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+.payment-method .method-copy{
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+.payment-method .method-copy b,.payment-method .method-copy span{
+  display:block !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+.payment-form-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;min-width:0 !important;}
+.payment-form-grid .field,.payment-form-grid .full{min-width:0 !important;max-width:100% !important;}
+.payment-form-grid input,.payment-form-grid select,.payment-form-grid textarea{width:100% !important;min-width:0 !important;max-width:100% !important;}
+
+/* Use a wider breakpoint so phones/tablets cannot retain the desktop two-column layout. */
+@media (max-width:900px){
+  .payment-account{grid-template-columns:minmax(0,1fr) !important;}
+  .payment-form-grid{grid-template-columns:minmax(0,1fr) !important;}
+  .payment-form-grid .full{grid-column:1 !important;}
+  .payment-methods{grid-template-columns:minmax(0,1fr) !important;}
+  .payment-card,.payment-form-card{padding:16px !important;}
+}
+@media (max-width:500px){
+  .payment-wrap{padding:0 !important;}
+  .payment-card,.payment-form-card{padding:14px !important;border-radius:18px !important;}
+  .payment-account .account-detail{gap:7px !important;}
+  .payment-account .account-detail span{flex:0 0 92px !important;font-size:10px !important;}
+  .payment-account .account-detail b{font-size:10px !important;line-height:1.45 !important;}
+  .payment-method{padding:10px !important;}
+  .payment-method .payment-logo-img{width:64px !important;height:44px !important;flex:0 0 64px !important;}
+}
+</style>
+
+
+<style id="hy-final-account-chat-fixes">
+/* Fix the post-login password-save buttons so both are always visible. */
+.save-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important}
+.save-actions button{min-height:44px!important;padding:11px 10px!important;border-radius:10px!important;font-size:11px!important;font-weight:800!important;display:flex!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important}
+.save-actions .save-ok{background:#FF6D00!important;color:#fff!important;border:1px solid #FF6D00!important}
+.save-actions .save-no{background:#002561!important;color:#fff!important;border:1px solid #002561!important}
+.save-actions .save-ok:hover{background:#001A45!important;border-color:#001A45!important}
+.save-actions .save-no:hover{background:#FF6D00!important;border-color:#FF6D00!important}
+@media(max-width:420px){.save-actions{grid-template-columns:1fr!important}}
+
+/* HY STORE customer help chat */
+.hy-chat-launcher{position:fixed;right:18px;bottom:78px;z-index:95;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FF6D00!important;color:#fff!important;border:3px solid #fff!important;box-shadow:0 10px 28px rgba(0,0,0,.22);font-size:20px;cursor:pointer}
+.hy-chat-launcher:hover{background:#001A45!important;transform:translateY(-2px)}
+.hy-chat-panel{position:fixed;right:18px;bottom:140px;z-index:96;width:min(360px,calc(100vw - 28px));max-height:min(610px,calc(100vh - 175px));display:none;flex-direction:column;overflow:hidden;background:#fff!important;color:#111!important;border:1px solid rgba(0,37,97,.2);border-radius:18px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.hy-chat-panel.open{display:flex}
+.hy-chat-head{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;background:#002561!important;color:#fff!important}
+.hy-chat-head b{font-size:12px;color:#fff!important}.hy-chat-head small{display:block;margin-top:2px;font-size:8px;color:#dce7f7!important}
+.hy-chat-close{width:29px;height:29px;border-radius:8px;background:#fff!important;color:#002561!important;font-size:17px}
+.hy-chat-messages{padding:13px;overflow-y:auto;display:flex;flex-direction:column;gap:9px;background:#f7f9fc!important;min-height:150px}
+.hy-chat-msg{max-width:90%;padding:9px 11px;border-radius:12px;font-size:10px;line-height:1.55;white-space:pre-line}
+.hy-chat-msg.bot{align-self:flex-start;background:#fff!important;color:#222!important;border:1px solid #e1e6ee}
+.hy-chat-msg.user{align-self:flex-end;background:#002561!important;color:#fff!important}
+.hy-chat-actions{padding:10px;background:#fff!important;border-top:1px solid #e6e9ef;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.hy-chat-actions button{padding:9px 7px;border-radius:9px;background:#fff!important;color:#002561!important;border:1px solid #ccd6e4!important;font-size:9px;font-weight:800;cursor:pointer}
+.hy-chat-actions button:hover{background:#FF6D00!important;color:#fff!important;border-color:#FF6D00!important}
+@media(max-width:680px){.hy-chat-launcher{right:14px;bottom:72px;width:48px;height:48px}.hy-chat-panel{right:10px;bottom:128px;width:calc(100vw - 20px);max-height:calc(100vh - 160px)}}
+</style>
 </head>
 
 <body>
@@ -1329,6 +1449,25 @@ header .head-actions .badge{
       </div>
     </section>
   </main>
+
+
+  <!-- Customer Help Chat -->
+  <button class="hy-chat-launcher" id="hyChatLauncher" onclick="toggleHYChat()" aria-label="Open customer help chat"><i class="fa-solid fa-comments"></i></button>
+  <section class="hy-chat-panel" id="hyChatPanel" aria-label="HY STORE Customer Help Chat">
+    <div class="hy-chat-head">
+      <div><b><i class="fa-solid fa-robot"></i> HY STORE AI Help</b><small>Customer support assistant</small></div>
+      <button class="hy-chat-close" onclick="toggleHYChat(false)" aria-label="Close chat">×</button>
+    </div>
+    <div class="hy-chat-messages" id="hyChatMessages"><div class="hy-chat-msg bot">Hello! How can I help you today? Choose an option below.</div></div>
+    <div class="hy-chat-actions">
+      <button onclick="hyChatReply('create')">How do I create an account?</button>
+      <button onclick="hyChatReply('forgot')">How do I reset my password?</button>
+      <button onclick="hyChatReply('order')">How do I place an order?</button>
+      <button onclick="hyChatReply('track')">How can I track my order?</button>
+      <button onclick="hyChatReply('payment')">How do I make a payment?</button>
+      <button onclick="hyChatReply('support')">I need customer support</button>
+    </div>
+  </section>
 
   <nav class="bottomnav">
     <button class="nav-btn active-nav" id="nav-home" onclick="switchPage('home')"><i class="fa-solid fa-house"></i><span>HOME</span></button>
@@ -2460,6 +2599,21 @@ header .head-actions .badge{
       container.innerHTML=`<div class="account-card"><div class="account"><div class="avatar">${initial}</div><div><h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3><span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span></div></div><div class="account-details"><div class="acc-info-row"><i class="fa-solid fa-envelope"></i><div><b>Email:</b> ${escapeHTML(currentUser.email)}</div></div><div class="acc-info-row"><i class="fa-solid fa-phone"></i><div><b>Phone:</b> ${escapeHTML(currentUser.phone||"N/A")}</div></div><div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><div><b>Address:</b> ${escapeHTML(currentUser.address||"N/A")}</div></div></div><div class="account-menu"><button onclick="openEditProfile()"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</button><button onclick="switchPage('orders')"><i class="fa-solid fa-box"></i> ORDERS</button><button onclick="switchPage('payment')"><i class="fa-solid fa-money-bill-transfer"></i> ACCOUNT PAYMENTS</button><button onclick="openChangePassword()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button></div><button class="btn-logout" style="margin-top:12px" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button></div>`;
     }
 
+
+
+    /* =========================
+       CUSTOMER HELP CHAT
+       ========================= */
+    const hyChatReplies={
+      create:{q:"How do I create an account?",a:"To create an account, open the Account/Profile page and select CREATE ACCOUNT. Enter your full name, email, mobile number, password, and delivery address, then select CREATE ACCOUNT."},
+      forgot:{q:"How do I reset my password?",a:"Select LOGIN ACCOUNT, then choose Forgot Password?. Enter your registered email, create a new password, confirm it, and select RESET PASSWORD."},
+      order:{q:"How do I place an order?",a:"Add your product to the cart, open the cart, and select PROCEED TO CHECKOUT. Complete your customer details, choose a payment method, and select PLACE ORDER NOW."},
+      track:{q:"How can I track my order?",a:"Open the Orders page while logged in. Your order status and tracking timeline will be shown there. You can also use the order tracking option if you have an Order ID."},
+      payment:{q:"How do I make a payment?",a:"Open ACCOUNT PAYMENTS from your profile or the Payment page. Review the payment account details, send the payment, and submit your transaction details or proof as requested."},
+      support:{q:"I need customer support",a:"Please use the available customer support/contact option on the website. For an order issue, keep your Order ID, phone number, and payment details ready so support can help you faster."}
+    };
+    function toggleHYChat(force){const panel=$("hyChatPanel");if(!panel)return;const open=typeof force==="boolean"?force:!panel.classList.contains("open");panel.classList.toggle("open",open)}
+    function hyChatReply(key){const item=hyChatReplies[key],box=$("hyChatMessages");if(!item||!box)return;box.insertAdjacentHTML("beforeend",`<div class="hy-chat-msg user">${escapeHTML(item.q)}</div>`);box.insertAdjacentHTML("beforeend",`<div class="hy-chat-msg bot">${escapeHTML(item.a)}</div>`);box.scrollTop=box.scrollHeight}
 
     /* =========================
        PAYMENT / TRANSACTION PROOF
