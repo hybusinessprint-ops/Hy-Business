@@ -2128,6 +2128,194 @@ header .head-actions .badge{
   .toast-content span{font-size:8px!important}
 }
 
+
+/* =========================================================
+   HY STORE — PRODUCT HOVER ARROW + DETAIL TRANSITIONS
+   ========================================================= */
+
+/* Product card: mouse-over cue */
+#view-home .product,
+#view-products .product{
+  position:relative!important;
+  cursor:pointer!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+
+/* Soft orange sweep on hover */
+#view-home .product::before,
+#view-products .product::before{
+  content:""!important;
+  position:absolute!important;
+  top:0!important;
+  left:-120%!important;
+  width:70%!important;
+  height:100%!important;
+  z-index:3!important;
+  pointer-events:none!important;
+  background:linear-gradient(105deg,transparent 0%,rgba(255,109,0,.06) 45%,rgba(255,255,255,.16) 50%,rgba(255,109,0,.06) 55%,transparent 100%)!important;
+  transform:skewX(-15deg)!important;
+  transition:left .65s ease!important;
+}
+#view-home .product:hover::before,
+#view-products .product:hover::before{
+  left:145%!important;
+}
+
+/* Orange circular arrow appears over the product */
+#view-home .product::after,
+#view-products .product::after{
+  content:"\f061"!important;
+  position:absolute!important;
+  right:11px!important;
+  bottom:69px!important;
+  z-index:5!important;
+  width:34px!important;
+  height:34px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  background:#ff6d00!important;
+  color:#fff!important;
+  font-family:"Font Awesome 6 Free"!important;
+  font-weight:900!important;
+  font-size:12px!important;
+  box-shadow:0 7px 18px rgba(255,109,0,.30)!important;
+  opacity:0!important;
+  transform:translateX(12px) scale(.55) rotate(-20deg)!important;
+  transition:opacity .22s ease,transform .32s cubic-bezier(.2,.85,.2,1.2)!important;
+  pointer-events:none!important;
+}
+#view-home .product:hover::after,
+#view-products .product:hover::after,
+#view-home .product:focus-visible::after,
+#view-products .product:focus-visible::after{
+  opacity:1!important;
+  transform:translateX(0) scale(1) rotate(0)!important;
+  animation:hyArrowFloat 1.15s ease-in-out .25s infinite alternate!important;
+}
+@keyframes hyArrowFloat{
+  from{transform:translateX(0) scale(1) rotate(0)}
+  to{transform:translateX(3px) scale(1.05) rotate(0)}
+}
+
+/* Image gently zooms when mouse is over a product */
+#view-home .product:hover .pimg img,
+#view-products .product:hover .pimg img{
+  transform:scale(1.055)!important;
+}
+
+/* "Tap to view details" becomes more noticeable */
+#view-home .product:hover .product-meta span:first-child,
+#view-products .product:hover .product-meta span:first-child{
+  color:#ff6d00!important;
+  transition:color .2s ease!important;
+}
+
+/* ---------- Product detail modal entrance ---------- */
+#productModal.show{
+  animation:hyModalBackdrop .32s ease both!important;
+}
+@keyframes hyModalBackdrop{
+  from{background:rgba(0,0,0,0);backdrop-filter:blur(0)}
+  to{background:rgba(0,0,0,.72);backdrop-filter:blur(9px)}
+}
+
+#productModal.show .product-detail-modal{
+  animation:hyProductDetailIn .58s cubic-bezier(.18,.9,.22,1.08) both!important;
+  transform-origin:center center!important;
+}
+@keyframes hyProductDetailIn{
+  0%{
+    opacity:0;
+    transform:translateY(45px) scale(.88) rotateX(4deg);
+  }
+  55%{
+    opacity:1;
+    transform:translateY(-7px) scale(1.012) rotateX(0);
+  }
+  78%{
+    transform:translateY(2px) scale(.997);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* Detail header slides in */
+#productModal.show .product-detail-modal .modalhead{
+  animation:hyDetailHead .55s ease .12s both!important;
+}
+@keyframes hyDetailHead{
+  from{opacity:0;transform:translateY(-9px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Detail content */
+#productModal.show .product-detail{
+  animation:hyDetailContent .55s ease .18s both!important;
+}
+@keyframes hyDetailContent{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Main product image gets a separate entrance */
+#productModal.show .gallery-main img{
+  animation:hyDetailImage .75s cubic-bezier(.2,.85,.2,1) .22s both!important;
+}
+@keyframes hyDetailImage{
+  from{opacity:0;transform:scale(.88) translateY(12px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* Gallery image hover */
+#productModal .gallery-main{
+  overflow:hidden!important;
+}
+#productModal .gallery-main img{
+  transition:transform .45s ease,filter .35s ease!important;
+}
+#productModal .gallery-main:hover img{
+  transform:scale(1.035)!important;
+  filter:saturate(1.04)!important;
+}
+
+/* Detail buttons get a small premium lift */
+#productModal .detail-actions button,
+#productModal .gallery-arrow,
+#productModal .gallery-thumb{
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease!important;
+}
+#productModal .detail-actions button:hover,
+#productModal .gallery-arrow:hover{
+  transform:translateY(-2px)!important;
+}
+#productModal .gallery-thumb:hover{
+  transform:translateY(-2px)!important;
+  border-color:#ff6d00!important;
+}
+
+/* Mobile: smaller hover cue */
+@media(max-width:680px){
+  #view-home .product::after,
+  #view-products .product::after{
+    width:30px!important;
+    height:30px!important;
+    right:8px!important;
+    bottom:63px!important;
+    font-size:10px!important;
+  }
+  #productModal.show .product-detail-modal{
+    animation:hyProductDetailMobile .48s cubic-bezier(.18,.9,.22,1.05) both!important;
+  }
+  @keyframes hyProductDetailMobile{
+    from{opacity:0;transform:translateY(25px) scale(.94)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+}
+
 </style>
 </head>
 
