@@ -3751,22 +3751,23 @@ header .head-actions .badge{
 
     document.addEventListener("keydown", e => {
       if (e.key === "Escape") {
-        document.querySelectorAll(".modal.show").forEach(modal => closeModal(modal.id));
-      }
+        <script>
+/* Menu click karne par direct section par jump karega (bina scrolling ke) */
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", function(e) {
+        const targetId = this.getAttribute("href");
+        if(targetId.startsWith("#")) {
+            e.preventDefault();
+            const targetSection = document.querySelector(targetId);
+            if(targetSection) {
+                // Instant jump (no smooth scroll)
+                targetSection.scrollIntoView({ behavior: "auto" });
+                
+                // Mobile menu close karne ke liye
+                document.querySelector(".nav-links").classList.remove("open");
+                document.querySelector("#menuBtn i").className = "fa-solid fa-bars";
+            }
+        }
     });
-  </script>
-
-<script>
-(function(){
-  function syncHYCatalogCount(){
-    var a=document.getElementById('catalogTotal');
-    var b=document.getElementById('catalogTotalTop');
-    if(a && b) b.textContent=a.textContent||'0';
-  }
-  syncHYCatalogCount();
-  setInterval(syncHYCatalogCount,500);
-})();
+});
 </script>
-
-</body>
-</html>
