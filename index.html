@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,8 +217,6 @@
     .detail-total strong{display:block;margin-top:3px;color:#FF6D00;font-size:15px}
     .detail-cart{background:#111!important;color:#fff!important;border-color:#111!important}
     .detail-buy{background:linear-gradient(135deg,#FF6D00,#FF6D00)!important;color:#fff!important;box-shadow:0 10px 25px rgba(255,109,0,.22)!important}
-  </style>
-</head>
 
     @media(max-width:680px){
       .products-hero{align-items:stretch;flex-direction:column;padding:17px}.products-stat{min-width:0}.product-toolbar{padding:9px}.product-toolbar-right{display:none}
@@ -501,69 +498,11 @@
   right:12.5%;
   top:27px;
   height:4px;
-  background:rgba(255,255,255,.10);
   border-radius:99px;
-  overflow:hidden;
+  background:#263449;
+  z-index:0;
 }
-.timeline-line-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  border-radius:99px;
-  transition:width .4s ease;
-}
-.timeline-step{
-  position:relative;
-  z-index:2;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:9px;
-  color:var(--muted);
-  font-size:9px;
-  font-weight:700;
-}
-.timeline-icon{
-  width:56px;
-  height:56px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:#111c30;
-  border:2px solid rgba(255,255,255,.10);
-  color:#73839c;
-  font-size:17px;
-  transition:.3s;
-}
-.timeline-step.done{color:#fff}
-.timeline-step.done .timeline-icon{
-  color:#fff;
-  background:linear-gradient(135deg,var(--primary),var(--primary-2));
-  border-color:rgba(0,37,97,.8);
-  box-shadow:0 0 0 5px rgba(0,37,97,.10);
-}
-.timeline-step.current .timeline-icon{
-  color:#fff;
-  border-color:var(--accent);
-  box-shadow:0 0 0 5px rgba(255,109,0,.12);
-}
-.timeline-step small{
-  display:block;
-  margin-top:3px;
-  color:var(--muted);
-  font-size:7px;
-  font-weight:500;
-}
-@media(max-width:480px){
-  .order-timeline{padding:16px 9px}
-  .timeline-icon{width:43px;height:43px;font-size:14px}
-  .timeline-line{top:21px}
-  .timeline-step{font-size:8px}
-}
-</style>
-</head>
-  .timeline-progress{
+.timeline-progress{
   position:absolute;
   left:12.5%;
   top:27px;
@@ -659,7 +598,7 @@
   .timeline-step small{font-size:6px}
 }
 
-
+  
 /* =========================
    PAYMENT PAGE
    ========================= */
@@ -738,7 +677,7 @@
     .auth-note{background:rgba(255,109,0,.08);border-color:rgba(255,109,0,.2);color:#FF6D00}
     .password-strength span{background:#002561}
     .save-password-box .save-icon{color:#002561;background:rgba(255,109,0,.1)}
-
+  
 /* =========================
    FINAL WHITE / GOLD / BLACK THEME
    ========================= */
@@ -859,197 +798,6 @@ section,.app-view,main{color:#111}
   --primary:#FF6D00 !important;
   --primary-2:#FF6D00 !important;
   --accent:#FF6D00 !important;
-  header .head-actions .iconbtn:hover i{
-  color:#fff!important;
-}
-@media(max-width:680px){
-  header .head-actions{
-    display:flex!important;
-    gap:5px!important;
-  }
-  header .head-actions .iconbtn{
-    width:34px!important;
-    height:34px!important;
-    min-width:34px!important;
-  }
-}
-
-/* Keep header buttons visible on all screen sizes */
-header .head-actions .iconbtn{
-  flex-shrink:0!important;
-}
-</style>
-
-
-<style id="hy-mobile-layout-fixes">
-@media(max-width:680px){
-  header .container{
-    padding-left:12px!important;
-    padding-right:12px!important;
-  }
-  .logo{
-    font-size:17px!important;
-  }
-  .search-wrapper{
-    width:100%!important;
-  }
-  .search{
-    width:100%!important;
-  }
-  .products-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:10px!important;
-  }
-  .product{
-    min-width:0!important;
-  }
-  .product .pimg{
-    height:150px!important;
-  }
-  .product .pbody{
-    padding:10px!important;
-  }
-  .product .pbody h3{
-    font-size:11px!important;
-  }
-  .product .price{
-    font-size:13px!important;
-  }
-  .product-meta{
-    font-size:8px!important;
-  }
-  .products-hero{
-    padding:16px!important;
-  }
-  .products-hero h1{
-    font-size:22px!important;
-  }
-  .section-title{
-    font-size:19px!important;
-  }
-}
-</style>
-
-
-<style id="hy-order-tracking-mobile">
-@media(max-width:600px){
-  .timeline{
-    gap:2px!important;
-  }
-  .timeline-step{
-    min-width:0!important;
-    flex:1!important;
-  }
-  .timeline-dot{
-    width:36px!important;
-    height:36px!important;
-    font-size:13px!important;
-  }
-  .timeline-step b{
-    font-size:7px!important;
-    word-break:break-word!important;
-  }
-  .timeline-step small{
-    font-size:6px!important;
-  }
-  .order-card{
-    padding:13px!important;
-  }
-  .order-grid-info{
-    grid-template-columns:1fr 1fr!important;
-  }
-}
-</style>
-
-
-<style id="hy-modal-responsive">
-@media(max-width:600px){
-  .modal-box,.modalbox{
-    width:calc(100% - 20px)!important;
-    max-width:500px!important;
-    max-height:90vh!important;
-    overflow-y:auto!important;
-    margin:10px auto!important;
-  }
-  .modal-overlay{
-    padding:10px!important;
-    align-items:center!important;
-  }
-  .modal-body,.modalbody{
-    padding:14px!important;
-  }
-  .detail-layout{
-    grid-template-columns:1fr!important;
-  }
-  .detail-gallery{
-    max-height:300px!important;
-  }
-}
-</style>
-
-
-<style id="hy-final-button-consistency">
-button{
-  cursor:pointer;
-  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
-}
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible{
-  outline:2px solid #FF6D00!important;
-  outline-offset:2px!important;
-}
-</style>
-
-
-<style id="hy-accessibility-fixes">
-img{
-  max-width:100%;
-}
-input,select,textarea,button{
-  font-family:inherit;
-}
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-</style>
-
-
-<style id="hy-footer-polish">
-footer{
-  padding:30px 16px!important;
-  border-top:2px solid #FF6D00!important;
-}
-footer a{
-  color:#fff!important;
-}
-footer a:hover{
-  color:#FF6D00!important;
-}
-</style>
-
-
-<style id="hy-final-brand-colors">
-:root{
-  --hy-blue:#002561;
-  --hy-orange:#FF6D00;
-}
-.logo b,
-.logo small,
-.topbar i,
-.page-title i{
-  color:var(--hy-orange)!important;
-}
-.btn-primary,
-.primary,
-.search button{
-  background:var(--hy-orange)!important;
-  border-color:var(--hy-orange)!important;
-  color:#fff!important;
-}
-</style>
   --warning:#FF6D00 !important;
   --text:#fff !important;
   --muted:#fff !important;
@@ -1171,7 +919,6 @@ main,
 .app-view {
   color:#fff !important;
 }
-</style>
 </style>
 
 <style id="hy-final-blue-text-white">
@@ -1349,272 +1096,608 @@ header .head-actions .iconbtn:hover{
   color:#fff!important;
   border-color:#FF6D00!important;
 }
-header .head-actions .iconbtn:hover i{color:#fff!important;}
+header .head-actions .iconbtn:hover i{
+  color:#fff!important;
+}
+header .head-actions .badge{
+  display:grid!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+@media(max-width:680px){
+  header .head-actions{
+    display:flex!important;
+    gap:5px!important;
+  }
+  header .head-actions .iconbtn{
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+  }
+}
 </style>
+
+
+<style id="hy-banner-no-round">
+/* HOME BANNER: remove all rounded corners */
+.hero-slider,
+.hero-slider .slides,
+.hero-slider .slide,
+.hero-slider .slide img{
+  border-radius:0!important;
+}
+.hero-slider{overflow:hidden!important;}
+</style>
+
+<style id="hy-payment-mobile-fix">
+/* FINAL PAYMENT PAGE MOBILE FIX — keeps the payment page inside the phone screen */
+.payment-wrap{width:100%!important;max-width:900px!important;min-width:0!important;overflow:hidden!important;}
+.payment-account,.payment-form-card,.payment-card,.payment-methods,.payment-method,.payment-form-grid,.payment-wrap .field{min-width:0!important;}
+.payment-account .account-detail{min-width:0!important;}
+.payment-account .account-detail b{
+  min-width:0!important;
+  max-width:100%!important;
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+  text-align:right!important;
+}
+.payment-method .method-copy{min-width:0!important;overflow:hidden!important;}
+.payment-method .method-copy b,.payment-method .method-copy span{
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+}
+.payment-form-grid .field,.payment-form-grid .full{min-width:0!important;}
+.payment-form-grid input,.payment-form-grid select,.payment-form-grid textarea{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+@media(max-width:720px){
+  .payment-wrap{width:100%!important;padding:0!important;overflow:hidden!important;}
+  .payment-account{grid-template-columns:1fr!important;width:100%!important;}
+  .payment-methods{grid-template-columns:1fr!important;width:100%!important;}
+  .payment-method{width:100%!important;}
+  .payment-form-grid{grid-template-columns:1fr!important;width:100%!important;}
+  .payment-form-grid .full{grid-column:1!important;}
+  .payment-card,.payment-form-card{width:100%!important;padding:16px!important;}
+  .payment-account .account-detail{display:flex!important;align-items:flex-start!important;gap:10px!important;}
+  .payment-account .account-detail span{flex:0 0 105px!important;}
+  .payment-account .account-detail b{flex:1 1 auto!important;}
+}
+@media(max-width:400px){
+  .payment-card,.payment-form-card{padding:14px!important;}
+  .payment-account .account-detail{gap:7px!important;}
+  .payment-account .account-detail span{flex:0 0 88px!important;font-size:9px!important;}
+  .payment-account .account-detail b{font-size:10px!important;}
+  .payment-method{padding:10px!important;}
+  .payment-method .payment-logo-img{width:64px!important;height:44px!important;flex:0 0 64px!important;}
+}
+</style>
+
+
+<style id="hy-payment-mobile-final-fix">
+/* PAYMENT PAGE — FINAL MOBILE OVERFLOW FIX */
+.payment-wrap{
+  width:100% !important;
+  max-width:900px !important;
+  min-width:0 !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  overflow:visible !important;
+}
+.payment-account{
+  width:100% !important;
+  min-width:0 !important;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) !important;
+}
+.payment-card,.payment-form-card{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+.payment-account .account-detail{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:10px !important;
+}
+.payment-account .account-detail span{
+  flex:0 0 105px !important;
+  min-width:0 !important;
+}
+.payment-account .account-detail b{
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-all !important;
+  white-space:normal !important;
+  text-align:right !important;
+}
+.copy-account{max-width:100% !important;white-space:normal !important;overflow:hidden !important;}
+.payment-methods{
+  width:100% !important;
+  min-width:0 !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+}
+.payment-method{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+.payment-method .method-copy{
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+}
+.payment-method .method-copy b,.payment-method .method-copy span{
+  display:block !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+.payment-form-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;min-width:0 !important;}
+.payment-form-grid .field,.payment-form-grid .full{min-width:0 !important;max-width:100% !important;}
+.payment-form-grid input,.payment-form-grid select,.payment-form-grid textarea{width:100% !important;min-width:0 !important;max-width:100% !important;}
+
+/* Use a wider breakpoint so phones/tablets cannot retain the desktop two-column layout. */
+@media (max-width:900px){
+  .payment-account{grid-template-columns:minmax(0,1fr) !important;}
+  .payment-form-grid{grid-template-columns:minmax(0,1fr) !important;}
+  .payment-form-grid .full{grid-column:1 !important;}
+  .payment-methods{grid-template-columns:minmax(0,1fr) !important;}
+  .payment-card,.payment-form-card{padding:16px !important;}
+}
+@media (max-width:500px){
+  .payment-wrap{padding:0 !important;}
+  .payment-card,.payment-form-card{padding:14px !important;border-radius:18px !important;}
+  .payment-account .account-detail{gap:7px !important;}
+  .payment-account .account-detail span{flex:0 0 92px !important;font-size:10px !important;}
+  .payment-account .account-detail b{font-size:10px !important;line-height:1.45 !important;}
+  .payment-method{padding:10px !important;}
+  .payment-method .payment-logo-img{width:64px !important;height:44px !important;flex:0 0 64px !important;}
+}
+</style>
+
+
+<style id="hy-final-account-chat-fixes">
+/* Fix the post-login password-save buttons so both are always visible. */
+.save-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:9px!important}
+.save-actions button{min-height:44px!important;padding:11px 10px!important;border-radius:10px!important;font-size:11px!important;font-weight:800!important;display:flex!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important}
+.save-actions .save-ok{background:#FF6D00!important;color:#fff!important;border:1px solid #FF6D00!important}
+.save-actions .save-no{background:#002561!important;color:#fff!important;border:1px solid #002561!important}
+.save-actions .save-ok:hover{background:#001A45!important;border-color:#001A45!important}
+.save-actions .save-no:hover{background:#FF6D00!important;border-color:#FF6D00!important}
+@media(max-width:420px){.save-actions{grid-template-columns:1fr!important}}
+
+/* HY STORE customer help chat */
+.hy-chat-launcher{position:fixed;right:18px;bottom:78px;z-index:95;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FF6D00!important;color:#fff!important;border:3px solid #fff!important;box-shadow:0 10px 28px rgba(0,0,0,.22);font-size:20px;cursor:pointer}
+.hy-chat-launcher:hover{background:#001A45!important;transform:translateY(-2px)}
+.hy-chat-panel{position:fixed;right:18px;bottom:140px;z-index:96;width:min(360px,calc(100vw - 28px));max-height:min(610px,calc(100vh - 175px));display:none;flex-direction:column;overflow:hidden;background:#fff!important;color:#111!important;border:1px solid rgba(0,37,97,.2);border-radius:18px;box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.hy-chat-panel.open{display:flex}
+.hy-chat-head{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;background:#002561!important;color:#fff!important}
+.hy-chat-head b{font-size:12px;color:#fff!important}.hy-chat-head small{display:block;margin-top:2px;font-size:8px;color:#dce7f7!important}
+.hy-chat-close{width:29px;height:29px;border-radius:8px;background:#fff!important;color:#002561!important;font-size:17px}
+.hy-chat-messages{padding:13px;overflow-y:auto;display:flex;flex-direction:column;gap:9px;background:#f7f9fc!important;min-height:150px}
+.hy-chat-msg{max-width:90%;padding:9px 11px;border-radius:12px;font-size:10px;line-height:1.55;white-space:pre-line}
+.hy-chat-msg.bot{align-self:flex-start;background:#fff!important;color:#222!important;border:1px solid #e1e6ee}
+.hy-chat-msg.user{align-self:flex-end;background:#002561!important;color:#fff!important}
+.hy-chat-actions{padding:10px;background:#fff!important;border-top:1px solid #e6e9ef;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.hy-chat-actions button{padding:9px 7px;border-radius:9px;background:#fff!important;color:#002561!important;border:1px solid #ccd6e4!important;font-size:9px;font-weight:800;cursor:pointer}
+.hy-chat-actions button:hover{background:#FF6D00!important;color:#fff!important;border-color:#FF6D00!important}
+@media(max-width:680px){.hy-chat-launcher{right:14px;bottom:72px;width:48px;height:48px}.hy-chat-panel{right:10px;bottom:128px;width:calc(100vw - 20px);max-height:calc(100vh - 160px)}}
+
+/* =========================================================
+   HY STORE — PRODUCT CATALOG PREMIUM REDESIGN
+   Strong override layer; existing JS/product data untouched.
+   ========================================================= */
+
+#view-products{
+  padding-top:4px!important;
+}
+
+/* Branded catalog title */
+#view-products > .hy-catalog-title{
+  display:flex!important;
+  align-items:center!important;
+  gap:14px!important;
+  min-height:68px!important;
+  margin:0 0 14px!important;
+  padding:10px 14px!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,#001a45 0%,#002561 70%,#073676 100%)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.18)!important;
+  color:#fff!important;
+  border-left:4px solid #ff6d00!important;
+}
+#view-products > .hy-catalog-title .hy-page-logo{
+  width:46px!important;
+  height:46px!important;
+  flex:0 0 46px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:5px!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  border:1px solid rgba(255,255,255,.35)!important;
+  box-shadow:0 5px 15px rgba(0,0,0,.18)!important;
+}
+#view-products > .hy-catalog-title .hy-page-logo img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  border-radius:6px!important;
+}
+#view-products > .hy-catalog-title .hy-page-title-text{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  flex:1!important;
+}
+#view-products > .hy-catalog-title .hy-page-title-text strong{
+  font-size:19px!important;
+  line-height:1.1!important;
+  color:#fff!important;
+  letter-spacing:.1px!important;
+}
+#view-products > .hy-catalog-title .hy-page-title-text small{
+  margin-top:4px!important;
+  color:rgba(255,255,255,.65)!important;
+  font-size:9px!important;
+  font-weight:500!important;
+}
+#view-products > .hy-catalog-title .hy-page-count{
+  min-width:78px!important;
+  padding:8px 10px!important;
+  text-align:center!important;
+  border:1px solid rgba(255,109,0,.45)!important;
+  border-radius:10px!important;
+  background:rgba(255,109,0,.08)!important;
+}
+#view-products > .hy-catalog-title .hy-page-count b{
+  display:block!important;
+  color:#ff6d00!important;
+  font-size:17px!important;
+  line-height:1!important;
+}
+#view-products > .hy-catalog-title .hy-page-count small{
+  display:block!important;
+  margin-top:4px!important;
+  color:rgba(255,255,255,.65)!important;
+  font-size:7px!important;
+  letter-spacing:.8px!important;
+}
+
+/* Main catalog hero */
+#view-products .products-hero{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 230px!important;
+  align-items:center!important;
+  gap:24px!important;
+  min-height:165px!important;
+  margin:0 0 12px!important;
+  padding:25px 28px!important;
+  overflow:hidden!important;
+  border-radius:16px!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(255,109,0,.13),transparent 24%),
+    radial-gradient(circle at 20% 0%,rgba(0,91,190,.18),transparent 34%),
+    linear-gradient(135deg,#001633,#002561 68%,#001a45)!important;
+  box-shadow:0 15px 35px rgba(0,0,0,.20)!important;
+}
+#view-products .products-hero:before{
+  content:""!important;
   position:absolute!important;
-  inset:0!important;
+  top:0!important;
+  right:0!important;
+  width:125px!important;
+  height:125px!important;
+  background:linear-gradient(135deg,transparent 48%,#ff6d00 49%,#ff6d00 70%,transparent 71%)!important;
+  opacity:.9!important;
   pointer-events:none!important;
-  background:linear-gradient(110deg,transparent 55%,rgba(255,255,255,.035) 55%,transparent 75%)!important;
 }
 #view-products .products-hero-copy{
   position:relative!important;
-  z-index:1!important;
+  z-index:2!important;
+  max-width:760px!important;
 }
 #view-products .products-hero-copy .eyebrow{
   display:inline-flex!important;
   align-items:center!important;
-  gap:7px!important;
-  padding:6px 10px!important;
-  border-radius:20px!important;
-  background:rgba(255,109,0,.12)!important;
-  border:1px solid rgba(255,109,0,.3)!important;
-  color:#ff8b35!important;
+  gap:6px!important;
+  margin-bottom:9px!important;
+  padding:5px 9px!important;
+  border-radius:6px!important;
+  color:#fff!important;
+  background:#ff6d00!important;
   font-size:8px!important;
   font-weight:900!important;
-  letter-spacing:1.1px!important;
+  letter-spacing:1px!important;
 }
-#view-products .products-hero-copy h1{
-  margin:12px 0 8px!important;
+#view-products .products-hero-copy .eyebrow i{
   color:#fff!important;
-  font-size:clamp(25px,4vw,36px)!important;
-  font-weight:950!important;
+}
+#view-products .products-hero h1{
+  margin:0 0 9px!important;
+  color:#fff!important;
+  font-size:clamp(24px,3vw,36px)!important;
   line-height:1.08!important;
-  letter-spacing:-.8px!important;
+  letter-spacing:-.7px!important;
 }
-#view-products .products-hero-copy p{
-  max-width:500px!important;
-  color:rgba(255,255,255,.68)!important;
+#view-products .products-hero h1::first-line{
+  text-shadow:0 2px 15px rgba(0,0,0,.16);
+}
+#view-products .products-hero p{
+  max-width:670px!important;
+  margin:0!important;
+  color:rgba(255,255,255,.70)!important;
   font-size:10px!important;
-  line-height:1.7!important;
+  line-height:1.75!important;
 }
-#view-products .products-hero-art{
+
+/* Right stat becomes a premium info card */
+#view-products .products-stat{
   position:relative!important;
-  z-index:1!important;
+  z-index:2!important;
+  min-width:0!important;
+  min-height:112px!important;
   display:flex!important;
+  flex-direction:column!important;
   align-items:center!important;
   justify-content:center!important;
+  padding:15px!important;
+  border-radius:15px!important;
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 25px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(7px)!important;
 }
-#view-products .products-hero-art img{
-  width:100%!important;
-  max-width:210px!important;
-  height:125px!important;
-  object-fit:contain!important;
-  filter:drop-shadow(0 12px 18px rgba(0,0,0,.25))!important;
-}
-#view-products .products-stats{
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:10px!important;
-  margin:0 0 16px!important;
-}
-#view-products .products-stat{
-  display:flex!important;
-  align-items:center!important;
-  gap:10px!important;
-  min-width:0!important;
-  padding:12px!important;
-  border-radius:12px!important;
-  background:#fff!important;
-  border:1px solid #e7eaf0!important;
-  box-shadow:0 5px 15px rgba(0,0,0,.04)!important;
-}
-#view-products .products-stat i{
-  width:32px!important;
-  height:32px!important;
+#view-products .products-stat:before{
+  content:"HY"!important;
+  width:31px!important;
+  height:31px!important;
   display:grid!important;
   place-items:center!important;
-  flex:0 0 32px!important;
-  border-radius:9px!important;
-  background:rgba(255,109,0,.1)!important;
-  color:#ff6d00!important;
-  font-size:13px!important;
+  margin-bottom:7px!important;
+  border-radius:8px!important;
+  background:#ff6d00!important;
+  color:#fff!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  box-shadow:0 5px 15px rgba(255,109,0,.22)!important;
 }
 #view-products .products-stat b{
-  display:block!important;
-  color:#002561!important;
-  font-size:15px!important;
+  color:#ff6d00!important;
+  font-size:27px!important;
   line-height:1!important;
 }
 #view-products .products-stat span{
-  display:block!important;
   margin-top:4px!important;
-  color:#777!important;
-  font-size:8px!important;
-  font-weight:700!important;
+  color:#fff!important;
+  font-size:7px!important;
+  font-weight:800!important;
+  letter-spacing:1px!important;
 }
+
+/* Category/filter strip */
 #view-products .product-toolbar{
   display:flex!important;
   align-items:center!important;
   justify-content:space-between!important;
-  gap:12px!important;
-  padding:12px 14px!important;
-  margin-bottom:13px!important;
-  border:1px solid #e6e9ef!important;
-  border-radius:12px!important;
+  min-height:48px!important;
+  margin:0 0 13px!important;
+  padding:7px 11px!important;
+  border-radius:11px!important;
   background:#fff!important;
+  border:1px solid rgba(0,37,97,.20)!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.10)!important;
+}
+#view-products .product-toolbar-left{
+  gap:8px!important;
+}
+#view-products .product-toolbar-left .live-dot{
+  width:10px!important;
+  height:10px!important;
+  background:#ff6d00!important;
+  box-shadow:0 0 0 4px rgba(255,109,0,.12)!important;
 }
 #view-products .product-toolbar strong{
   color:#002561!important;
   font-size:11px!important;
+  font-weight:900!important;
 }
 #view-products .product-toolbar small{
   color:#777!important;
   font-size:8px!important;
 }
 #view-products .product-toolbar-right{
-  color:#777!important;
-  font-size:9px!important;
+  color:#002561!important;
+  font-size:8px!important;
+  font-weight:700!important;
 }
-#view-products .products-grid{
-  display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  gap:15px!important;
+
+/* Product area heading becomes visually connected to page */
+#view-products .products{
+  padding-top:1px!important;
 }
+
+/* Product cards on catalog page */
 #view-products .product{
-  overflow:hidden!important;
-  border:1px solid #e6e9ef!important;
-  border-radius:13px!important;
+  border-radius:12px!important;
+  border:1px solid rgba(0,37,97,.16)!important;
   background:#fff!important;
-  box-shadow:0 6px 20px rgba(0,0,0,.045)!important;
-  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.08)!important;
 }
 #view-products .product:hover{
-  transform:translateY(-4px)!important;
-  border-color:rgba(255,109,0,.5)!important;
-  box-shadow:0 14px 30px rgba(0,0,0,.10)!important;
+  border-color:#ff6d00!important;
+  box-shadow:0 15px 32px rgba(0,0,0,.13)!important;
 }
-#view-products .product .pimg{
-  position:relative!important;
-  height:185px!important;
-  overflow:hidden!important;
-  background:#f7f8fa!important;
+#view-products .pimg{
+  height:220px!important;
+  background:#fff!important;
 }
-#view-products .product .pimg img{
-  width:100%!important;
-  height:100%!important;
-  object-fit:contain!important;
-  padding:12px!important;
-  transition:transform .3s ease!important;
-}
-#view-products .product:hover .pimg img{
-  transform:scale(1.05)!important;
-}
-#view-products .product .pbody{
+#view-products .pbody{
+  background:#002561!important;
   padding:12px!important;
 }
-#view-products .product .pbody h3{
-  min-height:34px!important;
-  margin:0 0 8px!important;
-  color:#172033!important;
-  font-size:11px!important;
-  font-weight:800!important;
-  line-height:1.5!important;
+#view-products .pbody h3{
+  color:#fff!important;
+  font-size:10px!important;
 }
-#view-products .product .price{
-  color:#002561!important;
-  font-size:14px!important;
-  font-weight:950!important;
+#view-products .price{
+  color:#ff6d00!important;
 }
-#view-products .product .old{
-  margin-left:5px!important;
-  color:#999!important;
-  font-size:9px!important;
-  text-decoration:line-through!important;
+#view-products .old{
+  color:rgba(255,255,255,.55)!important;
 }
 #view-products .product-meta{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  gap:5px!important;
-  margin-top:10px!important;
-  padding-top:9px!important;
-  border-top:1px solid #edf0f4!important;
-  color:#777!important;
-  font-size:8px!important;
+  border-top-color:rgba(255,255,255,.18)!important;
+}
+#view-products .product-meta span:first-child{
+  color:#fff!important;
 }
 #view-products .product-meta i{
   color:#ff6d00!important;
 }
-@media(max-width:900px){
-  #view-products .products-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  }
-  #view-products .products-hero{
-    grid-template-columns:minmax(0,1fr) 170px!important;
-  }
+
+/* Header logo: professional boxed treatment */
+header .logo img{
+  width:42px!important;
+  height:42px!important;
+  padding:3px!important;
+  object-fit:contain!important;
+  border-radius:8px!important;
+  background:#fff!important;
+  border:1px solid rgba(255,255,255,.35)!important;
+  box-shadow:0 3px 12px rgba(0,0,0,.18)!important;
 }
-@media(max-width:600px){
+
+/* Mobile */
+@media(max-width:680px){
+  #view-products > .hy-catalog-title{
+    min-height:60px!important;
+    gap:9px!important;
+    padding:8px 9px!important;
+  }
+  #view-products > .hy-catalog-title .hy-page-logo{
+    width:39px!important;
+    height:39px!important;
+    flex-basis:39px!important;
+  }
+  #view-products > .hy-catalog-title .hy-page-title-text strong{
+    font-size:15px!important;
+  }
+  #view-products > .hy-catalog-title .hy-page-title-text small{
+    font-size:7px!important;
+  }
+  #view-products > .hy-catalog-title .hy-page-count{
+    min-width:58px!important;
+    padding:7px 6px!important;
+  }
   #view-products .products-hero{
     grid-template-columns:1fr!important;
     min-height:0!important;
-    padding:19px!important;
+    gap:15px!important;
+    padding:18px!important;
   }
-  #view-products .products-hero-art{
-    display:none!important;
+  #view-products .products-hero:before{
+    width:85px!important;
+    height:85px!important;
   }
-  #view-products .products-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:9px!important;
-  }
-  #view-products .product .pimg{
-    height:140px!important;
+  #view-products .products-hero h1{
+    font-size:23px!important;
   }
   #view-products .products-stat{
-    padding:9px!important;
+    min-height:88px!important;
   }
-  #view-products .products-stat i{
-    width:27px!important;
-    height:27px!important;
-    flex-basis:27px!important;
+  #view-products .product-toolbar-right{
+    display:none!important;
   }
-  #view-products .products-stat b{
-    font-size:12px!important;
-  }
-  #view-products .products-stat span{
-    font-size:7px!important;
+  #view-products .pimg{
+    height:175px!important;
   }
 }
-</style>
+@media(max-width:400px){
+  #view-products .products-hero{
+    padding:15px!important;
+  }
+  #view-products .products-hero h1{
+    font-size:20px!important;
+  }
+  #view-products .pimg{
+    height:150px!important;
+  }
+}
 
 
-<style id="hy-customer-chat-final">
-.hy-chat-launcher{
-  position:fixed!important;
-  right:18px!important;
-  bottom:80px!important;
-  z-index:999!important;
+/* =========================================================
+   HY STORE — PROFESSIONAL ORDER TRACKING
+   Existing tracking/JS functionality is unchanged.
+   ========================================================= */
+
+#view-orders{
+  padding-top:4px!important;
 }
-.hy-chat-panel{
-  z-index:1000!important;
-}
-.hy-chat-panel.open{
+
+/* Page title */
+#view-orders > .page-title{
   display:flex!important;
-}
-.hy-chat-head{
-  background:#002561!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-height:54px!important;
+  margin:0 0 12px!important;
+  padding:8px 13px!important;
+  border-left:4px solid #ff6d00!important;
+  border-radius:12px!important;
+  background:linear-gradient(135deg,#001a45,#002561)!important;
+  border-top:1px solid rgba(255,255,255,.12)!important;
+  border-right:1px solid rgba(255,255,255,.12)!important;
+  border-bottom:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.14)!important;
   color:#fff!important;
+  font-size:15px!important;
+  font-weight:900!important;
 }
-.hy-chat-head b,.hy-chat-head small{
+#view-orders > .page-title:before{
+  content:""!important;
+  width:32px!important;
+  height:32px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:8px!important;
+  background:#ff6d00!important;
+  box-shadow:0 5px 14px rgba(255,109,0,.20)!important;
+}
+#view-orders > .page-title i{
+  position:absolute!important;
+  margin-left:8px!important;
   color:#fff!important;
+  font-size:13px!important;
 }
-.hy-chat-msg.user{
-  background:#002561!important;
-  color:#fff!important;
-}
-.hy-chat-msg.bot{
-  background:#fff!important;
-  color:#222!important;
-}
-.hy-chat-actions button{
-  background:#fff!important;
-  color:#002561!important;
-}
-.hy-chat-actions button:hover{
-  background:#FF6D00!important;
-  color:#fff!important;
-}
-</style>
-box-shadow:0 14px 34px rgba(0,0,0,.20)!important;
+
+/* Main tracking panel */
+#view-orders .track{
+  position:relative!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:24px 26px 22px!important;
+  border-radius:16px!important;
+  border:1px solid rgba(61,143,255,.38)!important;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(255,109,0,.12),transparent 22%),
+    radial-gradient(circle at 15% 0%,rgba(38,113,230,.13),transparent 30%),
+    linear-gradient(135deg,#001633 0%,#002561 68%,#001a45 100%)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.20)!important;
 }
 #view-orders .track:before{
   content:""!important;
@@ -1845,7 +1928,7 @@ header .head-actions .iconbtn:hover{
   transform:translateY(-2px)!important;
   box-shadow:0 8px 18px rgba(255,109,0,.20)!important;
 }
-header .head-actions .iconbtn .badge{
+header .head-actions .badge{
   animation:hyBadgePulse 1.8s ease-in-out infinite!important;
 }
 @keyframes hyBadgePulse{
@@ -1914,9 +1997,7 @@ header .head-actions .iconbtn .badge{
 }
 .toast-content{
   min-width:0!important;
-}
-
-flex:1!important;
+  flex:1!important;
   display:flex!important;
   flex-direction:column!important;
   gap:2px!important;
@@ -2216,7 +2297,7 @@ flex:1!important;
 #productModal .gallery-thumb:hover{
   transform:translateY(-2px)!important;
   border-color:#ff6d00!important;
-  }
+}
 
 /* Mobile: smaller hover cue */
 @media(max-width:680px){
@@ -2516,7 +2597,7 @@ flex:1!important;
         <div class="field"><label>New Password</label><input id="newPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="Enter new password"></div>
         <div class="field"><label>Confirm New Password</label><input id="confirmNewPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm new password"></div>
         <button class="primary" style="width:100%" type="submit">UPDATE PASSWORD <i class="fa-solid fa-check"></i></button>
-        </form></div>
+      </form></div>
     </div>
   </div>
 
@@ -2816,7 +2897,7 @@ flex:1!important;
               <div class="detail-feature"><i class="fa-solid fa-headset"></i> Live Support</div>
             </div>
             <div class="detail-desc">${escapeHTML(p.desc || 'Quality product available at HY STORE.')}</div>
-                        <div class="detail-qty-box">
+            <div class="detail-qty-box">
               <div class="detail-qty-title"><span><i class="fa-solid fa-layer-group"></i> SELECT QUANTITY</span><small>How many do you want?</small></div>
               <div class="detail-qty-row">
                 <button class="detail-qty-btn" onclick="changeDetailQty(-1)" aria-label="Decrease quantity">−</button>
@@ -3116,8 +3197,7 @@ flex:1!important;
     function armWhatsAppReturn(orderId) {
       pendingWhatsAppOrderId = orderId;
       whatsappReturnArmed = true;
-      if (whatsappReturnTimer) clearTimeout(whatsappReturnTimer);
-            clearTimeout(whatsappReturnTimer);
+      clearTimeout(whatsappReturnTimer);
       whatsappReturnTimer = setTimeout(() => {
         whatsappReturnArmed = false;
       }, 30 * 60 * 1000);
@@ -3417,277 +3497,486 @@ flex:1!important;
        SAFE CUSTOMER ACCOUNT STORAGE
        ========================= */
     const ACCOUNT_STORAGE_KEY = "hy_store_accounts";
-          const address = $("editProfileAddress").value.trim();
+    const SESSION_STORAGE_KEY = "hy_user_session";
 
-      if (!name || !phone || !address) {
-        toast("Missing Details", "Please complete all profile fields.");
+    function getAccounts() {
+      try {
+        const raw = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter(a => a && a.email) : [];
+      } catch (err) {
+        console.error("Account read error:", err);
+        return [];
+      }
+    }
+
+    function saveAccounts(accounts) {
+      try {
+        localStorage.setItem(ACCOUNT_STORAGE_KEY, JSON.stringify(Array.isArray(accounts) ? accounts : []));
+        return true;
+      } catch (err) {
+        console.error("Account save error:", err);
+        toast("Storage Error", "Your browser is blocking account storage. Please allow site storage and try again.");
+        return false;
+      }
+    }
+
+    async function hashPassword(password) {
+      const value = String(password || "");
+      if (window.crypto && crypto.subtle) {
+        const data = new TextEncoder().encode(value);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash))
+          .map(b => b.toString(16).padStart(2, "0"))
+          .join("");
+      }
+
+      /* Fallback for browsers/environments without Web Crypto. */
+      let h = 2166136261;
+      for (let i = 0; i < value.length; i++) {
+        h ^= value.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return "fallback-" + (h >>> 0).toString(16);
+    }
+
+    function setCurrentUserSession(user) {
+      currentUser = user || null;
+      try {
+        if (currentUser) localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(currentUser));
+        else localStorage.removeItem(SESSION_STORAGE_KEY);
+      } catch (err) {
+        console.error("Session save error:", err);
+      }
+    }
+
+    function normalizeAccount(account) {
+      if (!account) return null;
+      return {
+        name: String(account.name || "").trim(),
+        email: String(account.email || "").trim().toLowerCase(),
+        phone: String(account.phone || "").trim(),
+        address: String(account.address || "").trim(),
+        passwordHash: String(account.passwordHash || ""),
+        createdAt: account.createdAt || Date.now()
+      };
+    }
+    function passwordScore(password) {
+      let score=0;
+      if(password.length>=8) score++; if(/[A-Z]/.test(password)) score++; if(/[0-9]/.test(password)) score++; if(/[^A-Za-z0-9]/.test(password)) score++;
+      return score;
+    }
+    function updatePasswordStrength(inputId, barId) {
+      const n=passwordScore($(inputId).value); const w=["0%","25%","50%","75%","100%"][n]; $(barId).style.width=w;
+    }
+    function openAuthModal(mode="choice") {
+      authMode=mode; renderAuth(); showModal("authModal");
+    }
+    function renderAuth() {
+      const body=$("authBody");
+      if(authMode==="choice") {
+        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Welcome to HY STORE</h3><p>Login to order products and manage your account.</p></div>
+          <div class="auth-choice"><button class="auth-choice-btn" onclick="authMode='login';renderAuth()"><i class="fa-solid fa-right-to-bracket"></i><b>LOGIN ACCOUNT</b><small>Already have an HY STORE account?</small></button>
+          <button class="auth-choice-btn" onclick="authMode='register';renderAuth()"><i class="fa-solid fa-user-plus"></i><b>CREATE ACCOUNT</b><small>Register with your email and mobile number.</small></button></div>`;
+        return;
+      }
+      if(authMode==="login") {
+        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Login to Your Account</h3><p>Use your registered email and password.</p></div>
+          <form onsubmit="loginAccount(event)">
+            <div class="field"><label>Email Address</label><input id="loginEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
+            <div class="field"><label>Password</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password"></div>
+            <div class="auth-row"><button type="button" class="auth-link" onclick="authMode='forgot';renderAuth()">Forgot Password?</button><button type="button" class="auth-link" onclick="authMode='register';renderAuth()">Create Account</button></div>
+            <button class="primary" style="width:100%;margin-top:14px" type="submit">LOGIN NOW <i class="fa-solid fa-arrow-right"></i></button>
+            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='choice';renderAuth()">← Back</button>
+          </form>`;
+        const remembered=JSON.parse(localStorage.getItem("hy_saved_login")||"null"); if(remembered && $("loginEmail")) $("loginEmail").value=remembered.email||"";
+      } else if(authMode==="register") {
+        body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Register New Account</h3><p>Create your account once and stay signed in until logout.</p></div>
+          <form onsubmit="registerAccount(event)">
+            <div class="field"><label>Full Name</label><input id="regName" required autocomplete="name" placeholder="Enter your full name"></div>
+            <div class="field"><label>Email Address</label><input id="regEmail" type="email" required autocomplete="email" placeholder="name@example.com"></div>
+            <div class="field"><label>Mobile Number</label><input id="regPhone" required autocomplete="tel" placeholder="03XXXXXXXXX"></div>
+            <div class="field"><label>Password</label><input id="regPassword" type="password" required minlength="8" autocomplete="new-password" oninput="updatePasswordStrength('regPassword','regStrength')" placeholder="Minimum 8 characters"><div class="password-strength"><span id="regStrength"></span></div></div>
+            <div class="field"><label>Confirm Password</label><input id="regConfirm" type="password" required minlength="8" autocomplete="new-password" placeholder="Confirm password"></div>
+            <div class="field"><label>Delivery Address</label><textarea id="regAddress" rows="3" required placeholder="Complete delivery address"></textarea></div>
+            <button class="primary" style="width:100%" type="submit">CREATE ACCOUNT <i class="fa-solid fa-user-check"></i></button>
+            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='login';renderAuth()">Already have an account? Login</button>
+          </form>`;
+      } else {
+        body.innerHTML=`<div class="auth-brand"><div class="save-icon" style="width:58px;height:58px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;color:var(--primary);background:rgba(0,37,97,.1);font-size:22px"><i class="fa-solid fa-key"></i></div><h3>Reset Password</h3><p>Enter your registered email and choose a new password.</p></div>
+          <form onsubmit="resetPassword(event)">
+            <div class="field"><label>Registered Email</label><input id="forgotEmail" type="email" required placeholder="name@example.com"></div>
+            <div class="field"><label>New Password</label><input id="forgotPassword" type="password" required minlength="8" placeholder="New password"></div>
+            <div class="field"><label>Confirm New Password</label><input id="forgotConfirm" type="password" required minlength="8" placeholder="Confirm new password"></div>
+            <button class="primary" style="width:100%" type="submit">RESET PASSWORD</button>
+            <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='login';renderAuth()">← Back to Login</button>
+          </form>`;
+      }
+    }
+    async function registerAccount(e) {
+      e.preventDefault();
+
+      const name = $("regName").value.trim();
+      const email = $("regEmail").value.trim().toLowerCase();
+      const phone = $("regPhone").value.trim();
+      const password = $("regPassword").value;
+      const confirm = $("regConfirm").value;
+      const address = $("regAddress").value.trim();
+
+      if (!name || !email || !phone || !address) {
+        toast("Missing Details", "Please complete all account details.");
+        return;
+      }
+
+      if (password !== confirm) {
+        toast("Password Error", "Passwords do not match.");
+        return;
+      }
+
+      if (password.length < 8) {
+        toast("Weak Password", "Use at least 8 characters.");
+        return;
+      }
+
+      try {
+        const accounts = getAccounts();
+        const existing = accounts.find(a => String(a.email || "").toLowerCase() === email);
+
+        if (existing) {
+          toast("Account Exists", "This email is already registered. Please login.");
+          authMode = "login";
+          renderAuth();
+          setTimeout(() => {
+            if ($("loginEmail")) $("loginEmail").value = email;
+          }, 0);
+          return;
+        }
+
+        const account = normalizeAccount({
+          name,
+          email,
+          phone,
+          address,
+          passwordHash: await hashPassword(password),
+          createdAt: Date.now()
+        });
+
+        const saved = saveAccounts([...accounts, account]);
+        if (!saved) return;
+
+        setCurrentUserSession({
+          name: account.name,
+          email: account.email,
+          phone: account.phone,
+          address: account.address
+        });
+
+        closeModal("authModal");
+        toast("Account Created", "Welcome to HY STORE, " + account.name + ".");
+        renderProfilePage();
+
+        setTimeout(() => {
+          if (typeof showModal === "function" && $("savePasswordModal")) {
+            showModal("savePasswordModal");
+          }
+        }, 250);
+      } catch (err) {
+        console.error("Register error:", err);
+        toast("Account Error", "Account could not be created. Please try again.");
+      }
+    }
+
+    async function loginAccount(e) {
+      e.preventDefault();
+
+      const email = $("loginEmail").value.trim().toLowerCase();
+      const password = $("loginPassword").value;
+
+      try {
+        const accounts = getAccounts();
+        const account = accounts.find(a => String(a.email || "").toLowerCase() === email);
+
+        if (!account) {
+          toast("Account Not Found", "No account is registered with this email on this browser.");
+          return;
+        }
+
+        const enteredHash = await hashPassword(password);
+        if (String(account.passwordHash || "") !== enteredHash) {
+          toast("Login Failed", "Incorrect email or password.");
+          return;
+        }
+
+        const safeAccount = normalizeAccount(account);
+
+        setCurrentUserSession({
+          name: safeAccount.name,
+          email: safeAccount.email,
+          phone: safeAccount.phone,
+          address: safeAccount.address
+        });
+
+        userOrders = userOrders.map(item =>
+          typeof item === "string" ? { id: item, email: safeAccount.email } : item
+        );
+        localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+
+        closeModal("authModal");
+        toast("Login Successful", "Welcome back, " + safeAccount.name + ".");
+        renderProfilePage();
+
+        setTimeout(() => {
+          if (typeof showModal === "function" && $("savePasswordModal")) {
+            showModal("savePasswordModal");
+          }
+        }, 250);
+      } catch (err) {
+        console.error("Login error:", err);
+        toast("Login Error", "Login could not be completed. Please try again.");
+      }
+    }
+
+    function rememberLogin(save) {
+      if(save && currentUser) localStorage.setItem("hy_saved_login",JSON.stringify({email:currentUser.email})); else localStorage.removeItem("hy_saved_login");
+      closeModal("savePasswordModal");
+    }
+    async function resetPassword(e) {
+      e.preventDefault();
+
+      const email = $("forgotEmail").value.trim().toLowerCase();
+      const pass = $("forgotPassword").value;
+      const confirm = $("forgotConfirm").value;
+
+      if (pass !== confirm) {
+        toast("Password Error", "Passwords do not match.");
+        return;
+      }
+
+      if (pass.length < 8) {
+        toast("Weak Password", "Use at least 8 characters.");
+        return;
+      }
+
+      try {
+        const accounts = getAccounts();
+        const i = accounts.findIndex(a => String(a.email || "").toLowerCase() === email);
+
+        if (i < 0) {
+          toast("Email Not Found", "No account is registered with this email on this browser.");
+          return;
+        }
+
+        accounts[i].passwordHash = await hashPassword(pass);
+        if (!saveAccounts(accounts)) return;
+
+        toast("Password Changed", "You can now login with your new password.");
+        authMode = "login";
+        renderAuth();
+
+        setTimeout(() => {
+          if ($("loginEmail")) $("loginEmail").value = email;
+        }, 0);
+      } catch (err) {
+        console.error("Reset password error:", err);
+        toast("Reset Error", "Password could not be changed. Please try again.");
+      }
+    }
+    function openEditProfile() {
+      if(!currentUser){openAuthModal('login');return;}
+      $("editProfileName").value = currentUser.name || "";
+      $("editProfileEmail").value = currentUser.email || "";
+      $("editProfilePhone").value = currentUser.phone || "";
+      $("editProfileAddress").value = currentUser.address || "";
+      showModal("editProfileModal");
+    }
+
+    function saveEditProfile(e) {
+      e.preventDefault();
+      if(!currentUser){openAuthModal('login');return;}
+
+      const name = $("editProfileName").value.trim();
+      const phone = $("editProfilePhone").value.trim();
+      const address = $("editProfileAddress").value.trim();
+
+      if(!name || !phone || !address){
+        toast("Missing Details","Please complete all profile details.");
         return;
       }
 
       const accounts = getAccounts();
-      const index = accounts.findIndex(a => a.email === currentUser.email);
-
-      if (index < 0) {
-        toast("Account Error", "Your account could not be found.");
+      const i = accounts.findIndex(a => a.email === currentUser.email);
+      if(i < 0){
+        toast("Account Error","Account record not found.");
         return;
       }
 
-      accounts[index].name = name;
-      accounts[index].phone = phone;
-      accounts[index].address = address;
+      accounts[i].name = name;
+      accounts[i].phone = phone;
+      accounts[i].address = address;
+      if(!saveAccounts(accounts)) return;
 
-      if (!saveAccounts(accounts)) return;
+      currentUser = { ...currentUser, name, phone, address };
+      setCurrentUserSession(currentUser);
 
-      setCurrentUserSession({name, email:currentUser.email, phone, address});
       closeModal("editProfileModal");
-      toast("Profile Updated", "Your profile details have been saved.");
       renderProfilePage();
+      toast("Profile Updated","Your profile has been updated successfully.");
     }
 
+    function openChangePassword() {
+      if(!currentUser){openAuthModal('login');return;}
+      showModal("changePasswordModal");
+    }
+    async function changePassword(e) {
+      e.preventDefault(); const oldPass=$("oldPassword").value,newPass=$("newPassword").value,confirm=$("confirmNewPassword").value; if(newPass!==confirm){toast("Password Error","New passwords do not match.");return;}
+      const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===currentUser.email); if(i<0){toast("Account Error","Account record not found.");return;} if(accounts[i].passwordHash!==await hashPassword(oldPass)){toast("Password Error","Old password is incorrect.");return;} if(newPass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
+      accounts[i].passwordHash=await hashPassword(newPass); saveAccounts(accounts); closeModal("changePasswordModal"); $("changePasswordForm").reset(); toast("Password Changed","Your password has been updated successfully.");
+    }
+    function logoutUser() {
+      localStorage.removeItem("hy_user_session");
+      currentUser=null;
+      toast("Logged Out","You have been logged out successfully.");
+      renderProfilePage();
+    }
     function renderProfilePage() {
-      const box = $("profileContainer");
-
-      if (!currentUser || !currentUser.email) {
-        box.innerHTML = `
-          <div class="profile-card" style="text-align:center;padding:35px">
-            <i class="fa-solid fa-user-lock" style="font-size:35px;color:var(--primary);margin-bottom:14px"></i>
-            <h3 style="margin-bottom:8px">Welcome to HY STORE</h3>
-            <p style="color:var(--muted);font-size:11px;margin-bottom:18px">Login or create an account to manage your orders and profile.</p>
-            <button class="primary" onclick="openAuthModal('choice')">LOGIN / CREATE ACCOUNT</button>
-          </div>`;
+      const container=$("profileContainer");
+      if(!currentUser){
+        container.innerHTML=`<div class="auth-panel"><div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Welcome to HY STORE</h3><p>Login or create your account to place and track orders.</p></div><div class="auth-choice"><button class="auth-choice-btn" onclick="openAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i><b>LOGIN ACCOUNT</b><small>Sign in with your email and password.</small></button><button class="auth-choice-btn" onclick="openAuthModal('register')"><i class="fa-solid fa-user-plus"></i><b>CREATE ACCOUNT</b><small>Register your name, email and mobile.</small></button></div></div>`;
         return;
       }
-
-      box.innerHTML = `
-        <div class="profile-card">
-          <div class="profile-top">
-            <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="profile-name">
-              <h3>${escapeHTML(currentUser.name || "HY STORE Customer")}</h3>
-              <span><i class="fa-solid fa-circle-check"></i> Registered Customer</span>
-            </div>
-          </div>
-          <div class="profile-details">
-            <div><span>EMAIL ADDRESS</span><b>${escapeHTML(currentUser.email)}</b></div>
-            <div><span>PHONE NUMBER</span><b>${escapeHTML(currentUser.phone || "Not added")}</b></div>
-            <div><span>DELIVERY ADDRESS</span><b>${escapeHTML(currentUser.address || "Not added")}</b></div>
-          </div>
-          <div class="profile-actions">
-            <button onclick="openEditProfile()"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</button>
-            <button onclick="showModal('changePasswordModal')"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button>
-            <button class="logout-btn" onclick="logoutAccount()"><i class="fa-solid fa-right-from-bracket"></i> LOG OUT</button>
-          </div>
-        </div>`;
+      const initial=escapeHTML(currentUser.name?currentUser.name.charAt(0).toUpperCase():"U");
+      container.innerHTML=`<div class="account-card"><div class="account"><div class="avatar">${initial}</div><div><h3 style="font-size:16px">${escapeHTML(currentUser.name)}</h3><span style="font-size:11px;color:var(--muted)">${escapeHTML(currentUser.email)}</span></div></div><div class="account-details"><div class="acc-info-row"><i class="fa-solid fa-envelope"></i><div><b>Email:</b> ${escapeHTML(currentUser.email)}</div></div><div class="acc-info-row"><i class="fa-solid fa-phone"></i><div><b>Phone:</b> ${escapeHTML(currentUser.phone||"N/A")}</div></div><div class="acc-info-row"><i class="fa-solid fa-location-dot"></i><div><b>Address:</b> ${escapeHTML(currentUser.address||"N/A")}</div></div></div><div class="account-menu"><button onclick="openEditProfile()"><i class="fa-solid fa-user-pen"></i> EDIT PROFILE</button><button onclick="switchPage('orders')"><i class="fa-solid fa-box"></i> ORDERS</button><button onclick="switchPage('payment')"><i class="fa-solid fa-money-bill-transfer"></i> ACCOUNT PAYMENTS</button><button onclick="openChangePassword()"><i class="fa-solid fa-key"></i> CHANGE PASSWORD</button></div><button class="btn-logout" style="margin-top:12px" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT ACCOUNT</button></div>`;
     }
 
-    function logoutAccount() {
-      setCurrentUserSession(null);
-      toast("Logged Out", "You have been logged out successfully.");
-      renderProfilePage();
-      switchPage("home");
-    }
 
-    function changePassword(e) {
-      e.preventDefault();
-
-      if (!currentUser) {
-        closeModal("changePasswordModal");
-        openAuthModal("login");
-        return;
-      }
-
-      const oldPassword = $("oldPassword").value;
-      const newPassword = $("newPassword").value;
-      const confirmPassword = $("confirmNewPassword").value;
-
-      if (newPassword.length < 8) {
-        toast("Weak Password", "New password must contain at least 8 characters.");
-        return;
-      }
-
-      if (newPassword !== confirmPassword) {
-        toast("Password Error", "New passwords do not match.");
-        return;
-      }
-
-      (async () => {
-        try {
-          const accounts = getAccounts();
-          const index = accounts.findIndex(a => a.email === currentUser.email);
-
-          if (index < 0) {
-            toast("Account Error", "Your account could not be found.");
-            return;
-          }
-
-          const oldHash = await hashPassword(oldPassword);
-
-          if (accounts[index].passwordHash !== oldHash) {
-            toast("Incorrect Password", "Your old password is incorrect.");
-            return;
-          }
-
-          accounts[index].passwordHash = await hashPassword(newPassword);
-
-          if (!saveAccounts(accounts)) return;
-
-          closeModal("changePasswordModal");
-          $("changePasswordForm").reset();
-          toast("Password Updated", "Your password has been changed successfully.");
-        } catch (error) {
-          console.error("Change password error:", error);
-          toast("Password Error", "Unable to update password. Please try again.");
-        }
-      })();
-    }
 
     /* =========================
-       PAYMENT
+       CUSTOMER HELP CHAT
        ========================= */
-    function copyPaymentNumber() {
-      const number = $("paymentAccountNumber").textContent.trim();
+    const hyChatReplies={
+      create:{q:"How do I create an account?",a:"To create an account, open the Account/Profile page and select CREATE ACCOUNT. Enter your full name, email, mobile number, password, and delivery address, then select CREATE ACCOUNT."},
+      forgot:{q:"How do I reset my password?",a:"Select LOGIN ACCOUNT, then choose Forgot Password?. Enter your registered email, create a new password, confirm it, and select RESET PASSWORD."},
+      order:{q:"How do I place an order?",a:"Add your product to the cart, open the cart, and select PROCEED TO CHECKOUT. Complete your customer details, choose a payment method, and select PLACE ORDER NOW."},
+      track:{q:"How can I track my order?",a:"Open the Orders page while logged in. Your order status and tracking timeline will be shown there. You can also use the order tracking option if you have an Order ID."},
+      payment:{q:"How do I make a payment?",a:"Open ACCOUNT PAYMENTS from your profile or the Payment page. Review the payment account details, send the payment, and submit your transaction details or proof as requested."},
+      support:{q:"I need customer support",a:"Please use the available customer support/contact option on the website. For an order issue, keep your Order ID, phone number, and payment details ready so support can help you faster."}
+    };
+    function toggleHYChat(force){const panel=$("hyChatPanel");if(!panel)return;const open=typeof force==="boolean"?force:!panel.classList.contains("open");panel.classList.toggle("open",open)}
+    function hyChatReply(key){const item=hyChatReplies[key],box=$("hyChatMessages");if(!item||!box)return;box.insertAdjacentHTML("beforeend",`<div class="hy-chat-msg user">${escapeHTML(item.q)}</div>`);box.insertAdjacentHTML("beforeend",`<div class="hy-chat-msg bot">${escapeHTML(item.a)}</div>`);box.scrollTop=box.scrollHeight}
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(number)
-          .then(() => toast("Copied", "Account number copied successfully."))
-          .catch(() => toast("Copy Failed", "Please copy the account number manually."));
+    /* =========================
+       PAYMENT / TRANSACTION PROOF
+       ========================= */
+    function openPaymentPage(){
+      switchPage("payment");
+    }
+
+    function copyPaymentNumber(){
+      const number = "03478306672";
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(number).then(()=>toast("Copied","Account number copied."));
       } else {
         toast("Account Number", number);
       }
     }
 
-    function prefillPaymentForm() {
-      if (!currentUser) return;
-      if ($("paymentName")) $("paymentName").value = currentUser.name || "";
+    function prefillPaymentForm(){
+      if(currentUser){
+        const name = $("paymentName");
+        if(name && !name.value) name.value = currentUser.name || "";
+      }
     }
 
-    $("paymentProofForm").addEventListener("submit", async function(e) {
+    async function submitPaymentProof(e){
       e.preventDefault();
-
-      if (!currentUser || !currentUser.email) {
-        openAuthModal("login");
-        toast("Login Required", "Please login before submitting payment details.");
-        return;
-      }
-
-      const orderId = $("paymentOrderId").value.trim();
+      const btn = $("paymentSubmitBtn");
+      const orderId = $("paymentOrderId").value.trim().toUpperCase();
       const name = $("paymentName").value.trim();
       const transactionId = $("paymentTxnId").value.trim();
       const method = $("paymentMethod").value;
       const note = $("paymentNote").value.trim();
+      const statusBox = $("paymentStatusBox");
 
-      if (!orderId || !name || !transactionId) {
-        toast("Missing Details", "Please fill all required payment details.");
+      if(!orderId || !name || !transactionId){
+        toast("Missing Details","Please complete Order Number, Name and Transaction ID.");
         return;
       }
 
-      const button = $("paymentSubmitBtn");
-      button.disabled = true;
-      button.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
 
-      try {
+      const payload = {
+        action: "submitPaymentProof",
+        orderId,
+        name,
+        transactionId,
+        paymentMethod: method,
+        note,
+        email: currentUser ? (currentUser.email || "") : "",
+        phone: currentUser ? (currentUser.phone || "") : "",
+        submittedAt: new Date().toISOString()
+      };
+
+      try{
         await fetch(ADMIN_API_URL, {
           method:"POST",
           mode:"no-cors",
           headers:{"Content-Type":"text/plain;charset=utf-8"},
-          body:JSON.stringify({
-            action:"submitPayment",
-            orderId,
-            name,
-            email:currentUser.email,
-            transactionId,
-            method,
-            note
-          })
+          body:JSON.stringify(payload)
         });
 
-        $("paymentStatusBox").style.display = "block";
-        $("paymentStatusBox").innerHTML = `
-          <i class="fa-solid fa-circle-check" style="color:var(--primary)"></i>
-          Payment details submitted. Your transaction is pending Admin verification.`;
-
+        statusBox.style.display = "block";
+        statusBox.innerHTML = `<div class="payment-success"><i class="fa-solid fa-circle-check"></i><h3>Payment Details Submitted</h3><p>Order <b>#${escapeHTML(orderId)}</b> has been sent for Admin verification.</p></div>`;
         $("paymentProofForm").reset();
         prefillPaymentForm();
-        toast("Payment Submitted", "Your payment details have been sent for verification.");
-      } catch (error) {
-        console.error("Payment submission error:", error);
-        toast("Connection Error", "Unable to submit payment details. Please try again.");
-      } finally {
-        button.disabled = false;
-        button.innerHTML = `<i class="fa-solid fa-paper-plane"></i> SUBMIT PAYMENT`;
+        toast("Payment Submitted","Your transaction details have been sent for verification.");
+      }catch(err){
+        console.error("Payment submission error:",err);
+        toast("Submission Failed","Please try again.");
+      }finally{
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> SUBMIT PAYMENT`;
       }
+    }
+
+    document.addEventListener("DOMContentLoaded",()=>{
+      const form=$("paymentProofForm");
+      if(form) form.addEventListener("submit",submitPaymentProof);
+      prefillPaymentForm();
     });
 
     /* =========================
-       CUSTOMER HELP CHAT
+       INITIALIZE
        ========================= */
-    function toggleHYChat(force) {
-      const panel = $("hyChatPanel");
-      if (!panel) return;
-
-      const shouldOpen = typeof force === "boolean"
-        ? force
-        : !panel.classList.contains("open");
-
-      panel.classList.toggle("open", shouldOpen);
-    }
-
-    function hyChatReply(type) {
-      const messages = $("hyChatMessages");
-      if (!messages) return;
-
-      const replies = {
-        create: "To create an account, open Profile and select Create Account. Enter your name, email, phone number, password and delivery address.",
-        forgot: "On the login screen, select Forgot Password. Enter your registered email and set a new password.",
-        order: "Open a product, select the quantity and tap Buy Now or Add to Cart. Then complete checkout to submit your order.",
-        track: "Open Orders and enter your HY STORE Order ID in the tracking box to check its status.",
-        payment: "Open the Payment section, send your payment using the listed account details, then submit your Order Number and Transaction ID.",
-        support: "For customer support, contact HY STORE through WhatsApp using the support contact listed by the store."
-      };
-
-      const question = {
-        create:"How do I create an account?",
-        forgot:"How do I reset my password?",
-        order:"How do I place an order?",
-        track:"How can I track my order?",
-        payment:"How do I make a payment?",
-        support:"I need customer support"
-      };
-
-      messages.innerHTML += `
-        <div class="hy-chat-msg user">${escapeHTML(question[type] || "Help")}</div>
-        <div class="hy-chat-msg bot">${escapeHTML(replies[type] || "Please contact HY STORE support for assistance.")}</div>`;
-
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    /* =========================
-       INITIALIZE STORE
-       ========================= */
-    function initializeStore() {
+    window.addEventListener("DOMContentLoaded", () => {
       updateCartCount();
+      const searchWrapper = $("globalSearchWrapper");
+      if (searchWrapper) searchWrapper.classList.remove("search-hidden");
+      renderProfilePage();
       fetchSheetBanners();
       fetchSheetProducts();
-
-      if (currentUser && currentUser.email) {
-        renderProfilePage();
-      }
-
       restartSlider();
-    }
-
-    document.addEventListener("DOMContentLoaded", initializeStore);
-
-    /* =========================
-       KEYBOARD SUPPORT
-       ========================= */
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape") {
-        document.querySelectorAll(".modal.show").forEach(modal => closeModal(modal.id));
-        toggleHYChat(false);
-      }
     });
 
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".modal.show").forEach(modal => closeModal(modal.id));
+      }
+    });
   </script>
+
+<script>
+(function(){
+  function syncHYCatalogCount(){
+    var a=document.getElementById('catalogTotal');
+    var b=document.getElementById('catalogTotalTop');
+    if(a && b) b.textContent=a.textContent||'0';
+  }
+  syncHYCatalogCount();
+  setInterval(syncHYCatalogCount,500);
+})();
+</script>
+
 </body>
 </html>
