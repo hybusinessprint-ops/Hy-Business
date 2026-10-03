@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#002561">
   <meta name="description" content="HY STORE - Official Online Store">
+  <link rel="icon" type="image/png" sizes="48x48" href="logo.png">
+  <link rel="shortcut icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <title>HY STORE | Official Online Store</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2638,6 +2641,16 @@ header .head-actions .badge{
     /* =========================
        HELPERS
        ========================= */
+    /* Account storage availability check */
+    try {
+      const __hyStorageTest = "__hy_storage_test__";
+      localStorage.setItem(__hyStorageTest, "1");
+      localStorage.removeItem(__hyStorageTest);
+    } catch (err) {
+      console.warn("HY STORE account storage is unavailable:", err);
+    }
+
+
     const $ = id => document.getElementById(id);
 
     function escapeHTML(value) {
@@ -3481,16 +3494,74 @@ header .head-actions .badge{
        ========================= */
     let authMode = "choice";
 
+    /* =========================
+       SAFE CUSTOMER ACCOUNT STORAGE
+       ========================= */
+    const ACCOUNT_STORAGE_KEY = "hy_store_accounts";
+    const SESSION_STORAGE_KEY = "hy_user_session";
+
     function getAccounts() {
-      return JSON.parse(localStorage.getItem("hy_store_accounts") || "[]");
+      try {
+        const raw = localStorage.getItem(ACCOUNT_STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter(a => a && a.email) : [];
+      } catch (err) {
+        console.error("Account read error:", err);
+        return [];
+      }
     }
+
     function saveAccounts(accounts) {
-      localStorage.setItem("hy_store_accounts", JSON.stringify(accounts));
+      try {
+        localStorage.setItem(ACCOUNT_STORAGE_KEY, JSON.stringify(Array.isArray(accounts) ? accounts : []));
+        return true;
+      } catch (err) {
+        console.error("Account save error:", err);
+        toast("Storage Error", "Your browser is blocking account storage. Please allow site storage and try again.");
+        return false;
+      }
     }
+
     async function hashPassword(password) {
-      const data = new TextEncoder().encode(password);
-      const hash = await crypto.subtle.digest("SHA-256", data);
-      return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+      const value = String(password || "");
+      if (window.crypto && crypto.subtle) {
+        const data = new TextEncoder().encode(value);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash))
+          .map(b => b.toString(16).padStart(2, "0"))
+          .join("");
+      }
+
+      /* Fallback for browsers/environments without Web Crypto. */
+      let h = 2166136261;
+      for (let i = 0; i < value.length; i++) {
+        h ^= value.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return "fallback-" + (h >>> 0).toString(16);
+    }
+
+    function setCurrentUserSession(user) {
+      currentUser = user || null;
+      try {
+        if (currentUser) localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(currentUser));
+        else localStorage.removeItem(SESSION_STORAGE_KEY);
+      } catch (err) {
+        console.error("Session save error:", err);
+      }
+    }
+
+    function normalizeAccount(account) {
+      if (!account) return null;
+      return {
+        name: String(account.name || "").trim(),
+        email: String(account.email || "").trim().toLowerCase(),
+        phone: String(account.phone || "").trim(),
+        address: String(account.address || "").trim(),
+        passwordHash: String(account.passwordHash || ""),
+        createdAt: account.createdAt || Date.now()
+      };
     }
     function passwordScore(password) {
       let score=0;
@@ -3546,31 +3617,171 @@ header .head-actions .badge{
     }
     async function registerAccount(e) {
       e.preventDefault();
-      const name=$("regName").value.trim(), email=$("regEmail").value.trim().toLowerCase(), phone=$("regPhone").value.trim(), password=$("regPassword").value, confirm=$("regConfirm").value, address=$("regAddress").value.trim();
-      if(password!==confirm){toast("Password Error","Passwords do not match.");return;}
-      if(password.length<8){toast("Weak Password","Use at least 8 characters.");return;}
-      const accounts=getAccounts(); if(accounts.some(a=>a.email===email)){toast("Account Exists","This email is already registered. Please login.");authMode="login";renderAuth();return;}
-      accounts.push({name,email,phone,address,passwordHash:await hashPassword(password),createdAt:Date.now()}); saveAccounts(accounts);
-      currentUser={name,email,phone,address}; localStorage.setItem("hy_user_session",JSON.stringify(currentUser));
-      closeModal("authModal"); toast("Account Created","Welcome to HY STORE, "+name+"."); renderProfilePage();
-      setTimeout(()=>showModal("savePasswordModal"),250);
+
+      const name = $("regName").value.trim();
+      const email = $("regEmail").value.trim().toLowerCase();
+      const phone = $("regPhone").value.trim();
+      const password = $("regPassword").value;
+      const confirm = $("regConfirm").value;
+      const address = $("regAddress").value.trim();
+
+      if (!name || !email || !phone || !address) {
+        toast("Missing Details", "Please complete all account details.");
+        return;
+      }
+
+      if (password !== confirm) {
+        toast("Password Error", "Passwords do not match.");
+        return;
+      }
+
+      if (password.length < 8) {
+        toast("Weak Password", "Use at least 8 characters.");
+        return;
+      }
+
+      try {
+        const accounts = getAccounts();
+        const existing = accounts.find(a => String(a.email || "").toLowerCase() === email);
+
+        if (existing) {
+          toast("Account Exists", "This email is already registered. Please login.");
+          authMode = "login";
+          renderAuth();
+          setTimeout(() => {
+            if ($("loginEmail")) $("loginEmail").value = email;
+          }, 0);
+          return;
+        }
+
+        const account = normalizeAccount({
+          name,
+          email,
+          phone,
+          address,
+          passwordHash: await hashPassword(password),
+          createdAt: Date.now()
+        });
+
+        const saved = saveAccounts([...accounts, account]);
+        if (!saved) return;
+
+        setCurrentUserSession({
+          name: account.name,
+          email: account.email,
+          phone: account.phone,
+          address: account.address
+        });
+
+        closeModal("authModal");
+        toast("Account Created", "Welcome to HY STORE, " + account.name + ".");
+        renderProfilePage();
+
+        setTimeout(() => {
+          if (typeof showModal === "function" && $("savePasswordModal")) {
+            showModal("savePasswordModal");
+          }
+        }, 250);
+      } catch (err) {
+        console.error("Register error:", err);
+        toast("Account Error", "Account could not be created. Please try again.");
+      }
     }
+
     async function loginAccount(e) {
-      e.preventDefault(); const email=$("loginEmail").value.trim().toLowerCase(), password=$("loginPassword").value; const account=getAccounts().find(a=>a.email===email);
-      if(!account){toast("Account Not Found","Please register an account first.");return;}
-      if(account.passwordHash!==await hashPassword(password)){toast("Login Failed","Incorrect email or password.");return;}
-      currentUser={name:account.name,email:account.email,phone:account.phone,address:account.address}; localStorage.setItem("hy_user_session",JSON.stringify(currentUser));
-      userOrders=userOrders.map(item=>typeof item==='string'?{id:item,email:email}:item); localStorage.setItem("hy_user_orders",JSON.stringify(userOrders));
-      closeModal("authModal"); toast("Login Successful","Welcome back, "+account.name+"."); renderProfilePage(); setTimeout(()=>showModal("savePasswordModal"),250);
+      e.preventDefault();
+
+      const email = $("loginEmail").value.trim().toLowerCase();
+      const password = $("loginPassword").value;
+
+      try {
+        const accounts = getAccounts();
+        const account = accounts.find(a => String(a.email || "").toLowerCase() === email);
+
+        if (!account) {
+          toast("Account Not Found", "No account is registered with this email on this browser.");
+          return;
+        }
+
+        const enteredHash = await hashPassword(password);
+        if (String(account.passwordHash || "") !== enteredHash) {
+          toast("Login Failed", "Incorrect email or password.");
+          return;
+        }
+
+        const safeAccount = normalizeAccount(account);
+
+        setCurrentUserSession({
+          name: safeAccount.name,
+          email: safeAccount.email,
+          phone: safeAccount.phone,
+          address: safeAccount.address
+        });
+
+        userOrders = userOrders.map(item =>
+          typeof item === "string" ? { id: item, email: safeAccount.email } : item
+        );
+        localStorage.setItem("hy_user_orders", JSON.stringify(userOrders));
+
+        closeModal("authModal");
+        toast("Login Successful", "Welcome back, " + safeAccount.name + ".");
+        renderProfilePage();
+
+        setTimeout(() => {
+          if (typeof showModal === "function" && $("savePasswordModal")) {
+            showModal("savePasswordModal");
+          }
+        }, 250);
+      } catch (err) {
+        console.error("Login error:", err);
+        toast("Login Error", "Login could not be completed. Please try again.");
+      }
     }
+
     function rememberLogin(save) {
       if(save && currentUser) localStorage.setItem("hy_saved_login",JSON.stringify({email:currentUser.email})); else localStorage.removeItem("hy_saved_login");
       closeModal("savePasswordModal");
     }
     async function resetPassword(e) {
-      e.preventDefault(); const email=$("forgotEmail").value.trim().toLowerCase(), pass=$("forgotPassword").value, confirm=$("forgotConfirm").value; if(pass!==confirm){toast("Password Error","Passwords do not match.");return;}
-      const accounts=getAccounts(), i=accounts.findIndex(a=>a.email===email); if(i<0){toast("Email Not Found","No account is registered with this email.");return;} if(pass.length<8){toast("Weak Password","Use at least 8 characters.");return;}
-      accounts[i].passwordHash=await hashPassword(pass); saveAccounts(accounts); toast("Password Changed","You can now login with your new password."); authMode="login"; renderAuth();
+      e.preventDefault();
+
+      const email = $("forgotEmail").value.trim().toLowerCase();
+      const pass = $("forgotPassword").value;
+      const confirm = $("forgotConfirm").value;
+
+      if (pass !== confirm) {
+        toast("Password Error", "Passwords do not match.");
+        return;
+      }
+
+      if (pass.length < 8) {
+        toast("Weak Password", "Use at least 8 characters.");
+        return;
+      }
+
+      try {
+        const accounts = getAccounts();
+        const i = accounts.findIndex(a => String(a.email || "").toLowerCase() === email);
+
+        if (i < 0) {
+          toast("Email Not Found", "No account is registered with this email on this browser.");
+          return;
+        }
+
+        accounts[i].passwordHash = await hashPassword(pass);
+        if (!saveAccounts(accounts)) return;
+
+        toast("Password Changed", "You can now login with your new password.");
+        authMode = "login";
+        renderAuth();
+
+        setTimeout(() => {
+          if ($("loginEmail")) $("loginEmail").value = email;
+        }, 0);
+      } catch (err) {
+        console.error("Reset password error:", err);
+        toast("Reset Error", "Password could not be changed. Please try again.");
+      }
     }
     function openEditProfile() {
       if(!currentUser){openAuthModal('login');return;}
@@ -3604,10 +3815,10 @@ header .head-actions .badge{
       accounts[i].name = name;
       accounts[i].phone = phone;
       accounts[i].address = address;
-      saveAccounts(accounts);
+      if(!saveAccounts(accounts)) return;
 
       currentUser = { ...currentUser, name, phone, address };
-      localStorage.setItem("hy_user_session", JSON.stringify(currentUser));
+      setCurrentUserSession(currentUser);
 
       closeModal("editProfileModal");
       renderProfilePage();
