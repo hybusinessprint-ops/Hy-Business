@@ -760,6 +760,30 @@ section,.app-view,main{color:#111}
 
 .payment-method .method-copy{min-width:0}
 @media(max-width:720px){.hero{margin-top:4px!important;margin-bottom:18px!important}.slider-controls{bottom:8px!important}.dots{bottom:11px!important}}
+
+/* HY STORE orange-and-white notification finish */
+.toast {
+  background: linear-gradient(135deg,#fff 0%,#fffaf6 100%) !important;
+  border: 1px solid rgba(255,109,0,.22) !important;
+  box-shadow: 0 16px 42px rgba(25,35,50,.18),0 5px 16px rgba(255,109,0,.10) !important;
+}
+.toast:after { background: linear-gradient(90deg,#ff6d00,#ff9a45) !important; }
+.toast-check { background: #ff6d00 !important; box-shadow: 0 7px 18px rgba(255,109,0,.22) !important; }
+.toast-content b { color: #172033 !important; }
+.toast-content span { color: #5f6878 !important; }
+@media(max-width:600px){
+  .toast {
+    top: 12px !important;
+    width: calc(100vw - 20px) !important;
+    min-height: 66px !important;
+    padding: 11px 38px 11px 11px !important;
+    border-radius: 14px !important;
+  }
+  .toast-check { width: 36px !important; height: 36px !important; flex-basis: 36px !important; }
+  .toast-content b { font-size: 12px !important; }
+  .toast-content span { font-size: 10px !important; }
+}
+
 </style>
 
 
@@ -3525,23 +3549,30 @@ header .head-actions .badge{
       }
     }
 
-    async function hashPassword(password) {
+    function fallbackPasswordHash(password) {
       const value = String(password || "");
-      if (window.crypto && crypto.subtle) {
-        const data = new TextEncoder().encode(value);
-        const hash = await crypto.subtle.digest("SHA-256", data);
-        return Array.from(new Uint8Array(hash))
-          .map(b => b.toString(16).padStart(2, "0"))
-          .join("");
-      }
-
-      /* Fallback for browsers/environments without Web Crypto. */
       let h = 2166136261;
       for (let i = 0; i < value.length; i++) {
         h ^= value.charCodeAt(i);
         h = Math.imul(h, 16777619);
       }
       return "fallback-" + (h >>> 0).toString(16);
+    }
+
+    async function hashPassword(password) {
+      const value = String(password || "");
+      if (window.crypto && crypto.subtle) {
+        try {
+          const data = new TextEncoder().encode(value);
+          const hash = await crypto.subtle.digest("SHA-256", data);
+          return Array.from(new Uint8Array(hash))
+            .map(b => b.toString(16).padStart(2, "0"))
+            .join("");
+        } catch (err) {
+          console.warn("Secure password hashing unavailable; using compatibility hash.", err);
+        }
+      }
+      return fallbackPasswordHash(value);
     }
 
     function setCurrentUserSession(user) {
@@ -3593,7 +3624,10 @@ header .head-actions .badge{
             <button class="primary" style="width:100%;margin-top:14px" type="submit">LOGIN NOW <i class="fa-solid fa-arrow-right"></i></button>
             <button type="button" class="auth-link" style="display:block;margin:12px auto 0" onclick="authMode='choice';renderAuth()">← Back</button>
           </form>`;
-        const remembered=JSON.parse(localStorage.getItem("hy_saved_login")||"null"); if(remembered && $("loginEmail")) $("loginEmail").value=remembered.email||"";
+        let remembered = null;
+        try { remembered = JSON.parse(localStorage.getItem("hy_saved_login") || "null"); }
+        catch (err) { localStorage.removeItem("hy_saved_login"); }
+        if (remembered && $("loginEmail")) $("loginEmail").value = remembered.email || "";
       } else if(authMode==="register") {
         body.innerHTML=`<div class="auth-brand"><img src="logo.png" alt="HY STORE" onerror="this.style.display='none'"><h3>Register New Account</h3><p>Create your account once and stay signed in until logout.</p></div>
           <form onsubmit="registerAccount(event)">
@@ -3705,10 +3739,31 @@ header .head-actions .badge{
           return;
         }
 
+        const storedHash = String(account.passwordHash || "");
         const enteredHash = await hashPassword(password);
-        if (String(account.passwordHash || "") !== enteredHash) {
-          toast("Login Failed", "Incorrect email or password.");
+        const legacyHash = fallbackPasswordHash(password);
+
+        /* Support accounts created when Web Crypto was unavailable, too. */
+        const passwordMatches =
+          storedHash === enteredHash ||
+          storedHash === legacyHash ||
+          storedHash === password ||
+          String(account.password || "") === password;
+
+        if (!passwordMatches) {
+          toast("Login Failed", "Incorrect email or password. Please check your details and try again.");
           return;
+        }
+
+        /* Upgrade older fallback/plain-text records to the current hash format. */
+        if (storedHash !== enteredHash) {
+          account.passwordHash = enteredHash;
+          delete account.password;
+          const accountIndex = accounts.findIndex(a => String(a.email || "").toLowerCase() === email);
+          if (accountIndex >= 0) {
+            accounts[accountIndex] = account;
+            saveAccounts(accounts);
+          }
         }
 
         const safeAccount = normalizeAccount(account);
